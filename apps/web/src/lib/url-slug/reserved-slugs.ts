@@ -1,0 +1,41 @@
+/** System path segments — cannot be assigned to catalog/CMS slugs */
+export const RESERVED_SLUGS = new Set([
+  "cart",
+  "checkout",
+  "account",
+  "login",
+  "register",
+  "search",
+  "wishlist",
+  "compare",
+  "track",
+  "blog",
+  "api",
+  "admin",
+  "dashboard",
+  "catalog",
+  "orders",
+  "settings",
+  "media",
+  "shop",
+  "products",
+  "categories",
+  "brands",
+  "new",
+  "deals",
+  "bestsellers",
+  "offers",
+  "contact",
+  "about",
+  "faq",
+  "careers",
+  "shipping",
+  "recommendations",
+  "privacy",
+  "terms",
+  "sitemap",
+]);
+
+export function isReservedSlug(slug: string) {
+  return RESERVED_SLUGS.has(slug.toLowerCase());
+}

@@ -1,0 +1,28 @@
+# BlogComments — Changes
+
+> **Page Spec:** [BlogComments.md](./BlogComments.md)  
+> **Review:** [BlogCommentsReview.md](./BlogCommentsReview.md)
+
+---
+
+## Change Log
+
+| Date | Version | Author | Change |
+|------|---------|--------|--------|
+| 2026-06-12 | 0.1.0 | — | Initial stub |
+
+---
+
+## Pending Changes
+
+| # | Change | Priority | Status |
+|---|--------|----------|--------|
+| — | Complete page spec | High | Open |
+
+---
+
+## Implemented (Prototype)
+
+| Date | UI change | Route |
+|------|-----------|-------|
+| — | — | — |

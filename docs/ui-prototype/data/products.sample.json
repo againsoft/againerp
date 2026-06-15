@@ -1,0 +1,26 @@
+[
+  {
+    "id": "prod_001",
+    "name": "Premium Cotton T-Shirt",
+    "sku": "TSH-BLK-M",
+    "price": 899,
+    "currency": "BDT",
+    "status": "published",
+    "stock": 142,
+    "category": "Apparel",
+    "brand": "UrbanWear",
+    "image": "/prototype/assets/products/tshirt-black.jpg"
+  },
+  {
+    "id": "prod_002",
+    "name": "Wireless Earbuds Pro",
+    "sku": "ELC-EAR-001",
+    "price": 2499,
+    "currency": "BDT",
+    "status": "draft",
+    "stock": 8,
+    "category": "Electronics",
+    "brand": "SoundMax",
+    "image": "/prototype/assets/products/earbuds.jpg"
+  }
+]
