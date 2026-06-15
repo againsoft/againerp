@@ -8,6 +8,36 @@ Format follows [GOVERNANCE.md](./GOVERNANCE.md#changelog-system).
 
 ## [Unreleased]
 
+### Added — 2026-06-15 — Suppliers Module + Vendor ↔ Product Mapping (UI Prototype)
+
+| Field | Value |
+|-------|-------|
+| **Version** | `2.45.0-suppliers-vendor-mapping` |
+| **Module** | Purchase · Catalog · Inventory (supplier feed) |
+| **Change Type** | Added |
+| **Reason** | Implement procurement UI prototype: supplier directory, vendor detail, multi-supplier product sourcing, canonical vendor-product mapping store |
+| **Impact** | New `/suppliers/*` routes; sidebar menu; vendor detail record view; `purchase_vendor_items` prototype mapping with stock status, warranty, web publish flag; product drawer supplier sourcing + Map supplier sheet |
+
+**Docs:**
+- `docs/ui-prototype/purchase/SUPPLIERS_IMPLEMENTED_DESIGN.md` (new)
+- `docs/ui-prototype/purchase/README.md`
+- `docs/ui-prototype/catalog/products/IMPLEMENTED_DESIGN.md`
+- `docs/modules/purchase/PURCHASE_MODULE_ARCHITECTURE.md` §4 Vendor Catalog Mapping
+- `docs/modules/purchase/README.md`
+
+**Code:**
+- `apps/web/src/lib/navigation.ts` — Suppliers sidebar (Summary last)
+- `apps/web/src/app/(admin)/suppliers/` — control center + `[id]` detail
+- `apps/web/src/components/suppliers/` — shell, control center, detail workspace
+- `apps/web/src/lib/mock-data/suppliers.ts`
+- `apps/web/src/lib/mock-data/vendor-product-mapping.ts`
+- `apps/web/src/lib/store/vendor-mapping-store.ts`
+- `apps/web/src/components/products/product-supplier-sourcing.tsx`
+- `apps/web/src/components/products/map-supplier-sheet.tsx`
+- `apps/web/src/components/products/product-detail-content.tsx`
+
+---
+
 ### Added — 2026-06-14 — Moharaz-Style Flat URL / Slug Architecture
 
 | Field | Value |

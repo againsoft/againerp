@@ -25,7 +25,7 @@ export const useAppStore = create<AppState>()(
     (set, get) => ({
       theme: "system",
       sidebarCollapsed: false,
-      utilityPanelOpen: true,
+      utilityPanelOpen: false,
       aiDrawerOpen: false,
       companyId: "co1",
       branchId: "br1",
@@ -50,6 +50,15 @@ export const useAppStore = create<AppState>()(
         });
       },
     }),
-    { name: "againerp-prototype" },
+    {
+      name: "againerp-prototype",
+      version: 1,
+      migrate: (persistedState, version) => {
+        if (version < 1) {
+          return { ...(persistedState as object), utilityPanelOpen: false };
+        }
+        return persistedState as AppState;
+      },
+    },
   ),
 );

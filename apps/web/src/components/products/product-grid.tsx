@@ -17,7 +17,7 @@ import {
   Search,
 } from "lucide-react";
 import { toast } from "sonner";
-import { products as initialProducts, type Product, type ProductStatus } from "@/lib/mock-data/products";
+import { products as initialProducts, type Product, type ProductStatus, type StockStatusLabel } from "@/lib/mock-data/products";
 import { categoriesFlat } from "@/lib/mock-data/categories";
 import { getProductCategoryDisplay } from "@/lib/category-utils";
 import { cn, formatCurrency } from "@/lib/utils";
@@ -48,14 +48,19 @@ const BRANDS = ["UrbanWear", "TechPro", "HomeNest", "GlowUp", "ActiveLife", "Rea
 const FILTER_BRANDS = [...BRANDS].sort((a, b) => a.localeCompare(b));
 const PAGE_SIZE = 25;
 const UPDATED_BY = ["Admin", "Sadia Rahman", "Rahim Uddin", "Manager"];
+const STOCK_STATUSES: StockStatusLabel[] = ["In Stock", "Low Stock", "Out of Stock", "Pre-order"];
 
 const COLUMN_KEYS = [
   "thumbnail",
+  "productId",
   "sku",
   "slug",
   "price",
+  "offerPrice",
   "stock",
+  "stockStatus",
   "status",
+  "seoTitle",
   "brand",
   "category",
   "updatedAt",
@@ -64,11 +69,15 @@ type ColumnKey = (typeof COLUMN_KEYS)[number];
 
 const COLUMN_LABELS: Record<ColumnKey, string> = {
   thumbnail: "Image",
+  productId: "Product ID",
   sku: "SKU",
   slug: "Slug",
   price: "Price",
+  offerPrice: "Offer price",
   stock: "Stock",
+  stockStatus: "Stock Status",
   status: "Status",
+  seoTitle: "SEO Title",
   brand: "Brand",
   category: "Category",
   updatedAt: "Updated",
@@ -76,11 +85,15 @@ const COLUMN_LABELS: Record<ColumnKey, string> = {
 
 const DEFAULT_VISIBLE: Record<ColumnKey, boolean> = {
   thumbnail: true,
+  productId: false,
   sku: true,
   slug: false,
   price: true,
+  offerPrice: false,
   stock: true,
+  stockStatus: false,
   status: true,
+  seoTitle: false,
   brand: true,
   category: true,
   updatedAt: true,
@@ -92,6 +105,7 @@ const FILTER_VISIBILITY_KEYS = [
   "category",
   "brand",
   "stock",
+  "stockStatus",
   "price",
 ] as const;
 type FilterVisibilityKey = (typeof FILTER_VISIBILITY_KEYS)[number];
@@ -102,6 +116,7 @@ const FILTER_LABELS: Record<FilterVisibilityKey, string> = {
   category: "Category",
   brand: "Brand",
   stock: "Stock",
+  stockStatus: "Stock Status",
   price: "Price range",
 };
 
@@ -111,6 +126,7 @@ const FILTER_HINTS: Record<FilterVisibilityKey, string> = {
   category: "Category search dropdown",
   brand: "Brand search dropdown",
   stock: "In stock / Low / Out of stock",
+  stockStatus: "In Stock / Low Stock / Out of Stock / Pre-order",
   price: "Drag slider to set min–max",
 };
 
@@ -120,10 +136,23 @@ const DEFAULT_VISIBLE_FILTERS: Record<FilterVisibilityKey, boolean> = {
   category: true,
   brand: true,
   stock: true,
+  stockStatus: false,
   price: false,
 };
 
-const LIVE_EDIT_TOGGLES = ["name", "category", "brand", "slug", "sku", "price", "stock", "status"] as const;
+const LIVE_EDIT_TOGGLES = [
+  "name",
+  "category",
+  "brand",
+  "slug",
+  "sku",
+  "price",
+  "offerPrice",
+  "stock",
+  "stockStatus",
+  "status",
+  "seoTitle",
+] as const;
 type LiveEditKey = (typeof LIVE_EDIT_TOGGLES)[number];
 
 const LIVE_EDIT_LABELS: Record<LiveEditKey, string> = {
@@ -133,8 +162,11 @@ const LIVE_EDIT_LABELS: Record<LiveEditKey, string> = {
   slug: "Slug",
   sku: "SKU",
   price: "Price",
+  offerPrice: "Offer price",
   stock: "Stock",
+  stockStatus: "Stock Status",
   status: "Status",
+  seoTitle: "SEO Title",
 };
 
 const LIVE_EDIT_HINTS: Record<LiveEditKey, string> = {
@@ -144,8 +176,11 @@ const LIVE_EDIT_HINTS: Record<LiveEditKey, string> = {
   slug: "Double-click Slug column to edit in grid",
   sku: "Double-click cell to edit in grid",
   price: "Double-click cell to edit in grid",
+  offerPrice: "Double-click cell to edit offer price in grid",
   stock: "Double-click cell to edit in grid",
+  stockStatus: "Double-click cell · pick stock status",
   status: "Double-click cell · draft / published / archived",
+  seoTitle: "Double-click SEO Title column to edit in grid",
 };
 
 const DEFAULT_LIVE_EDIT: Record<LiveEditKey, boolean> = {
@@ -155,13 +190,16 @@ const DEFAULT_LIVE_EDIT: Record<LiveEditKey, boolean> = {
   slug: false,
   sku: true,
   price: true,
+  offerPrice: false,
   stock: true,
+  stockStatus: false,
   status: true,
+  seoTitle: false,
 };
 
 const FORM_ONLY_FIELDS = [
   "Description & media",
-  "SEO meta (title, description)",
+  "SEO meta description",
   "Variants, attributes",
 ] as const;
 
@@ -379,12 +417,25 @@ function StatusBadge({ status }: { status: ProductStatus }) {
   return <Badge variant={variant} className="capitalize">{status}</Badge>;
 }
 
+function StockStatusBadge({ status }: { status: StockStatusLabel }) {
+  const variant =
+    status === "In Stock"
+      ? "success"
+      : status === "Low Stock"
+        ? "warning"
+        : status === "Pre-order"
+          ? "default"
+          : "muted";
+  return <Badge variant={variant}>{status}</Badge>;
+}
+
 type FilterState = {
   search: string;
   status: string;
   category: string;
   brand: string;
   stock: string;
+  stockStatus: string;
   priceMin: string;
   priceMax: string;
 };
@@ -395,6 +446,7 @@ const DEFAULT_FILTERS: FilterState = {
   category: "all",
   brand: "all",
   stock: "all",
+  stockStatus: "all",
   priceMin: "",
   priceMax: "",
 };
@@ -404,6 +456,7 @@ function countAdvancedFilters(f: FilterState) {
   if (f.category !== "all") n++;
   if (f.brand !== "all") n++;
   if (f.stock !== "all") n++;
+  if (f.stockStatus !== "all") n++;
   if (f.priceMin) n++;
   if (f.priceMax) n++;
   return n;
@@ -422,6 +475,7 @@ function applyFilters(rows: Product[], f: FilterState) {
     if (f.stock === "low" && (p.stock > 20 || p.stock === 0)) return false;
     if (f.stock === "out" && p.stock !== 0) return false;
     if (f.stock === "in" && p.stock === 0) return false;
+    if (f.stockStatus !== "all" && p.stockStatus !== f.stockStatus) return false;
     if (min !== null && p.price < min) return false;
     if (max !== null && p.price > max) return false;
     return true;
@@ -468,34 +522,51 @@ export function ProductGrid({ onEdit, onView, className }: Props) {
     setArchiveOpen(true);
   }, []);
 
-  const RowActions = useCallback(
-    ({ data }: ICellRendererParams<Product>) => {
-      if (!data) return null;
+  const ProductRowMenu = useCallback(
+    ({ data }: { data: Product }) => (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" size="sm" className="h-7 w-7 p-0">
+            <MoreHorizontal className="h-4 w-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuItem onClick={() => onView(data)}>
+            <Eye className="mr-2 h-3.5 w-3.5" /> View
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => onEdit(data)}>
+            <Pencil className="mr-2 h-3.5 w-3.5" /> Edit
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => openArchiveConfirm([data])}
+            className="text-destructive"
+          >
+            <Archive className="mr-2 h-3.5 w-3.5" /> Archive
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    ),
+    [onView, onEdit, openArchiveConfirm],
+  );
+
+  const ProductActionCell = useCallback(
+    (p: ICellRendererParams<Product>) => {
+      if (!p.data) return null;
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="sm" className="h-7 w-7 p-0">
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={() => onView(data)}>
-              <Eye className="mr-2 h-3.5 w-3.5" /> View
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => onEdit(data)}>
-              <Pencil className="mr-2 h-3.5 w-3.5" /> Edit
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => openArchiveConfirm([data])}
-              className="text-destructive"
-            >
-              <Archive className="mr-2 h-3.5 w-3.5" /> Archive
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className="flex items-center justify-center gap-0">
+          <ActivityTriggerButton
+            entity={{
+              type: "product",
+              id: p.data.id,
+              label: p.data.name,
+              subtitle: `SKU ${p.data.sku}`,
+            }}
+          />
+          <ProductRowMenu data={p.data} />
+        </div>
       );
     },
-    [onView, onEdit, openArchiveConfirm],
+    [ProductRowMenu],
   );
 
   const columnDefs = useMemo<ColDef<Product>[]>(
@@ -503,33 +574,55 @@ export function ProductGrid({ onEdit, onView, className }: Props) {
       {
         headerCheckboxSelection: true,
         checkboxSelection: true,
-        width: 44,
+        width: 32,
+        maxWidth: 32,
+        headerClass: "product-grid-select-col",
+        cellClass: "product-grid-select-col",
         pinned: "left",
         resizable: false,
         suppressMovable: true,
+        suppressHeaderMenuButton: true,
+        sortable: false,
+      },
+      {
+        colId: "productId",
+        field: "id",
+        headerName: "Product ID",
+        hide: !visibleCols.productId,
+        pinned: "left",
+        width: 100,
+        minWidth: 88,
+        resizable: true,
+        suppressMovable: true,
+        sortable: false,
         suppressHeaderMenuButton: true,
       },
       {
         colId: "thumbnail",
         field: "thumbnail",
         headerName: "",
-        width: 52,
+        width: 36,
+        maxWidth: 36,
         hide: !visibleCols.thumbnail,
         resizable: false,
         suppressMovable: true,
+        sortable: false,
+        suppressHeaderMenuButton: true,
+        cellClass: "product-grid-icon-col",
         cellRenderer: (p: ICellRendererParams<Product>) =>
           p.data ? (
             <button
               type="button"
-              className="rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-              onClick={() => onView(p.data!)}
+              className="cursor-pointer rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              onClick={(e) => {
+                e.stopPropagation();
+                onView(p.data!);
+              }}
               aria-label={`View ${p.data.name}`}
             >
               <img src={p.data.thumbnail} alt="" className="h-7 w-7 rounded object-cover" />
             </button>
           ) : null,
-        sortable: false,
-        suppressHeaderMenuButton: true,
       },
       {
         field: "name",
@@ -544,16 +637,11 @@ export function ProductGrid({ onEdit, onView, className }: Props) {
         cellRenderer: (p: ICellRendererParams<Product>) =>
           p.data ? (
             liveEdit.name ? (
-              <span className="block w-full truncate">{p.data.name}</span>
+              <span className="block w-full truncate font-semibold text-foreground">{p.data.name}</span>
             ) : (
-              <button
-                type="button"
-                title={p.data.name}
-                className="block w-full truncate text-left text-primary"
-                onClick={() => onView(p.data!)}
-              >
+              <span title={p.data.name} className="block w-full truncate font-semibold text-foreground">
                 {p.data.name}
-              </button>
+              </span>
             )
           ) : null,
       },
@@ -584,11 +672,31 @@ export function ProductGrid({ onEdit, onView, className }: Props) {
         valueFormatter: (p) => formatCurrency(p.value ?? 0),
       },
       {
+        field: "offerPrice",
+        headerName: "Offer price",
+        hide: !visibleCols.offerPrice,
+        editable: liveEdit.offerPrice,
+        width: 110,
+        valueFormatter: (p) =>
+          p.value != null && p.value !== "" ? formatCurrency(Number(p.value)) : "—",
+      },
+      {
         field: "stock",
         headerName: "Stock",
         hide: !visibleCols.stock,
         editable: liveEdit.stock,
         width: 80,
+      },
+      {
+        field: "stockStatus",
+        headerName: "Stock Status",
+        hide: !visibleCols.stockStatus,
+        editable: liveEdit.stockStatus,
+        cellEditor: liveEdit.stockStatus ? "agSelectCellEditor" : undefined,
+        cellEditorParams: liveEdit.stockStatus ? { values: STOCK_STATUSES } : undefined,
+        cellRenderer: (p: ICellRendererParams<Product>) =>
+          p.data ? <StockStatusBadge status={p.data.stockStatus} /> : null,
+        width: 120,
       },
       {
         field: "status",
@@ -602,6 +710,15 @@ export function ProductGrid({ onEdit, onView, className }: Props) {
         cellRenderer: (p: ICellRendererParams<Product>) =>
           p.data ? <StatusBadge status={p.data.status} /> : null,
         width: 110,
+      },
+      {
+        field: "seoTitle",
+        headerName: "SEO Title",
+        hide: !visibleCols.seoTitle,
+        editable: liveEdit.seoTitle,
+        width: 220,
+        minWidth: 140,
+        tooltipField: "seoTitle",
       },
       {
         field: "category",
@@ -642,38 +759,20 @@ export function ProductGrid({ onEdit, onView, className }: Props) {
         },
       },
       {
-        colId: "activity",
-        headerName: "Activity",
+        colId: "actions",
+        headerName: "Action",
         width: 72,
+        maxWidth: 72,
         pinned: "right",
         resizable: false,
         suppressMovable: true,
         sortable: false,
         suppressHeaderMenuButton: true,
-        cellRenderer: (p: ICellRendererParams<Product>) =>
-          p.data ? (
-            <ActivityTriggerButton
-              entity={{
-                type: "product",
-                id: p.data.id,
-                label: p.data.name,
-                subtitle: `SKU ${p.data.sku}`,
-              }}
-            />
-          ) : null,
-      },
-      {
-        headerName: "",
-        width: 48,
-        pinned: "right",
-        resizable: false,
-        suppressMovable: true,
-        cellRenderer: RowActions,
-        sortable: false,
-        suppressHeaderMenuButton: true,
+        cellClass: "product-grid-icon-col",
+        cellRenderer: ProductActionCell,
       },
     ],
-    [onView, visibleCols, liveEdit, RowActions],
+    [onView, visibleCols, liveEdit, ProductActionCell],
   );
 
   const onCellValueChanged = useCallback(
@@ -705,6 +804,7 @@ export function ProductGrid({ onEdit, onView, className }: Props) {
         ...(key === "category" ? { category: "all" } : {}),
         ...(key === "brand" ? { brand: "all" } : {}),
         ...(key === "stock" ? { stock: "all" } : {}),
+        ...(key === "stockStatus" ? { stockStatus: "all" } : {}),
         ...(key === "price" ? { priceMin: "", priceMax: "" } : {}),
       }));
     }
@@ -761,6 +861,20 @@ export function ProductGrid({ onEdit, onView, className }: Props) {
             <option value="in">In stock</option>
             <option value="low">Low stock</option>
             <option value="out">Out of stock</option>
+          </Select>
+        )}
+        {visibleFilters.stockStatus && (
+          <Select
+            value={filters.stockStatus}
+            onChange={(e) => setFilters((f) => ({ ...f, stockStatus: e.target.value }))}
+            className="w-[148px]"
+          >
+            <option value="all">All stock statuses</option>
+            {STOCK_STATUSES.map((status) => (
+              <option key={status} value={status}>
+                {status}
+              </option>
+            ))}
           </Select>
         )}
         {visibleFilters.price && (
@@ -880,7 +994,8 @@ export function ProductGrid({ onEdit, onView, className }: Props) {
               defaultColDef={{
                 sortable: true,
                 resizable: true,
-                filter: true,
+                filter: false,
+                suppressHeaderMenuButton: true,
                 suppressMovable: false,
                 minWidth: 72,
               }}

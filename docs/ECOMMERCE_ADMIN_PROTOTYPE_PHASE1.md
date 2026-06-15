@@ -18,7 +18,7 @@
 
 ## Scope (Ecommerce Admin Only)
 
-Dashboard · Catalog (Products, Categories, Brands, Attributes, Variants, Filters, Reviews) · Customers · Orders · Inventory · Marketing · SEO · Media · Reports · System · AI OS
+Dashboard · Catalog (Products, Categories, Brands, Attributes, Variants, Filters, Reviews, Collections, Bundles) · Customers · Orders · Inventory · **Suppliers** · Marketing · SEO · Media · Reports · System · AI OS
 
 **Not in Phase 1:** ERP modules (CRM, Accounting, HR, …)
 
@@ -38,6 +38,8 @@ Dashboard · Catalog (Products, Categories, Brands, Attributes, Variants, Filter
 | 8 | Product Edit | modal (`ProductFormDialog`) | [EditProduct.md](./ui-prototype/catalog/products/EditProduct.md) |
 | 9 | Media Manager | `/media` | MediaLibrary.md |
 | 10 | AI Assistant | drawer | AI OS UI |
+| 11 | Suppliers control center | `/suppliers/*` | [SUPPLIERS_IMPLEMENTED_DESIGN.md](./ui-prototype/purchase/SUPPLIERS_IMPLEMENTED_DESIGN.md) |
+| 12 | Vendor ↔ product mapping | Product drawer + supplier catalog | Same doc § Mapping |
 
 ### Implementation status (2026-06-12)
 
@@ -52,6 +54,7 @@ Dashboard · Catalog (Products, Categories, Brands, Attributes, Variants, Filter
 | Product Create + Edit | ✅ documented |
 | Media Library | ✅ |
 | AI Assistant drawer | ✅ |
+| Suppliers + vendor mapping | ✅ documented |
 
 ---
 
@@ -72,6 +75,12 @@ Catalog
 Customers
 Orders
 Inventory
+Suppliers
+  ├── All Suppliers
+  ├── Purchase Orders
+  ├── RFQ
+  ├── Stock Feed
+  └── Summary
 Marketing
 SEO
 Media
@@ -98,4 +107,4 @@ Every screen: `{Screen}.md` · `{Screen}Review.md` · `{Screen}Changes.md`
 
 ---
 
-**Last Updated:** 2026-06-12
+**Last Updated:** 2026-06-15

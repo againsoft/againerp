@@ -3,9 +3,9 @@
 import Link from "next/link";
 import {
   Bell,
-  Building2,
   ChevronDown,
   Menu,
+  MessageSquare,
   Moon,
   Plus,
   Search,
@@ -16,10 +16,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { branches, companies, quickCreateItems } from "@/lib/navigation";
 import { useAppStore } from "@/lib/store/app-store";
+import { cn } from "@/lib/utils";
 
 export function AdminHeader() {
   const toggleSidebar = useAppStore((s) => s.toggleSidebar);
   const toggleAi = useAppStore((s) => s.toggleAiDrawer);
+  const utilityPanelOpen = useAppStore((s) => s.utilityPanelOpen);
+  const toggleUtilityPanel = useAppStore((s) => s.toggleUtilityPanel);
   const theme = useAppStore((s) => s.theme);
   const setTheme = useAppStore((s) => s.setTheme);
   const companyId = useAppStore((s) => s.companyId);
@@ -91,8 +94,16 @@ export function AdminHeader() {
           12
         </span>
       </Button>
-      <Button variant="ghost" size="icon" title="Activities">
-        <Building2 className="h-4 w-4" />
+      <Button
+        variant="ghost"
+        size="icon"
+        title="Activity & Chatter"
+        aria-label="Activity & Chatter"
+        aria-pressed={utilityPanelOpen}
+        onClick={toggleUtilityPanel}
+        className={cn(utilityPanelOpen && "bg-accent text-foreground")}
+      >
+        <MessageSquare className="h-4 w-4" />
       </Button>
       <Button variant="ghost" size="icon" onClick={toggleAi} title="AI Assistant">
         <Sparkles className="h-4 w-4 text-violet-500" />

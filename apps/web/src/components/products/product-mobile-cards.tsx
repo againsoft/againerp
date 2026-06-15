@@ -52,13 +52,7 @@ export function ProductMobileCards({ products, onView, onEdit, onArchive }: Prop
             <img src={p.thumbnail} alt="" className="h-14 w-14 rounded-md object-cover" />
           </button>
           <div className="min-w-0 flex-1">
-            <button
-              type="button"
-              className="line-clamp-2 text-left text-sm font-medium text-primary"
-              onClick={() => onView(p)}
-            >
-              {p.name}
-            </button>
+            <p className="line-clamp-2 text-sm font-semibold text-foreground">{p.name}</p>
             <p className="mt-0.5 text-xs text-muted-foreground">{p.sku}</p>
             <div className="mt-2 flex flex-wrap items-center gap-2">
               <span className="text-sm font-semibold">{formatCurrency(p.price)}</span>

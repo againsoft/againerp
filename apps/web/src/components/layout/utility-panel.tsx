@@ -1,6 +1,6 @@
 "use client";
 
-import { MessageSquare, Paperclip, StickyNote, Clock } from "lucide-react";
+import { MessageSquare, Paperclip, StickyNote, Clock, PanelRightOpen } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAppStore } from "@/lib/store/app-store";
 
@@ -19,9 +19,15 @@ export function UtilityPanel() {
       <button
         type="button"
         onClick={toggle}
-        className="hidden w-8 shrink-0 border-l bg-muted/30 text-xs writing-mode-vertical xl:block"
+        title="Show Activity & Chatter"
+        aria-label="Show Activity & Chatter"
+        className="group hidden w-9 shrink-0 flex-col items-center gap-2 border-l border-input bg-muted/20 py-3 text-muted-foreground transition-colors hover:bg-muted/40 hover:text-foreground xl:flex"
       >
-        Activity
+        <PanelRightOpen className="h-4 w-4 shrink-0 opacity-70 group-hover:opacity-100" />
+        <MessageSquare className="h-3.5 w-3.5 shrink-0" />
+        <span className="text-[10px] font-medium leading-none [writing-mode:vertical-rl] rotate-180">
+          Activity & Chatter
+        </span>
       </button>
     );
   }
@@ -30,7 +36,11 @@ export function UtilityPanel() {
     <aside className="hidden w-60 shrink-0 flex-col border-l bg-muted/10 xl:flex text-xs">
       <div className="flex items-center justify-between border-b px-2.5 py-1.5">
         <span className="text-xs font-medium">Activity & Chatter</span>
-        <button type="button" className="text-xs text-muted-foreground" onClick={toggle}>
+        <button
+          type="button"
+          className="rounded px-1.5 py-0.5 text-xs text-muted-foreground hover:bg-muted hover:text-foreground"
+          onClick={toggle}
+        >
           Hide
         </button>
       </div>

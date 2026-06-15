@@ -244,6 +244,8 @@ Requires `inventory.adjustment.approve` above configurable threshold.
 | Purchase receipt | Inbound qty; updates `qty_on_hand` |
 | Cost sync | Posts `cost_price` hint to Catalog (async) |
 
+**UI prototype (2026-06-15):** Supplier stock feed tab at `/suppliers/stock-feed`; vendor SKU mapping shared with Purchase via `vendor-mapping-store`. See [SUPPLIERS_IMPLEMENTED_DESIGN.md](../../ui-prototype/purchase/SUPPLIERS_IMPLEMENTED_DESIGN.md).
+
 Purchase module (future) owns PO workflow; Inventory owns receipt posting and stock impact.
 
 ---

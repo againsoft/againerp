@@ -51,6 +51,7 @@
 | [customers/](./customers/) | 9 |
 | [orders/](./orders/) | 9 |
 | [inventory/](./inventory/) | 8 |
+| [purchase/](./purchase/) | Suppliers prototype + vendor mapping |
 | [marketing/](./marketing/) | 16 |
 | [content/](./content/) | 10 |
 | [media/](./media/) | 9 |

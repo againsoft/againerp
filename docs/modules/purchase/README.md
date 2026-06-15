@@ -14,18 +14,22 @@ Procurement and vendor management — RFQ, purchase orders, goods receipts, vend
 
 ## Scope
 
-| Area | Route |
-|------|-------|
-| Vendors | `/purchase/vendors` |
-| RFQ | `/purchase/rfq` |
-| Quotations | `/purchase/quotations` |
-| Purchase Orders | `/purchase/orders` |
-| Goods Receipts | `/purchase/receipts` |
-| Vendor Bills | `/purchase/bills` |
-| Returns | `/purchase/returns` |
-| Contracts | `/purchase/contracts` |
-| Reports | `/purchase/reports` |
-| Settings | `/purchase/settings` |
+| Area | Route (canonical) | Prototype route |
+|------|-------------------|-----------------|
+| Vendors | `/purchase/vendors` | `/suppliers/all` · `/suppliers/[id]` |
+| RFQ | `/purchase/rfq` | `/suppliers/rfq` |
+| Quotations | `/purchase/quotations` | — |
+| Purchase Orders | `/purchase/orders` | `/suppliers/purchase-orders` |
+| Goods Receipts | `/purchase/receipts` | — |
+| Vendor Bills | `/purchase/bills` | — |
+| Returns | `/purchase/returns` | — |
+| Contracts | `/purchase/contracts` | Vendor detail tab |
+| Stock feed | Inventory supplier feed | `/suppliers/stock-feed` |
+| Summary / Dashboard | `/purchase` | `/suppliers` |
+| Reports | `/purchase/reports` | — |
+| Settings | `/purchase/settings` | — |
+
+**UI prototype:** [SUPPLIERS_IMPLEMENTED_DESIGN.md](../../ui-prototype/purchase/SUPPLIERS_IMPLEMENTED_DESIGN.md)
 
 ## API Base
 

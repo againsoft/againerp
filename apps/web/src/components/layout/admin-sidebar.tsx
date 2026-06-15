@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown } from "lucide-react";
-import { useState } from "react";
+import { useState, type Dispatch, type SetStateAction } from "react";
 import { cn } from "@/lib/utils";
 import { sidebarNav, type NavItem } from "@/lib/navigation";
 import { useAppStore } from "@/lib/store/app-store";
@@ -22,38 +22,53 @@ function NavChildren({
   items,
   pathname,
   depth,
+  groupPrefix,
+  openGroups,
+  setOpenGroups,
   addRecent,
 }: {
   items: NavItem[];
   pathname: string;
   depth: number;
+  groupPrefix: string;
+  openGroups: Record<string, boolean>;
+  setOpenGroups: Dispatch<SetStateAction<Record<string, boolean>>>;
   addRecent: (title: string, href: string) => void;
 }) {
   return (
     <div className={cn("border-l pl-2", depth > 0 ? "ml-2" : "ml-3")}>
       {items.map((child) => {
         if (child.children?.length) {
+          const key = `${groupPrefix}/${child.title}`;
+          const open = openGroups[key] ?? isNavItemActive(pathname, child);
+          const active = isNavItemActive(pathname, child);
           return (
-            <div key={child.title} className="mb-1">
-              {child.href ? (
-                <Link
-                  href={child.href}
-                  onClick={() => addRecent(child.title, child.href!)}
-                  className={cn(
-                    "block rounded-md px-1.5 py-1 text-xs font-semibold hover:bg-accent",
-                    pathname === child.href
-                      ? "bg-accent font-medium text-foreground"
-                      : "text-muted-foreground",
-                  )}
-                >
-                  {child.title}
-                </Link>
-              ) : (
-                <p className="px-1.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
-                  {child.title}
-                </p>
+            <div key={key} className="mb-0.5">
+              <button
+                type="button"
+                onClick={() => setOpenGroups((g) => ({ ...g, [key]: !open }))}
+                className={cn(
+                  "flex w-full items-center justify-between rounded-md px-1.5 py-1 text-xs font-medium hover:bg-accent",
+                  active && "bg-accent/50",
+                  depth > 0 && !active && "text-muted-foreground",
+                )}
+              >
+                <span className="truncate">{child.title}</span>
+                <ChevronDown
+                  className={cn("h-3.5 w-3.5 shrink-0 transition", open && "rotate-180")}
+                />
+              </button>
+              {open && (
+                <NavChildren
+                  items={child.children}
+                  pathname={pathname}
+                  depth={depth + 1}
+                  groupPrefix={key}
+                  openGroups={openGroups}
+                  setOpenGroups={setOpenGroups}
+                  addRecent={addRecent}
+                />
               )}
-              <NavChildren items={child.children} pathname={pathname} depth={depth + 1} addRecent={addRecent} />
             </div>
           );
         }
@@ -121,6 +136,9 @@ export function AdminSidebar() {
                       items={item.children}
                       pathname={pathname}
                       depth={0}
+                      groupPrefix={item.title}
+                      openGroups={openGroups}
+                      setOpenGroups={setOpenGroups}
                       addRecent={addRecent}
                     />
                   )}

@@ -9,6 +9,7 @@ import {
   Search,
   Settings,
   ShoppingCart,
+  Truck,
   Users,
   Warehouse,
   BarChart3,
@@ -84,6 +85,17 @@ export const sidebarNav: NavItem[] = [
     ], // Status tabs (Draft, Pending, …) are inside the All Orders grid — not in nav
   },
   { title: "Inventory", href: "/inventory", icon: Warehouse },
+  {
+    title: "Suppliers",
+    icon: Truck,
+    children: [
+      { title: "All Suppliers", href: "/suppliers/all" },
+      { title: "Purchase Orders", href: "/suppliers/purchase-orders" },
+      { title: "RFQ", href: "/suppliers/rfq" },
+      { title: "Stock Feed", href: "/suppliers/stock-feed" },
+      { title: "Summary", href: "/suppliers" },
+    ],
+  },
   { title: "Marketing", href: "/marketing", icon: Megaphone },
   { title: "SEO", href: "/seo", icon: Search },
   { title: "Media", href: "/media", icon: Image },

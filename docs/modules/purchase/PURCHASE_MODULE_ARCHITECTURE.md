@@ -207,12 +207,21 @@ Purchase appears as a **top-level sidebar module** — parallel to Inventory, Ca
 | `vendor_price` | Last quoted / contract price |
 | `lead_time_days` | Item-level override |
 | `min_order_qty` | Vendor MOQ |
+| `supplier_stock` | Supplier-reported availability (feed or manual) |
+| `stock_status` | `in_stock` · `low` · `out` · `unknown` |
+| `warranty` | Supplier warranty terms for SKU |
+| `is_preferred` | Preferred vendor for this product/variant |
+| `is_published_on_web` | Expose supplier offer on storefront (optional) |
+
+**Prototype (2026-06-15):** UI prototype implements mapping via `vendor-mapping-store` in `apps/web`. See [SUPPLIERS_IMPLEMENTED_DESIGN.md](../../ui-prototype/purchase/SUPPLIERS_IMPLEMENTED_DESIGN.md).
 
 ### Vendor UI
 
 - Vendor list with spend YTD, open POs, rating, status
-- Vendor detail: contacts, terms, item catalog, PO history, contracts, activity drawer
+- Vendor detail: contacts, terms, item catalog (mapped + unmapped feed), PO history, contracts, activity drawer
 - Performance: on-time delivery %, quality reject rate, price variance
+- **Product drawer:** multi-supplier cost/stock/warranty comparison per catalog variant
+- **Map supplier:** link product to vendor SKU; same product may have 2–3+ suppliers with different prices; not all mappings are published on website
 
 ---
 

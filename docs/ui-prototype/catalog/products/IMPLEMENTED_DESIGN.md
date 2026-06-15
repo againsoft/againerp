@@ -2,7 +2,7 @@
 
 > **Status:** Ready (Prototype) — **documented as built**  
 > **Version:** `1.0.0`  
-> **Updated:** 2026-06-13  
+> **Updated:** 2026-06-15  
 > **Scope:** Product List · Add Product · Edit Product  
 > **Code:** `apps/web/src/components/products/` · `apps/web/src/app/(admin)/catalog/products/`
 
@@ -17,6 +17,7 @@
 | Screen | Route | Component(s) |
 |--------|-------|--------------|
 | Product List | `/catalog/products` | `ProductGrid`, `ProductMobileCards` |
+| Product Details / Drawer | `/catalog/products` · `/catalog/products/[id]` | `ProductViewDialog` → `ProductDetailContent` |
 | Add Product | `/catalog/products/new` | `ProductForm` |
 | Edit Product | Modal (list / details) | `ProductFormDialog` → `ProductForm` |
 
@@ -159,6 +160,59 @@ apps/web/src/components/ui/label.tsx
 
 ---
 
+## Product Drawer / Details — Supplier Sourcing (2026-06-15)
+
+Right sheet drawer (`ProductViewDialog`) and full detail use `ProductDetailContent`.
+
+### Layout (drawer)
+
+- Header: status, SKU, title, Open page / Edit  
+- Summary strip: price, stock, category, brand  
+- Gallery + variants (side-by-side on `sm+`)  
+- Description · Specifications  
+- **Supplier sourcing** — multi-vendor cost/stock table  
+
+### Supplier sourcing section
+
+| State | UI |
+|-------|-----|
+| No mapping | Empty state + **Map supplier** |
+| Has mappings | Table: supplier, vendor SKU, cost, supplier stock, warranty, lead, web badge |
+| Multi-supplier | All vendors for active variant; lowest cost highlighted; preferred ★ |
+
+**Actions:** Map supplier · Create PO (stub) · Set preferred · Toggle web publish
+
+### Map supplier sheet
+
+Opens from **Map supplier** — links product variant to vendor catalog item.
+
+| Field | Notes |
+|-------|-------|
+| Catalog variant | `demoVariants` |
+| Supplier | From `suppliersSeed`; blocked disabled |
+| Vendor SKU · Cost · Supplier stock | Required for save |
+| Stock status | Auto from qty; manual override |
+| Warranty | Select: None → Manufacturer warranty |
+| Lead time · MOQ | Defaults from supplier profile |
+| Preferred · Publish on website | Switches |
+
+Data saved to `vendor-mapping-store` → syncs to `/suppliers/[id]` Catalog tab.
+
+**Cross-ref:** [SUPPLIERS_IMPLEMENTED_DESIGN.md](../../purchase/SUPPLIERS_IMPLEMENTED_DESIGN.md)
+
+### Files
+
+```
+apps/web/src/components/products/product-view-dialog.tsx
+apps/web/src/components/products/product-detail-content.tsx
+apps/web/src/components/products/product-supplier-sourcing.tsx
+apps/web/src/components/products/map-supplier-sheet.tsx
+apps/web/src/lib/mock-data/vendor-product-mapping.ts
+apps/web/src/lib/store/vendor-mapping-store.ts
+```
+
+---
+
 ## Global Variants List — As Built
 
 - Route: `/catalog/variants` (sidebar: Catalog → Variants)
@@ -199,6 +253,8 @@ apps/web/src/components/products/product-form-dialog.tsx
 | Row ⋮ View | `/catalog/products/[id]` |
 | Row ⋮ Edit | Edit modal |
 | Details → Edit | Edit modal |
+| Drawer → Map supplier | `MapSupplierSheet` → updates vendor mapping store |
+| Drawer → supplier name | `/suppliers/[id]` |
 
 ---
 
@@ -211,6 +267,7 @@ apps/web/src/components/products/product-form-dialog.tsx
 | Backend API / DB save | Prototype mock |
 | Dedicated edit route | Modal only |
 | Bulk import/export pages | Toast mock on list |
+| PO create from supplier row | Toast stub |
 
 ---
 

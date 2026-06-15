@@ -3,6 +3,8 @@ import { productPath } from "@/lib/url-slug/paths";
 
 export type ProductStatus = "draft" | "published" | "archived";
 
+export type StockStatusLabel = "In Stock" | "Low Stock" | "Out of Stock" | "Pre-order";
+
 export type Product = {
   id: string;
   name: string;
@@ -10,15 +12,75 @@ export type Product = {
   sku: string;
   price: number;
   compareAtPrice?: number;
+  offerPrice?: number;
   stock: number;
+  stockStatus: StockStatusLabel;
   status: ProductStatus;
   category: string;
   brand: string;
   thumbnail: string;
   updatedAt: string;
+  seoTitle: string;
   description?: string;
+  shortDescription?: string;
+  keyFeatures?: string[];
   tags: string[];
 };
+
+const productShortDescriptions: Record<string, string> = {
+  "Premium Cotton T-Shirt": "Breathable premium cotton tee with a relaxed fit — ideal for daily wear and layering.",
+  "Wireless Earbuds Pro": "True wireless earbuds with hybrid ANC, low-latency mode, and all-day battery with charging case.",
+  "Ceramic Coffee Mug Set": "Set of handcrafted ceramic mugs — microwave-safe glaze, comfortable handle, gift-ready packaging.",
+  "Running Shoes Ultra": "Lightweight performance runners with responsive cushioning and breathable mesh upper.",
+  "Smart Watch Series 5": "Health-tracking smartwatch with AMOLED display, GPS, and 7-day battery in smart mode.",
+  "Linen Summer Dress": "Airy linen blend dress with a flattering cut — perfect for warm weather and casual outings.",
+  "Bluetooth Speaker Mini": "Pocket-sized speaker with rich 360° sound, IPX5 splash resistance, and 12-hour playtime.",
+  "Organic Face Serum": "Vitamin-rich serum for brighter, hydrated skin — dermatologist-tested, paraben-free formula.",
+  "Yoga Mat Pro": "Extra-grip 6 mm mat with alignment lines — eco TPE material, includes carry strap.",
+  "LED Desk Lamp": "Adjustable LED desk lamp with warm/cool modes, USB charging port, and flicker-free light.",
+  "Leather Wallet": "Slim genuine-leather bifold with RFID blocking and 6 card slots plus bill compartment.",
+  "Stainless Water Bottle": "Double-wall insulated bottle — keeps drinks cold 24 h / hot 12 h, BPA-free.",
+  "Graphic Hoodie": "Soft fleece hoodie with premium screen print — kangaroo pocket, ribbed cuffs and hem.",
+  "USB-C Hub 7-in-1": "7-port USB-C hub with 4K HDMI, SD slots, and 100 W pass-through charging for laptops.",
+  "Scented Candle Pack": "Set of three soy candles in seasonal scents — 45-hour burn, cotton wicks, reusable jars.",
+};
+
+const productKeyFeatures: Record<string, string[]> = {
+  "Premium Cotton T-Shirt": ["100% combed cotton", "Pre-shrunk fabric", "Reinforced neckline", "Machine washable"],
+  "Wireless Earbuds Pro": ["Hybrid ANC", "Bluetooth 5.3", "32 h total battery", "IPX5 water resistant", "Low-latency gaming mode"],
+  "Ceramic Coffee Mug Set": ["Set of 4 mugs", "350 ml capacity", "Microwave & dishwasher safe", "Lead-free glaze"],
+  "Running Shoes Ultra": ["Responsive foam midsole", "Breathable mesh upper", "Anti-slip rubber outsole", "Reflective accents"],
+  "Smart Watch Series 5": ["1.4″ AMOLED display", "Heart rate & SpO₂", "Built-in GPS", "7-day battery", "50 m water resistant"],
+  "Bluetooth Speaker Mini": ["360° stereo sound", "IPX5 splash proof", "12 h playback", "Pair two for stereo"],
+  "USB-C Hub 7-in-1": ["4K @ 60 Hz HDMI", "100 W PD pass-through", "SD + microSD readers", "3× USB 3.0 ports"],
+  "Organic Face Serum": ["10% vitamin C complex", "Hyaluronic acid", "Paraben-free", "Suitable for all skin types"],
+  "LED Desk Lamp": ["5 brightness levels", "Warm & cool colour temps", "USB-A charging port", "Memory function"],
+  "Stainless Water Bottle": ["24 h cold / 12 h hot", "18/8 stainless steel", "Leak-proof lid", "750 ml capacity"],
+};
+
+function baseProductName(name: string) {
+  return name.replace(/\s+v\d+$/i, "").trim();
+}
+
+function resolveShortDescription(name: string, index: number) {
+  const base = baseProductName(name);
+  return (
+    productShortDescriptions[base] ??
+    `Quality ${base.toLowerCase()} from our ${index % 2 === 0 ? "bestselling" : "curated"} catalog range.`
+  );
+}
+
+function resolveKeyFeatures(name: string) {
+  const base = baseProductName(name);
+  return (
+    productKeyFeatures[base] ?? [
+      "Premium materials",
+      "Quality assured",
+      "Fast dispatch ready",
+      "1-year warranty",
+    ]
+  );
+}
 
 const productCategories = categoriesFlat.filter((c) => c.active);
 const brands = ["UrbanWear", "TechPro", "HomeNest", "GlowUp", "ActiveLife", "ReadWell"];
@@ -53,6 +115,13 @@ function slugify(text: string) {
     .replace(/^-+|-+$/g, "");
 }
 
+function resolveStockStatus(stock: number, index: number): StockStatusLabel {
+  if (index % 17 === 0) return "Pre-order";
+  if (stock === 0) return "Out of Stock";
+  if (stock <= 20) return "Low Stock";
+  return "In Stock";
+}
+
 export const products: Product[] = Array.from({ length: 120 }, (_, i) => {
   const base = names[i % names.length];
   const variant = Math.floor(i / names.length) + 1;
@@ -61,6 +130,7 @@ export const products: Product[] = Array.from({ length: 120 }, (_, i) => {
   const stock = status === "archived" ? 0 : (i * 7) % 200;
   const day = (i % 28) + 1;
   const name = variant > 1 ? `${base} v${variant}` : base;
+  const stockStatus = resolveStockStatus(stock, i);
   return {
     id: `prod_${pad(i + 1)}`,
     name,
@@ -68,14 +138,19 @@ export const products: Product[] = Array.from({ length: 120 }, (_, i) => {
     sku: `SKU-${pad(i + 1)}`,
     price,
     compareAtPrice: i % 3 === 0 ? price + 200 : undefined,
+    offerPrice: i % 4 === 0 ? Math.max(price - 50, 99) : undefined,
     stock,
+    stockStatus,
     status,
     category: productCategories[i % productCategories.length].name,
     brand: brands[i % brands.length],
     thumbnail: `https://picsum.photos/seed/${i + 1}/80/80`,
     updatedAt: `2026-06-${pad(day, 2)}T10:00:00+06:00`,
+    seoTitle: `${name} | Buy Online — AgainShop`,
     tags: ["featured", "bestseller"].slice(0, i % 2 === 0 ? 2 : 1),
     description: `High-quality ${base.toLowerCase()} for everyday use. Prototype dummy data.`,
+    shortDescription: resolveShortDescription(name, i),
+    keyFeatures: resolveKeyFeatures(name),
   };
 });
 
@@ -103,13 +178,17 @@ export function buildProductFromQuickAdd(input: QuickAddProductInput): Product {
     sku,
     price,
     stock,
+    stockStatus: stock === 0 ? "Out of Stock" : stock <= 20 ? "Low Stock" : "In Stock",
     status: "published",
     category: input.category?.trim() || "Apparel",
     brand: input.brand?.trim() || "UrbanWear",
     thumbnail: `https://picsum.photos/seed/${id}/80/80`,
     updatedAt: new Date().toISOString(),
+    seoTitle: `${name} | Buy Online — AgainShop`,
     tags: [],
     description: `Quick-added product: ${name}`,
+    shortDescription: `New listing: ${name}. Add full description in the editor.`,
+    keyFeatures: ["New arrival", "Quality checked", "Ready to publish"],
   };
 }
 
@@ -257,22 +336,6 @@ const PRODUCT_VARIANT_MEDIA: Record<string, Record<string, ProductMedia[]>> = {
   prod_0002: PROD_0002_MEDIA,
 };
 
-export function getVariantMedia(productId: string, variantId: string): ProductMedia[] {
-  const productMedia = PRODUCT_VARIANT_MEDIA[productId];
-  if (productMedia?.[variantId]?.length) return productMedia[variantId];
-
-  const variant = demoVariants.find((v) => v.id === variantId);
-  if (!variant) return [];
-
-  return variant.gallery.map((url, i) => ({
-    id: `${variantId}_img_${i}`,
-    type: "image" as const,
-    url,
-    title: `Image ${i + 1}`,
-    isPrimary: i === 0,
-  }));
-}
-
 export const demoVariants: ProductVariant[] = [
   {
     id: "v1",
@@ -315,3 +378,85 @@ export const demoVariants: ProductVariant[] = [
     gallery: ["https://picsum.photos/seed/v3a/600/600"],
   },
 ];
+
+export function getVariantMedia(productId: string, variantId: string): ProductMedia[] {
+  const productMedia = PRODUCT_VARIANT_MEDIA[productId];
+  if (productMedia?.[variantId]?.length) return productMedia[variantId];
+
+  const variant = demoVariants.find((v) => v.id === variantId);
+  if (!variant) return [];
+
+  return variant.gallery.map((url, i) => ({
+    id: `${variantId}_img_${i}`,
+    type: "image" as const,
+    url,
+    title: `Image ${i + 1}`,
+    isPrimary: i === 0,
+  }));
+}
+
+export type ProductMediaWithVariant = ProductMedia & { variantId: string };
+
+export function getAllVariantMedia(productId: string): ProductMediaWithVariant[] {
+  const items: ProductMediaWithVariant[] = [];
+  for (const variant of demoVariants) {
+    for (const media of getVariantMedia(productId, variant.id)) {
+      items.push({ ...media, variantId: variant.id });
+    }
+  }
+  return items;
+}
+
+export function getVariantFirstMediaIndex(media: ProductMediaWithVariant[]): Record<string, number> {
+  const map: Record<string, number> = {};
+  media.forEach((item, index) => {
+    if (map[item.variantId] === undefined) map[item.variantId] = index;
+  });
+  return map;
+}
+
+export type VariantSpecGroup = {
+  variantId: string;
+  title: string;
+  specs: { label: string; value: string }[];
+};
+
+export function getDrawerVariantSpecGroups(product: Product): VariantSpecGroup[] {
+  return demoVariants
+    .filter((v) => v.id === "v1" || v.id === "v2")
+    .map((variant) => ({
+      variantId: variant.id,
+      title: `${variant.color} / ${variant.storage}`,
+      specs:
+        product.id === "prod_0002" && variant.id === "v1"
+          ? [
+              { label: "Color", value: variant.color },
+              { label: "Storage", value: variant.storage ?? "—" },
+              { label: "RAM", value: variant.ram ?? "—" },
+              { label: "SKU", value: variant.sku },
+              { label: "Driver", value: "10mm dynamic" },
+              { label: "ANC", value: "Hybrid active noise cancellation" },
+              { label: "Battery (buds)", value: "Up to 8 hours" },
+              { label: "Battery (case)", value: "32 hours total" },
+            ]
+          : product.id === "prod_0002" && variant.id === "v2"
+            ? [
+                { label: "Color", value: variant.color },
+                { label: "Storage", value: variant.storage ?? "—" },
+                { label: "RAM", value: variant.ram ?? "—" },
+                { label: "SKU", value: variant.sku },
+                { label: "Bluetooth", value: "5.3" },
+                { label: "Range", value: "10 m" },
+                { label: "Water resistance", value: "IPX5" },
+                { label: "Battery (buds)", value: "Up to 10 hours" },
+              ]
+            : [
+                { label: "Color", value: variant.color },
+                { label: "Storage", value: variant.storage ?? "—" },
+                { label: "RAM", value: variant.ram ?? "—" },
+                { label: "SKU", value: variant.sku },
+                { label: "Brand", value: product.brand },
+                { label: "Category", value: product.category },
+              ],
+    }));
+}
