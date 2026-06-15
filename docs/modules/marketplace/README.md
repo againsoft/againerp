@@ -1,4 +1,4 @@
-# Marketplace Module
+ # Marketplace Module
 
 > **Status:** Draft  
 > **Phase:** 7 — Marketplace Layer  
