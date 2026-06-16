@@ -18,6 +18,7 @@ import { formatCurrency } from "@/lib/utils";
 import { useState, useMemo } from "react";
 import { getCartSpecialOfferHints } from "@/lib/storefront/storefront-offers";
 import { useStorefrontOfferSources } from "@/hooks/use-storefront-offers";
+import { EmiInlineLink } from "@/components/storefront/emi/emi-badge";
 import { productPath, storefrontPaths } from "@/lib/url-slug/storefront-paths";
 
 export function CartView() {
@@ -181,6 +182,11 @@ export function CartView() {
               <span>Estimated total</span>
               <span>{formatCurrency(Math.max(0, subtotal - couponDiscount))}</span>
             </div>
+            <EmiInlineLink
+              amount={Math.max(0, subtotal - couponDiscount)}
+              className="mt-3"
+              surface="cart"
+            />
             <Button asChild size="lg" className="mt-4 h-11 w-full">
               <Link href={storefrontPaths.checkout}>Proceed to checkout</Link>
             </Button>

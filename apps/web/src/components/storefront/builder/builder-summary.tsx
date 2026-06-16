@@ -19,6 +19,7 @@ import { useStorefrontCart } from "@/lib/store/storefront-cart-store";
 import { builderPcPath } from "@/lib/url-slug/storefront-paths";
 import { pcSelectionsToErpInput } from "@/lib/configurator/erp/build-to-erp";
 import { BuilderErpActions } from "@/components/configurator/erp/builder-erp-actions";
+import { EmiInlineLink } from "@/components/storefront/emi/emi-badge";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -311,6 +312,8 @@ export function BuilderSummary({ className }: Props) {
           <span className="text-xs font-medium text-muted-foreground">Total</span>
           <span className="text-lg font-bold tracking-tight">{formatCurrency(totalPrice())}</span>
         </div>
+
+        <EmiInlineLink amount={totalPrice()} className="mt-2" surface="builder" />
 
         <div className="mt-3 space-y-2">
           <Input

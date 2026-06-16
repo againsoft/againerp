@@ -1,6 +1,7 @@
 import { products, type Product } from "./products";
 import { categoriesFlat, getCategoryBySlug, type Category } from "./categories";
 import { enrichStorefrontProduct } from "@/lib/storefront/storefront-offers";
+import { isProductOnWebsite } from "@/lib/catalog/website-visibility";
 import { toStorefrontProduct, type StorefrontProduct } from "./storefront-home";
 
 export type CatalogSort = "relevance" | "price_asc" | "price_desc" | "newest" | "best_selling";
@@ -67,7 +68,7 @@ export function productMatchesCategory(product: Product, categorySlug?: string) 
 
 export function getPublishedProducts(categorySlug?: string) {
   return products.filter(
-    (p) => p.status === "published" && productMatchesCategory(p, categorySlug),
+    (p) => isProductOnWebsite(p) && productMatchesCategory(p, categorySlug),
   );
 }
 

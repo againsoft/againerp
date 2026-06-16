@@ -327,6 +327,23 @@ Events: `commerce.cart.updated`, `commerce.cart.abandoned` (Marketing).
 - Payment intent created server-side; never expose secrets client-side
 - 3DS redirect handled in iframe/redirect return URL
 
+### Bank EMI (Plugin — `bank-emi`)
+
+Optional **installable plugin** for Bangladesh market — inspired by storefronts such as [Apple Gadgets BD](https://www.applegadgetsbd.com/product/apple-pencil-pro).
+
+| Surface | Behaviour |
+|---------|-----------|
+| **PDP** | “EMI Available for orders above ৳{min}” + **View Plans** |
+| **Modal** | Bank sidebar + amount input + tenure table (EMI, charge %, effective cost) |
+| **Cart / Builder** | EMI hint on eligible totals |
+| **Checkout** | Informational banner only (Phase 1); gateway EMI redirect Phase 3 |
+
+**Docs:** [plugins/bank-emi/Architecture.md](../../plugins/bank-emi/Architecture.md) · [ui-prototype/plugins/BankEmi.md](../../ui-prototype/plugins/BankEmi.md)
+
+**API:** `GET /api/v1/storefront/emi/plans?amount={n}`
+
+**Rule:** EMI display is estimate-only; actual terms confirmed at payment gateway.
+
 ### Checkout API
 
 ```text

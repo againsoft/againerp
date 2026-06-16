@@ -1,6 +1,7 @@
 # Purchase / Suppliers — UI Prototype Index
 
 > **Status:** **Partially implemented** (Suppliers prototype live)  
+> **Build guide:** [**PURCHASE_UI_BUILD_GUIDE.md**](./PURCHASE_UI_BUILD_GUIDE.md) — step-by-step UI commands  
 > **Architecture:** [PURCHASE_MODULE_ARCHITECTURE.md](../../modules/purchase/PURCHASE_MODULE_ARCHITECTURE.md)  
 > **Workflows:** [PURCHASE_WORKFLOW.md](../../modules/purchase/PURCHASE_WORKFLOW.md)  
 > **As-built:** [SUPPLIERS_IMPLEMENTED_DESIGN.md](./SUPPLIERS_IMPLEMENTED_DESIGN.md)  
@@ -15,9 +16,12 @@
 | Summary | `/suppliers` | ✅ KPIs + charts |
 | All Suppliers | `/suppliers/all` | ✅ List + link to detail |
 | Vendor detail | `/suppliers/[id]` | ✅ Record view + tabs |
-| Purchase Orders | `/suppliers/purchase-orders` | ✅ Mock table |
-| RFQ | `/suppliers/rfq` | ✅ Mock table |
-| Stock Feed | `/suppliers/stock-feed` | ✅ Mock table |
+| Purchase Orders | `/suppliers/purchase-orders` | ✅ AG Grid + detail + create |
+| RFQ | `/suppliers/rfq` | ✅ AG Grid + detail + create |
+| Quotations | `/suppliers/quotations` | ✅ Vendor quotes list |
+| Goods Receipts | `/suppliers/receipts` | ✅ List + detail + receive from PO |
+| Vendor Bills | `/suppliers/bills` | ✅ List + detail + three-way match + create from PO |
+| Vendor Returns | `/suppliers/returns` | ✅ List + detail + RMA workflow + create from PO |
 | Vendor ↔ product mapping | Product drawer + supplier catalog | ✅ Zustand store |
 | Map supplier sheet | Product drawer | ✅ Form with stock status + warranty |
 
@@ -30,7 +34,6 @@
 | Dashboard (purchase module) | `/purchase` | — |
 | Quotations | `/purchase/quotations` | PURCHASE_WORKFLOW |
 | Goods Receipts | `/purchase/receipts` | PURCHASE_WORKFLOW §3 |
-| Vendor Bills | `/purchase/bills` | PURCHASE_WORKFLOW §4 |
 | Returns | `/purchase/returns` | PURCHASE_WORKFLOW §5 |
 | Contracts (standalone list) | `/purchase/contracts` | — |
 | Reports | `/purchase/reports` | — |

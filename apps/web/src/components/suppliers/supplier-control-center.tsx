@@ -255,10 +255,15 @@ function SuppliersTab() {
 function PurchaseOrdersTab() {
   return (
     <div className="space-y-3">
-      <div className="flex justify-end">
-        <Button size="sm" onClick={() => toast.info("Create PO — prototype")}>
-          <Plus className="mr-1.5 h-3.5 w-3.5" />
-          Create PO
+      <div className="flex justify-end gap-2">
+        <Button size="sm" variant="outline" asChild>
+          <Link href="/suppliers/purchase-orders">Open full list</Link>
+        </Button>
+        <Button size="sm" asChild>
+          <Link href="/suppliers/purchase-orders/create">
+            <Plus className="mr-1.5 h-3.5 w-3.5" />
+            Create PO
+          </Link>
         </Button>
       </div>
       <div className="overflow-x-auto rounded-lg border border-input">
@@ -276,7 +281,14 @@ function PurchaseOrdersTab() {
           <tbody>
             {purchaseOrdersSeed.map((po) => (
               <tr key={po.id} className="border-b last:border-0 hover:bg-muted/20">
-                <td className="px-3 py-2 font-medium">{po.poNumber}</td>
+                <td className="px-3 py-2">
+                  <Link
+                    href={`/suppliers/purchase-orders/${po.id}`}
+                    className="font-medium text-primary hover:underline"
+                  >
+                    {po.poNumber}
+                  </Link>
+                </td>
                 <td className="px-3 py-2">{po.supplierName}</td>
                 <td className="px-3 py-2">{po.items}</td>
                 <td className="px-3 py-2 font-medium">{formatBdt(po.total)}</td>
@@ -296,10 +308,15 @@ function PurchaseOrdersTab() {
 function RfqTab() {
   return (
     <div className="space-y-3">
-      <div className="flex justify-end">
-        <Button size="sm" onClick={() => toast.info("New RFQ — prototype")}>
-          <Plus className="mr-1.5 h-3.5 w-3.5" />
-          New RFQ
+      <div className="flex justify-end gap-2">
+        <Button size="sm" variant="outline" asChild>
+          <Link href="/suppliers/rfq">Open full list</Link>
+        </Button>
+        <Button size="sm" asChild>
+          <Link href="/suppliers/rfq/create">
+            <Plus className="mr-1.5 h-3.5 w-3.5" />
+            New RFQ
+          </Link>
         </Button>
       </div>
       <div className="overflow-x-auto rounded-lg border border-input">
@@ -317,7 +334,14 @@ function RfqTab() {
           <tbody>
             {rfqSeed.map((r) => (
               <tr key={r.id} className="border-b last:border-0 hover:bg-muted/20">
-                <td className="px-3 py-2 font-medium">{r.rfqNumber}</td>
+                <td className="px-3 py-2">
+                  <Link
+                    href={`/suppliers/rfq/${r.id}`}
+                    className="font-medium text-primary hover:underline"
+                  >
+                    {r.rfqNumber}
+                  </Link>
+                </td>
                 <td className="px-3 py-2">{r.title}</td>
                 <td className="px-3 py-2">{r.vendorsInvited}</td>
                 <td className="px-3 py-2">{r.responses}</td>

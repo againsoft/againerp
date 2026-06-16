@@ -45,12 +45,13 @@
 
 ### Filter bar
 - Live search (SKU, name)
+- **Website** — All products / On website / Not on website (published + public visibility + active category)
 - **Category** — searchable dropdown; hierarchical two-line labels (parent path small, caption/name larger); matches name, caption, ancestors, slug
 - **Brand** — searchable dropdown
 - **Stock** — in stock / low / out
-- **Filters** sheet — show/hide toolbar filters (search, status, category, brand, stock, price range)
+- **Filters** sheet — show/hide toolbar filters (search, **website**, status, category, brand, stock, price range)
 - **Live edit** sheet — toggle inline fields: Product title, Category, Brand, Slug, SKU, Price, Stock, Status
-- **Columns** sheet — toggle image, SKU, slug, price, stock, status, brand, category, updated
+- **Columns** sheet — toggle image, SKU, slug, price, stock, status, **web**, brand, category, updated
 
 ### Category column
 - Subcategories: top line `8px` muted parent path (`Laptops › Gaming Laptop` when depth > 2, root omitted); bottom line `13px` medium caption (`HP`)
@@ -68,8 +69,9 @@
 - Column resize (header edge drag) · column reorder (header drag)
 - Name: link to details when title live edit off; truncate + tooltip, width 280 (min 120, max 720)
 - Slug column: hideable, default hidden
-- Row menu (⋮): View · Edit · Archive
-- Bulk bar on select: publish · archive · export selected
+- **Web column:** green ✓ = live on storefront; — = not live (hover tooltip: not published / private / inactive category / archived)
+- Row menu (⋮): View · Edit · **Publish to website** / **Remove from website** · Archive
+- Bulk bar on select: **publish to website** · **remove from website** · archive · export selected
 - Archive: confirm modal
 - Empty state when filters match nothing
 - Footer: `Showing 1–25 of N · drag column edges to resize · drag headers to reorder`

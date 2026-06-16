@@ -21,10 +21,10 @@ Primary admin grid for catalog products — search, filter, bulk actions, inline
 ┌─────────────────────────────────────────────────────────────────────────┐
 │ Products (120)                [Import] [Export] [+ Add Product]         │
 ├─────────────────────────────────────────────────────────────────────────┤
-│ [Search] [Category▾] [Brand▾] [Stock▾] … [Filters] [Live edit] [Cols] │
+│ [Search] [Website▾] [Category▾] [Brand▾] [Stock▾] … [Filters] [Live edit] [Cols] │
 ├─────────────────────────────────────────────────────────────────────────┤
 │ AG Grid — full height                                                   │
-│ ☐ │ Img │ Name✎ │ SKU✎ │ Slug✎ │ Price✎ │ Stock✎ │ Status✎ │ Cat✎ │ Brand✎ │ ⋮ │
+│ ☐ │ Img │ Name✎ │ SKU✎ │ Slug✎ │ Price✎ │ Stock✎ │ Status✎ │ Web │ Cat✎ │ Brand✎ │ ⋮ │
 ├─────────────────────────────────────────────────────────────────────────┤
 │ Pagination · Showing 1–25 of 120                                        │
 └─────────────────────────────────────────────────────────────────────────┘
@@ -37,13 +37,13 @@ Primary admin grid for catalog products — search, filter, bulk actions, inline
 | Component | Detail |
 |-----------|--------|
 | AG Grid | Legacy theme, dark mode, resize/reorder columns |
-| Live toolbar filters | Search, Category, Brand, Stock (+ Status, Price via Filters sheet) |
+| Live toolbar filters | Search, **Website**, Category, Brand, Stock (+ Status, Price via Filters sheet) |
 | **Category filter** | Searchable dropdown; same hierarchical label as grid column |
 | **Brand filter** | Searchable dropdown |
 | **Filters** menu | Single list — show/hide any toolbar filter |
 | **Live edit** menu | Toggle inline edit per field (see table below) |
-| **Columns** menu | Toggle Image, SKU, Slug, Price, Stock, Status, Brand, Category, Updated |
-| Bulk bar | Publish, archive, export selected |
+| **Columns** menu | Toggle Image, SKU, Slug, Price, Stock, Status, **Web**, Brand, Category, Updated |
+| Bulk bar | **Publish to website**, **Remove from website**, archive, export selected |
 | Row menu | View, edit, archive + confirm modal |
 | Mobile cards | `ProductMobileCards` |
 
@@ -71,6 +71,7 @@ Search matches name, caption, parent path, and slug.
 | Price | ✓ | BDT format |
 | Stock | ✓ | |
 | Status | ✓ | draft / published / archived |
+| **Web** | — | ✓ on website · — not live (tooltip: reason) |
 | Category | ✓ | Select editor; hierarchical cell renderer |
 | Brand | ✓ | Select editor |
 | Updated | — | Hideable |
@@ -85,6 +86,8 @@ Search matches name, caption, parent path, and slug.
 | + Add Product | `/catalog/products/new` |
 | Import / Export | Mock toast (bottom-right, compact) |
 | Bulk publish / archive | Mock update + confirm |
+| **Website filter** | On website / Not on website / All — `published` + `visibility public` + active category |
+| Row ⋮ | Publish to website · Remove from website (when applicable) |
 | Row edit | `ProductFormDialog` |
 | Inline cell edit | Toast: `Updated {field} for {sku}` |
 
@@ -100,6 +103,7 @@ All prototype toasts (Sonner): **bottom-right**, compact size — see [component
 
 | Date | Change |
 |------|--------|
+| 2026-06-15 | Phase 2: Website filter, Web column, publish/remove from website bulk + row actions |
 | 2026-06-13 | Category hierarchy display; searchable Category/Brand filters; live edit title/category/brand/slug; slug field |
 | 2026-06-13 | Global toasts bottom-right compact |
 | 2026-06-12 | Prototype UI built |

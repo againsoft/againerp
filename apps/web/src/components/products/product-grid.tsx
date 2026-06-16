@@ -8,6 +8,7 @@ import {
   Archive,
   Eye,
   Filter,
+  Globe,
   MoreHorizontal,
   MousePointerClick,
   Pencil,
@@ -38,7 +39,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ProductMobileCards } from "@/components/products/product-mobile-cards";
 import { PriceRangeFilter } from "@/components/products/price-range-filter";
+import { WebsiteBadge } from "@/components/products/website-badge";
 import { ActivityTriggerButton } from "@/components/activity/activity-trigger-button";
+import {
+  isProductOnWebsite,
+  publishProductToWebsite,
+  removeProductFromWebsite,
+} from "@/lib/catalog/website-visibility";
 
 const FILTER_CATEGORIES = categoriesFlat
   .filter((c) => c.active)
@@ -60,6 +67,7 @@ const COLUMN_KEYS = [
   "stock",
   "stockStatus",
   "status",
+  "onWeb",
   "seoTitle",
   "brand",
   "category",
@@ -77,6 +85,7 @@ const COLUMN_LABELS: Record<ColumnKey, string> = {
   stock: "Stock",
   stockStatus: "Stock Status",
   status: "Status",
+  onWeb: "Web",
   seoTitle: "SEO Title",
   brand: "Brand",
   category: "Category",
@@ -93,6 +102,7 @@ const DEFAULT_VISIBLE: Record<ColumnKey, boolean> = {
   stock: true,
   stockStatus: false,
   status: true,
+  onWeb: true,
   seoTitle: false,
   brand: true,
   category: true,
@@ -101,6 +111,7 @@ const DEFAULT_VISIBLE: Record<ColumnKey, boolean> = {
 
 const FILTER_VISIBILITY_KEYS = [
   "search",
+  "website",
   "status",
   "category",
   "brand",
@@ -112,6 +123,7 @@ type FilterVisibilityKey = (typeof FILTER_VISIBILITY_KEYS)[number];
 
 const FILTER_LABELS: Record<FilterVisibilityKey, string> = {
   search: "Search",
+  website: "Website",
   status: "Status",
   category: "Category",
   brand: "Brand",
@@ -122,6 +134,7 @@ const FILTER_LABELS: Record<FilterVisibilityKey, string> = {
 
 const FILTER_HINTS: Record<FilterVisibilityKey, string> = {
   search: "SKU, name search",
+  website: "On website / Not on website",
   status: "Published / Draft / Archived",
   category: "Category search dropdown",
   brand: "Brand search dropdown",
@@ -132,6 +145,7 @@ const FILTER_HINTS: Record<FilterVisibilityKey, string> = {
 
 const DEFAULT_VISIBLE_FILTERS: Record<FilterVisibilityKey, boolean> = {
   search: true,
+  website: true,
   status: false,
   category: true,
   brand: true,
@@ -431,6 +445,7 @@ function StockStatusBadge({ status }: { status: StockStatusLabel }) {
 
 type FilterState = {
   search: string;
+  website: string;
   status: string;
   category: string;
   brand: string;
@@ -442,6 +457,7 @@ type FilterState = {
 
 const DEFAULT_FILTERS: FilterState = {
   search: "",
+  website: "all",
   status: "all",
   category: "all",
   brand: "all",
@@ -469,6 +485,8 @@ function applyFilters(rows: Product[], f: FilterState) {
 
   return rows.filter((p) => {
     if (q && !p.name.toLowerCase().includes(q) && !p.sku.toLowerCase().includes(q)) return false;
+    if (f.website === "on" && !isProductOnWebsite(p)) return false;
+    if (f.website === "off" && isProductOnWebsite(p)) return false;
     if (f.status !== "all" && p.status !== f.status) return false;
     if (f.category !== "all" && p.category !== f.category) return false;
     if (f.brand !== "all" && p.brand !== f.brand) return false;
@@ -537,6 +555,30 @@ export function ProductGrid({ onEdit, onView, className }: Props) {
           <DropdownMenuItem onClick={() => onEdit(data)}>
             <Pencil className="mr-2 h-3.5 w-3.5" /> Edit
           </DropdownMenuItem>
+          {!isProductOnWebsite(data) && data.status !== "archived" && (
+            <DropdownMenuItem
+              onClick={() => {
+                setRowData((rows) =>
+                  rows.map((r) => (r.id === data.id ? publishProductToWebsite(r) : r)),
+                );
+                toast.success(`"${data.name}" published to website`);
+              }}
+            >
+              <Globe className="mr-2 h-3.5 w-3.5" /> Publish to website
+            </DropdownMenuItem>
+          )}
+          {isProductOnWebsite(data) && (
+            <DropdownMenuItem
+              onClick={() => {
+                setRowData((rows) =>
+                  rows.map((r) => (r.id === data.id ? removeProductFromWebsite(r) : r)),
+                );
+                toast.success(`"${data.name}" removed from website`);
+              }}
+            >
+              <Globe className="mr-2 h-3.5 w-3.5" /> Remove from website
+            </DropdownMenuItem>
+          )}
           <DropdownMenuItem
             onClick={() => openArchiveConfirm([data])}
             className="text-destructive"
@@ -712,6 +754,18 @@ export function ProductGrid({ onEdit, onView, className }: Props) {
         width: 110,
       },
       {
+        colId: "onWeb",
+        headerName: "Web",
+        hide: !visibleCols.onWeb,
+        width: 64,
+        maxWidth: 72,
+        sortable: true,
+        valueGetter: (p) => (p.data && isProductOnWebsite(p.data) ? 1 : 0),
+        cellRenderer: (p: ICellRendererParams<Product>) =>
+          p.data ? <WebsiteBadge product={p.data} /> : null,
+        cellClass: "product-grid-icon-col",
+      },
+      {
         field: "seoTitle",
         headerName: "SEO Title",
         hide: !visibleCols.seoTitle,
@@ -800,6 +854,7 @@ export function ProductGrid({ onEdit, onView, className }: Props) {
       setFilters((f) => ({
         ...f,
         ...(key === "search" ? { search: "" } : {}),
+        ...(key === "website" ? { website: "all" } : {}),
         ...(key === "status" ? { status: "all" } : {}),
         ...(key === "category" ? { category: "all" } : {}),
         ...(key === "brand" ? { brand: "all" } : {}),
@@ -826,6 +881,18 @@ export function ProductGrid({ onEdit, onView, className }: Props) {
             onChange={(e) => setFilters((f) => ({ ...f, search: e.target.value }))}
             className="max-w-[220px]"
           />
+        )}
+        {visibleFilters.website && (
+          <Select
+            value={filters.website}
+            onChange={(e) => setFilters((f) => ({ ...f, website: e.target.value }))}
+            className="w-[152px]"
+            aria-label="Website visibility"
+          >
+            <option value="all">All products</option>
+            <option value="on">On website</option>
+            <option value="off">Not on website</option>
+          </Select>
         )}
         {visibleFilters.status && (
           <Select
@@ -929,15 +996,28 @@ export function ProductGrid({ onEdit, onView, className }: Props) {
             onClick={() => {
               const ids = new Set(selected.map((s) => s.id));
               setRowData((rows) =>
-                rows.map((r) =>
-                  ids.has(r.id) ? { ...r, status: "published" as ProductStatus } : r,
-                ),
+                rows.map((r) => (ids.has(r.id) ? publishProductToWebsite(r) : r)),
               );
-              toast.success(`Published ${selected.length} products`);
+              toast.success(`Published ${selected.length} product${selected.length > 1 ? "s" : ""} to website`);
               setSelected([]);
             }}
           >
-            Bulk publish
+            <Globe className="mr-1.5 h-3.5 w-3.5" />
+            Publish to website
+          </Button>
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => {
+              const ids = new Set(selected.map((s) => s.id));
+              setRowData((rows) =>
+                rows.map((r) => (ids.has(r.id) ? removeProductFromWebsite(r) : r)),
+              );
+              toast.success(`Removed ${selected.length} product${selected.length > 1 ? "s" : ""} from website`);
+              setSelected([]);
+            }}
+          >
+            Remove from website
           </Button>
           <Button
             variant="secondary"

@@ -87,6 +87,9 @@ Prototype implementation in `apps/web` using the `(storefront)` route group. **M
 | Q&A accordion + **Ask a question** dialog | ✓ |
 | Cross-sell · upsell · related rails | ✓ |
 | Wishlist + compare buttons | ✓ |
+| **EMI View Plans** (Bank EMI plugin) | ✓ — [BankEmi.md](../plugins/BankEmi.md) |
+
+**EMI components:** `emi-badge.tsx` · `emi-plans-modal.tsx` · `hooks/use-bank-emi.ts` · `lib/plugins/bank-emi/*` · `lib/mock-data/emi-banks.ts`
 
 **Data:** `storefront-product.ts` — variants, specs, reviews, questions, gallery merge
 

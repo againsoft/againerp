@@ -257,6 +257,66 @@ export const PLUGIN_REGISTRY: PluginDef[] = [
     ],
   },
   {
+    id: "bank-emi",
+    name: "Bank EMI Calculator",
+    description: "Show bank-wise EMI installment plans on product, cart, and PC builder.",
+    longDescription:
+      "Apple Gadgets–style EMI modal — customers compare monthly installments across AB Bank, Brac, Bank Asia, and more. Admin configures tenure rates and minimum order amount.",
+    category: "payment",
+    version: "1.0.0",
+    author: "AgainERP",
+    website: "https://again.com.bd",
+    brandColor: "#D97706",
+    sections: [
+      {
+        id: "general",
+        title: "General",
+        fields: [
+          {
+            key: "plugin_enabled",
+            label: "Enable EMI on storefront",
+            type: "toggle",
+            defaultValue: true,
+          },
+          {
+            key: "min_order_amount",
+            label: "Minimum order amount (BDT)",
+            type: "number",
+            defaultValue: 5000,
+            required: true,
+          },
+          {
+            key: "label_en",
+            label: "PDP label (EN)",
+            type: "text",
+            defaultValue: "EMI Available for orders above ৳ {min}",
+          },
+          {
+            key: "label_bn",
+            label: "PDP label (BN)",
+            type: "text",
+            defaultValue: "{min} টাকার বেশি অর্ডারে কিস্তি সুবিধা",
+          },
+        ],
+      },
+      {
+        id: "display",
+        title: "Display surfaces",
+        fields: [
+          { key: "show_on_pdp", label: "Product page", type: "toggle", defaultValue: true },
+          { key: "show_on_cart", label: "Shopping cart", type: "toggle", defaultValue: true },
+          { key: "show_on_builder", label: "PC Builder summary", type: "toggle", defaultValue: true },
+        ],
+      },
+      {
+        id: "banks",
+        title: "Banks & Plans",
+        description: "Add banks and set EMI charge % per tenure",
+        fields: [],
+      },
+    ],
+  },
+  {
     id: "whatsapp",
     name: "WhatsApp Business",
     description: "Order updates and marketing via WhatsApp Business API.",

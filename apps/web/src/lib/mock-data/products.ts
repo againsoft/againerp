@@ -3,6 +3,8 @@ import { productPath } from "@/lib/url-slug/paths";
 
 export type ProductStatus = "draft" | "published" | "archived";
 
+export type ProductVisibility = "public" | "private" | "password";
+
 export type StockStatusLabel = "In Stock" | "Low Stock" | "Out of Stock" | "Pre-order";
 
 export type Product = {
@@ -16,6 +18,8 @@ export type Product = {
   stock: number;
   stockStatus: StockStatusLabel;
   status: ProductStatus;
+  /** Storefront visibility — public products can appear on website when published */
+  visibility?: ProductVisibility;
   category: string;
   brand: string;
   thumbnail: string;
@@ -82,7 +86,8 @@ function resolveKeyFeatures(name: string) {
   );
 }
 
-const productCategories = categoriesFlat.filter((c) => c.active);
+const activeCategories = categoriesFlat.filter((c) => c.active);
+const inactiveCategories = categoriesFlat.filter((c) => !c.active);
 const brands = ["UrbanWear", "TechPro", "HomeNest", "GlowUp", "ActiveLife", "ReadWell"];
 const statuses: ProductStatus[] = ["published", "published", "published", "draft", "archived"];
 
@@ -131,6 +136,12 @@ export const products: Product[] = Array.from({ length: 120 }, (_, i) => {
   const day = (i % 28) + 1;
   const name = variant > 1 ? `${base} v${variant}` : base;
   const stockStatus = resolveStockStatus(stock, i);
+  const categoryPool =
+    i % 13 === 0 && inactiveCategories.length > 0
+      ? inactiveCategories
+      : activeCategories;
+  const visibility: ProductVisibility =
+    status === "published" && i % 11 === 0 ? "private" : "public";
   return {
     id: `prod_${pad(i + 1)}`,
     name,
@@ -142,7 +153,8 @@ export const products: Product[] = Array.from({ length: 120 }, (_, i) => {
     stock,
     stockStatus,
     status,
-    category: productCategories[i % productCategories.length].name,
+    visibility,
+    category: categoryPool[i % categoryPool.length].name,
     brand: brands[i % brands.length],
     thumbnail: `https://picsum.photos/seed/${i + 1}/80/80`,
     updatedAt: `2026-06-${pad(day, 2)}T10:00:00+06:00`,
@@ -180,6 +192,7 @@ export function buildProductFromQuickAdd(input: QuickAddProductInput): Product {
     stock,
     stockStatus: stock === 0 ? "Out of Stock" : stock <= 20 ? "Low Stock" : "In Stock",
     status: "published",
+    visibility: "public",
     category: input.category?.trim() || "Apparel",
     brand: input.brand?.trim() || "UrbanWear",
     thumbnail: `https://picsum.photos/seed/${id}/80/80`,

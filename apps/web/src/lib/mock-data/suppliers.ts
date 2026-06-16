@@ -1,3 +1,10 @@
+import {
+  purchaseOrdersSeed as purchaseOrdersFullSeed,
+  toPurchaseOrderSummary,
+  type PurchaseOrderSummary,
+} from "./purchase-orders";
+import { purchaseRfqSeed, toRfqRecord } from "./purchase-rfq";
+
 export type SupplierStatus = "active" | "blocked" | "preferred";
 
 export type PoStatus = "draft" | "sent" | "partial" | "received" | "cancelled";
@@ -8,6 +15,10 @@ export const SUPPLIER_TABS = [
   "suppliers",
   "purchase-orders",
   "rfq",
+  "quotations",
+  "receipts",
+  "bills",
+  "returns",
   "stock-feed",
   "summary",
 ] as const;
@@ -18,6 +29,10 @@ export const SUPPLIER_TAB_LABELS: Record<SupplierTab, string> = {
   suppliers: "All Suppliers",
   "purchase-orders": "Purchase Orders",
   rfq: "RFQ",
+  quotations: "Quotations",
+  receipts: "Goods Receipts",
+  bills: "Vendor Bills",
+  returns: "Returns",
   "stock-feed": "Stock Feed",
   summary: "Summary",
 };
@@ -253,117 +268,13 @@ export const suppliersSeed: Supplier[] = [
   },
 ];
 
-export type PurchaseOrder = {
-  id: string;
-  poNumber: string;
-  supplierId: string;
-  supplierName: string;
-  status: PoStatus;
-  items: number;
-  total: number;
-  expectedAt: string;
-  createdAt: string;
-};
+export type PurchaseOrder = PurchaseOrderSummary;
 
-export const purchaseOrdersSeed: PurchaseOrder[] = [
-  {
-    id: "po_001",
-    poNumber: "PO-2026-0142",
-    supplierId: "sup_001",
-    supplierName: "TechPro Distributors Ltd",
-    status: "sent",
-    items: 5,
-    total: 840000,
-    expectedAt: "2026-06-20",
-    createdAt: "2026-06-14",
-  },
-  {
-    id: "po_002",
-    poNumber: "PO-2026-0141",
-    supplierId: "sup_004",
-    supplierName: "Shenzhen Electronics Co.",
-    status: "partial",
-    items: 12,
-    total: 1250000,
-    expectedAt: "2026-07-05",
-    createdAt: "2026-06-10",
-  },
-  {
-    id: "po_003",
-    poNumber: "PO-2026-0140",
-    supplierId: "sup_003",
-    supplierName: "GlowUp Beauty Imports",
-    status: "draft",
-    items: 3,
-    total: 186000,
-    expectedAt: "2026-06-25",
-    createdAt: "2026-06-15",
-  },
-  {
-    id: "po_004",
-    poNumber: "PO-2026-0138",
-    supplierId: "sup_001",
-    supplierName: "TechPro Distributors Ltd",
-    status: "received",
-    items: 8,
-    total: 620000,
-    expectedAt: "2026-05-28",
-    createdAt: "2026-05-15",
-  },
-  {
-    id: "po_005",
-    poNumber: "PO-2026-0135",
-    supplierId: "sup_002",
-    supplierName: "UrbanWear Manufacturing",
-    status: "received",
-    items: 6,
-    total: 445000,
-    expectedAt: "2026-05-10",
-    createdAt: "2026-04-28",
-  },
-  {
-    id: "po_006",
-    poNumber: "PO-2026-0139",
-    supplierId: "sup_004",
-    supplierName: "Shenzhen Electronics Co.",
-    status: "sent",
-    items: 4,
-    total: 980000,
-    expectedAt: "2026-06-30",
-    createdAt: "2026-06-08",
-  },
-];
+export const purchaseOrdersSeed: PurchaseOrder[] = purchaseOrdersFullSeed.map(toPurchaseOrderSummary);
 
-export type RfqRecord = {
-  id: string;
-  rfqNumber: string;
-  title: string;
-  status: RfqStatus;
-  vendorsInvited: number;
-  responses: number;
-  deadline: string;
-};
+export type { RfqRecord } from "./purchase-rfq";
 
-export const rfqSeed: RfqRecord[] = [
-  {
-    id: "rfq_001",
-    rfqNumber: "RFQ-2026-008",
-    title: "Wireless earbuds — Q3 restock",
-    status: "sent",
-    vendorsInvited: 4,
-    responses: 2,
-    deadline: "2026-06-20",
-  },
-  {
-    id: "rfq_002",
-    rfqNumber: "RFQ-2026-007",
-    title: "Summer apparel collection",
-    status: "review",
-    vendorsInvited: 3,
-    responses: 3,
-    deadline: "2026-06-18",
-  },
-];
+export const rfqSeed = purchaseRfqSeed.map(toRfqRecord);
 
 export type SupplierStockFeed = {
   id: string;
@@ -417,6 +328,10 @@ export function tabFromPath(pathname: string): SupplierTab {
   if (pathname.startsWith("/suppliers/all")) return "suppliers";
   if (pathname.startsWith("/suppliers/purchase-orders")) return "purchase-orders";
   if (pathname.startsWith("/suppliers/rfq")) return "rfq";
+  if (pathname.startsWith("/suppliers/quotations")) return "quotations";
+  if (pathname.startsWith("/suppliers/receipts")) return "receipts";
+  if (pathname.startsWith("/suppliers/bills")) return "bills";
+  if (pathname.startsWith("/suppliers/returns")) return "returns";
   if (pathname.startsWith("/suppliers/stock-feed")) return "stock-feed";
   return "summary";
 }

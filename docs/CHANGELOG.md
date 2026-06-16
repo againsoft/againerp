@@ -8,6 +8,24 @@ Format follows [GOVERNANCE.md](./GOVERNANCE.md#changelog-system).
 
 ## [Unreleased]
 
+### Added — 2026-06-15 — Bank EMI Calculator Plugin (Documentation)
+
+| Field | Value |
+|-------|-------|
+| **Version** | `2.46.0-bank-emi-plugin-docs` |
+| **Module** | Ecommerce · Plugin (`bank-emi`) |
+| **Change Type** | Added |
+| **Reason** | Study Apple Gadgets BD EMI “View Plans” UX; plan installable Bank EMI plugin for AgainERP |
+| **Impact** | Plugin architecture, calculation model, admin config, storefront modal spec |
+
+**Docs:** `docs/plugins/bank-emi/` · `docs/ui-prototype/plugins/BankEmi.md` · updated `Plugins.md`, `ECOMMERCE_STOREFRONT_ARCHITECTURE.md`
+
+**Reference:** [Apple Gadgets BD — Apple Pencil Pro](https://www.applegadgetsbd.com/product/apple-pencil-pro)
+
+**Next:** Prototype UI (`emi-plans-modal.tsx`, mock banks, PDP hook)
+
+---
+
 ### Added — 2026-06-15 — Suppliers Module + Vendor ↔ Product Mapping (UI Prototype)
 
 | Field | Value |

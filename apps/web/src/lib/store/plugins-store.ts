@@ -6,6 +6,8 @@ import {
   buildPluginDefaults,
   findPlugin,
 } from "@/lib/settings/plugins/registry";
+import { serializeBanks } from "@/lib/plugins/bank-emi/banks-config";
+import { DEFAULT_EMI_SETTINGS } from "@/lib/mock-data/emi-banks";
 
 type PluginsStore = {
   plugins: Record<string, PluginInstallState>;
@@ -48,13 +50,17 @@ export const usePluginsStore = create<PluginsStore>()(
       installPlugin: (pluginId) => {
         const plugin = findPlugin(pluginId);
         if (!plugin) return;
+        const config = buildPluginDefaults(plugin);
+        if (pluginId === "bank-emi") {
+          config.banks_json = serializeBanks(DEFAULT_EMI_SETTINGS.banks);
+        }
         set((s) => ({
           plugins: {
             ...s.plugins,
             [pluginId]: {
               installed: true,
               enabled: true,
-              config: buildPluginDefaults(plugin),
+              config,
               installedAt: new Date().toISOString(),
               updatedAt: new Date().toISOString(),
             },

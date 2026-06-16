@@ -57,6 +57,7 @@
 | [media/](./media/) | 9 |
 | [seo/](./seo/) | 12 |
 | [builder/](./builder/) | 14 |
+| [plugins/](./plugins/) | Bank EMI (financing) |
 | [reports/](./reports/) | 14 |
 | [system/](./system/) | 24 |
 | [ai-os/](./ai-os/) | 15 |

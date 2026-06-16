@@ -16,6 +16,7 @@ import { findPlugin, PLUGIN_CATEGORIES } from "@/lib/settings/plugins/registry";
 import { usePluginsStore } from "@/lib/store/plugins-store";
 import { SettingsLayerNav } from "@/components/settings/settings-layer-nav";
 import { PluginBrandMark, PluginFieldRow } from "@/components/settings/plugins/plugin-field-row";
+import { BankEmiBanksPanel } from "@/components/settings/plugins/bank-emi-banks-panel";
 import { ActivityTriggerButton } from "@/components/activity/activity-trigger-button";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -260,7 +261,10 @@ export function PluginConfigWorkspace({ pluginId }: Props) {
         </nav>
 
         <div className="min-w-0 space-y-4">
-          {activeSectionDef && (
+          {pluginId === "bank-emi" && activeSection === "banks" ? (
+            <BankEmiBanksPanel pluginId={pluginId} />
+          ) : (
+            activeSectionDef && (
             <div className="overflow-hidden rounded-xl border border-input bg-card shadow-sm">
               <div className="border-b border-input bg-muted/30 px-4 py-3">
                 <p className="text-sm font-semibold">{activeSectionDef.title}</p>
@@ -280,6 +284,7 @@ export function PluginConfigWorkspace({ pluginId }: Props) {
                 ))}
               </div>
             </div>
+            )
           )}
         </div>
       </div>

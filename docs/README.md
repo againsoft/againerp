@@ -201,6 +201,7 @@ AgainERP includes a platform-wide **AI OS** — Chief AI Agent orchestrating dom
 | [Ecommerce Module](./modules/ecommerce/Architecture.md) | Phase 1 active module (admin) |
 | [Ecommerce Storefront](./modules/ecommerce/ECOMMERCE_STOREFRONT_ARCHITECTURE.md) | **Customer storefront** (v1.0) |
 | [Storefront UI Prototype (as-built)](./ui-prototype/storefront/IMPLEMENTED_DESIGN.md) | **AgainShop `/shop/*`** prototype screens |
+| [Plugins](./plugins/README.md) | **Installable integrations** — Bank EMI, Pathao, bKash, … |
 | [Module Dependency Map](./MODULE_DEPENDENCY_MAP.md) | Cross-module dependencies (master) |
 | [Entity Relationship Registry](./ENTITY_RELATIONSHIP_REGISTRY.md) | Business entity profiles |
 | [Catalog Entity Catalog](./modules/ecommerce/catalog/ENTITY_CATALOG.md) | **Catalog domain entities** (v1.0) |
@@ -216,4 +217,4 @@ AgainERP includes a platform-wide **AI OS** — Chief AI Agent orchestrating dom
 
 **Platform:** AgainERP  
 **Maintainer:** Platform Architecture Team  
-**Last Updated:** 2026-06-13
+**Last Updated:** 2026-06-15

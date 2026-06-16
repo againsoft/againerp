@@ -53,7 +53,10 @@ External plugin marketplace inside Business Settings. Install integrations (Path
 | Steadfast Courier | Shipping | API Key, Secret, auto parcel |
 | bKash | Payment | Username, App Key/Secret, checkout |
 | SSLCommerz | Payment | Store ID, Password |
+| **Bank EMI Calculator** | **Payment / Financing** | Banks, tenure plans, charge %, min order, PDP/cart display |
 | WhatsApp Business | Communication | Phone ID, Access Token, notifications |
+
+**Bank EMI docs:** [plugins/BankEmi.md](../plugins/BankEmi.md) · [plugins/bank-emi/Architecture.md](../../plugins/bank-emi/Architecture.md)
 
 ## Actions
 
@@ -69,4 +72,5 @@ External plugin marketplace inside Business Settings. Install integrations (Path
 
 | Date | Change |
 |------|--------|
+| 2026-06-15 | Bank EMI Calculator plugin — architecture + UI prototype docs |
 | 2026-06-13 | Plugins menu + Pathao integration UI prototype |

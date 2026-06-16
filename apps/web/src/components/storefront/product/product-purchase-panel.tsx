@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { WishlistButton } from "@/components/storefront/wishlist/wishlist-button";
 import { CompareButton } from "@/components/storefront/compare/compare-button";
+import { EmiBadge } from "@/components/storefront/emi/emi-badge";
 import { cn, formatCurrency } from "@/lib/utils";
 import { useStorefrontCart } from "@/lib/store/storefront-cart-store";
 import { storefrontPaths } from "@/lib/url-slug/storefront-paths";
@@ -112,6 +113,7 @@ export function ProductPurchasePanel({
 
       <div className="flex flex-wrap items-baseline gap-3">
         <span className="text-3xl font-bold">{formatCurrency(price)}</span>
+        <span className="text-xs text-muted-foreground">(Cash Price)</span>
         {offer.compareAtPrice && offer.compareAtPrice > price && (
           <>
             <span className="text-lg text-muted-foreground line-through">
@@ -123,6 +125,8 @@ export function ProductPurchasePanel({
           </>
         )}
       </div>
+
+      <EmiBadge amount={price * qty} showCashLabel />
 
       {offer.labels.length > 0 && (
         <div className="space-y-1.5 rounded-lg border border-violet-200 bg-violet-50/60 px-3 py-2.5 dark:border-violet-900 dark:bg-violet-950/20">
