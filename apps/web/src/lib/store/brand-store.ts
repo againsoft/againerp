@@ -63,6 +63,8 @@ export const useBrandStore = create<BrandState>()(
             metaKeywords: data.metaKeywords,
             logoUrl: data.logoUrl,
             bannerUrl: data.bannerUrl,
+            logoMediaId: data.logoMediaId,
+            bannerMediaId: data.bannerMediaId,
           };
           return { brands: [...state.brands, created] };
         });

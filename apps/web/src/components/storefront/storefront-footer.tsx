@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Globe, Mail, Share2 } from "lucide-react";
 import { storeConfig } from "@/lib/mock-data/storefront-home";
-import { storefrontPaths } from "@/lib/url-slug/storefront-paths";
+import { builderPcPath, builderPath, storefrontPaths } from "@/lib/url-slug/storefront-paths";
 
 const footerLinks = {
   shop: [
@@ -9,6 +9,12 @@ const footerLinks = {
     { label: "New arrivals", href: storefrontPaths.newArrivals },
     { label: "Best sellers", href: storefrontPaths.bestsellers },
     { label: "Deals", href: storefrontPaths.deals },
+  ],
+  builders: [
+    { label: "All builders", href: builderPath() },
+    { label: "PC Builder", href: builderPcPath() },
+    { label: "Laptop Builder", href: builderPath(), soon: true },
+    { label: "CCTV Builder", href: builderPath(), soon: true },
   ],
   help: [
     { label: "Contact us", href: storefrontPaths.contact },
@@ -50,9 +56,12 @@ export function StorefrontFooter() {
               <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{title}</p>
               <ul className="mt-3 space-y-2">
                 {links.map((link) => (
-                  <li key={link.href}>
+                  <li key={`${title}-${link.label}`}>
                     <Link href={link.href} className="text-sm text-muted-foreground hover:text-foreground">
                       {link.label}
+                      {"soon" in link && link.soon ? (
+                        <span className="ml-1 text-[10px] text-muted-foreground/70">(soon)</span>
+                      ) : null}
                     </Link>
                   </li>
                 ))}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import {
   Bar,
   BarChart,
@@ -16,8 +17,10 @@ import {
   Megaphone,
   Plus,
   Sparkles,
+  Tag,
   Users,
   Workflow,
+  Zap,
 } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -36,6 +39,10 @@ import {
   type CampaignStatus,
   type MarketingTab,
 } from "@/lib/mock-data/marketing";
+import { flashSaleKpis } from "@/lib/mock-data/flash-sales";
+import { promotionKpis } from "@/lib/mock-data/promotions";
+import { useFlashSaleStore } from "@/lib/store/flash-sale-store";
+import { usePromotionStore } from "@/lib/store/promotion-store";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -51,8 +58,66 @@ function campaignStatusVariant(status: CampaignStatus) {
 }
 
 function DashboardTab() {
+  const sales = useFlashSaleStore((s) => s.sales);
+  const promotions = usePromotionStore((s) => s.promotions);
+  const offerKpis = flashSaleKpis(sales);
+  const promoKpis = promotionKpis(promotions);
+
   return (
     <div className="space-y-4">
+      <div className="rounded-lg border border-amber-200 bg-amber-50/50 p-4 dark:border-amber-900/50 dark:bg-amber-950/20">
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <div className="flex items-center gap-2">
+              <Zap className="h-4 w-4 text-amber-600" />
+              <h2 className="text-sm font-semibold">Flash Sales — scheduled product offers</h2>
+            </div>
+            <p className="mt-1 max-w-2xl text-xs text-muted-foreground">
+              Single or multi-product time-boxed discounts. Scheduler syncs{" "}
+              <code className="rounded bg-background px-1">special_price</code> at start/end — live
+              on <code className="rounded bg-background px-1">/deals</code> and product pages.
+            </p>
+          </div>
+          <Button size="sm" variant="outline" className="shrink-0" asChild>
+            <Link href="/marketing/flash-sales">Manage flash sales →</Link>
+          </Button>
+        </div>
+        <div className="mt-3 grid gap-2 sm:grid-cols-4">
+          {offerKpis.map((kpi) => (
+            <div key={kpi.label} className="rounded-md border border-input bg-background px-3 py-2">
+              <p className="text-[10px] text-muted-foreground">{kpi.label}</p>
+              <p className="text-sm font-semibold">{kpi.value}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="rounded-lg border border-indigo-200 bg-indigo-50/50 p-4 dark:border-indigo-900/50 dark:bg-indigo-950/20">
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <div className="flex items-center gap-2">
+              <Tag className="h-4 w-4 text-indigo-600" />
+              <h2 className="text-sm font-semibold">Promotions — cart rule engine</h2>
+            </div>
+            <p className="mt-1 max-w-2xl text-xs text-muted-foreground">
+              Auto discounts from cart subtotal, category, customer group, or product-in-cart rules.
+              No coupon code — evaluated at checkout before coupons and loyalty.
+            </p>
+          </div>
+          <Button size="sm" variant="outline" className="shrink-0" asChild>
+            <Link href="/marketing/promotions">Manage promotions →</Link>
+          </Button>
+        </div>
+        <div className="mt-3 grid gap-2 sm:grid-cols-4">
+          {promoKpis.map((kpi) => (
+            <div key={kpi.label} className="rounded-md border border-input bg-background px-3 py-2">
+              <p className="text-[10px] text-muted-foreground">{kpi.label}</p>
+              <p className="text-sm font-semibold">{kpi.value}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <div className="flex flex-wrap gap-2">
         {[
           "Create campaign",

@@ -3,6 +3,7 @@ import { categoriesFlat } from "./categories";
 import type { StorefrontBlogPost } from "./storefront-blog";
 import { blogPosts } from "./storefront-blog";
 import { categoryPath } from "@/lib/url-slug/paths";
+import type { OfferLabel } from "@/lib/storefront/storefront-offer-types";
 
 export type { StorefrontBlogPost };
 
@@ -17,6 +18,8 @@ export type StorefrontProduct = {
   rating: number;
   reviewCount: number;
   badge?: "new" | "sale" | "bestseller" | "ai-pick";
+  offerLabels?: OfferLabel[];
+  flashSaleName?: string;
 };
 
 export type StorefrontCategory = {
@@ -121,10 +124,6 @@ export const featuredCategories: StorefrontCategory[] = categoriesFlat
 export const featuredProducts = published.slice(0, 8).map(toStorefrontProduct);
 export const bestSellers = published.slice(8, 16).map(toStorefrontProduct);
 export const newArrivals = published.slice(16, 24).map(toStorefrontProduct);
-export const dealProducts = published
-  .filter((p) => p.compareAtPrice)
-  .slice(0, 6)
-  .map(toStorefrontProduct);
 
 export const storefrontBrands: StorefrontBrand[] = [
   { id: "b1", name: "UrbanWear", slug: "urbanwear", logo: "https://picsum.photos/seed/brand1/120/48" },

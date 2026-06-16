@@ -50,13 +50,16 @@ Floating toolbar on text selection. Slash command `/` for block insert (Notion-s
 
 | Action | Trigger |
 |--------|---------|
-| Generate | Empty field → "Generate with AI" |
-| Improve | Select text → AI → Improve |
-| Shorten / Expand | Selection menu |
-| Translate | Selection → target language |
-| SEO optimize | Product/blog description |
+| Generate | **Preset** icon — streams Settings pre-prompt directly into editor |
+| Custom instruct | **Chat** drawer — discuss, refine, then **Insert into editor** |
+| Improve | Chat: "improve tone" / preset from Settings |
+| Shorten / Expand | Chat prompt keywords |
+| Translate | Chat: "translate to Bengali" |
+| SEO optimize | Settings prompt template per context |
 
-Output streams into editor — user confirms before replace.
+**Detail:** [EDITOR_AI_RULES.md](../ui-prototype/catalog/products/EDITOR_AI_RULES.md) — two toolbar icons, Settings prompt mapping, apply + audit rules.
+
+Output from **Chat** appears in the drawer — user inserts when final. **Preset** types live into the editor.
 
 ---
 

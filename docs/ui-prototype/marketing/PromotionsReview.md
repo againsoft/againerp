@@ -1,7 +1,8 @@
 # Promotions — Review
 
-> **Status:** Draft  
+> **Status:** Prototype built — review pending  
 > **Page Spec:** [Promotions.md](./Promotions.md)  
+> **Admin:** [PROMOTIONS_ADMIN.md](./PROMOTIONS_ADMIN.md)  
 > **Parent:** [UI_PROTOTYPE_MODE.md](../../UI_PROTOTYPE_MODE.md)
 
 ---
@@ -12,8 +13,8 @@
 |-------|-------|
 | **Review Date** | — |
 | **Reviewer(s)** | — |
-| **Prototype Build** | Not started |
-| **Result** | Pending |
+| **Prototype Build** | Implemented 2026-06-15 |
+| **Result** | Pending UX sign-off |
 
 ---
 

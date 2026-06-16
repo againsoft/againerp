@@ -15,13 +15,21 @@ import {
 import { validateCoupon, FREE_SHIPPING_THRESHOLD } from "@/lib/mock-data/storefront-checkout";
 import { crossSell } from "@/lib/mock-data/storefront-cart-extras";
 import { formatCurrency } from "@/lib/utils";
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import { getCartSpecialOfferHints } from "@/lib/storefront/storefront-offers";
+import { useStorefrontOfferSources } from "@/hooks/use-storefront-offers";
 import { productPath, storefrontPaths } from "@/lib/url-slug/storefront-paths";
 
 export function CartView() {
   const { items, updateQty, removeItem, couponCode, couponDiscount, setCoupon } = useStorefrontCart();
+  const sources = useStorefrontOfferSources();
   const [couponInput, setCouponInput] = useState("");
   const [couponError, setCouponError] = useState<string | null>(null);
+
+  const offerHints = useMemo(
+    () => getCartSpecialOfferHints(items.map((i) => i.productId), sources.specialOffers),
+    [items, sources.specialOffers],
+  );
 
   const subtotal = getCartSubtotal(items);
   const savings = getCartSavings(items);
@@ -97,6 +105,19 @@ export function CartView() {
               </Button>
             </article>
           ))}
+
+          {offerHints.length > 0 && (
+            <div className="rounded-xl border border-violet-200 bg-violet-50/50 p-4 dark:border-violet-900 dark:bg-violet-950/20">
+              <p className="text-sm font-medium text-violet-800 dark:text-violet-200">
+                Active special offers
+              </p>
+              <ul className="mt-2 space-y-1 text-xs text-violet-700 dark:text-violet-300">
+                {offerHints.map((hint) => (
+                  <li key={hint}>• {hint}</li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           <div className="rounded-xl border border-border/60 bg-card p-4">
             <div className="flex items-center gap-2 text-sm font-medium">

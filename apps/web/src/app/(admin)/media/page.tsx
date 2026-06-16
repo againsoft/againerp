@@ -1,79 +1,99 @@
 "use client";
 
-import { useState } from "react";
-import { Folder, Image as ImageIcon, Search, Upload } from "lucide-react";
+import { useMemo, useState } from "react";
+import { Upload } from "lucide-react";
+import {
+  createUploadedMediaItemsFromFiles,
+  filterMediaLibraryItems,
+  type MediaLibraryItem,
+} from "@/lib/mock-data/media-library";
+import { filterByMediaUsage, useMediaUsageMap, type MediaUsageFilter } from "@/lib/media/media-usage";
+import { useMediaStore } from "@/lib/store/media-store";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-
-const mockMedia = Array.from({ length: 24 }, (_, i) => ({
-  id: `media_${i}`,
-  name: `asset-${i + 1}.jpg`,
-  folder: i % 3 === 0 ? "Products" : i % 3 === 1 ? "Banners" : "Blog",
-  url: `https://picsum.photos/seed/media${i}/300/300`,
-  type: i % 5 === 0 ? "video" : "image",
-}));
+import { toast } from "sonner";
+import { MediaLibraryBrowser } from "@/components/media/media-library-browser";
 
 export default function MediaPage() {
+  const items = useMediaStore((state) => state.items);
+  const prependItems = useMediaStore((state) => state.prependItems);
+  const patchMediaItem = useMediaStore((state) => state.patchMediaItem);
+
   const [query, setQuery] = useState("");
-  const filtered = mockMedia.filter((m) =>
-    m.name.toLowerCase().includes(query.toLowerCase()),
-  );
+  const [usageFilter, setUsageFilter] = useState<MediaUsageFilter>("all");
+  const [activeTab, setActiveTab] = useState<"library" | "upload">("library");
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [focusedId, setFocusedId] = useState<string | null>(null);
+
+  const usageMap = useMediaUsageMap();
+
+  const filtered = useMemo(() => {
+    const searched = filterMediaLibraryItems(items, { query });
+    return filterByMediaUsage(searched, usageMap, usageFilter);
+  }, [items, query, usageMap, usageFilter]);
+
+  const handleItemClick = (item: MediaLibraryItem) => {
+    setFocusedId(item.id);
+    setSelectedIds((prev) =>
+      prev.includes(item.id) ? prev.filter((id) => id !== item.id) : [...prev, item.id],
+    );
+  };
+
+  const applyImportedItems = (imported: MediaLibraryItem[]) => {
+    prependItems(imported);
+    setActiveTab("library");
+    if (imported[0]) {
+      setFocusedId(imported[0].id);
+      setSelectedIds([imported[0].id]);
+    }
+  };
+
+  const handleUpload = (files: FileList) => {
+    const { items, rejected } = createUploadedMediaItemsFromFiles(files);
+    if (rejected.length) {
+      toast.error(
+        `${rejected.length} file${rejected.length === 1 ? "" : "s"} blocked — unsafe file type.`,
+      );
+    }
+    if (items.length) applyImportedItems(items);
+  };
+
+  const handleImport = (imported: MediaLibraryItem[]) => {
+    applyImportedItems(imported);
+  };
 
   return (
-    <div className="space-y-4">
+    <div className="flex min-h-[calc(100vh-8rem)] flex-col gap-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div>
           <p className="page-subtitle">Media</p>
           <h1 className="page-title">Media Library</h1>
-        </div>
-        <Button size="sm"><Upload className="h-4 w-4" /> Bulk Upload</Button>
-      </div>
-      <div className="flex gap-4">
-        <aside className="hidden w-48 shrink-0 rounded-lg border p-3 md:block">
-          <p className="mb-2 text-xs font-semibold uppercase text-muted-foreground">Folders</p>
-          {["All", "Products", "Banners", "Blog"].map((f) => (
-            <button
-              key={f}
-              type="button"
-              className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-sm hover:bg-accent"
-            >
-              <Folder className="h-4 w-4" /> {f}
-            </button>
-          ))}
-        </aside>
-        <div className="min-w-0 flex-1">
-          <div className="relative mb-4 max-w-sm">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input
-              className="pl-8"
-              placeholder="Search media…"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
-          </div>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
-            {filtered.map((m) => (
-              <button
-                key={m.id}
-                type="button"
-                className="group overflow-hidden rounded-lg border text-left hover:ring-2 hover:ring-primary"
-              >
-                <div className="relative aspect-square bg-muted">
-                  <img src={m.url} alt="" className="h-full w-full object-cover" />
-                  {m.type === "video" && (
-                    <span className="absolute bottom-1 right-1 rounded bg-black/60 px-1 text-[10px] text-white">
-                      VIDEO
-                    </span>
-                  )}
-                </div>
-                <p className="truncate p-2 text-xs">{m.name}</p>
-              </button>
-            ))}
-          </div>
-          <p className="mt-4 text-xs text-muted-foreground">
-            WordPress-style library · reusable media picker popup (prototype)
+          <p className="mt-1 text-xs text-muted-foreground">
+            Browse all media, preview attachments, and edit title, file name, and alt text live.
           </p>
         </div>
+        <Button size="sm" onClick={() => setActiveTab("upload")}>
+          <Upload className="h-4 w-4" />
+          Upload
+        </Button>
+      </div>
+
+      <div className="flex min-h-0 flex-1 flex-col rounded-xl border border-input bg-background p-4">
+        <MediaLibraryBrowser
+          items={filtered}
+          query={query}
+          onQueryChange={setQuery}
+          usageFilter={usageFilter}
+          onUsageFilterChange={setUsageFilter}
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+          selectedIds={selectedIds}
+          focusedId={focusedId}
+          onItemClick={handleItemClick}
+          onItemUpdate={patchMediaItem}
+          mode="multiple"
+          onUpload={handleUpload}
+          onImport={handleImport}
+        />
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import { products, type Product } from "./products";
 import { categoriesFlat, getCategoryBySlug, type Category } from "./categories";
+import { enrichStorefrontProduct } from "@/lib/storefront/storefront-offers";
 import { toStorefrontProduct, type StorefrontProduct } from "./storefront-home";
 
 export type CatalogSort = "relevance" | "price_asc" | "price_desc" | "newest" | "best_selling";
@@ -192,5 +193,6 @@ export function parseSortFromParams(params: URLSearchParams): CatalogSort {
 export type CatalogProductWithMeta = StorefrontProduct & { stock: number; category: string };
 
 export function toCatalogProductWithMeta(p: Product, i: number): CatalogProductWithMeta {
-  return { ...toStorefrontProduct(p, i), stock: p.stock, category: p.category };
+  const base = { ...toStorefrontProduct(p, i), stock: p.stock, category: p.category };
+  return enrichStorefrontProduct(base, p.category);
 }

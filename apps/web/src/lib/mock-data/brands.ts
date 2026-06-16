@@ -13,6 +13,8 @@ export type Brand = {
   metaKeywords?: string;
   logoUrl?: string;
   bannerUrl?: string;
+  logoMediaId?: string;
+  bannerMediaId?: string;
 };
 
 const seed: Brand[] = [

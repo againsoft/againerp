@@ -11,6 +11,7 @@ import { ProductListRow } from "@/components/storefront/catalog/product-list-row
 import { SubcategoryChips } from "@/components/storefront/catalog/subcategory-chips";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
+import { resolveMediaUrl } from "@/lib/media/resolve-media";
 import { getCategoryBreadcrumbs } from "@/lib/mock-data/categories";
 import {
   DEFAULT_FILTERS,
@@ -88,6 +89,9 @@ export function CatalogView({ categorySlug, brandSlug, variant = "catalog" }: Ca
   const onSortChange = (next: CatalogSort) => pushParams({ sort: next, page: "1" });
 
   const isSearch = variant === "search";
+  const categoryBannerUrl = context.category
+    ? resolveMediaUrl(context.category.bannerMediaId, context.category.bannerUrl)
+    : undefined;
 
   return (
     <div>
@@ -95,10 +99,10 @@ export function CatalogView({ categorySlug, brandSlug, variant = "catalog" }: Ca
         <CatalogBreadcrumbs crumbs={breadcrumbs} leafLabel={!categorySlug ? "All products" : undefined} />
       )}
 
-      {!isSearch && context.category?.bannerUrl && (
+      {!isSearch && categoryBannerUrl && (
         <div className="relative mb-6 aspect-[3/1] overflow-hidden rounded-2xl bg-muted sm:aspect-[4/1]">
           <Image
-            src={context.category.bannerUrl}
+            src={categoryBannerUrl}
             alt=""
             fill
             priority
@@ -115,7 +119,7 @@ export function CatalogView({ categorySlug, brandSlug, variant = "catalog" }: Ca
         </div>
       )}
 
-      {!isSearch && !context.category?.bannerUrl && (
+      {!isSearch && !categoryBannerUrl && (
         <header className="mb-6">
           <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">{context.title}</h1>
           <p className="mt-1 max-w-2xl text-sm text-muted-foreground">{context.description}</p>
@@ -200,7 +204,7 @@ export function CatalogView({ categorySlug, brandSlug, variant = "catalog" }: Ca
             </div>
           )}
 
-          {!isSearch && context.category?.description && context.category.bannerUrl && (
+          {!isSearch && context.category?.description && categoryBannerUrl && (
             <div className="prose prose-sm mt-12 max-w-none rounded-xl border border-border/60 bg-muted/30 p-5 text-muted-foreground">
               <h2 className="text-base font-semibold text-foreground">About {context.category.name}</h2>
               <p className="mt-2 text-sm">{context.category.description}</p>

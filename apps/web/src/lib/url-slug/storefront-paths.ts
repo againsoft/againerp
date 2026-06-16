@@ -29,6 +29,8 @@ export const storefrontPaths = {
   shipping: "/shipping",
   careers: "/careers",
   recommendations: "/recommendations",
+  builder: "/builder",
+  builderPc: "/builder/pc-builder",
   blog: blogIndexPath(),
   warranty: cmsPagePath("warranty-policy"),
   privacy: cmsPagePath("privacy-policy"),
@@ -50,5 +52,13 @@ export const accountPaths = {
   notifications: "/account/notifications",
   support: "/account/support",
 } as const;
+
+export function builderPath() {
+  return storefrontPaths.builder;
+}
+
+export function builderPcPath() {
+  return storefrontPaths.builderPc;
+}
 
 export { blogPostPath, brandPath, categoryPath, cmsPagePath, productPath };

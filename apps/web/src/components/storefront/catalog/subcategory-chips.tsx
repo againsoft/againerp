@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Category } from "@/lib/mock-data/categories";
+import { resolveMediaUrl } from "@/lib/media/resolve-media";
 import { categoryPath } from "@/lib/url-slug/storefront-paths";
 import { cn } from "@/lib/utils";
 
@@ -19,6 +20,7 @@ export function SubcategoryChips({ subcategories, activeSlug, className }: Subca
     <div className={cn("flex gap-2 overflow-x-auto pb-1 scrollbar-thin", className)}>
       {subcategories.map((cat) => {
         const active = activeSlug === cat.slug;
+        const iconUrl = resolveMediaUrl(cat.iconMediaId, cat.iconUrl);
         return (
           <Link
             key={cat.id}
@@ -30,9 +32,9 @@ export function SubcategoryChips({ subcategories, activeSlug, className }: Subca
                 : "border-border/60 bg-card hover:border-primary/40",
             )}
           >
-            {cat.iconUrl && (
+            {iconUrl && (
               <span className="relative h-5 w-5 overflow-hidden rounded-full">
-                <Image src={cat.iconUrl} alt="" fill sizes="20px" className="object-cover" />
+                <Image src={iconUrl} alt="" fill sizes="20px" className="object-cover" />
               </span>
             )}
             {cat.caption || cat.name}

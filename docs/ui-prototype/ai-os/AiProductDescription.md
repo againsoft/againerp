@@ -1,96 +1,68 @@
 # AI Product Description
 
-> **Status:** Draft  
+> **Status:** Implemented (editor integration — prototype)  
 > **Prototype Phase:** 1 — UI Only  
 > **Module:** Ecommerce · AI  
 > **Menu Location:** Ecommerce → AI → AI Product Description  
-> **Menu Doc:** [Menus mirror](../../modules/ecommerce/Menus/AI/AI Product Description.md)  
-> **UI Standards:** [ENTERPRISE_UI_ARCHITECTURE.md](../../ui-ux/ENTERPRISE_UI_ARCHITECTURE.md)
+> **Editor rules:** [EDITOR_AI_RULES.md](./EDITOR_AI_RULES.md)
 
 ---
 
 ## Purpose
 
-_TBD — prototype specification for AI Product Description._
+Generate and refine **product descriptions** inside the product editor using AI — without leaving the form.
 
-## Business Goal
+## In-editor AI (built)
 
-- 
+Product **Description** uses `WordPressClassicEditor` with AI chat + preset.
 
-## User Roles
+**Short description** uses `RichTextEditor` — same workable engine as Description (`WordPressClassicEditor`), default `minRows={3}`, preset context `product.short_description`.
 
-| Role | Access | Notes |
-|------|--------|-------|
-| Admin | Full | |
-| Manager | Read/Write | |
-| Staff | Read | |
-
-## Menu Location
-
-`Ecommerce → AI → AI Product Description`
-
-## Breadcrumb
-
-`AgainERP › Ecommerce › AI › AI Product Description`
-
-## UI Layout
-
-_See [ENTERPRISE_UI_ARCHITECTURE.md](../../ui-ux/ENTERPRISE_UI_ARCHITECTURE.md)._
-
-## Components
-
-_TBD_
-
-## Fields
-
-_TBD_
-
-## Actions
-
-_TBD_
-
-## Filters
-
-_TBD_
-
-## Tables
-
-_TBD_
-
-## Permissions
-
-_TBD_
-
-## Workflows
-
-_TBD_
-
-## Related Pages
-
-_TBD_
-
-## AI Features
-
-_TBD — see [AI_FIRST_ARCHITECTURE.md](../../modules/ai/AI_FIRST_ARCHITECTURE.md)_
-
-## Reports
-
-_TBD_
-
-## Future Enhancements
-
-- 
-
-## Prototype Notes
-
-| Item | Detail |
+| Icon | Action |
 |------|--------|
-| Fixture | `data/` TBD |
-| Mock route | `/prototype/ai-os/...` |
+| MessageSquare | Custom prompt chat drawer |
+| Sparkles | Run Settings pre-prompt into editor (`product.description`) |
+
+Variables passed on **Description**: `product_name`, `category`, `brand`.
+
+## Settings pre-prompts
+
+| Context | Settings path | Editor |
+|---------|---------------|--------|
+| Full description | Settings → AI → Prompts → Product description | WordPressClassicEditor |
+| Short description | Settings → AI → Prompts → Product short description | RichTextEditor (compact) |
+
+Prototype registry: `apps/web/src/lib/editor/editor-ai-prompts.ts`
+
+## User flow
+
+```
+1. User edits product → General section
+2. Clicks Sparkles → preset runs → preview in right panel
+   OR clicks MessageSquare → types prompt → Send
+3. Reviews AI HTML in panel
+4. Apply to editor → content sanitized + saved to form state
+```
+
+## AI Features (prototype)
+
+| Feature | Status |
+|---------|--------|
+| Preset generate | Mock HTML |
+| Custom chat prompt | Mock response |
+| Apply to editor | Implemented |
+| Audit log | Planned (production) |
+| Live LLM | Not connected |
+
+## Related
+
+- [EDITOR_AI_RULES.md](./EDITOR_AI_RULES.md)
+- [IMPLEMENTED_DESIGN.md](./IMPLEMENTED_DESIGN.md)
+- [AI_FIRST_ARCHITECTURE.md](../../modules/ai/AI_FIRST_ARCHITECTURE.md)
 
 ## Change History
 
 | Date | Change |
 |------|--------|
+| 2026-06-15 | Documented in-editor AI icons + Settings prompt flow |
 | 2026-06-12 | Stub generated |
-

@@ -15,6 +15,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { LiveSearch } from "@/components/storefront/search/live-search";
+import { StorefrontBuilderNav } from "@/components/storefront/storefront-builder-nav";
 import { useStorefrontAuth } from "@/lib/store/storefront-auth-store";
 import { useStorefrontCart } from "@/lib/store/storefront-cart-store";
 import { useStorefrontCompare } from "@/lib/store/storefront-compare-store";
@@ -56,6 +57,7 @@ export function StorefrontHeader() {
           <SheetContent side="left" className="w-[280px]">
             <h2 className="text-lg font-semibold">{storeConfig.name}</h2>
             <nav className="mt-6 flex flex-col gap-1">
+              <StorefrontBuilderNav variant="mobile" />
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -141,6 +143,7 @@ export function StorefrontHeader() {
           className="mx-auto flex max-w-6xl items-center gap-0.5 overflow-x-auto px-3 py-2 sm:gap-1 sm:px-5 lg:py-2.5"
           aria-label="Main menu"
         >
+          <StorefrontBuilderNav variant="desktop" />
           {navLinks.map((link) => (
             <Link
               key={link.href}

@@ -24,7 +24,9 @@ import { toast } from "sonner";
 import type { Category } from "@/lib/mock-data/categories";
 import { categoriesFlat as seedCategories, getDisplayOrder } from "@/lib/mock-data/categories";
 import { getCategoryDepth, getParentLabel, reorderSiblingIds } from "@/lib/category-utils";
+import { resolveMediaUrl } from "@/lib/media/resolve-media";
 import { useCategoryStore } from "@/lib/store/category-store";
+import { useMediaStore } from "@/lib/store/media-store";
 import { cn } from "@/lib/utils";
 import { useIsDark } from "@/lib/use-is-dark";
 import { Button } from "@/components/ui/button";
@@ -185,6 +187,7 @@ export function CategoryGrid({ className, addTrigger = 0 }: Props) {
   const reorderSiblings = useCategoryStore((s) => s.reorderSiblings);
   const deleteCategories = useCategoryStore((s) => s.deleteCategories);
   const setCategories = useCategoryStore((s) => s.setCategories);
+  const mediaItems = useMediaStore((s) => s.items);
 
   const [filters, setFilters] = useState<FilterState>(DEFAULT_FILTERS);
   const [formOpen, setFormOpen] = useState(false);
@@ -231,6 +234,10 @@ export function CategoryGrid({ className, addTrigger = 0 }: Props) {
   useEffect(() => {
     if (addTrigger > 0) openCreate(null);
   }, [addTrigger, openCreate]);
+
+  useEffect(() => {
+    gridRef.current?.api?.refreshCells({ columns: ["icon"], force: true });
+  }, [mediaItems]);
 
   const turnOff = useCallback(
     (cat: Category) => {
@@ -442,12 +449,14 @@ export function CategoryGrid({ className, addTrigger = 0 }: Props) {
         suppressMovable: true,
         sortable: false,
         suppressHeaderMenuButton: true,
-        cellRenderer: (p: ICellRendererParams<Category>) =>
-          p.data?.iconUrl ? (
-            <img src={p.data.iconUrl} alt="" className="h-7 w-7 rounded object-cover" />
+        cellRenderer: (p: ICellRendererParams<Category>) => {
+          const url = resolveMediaUrl(p.data?.iconMediaId, p.data?.iconUrl);
+          return url ? (
+            <img src={url} alt="" className="h-7 w-7 rounded object-cover" />
           ) : (
             <span className="inline-block h-7 w-7 rounded bg-muted" />
-          ),
+          );
+        },
       },
       {
         field: "name",
@@ -530,7 +539,7 @@ export function CategoryGrid({ className, addTrigger = 0 }: Props) {
         suppressHeaderMenuButton: true,
       },
     ],
-    [categories, RowActions, visibleCols, liveEdit, MenuCell, StatusCell],
+    [categories, RowActions, visibleCols, liveEdit, MenuCell, StatusCell, mediaItems],
   );
 
   const pageStart = page * PAGE_SIZE + 1;

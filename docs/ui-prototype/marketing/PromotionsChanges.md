@@ -1,7 +1,9 @@
 # Promotions — Changes
 
 > **Page Spec:** [Promotions.md](./Promotions.md)  
-> **Review:** [PromotionsReview.md](./PromotionsReview.md)
+> **Admin detail:** [PROMOTIONS_ADMIN.md](./PROMOTIONS_ADMIN.md)  
+> **Review:** [PromotionsReview.md](./PromotionsReview.md)  
+> **Dev:** [MARKETING_PROTOTYPE_DEV.md](./MARKETING_PROTOTYPE_DEV.md)
 
 ---
 
@@ -10,6 +12,18 @@
 | Date | Version | Author | Change |
 |------|---------|--------|--------|
 | 2026-06-12 | 0.1.0 | — | Initial stub |
+| 2026-06-15 | 1.0.0 | — | Full admin UI, Zustand store, marketing dashboard card |
+
+---
+
+## Implemented (Prototype)
+
+| Date | UI change | Route / file |
+|------|-----------|----------------|
+| 2026-06-15 | Promotions list + KPIs + filters | `/marketing/promotions` |
+| 2026-06-15 | Rule/action form sheet | `promotion-form-sheet.tsx` |
+| 2026-06-15 | Mock data + persist store | `promotions.ts`, `promotion-store.ts` |
+| 2026-06-15 | Marketing dashboard card | `marketing-control-center.tsx` |
 
 ---
 
@@ -17,12 +31,14 @@
 
 | # | Change | Priority | Status |
 |---|--------|----------|--------|
-| — | Complete page spec | High | Open |
+| 1 | Storefront cart evaluation + announcement bar | High | Open |
+| 2 | Real API + checkout evaluate endpoint | High | Open |
+| 3 | Stacking conflict UI preview | Medium | Open |
 
 ---
 
-## Implemented (Prototype)
+## Dev notes (2026-06-15)
 
-| Date | UI change | Route |
-|------|-----------|-------|
-| — | — | — |
+- Persist key: `againerp-promotions`
+- Running seeds: `promo_free_ship_3k`, `promo_vip_cart`
+- Storefront wiring not yet implemented — admin-only prototype

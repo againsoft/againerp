@@ -1,44 +1,97 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
-import Link from "next/link";
+import { Suspense, useEffect, useMemo } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Plus } from "lucide-react";
 import { ProductGrid } from "@/components/products/product-grid";
 import { ProductFormDialog } from "@/components/products/product-form-dialog";
 import { ProductViewDialog } from "@/components/products/product-view-dialog";
 import { Button } from "@/components/ui/button";
-import { products, type Product } from "@/lib/mock-data/products";
+import { getProductById, products, type Product } from "@/lib/mock-data/products";
 import { toast } from "sonner";
+
+function buildProductsUrl(params: URLSearchParams) {
+  const query = params.toString();
+  return query ? `/catalog/products?${query}` : "/catalog/products";
+}
 
 function ProductListContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const createFromUrl = searchParams.get("create") === "1";
 
-  useEffect(() => {
-    if (createFromUrl) router.replace("/catalog/products/new");
-  }, [createFromUrl, router]);
-  const [editOpen, setEditOpen] = useState(false);
-  const [editProduct, setEditProduct] = useState<Product | null>(null);
-  const [viewOpen, setViewOpen] = useState(false);
-  const [viewProduct, setViewProduct] = useState<Product | null>(null);
+  const createOpen = searchParams.get("create") === "1";
+  const editId = searchParams.get("edit");
+  const viewId = searchParams.get("view");
+
+  const editProduct = useMemo(
+    () => (editId ? getProductById(editId) ?? null : null),
+    [editId],
+  );
+  const viewProduct = useMemo(
+    () => (viewId ? getProductById(viewId) ?? null : null),
+    [viewId],
+  );
+
+  const pushParams = (mutate: (params: URLSearchParams) => void) => {
+    const params = new URLSearchParams(searchParams.toString());
+    mutate(params);
+    router.push(buildProductsUrl(params), { scroll: false });
+  };
+
+  const openCreate = () => {
+    pushParams((params) => {
+      params.delete("edit");
+      params.delete("view");
+      params.set("create", "1");
+    });
+  };
 
   const handleEdit = (product: Product) => {
-    setEditProduct(product);
-    setEditOpen(true);
+    pushParams((params) => {
+      params.delete("create");
+      params.delete("view");
+      params.set("edit", product.id);
+    });
   };
 
   const handleView = (product: Product) => {
-    setViewProduct(product);
-    setViewOpen(true);
+    pushParams((params) => {
+      params.delete("create");
+      params.delete("edit");
+      params.set("view", product.id);
+    });
   };
 
   const handleEditFromView = (product: Product) => {
-    setViewOpen(false);
-    setViewProduct(null);
     handleEdit(product);
   };
+
+  const closeForm = () => {
+    pushParams((params) => {
+      params.delete("create");
+      params.delete("edit");
+    });
+  };
+
+  const closeView = () => {
+    pushParams((params) => {
+      params.delete("view");
+    });
+  };
+
+  useEffect(() => {
+    if (editId && !editProduct) {
+      toast.error("Product not found");
+      closeForm();
+    }
+  }, [editId, editProduct]);
+
+  useEffect(() => {
+    if (viewId && !viewProduct && !editId && !createOpen) {
+      toast.error("Product not found");
+      closeView();
+    }
+  }, [viewId, viewProduct, editId, createOpen]);
 
   return (
     <div className="flex min-h-0 flex-1 flex-col gap-3">
@@ -63,41 +116,38 @@ function ProductListContent() {
           >
             Export
           </Button>
-          <Button size="sm" asChild>
-            <Link href="/catalog/products/new">+ Add Product</Link>
+          <Button size="sm" onClick={openCreate}>
+            + Add Product
           </Button>
         </div>
       </div>
 
       <ProductGrid onView={handleView} onEdit={handleEdit} className="min-h-0 flex-1" />
 
-      {/* Mobile FAB */}
       <Button
         size="sm"
         className="fixed bottom-6 right-6 z-40 h-12 w-12 rounded-full p-0 shadow-lg md:hidden"
-        onClick={() => router.push("/catalog/products/new")}
+        onClick={openCreate}
         aria-label="Add product"
       >
         <Plus className="h-5 w-5" />
       </Button>
 
       <ProductViewDialog
-        open={viewOpen}
+        open={!!viewProduct && !createOpen && !editProduct}
         onOpenChange={(open) => {
-          setViewOpen(open);
-          if (!open) setViewProduct(null);
+          if (!open) closeView();
         }}
         product={viewProduct}
         onEdit={handleEditFromView}
       />
 
       <ProductFormDialog
-        open={editOpen}
+        open={createOpen || !!editProduct}
         onOpenChange={(open) => {
-          setEditOpen(open);
-          if (!open) setEditProduct(null);
+          if (!open) closeForm();
         }}
-        mode="edit"
+        mode={createOpen ? "create" : "edit"}
         product={editProduct}
       />
     </div>

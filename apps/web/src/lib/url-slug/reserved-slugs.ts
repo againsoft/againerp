@@ -31,6 +31,7 @@ export const RESERVED_SLUGS = new Set([
   "careers",
   "shipping",
   "recommendations",
+  "builder",
   "privacy",
   "terms",
   "sitemap",

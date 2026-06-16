@@ -2,7 +2,7 @@ import { HeroBanner } from "@/components/storefront/home/hero-banner";
 import { SectionHeader } from "@/components/storefront/home/section-header";
 import { CategoryGrid } from "@/components/storefront/home/category-grid";
 import { ProductRail } from "@/components/storefront/home/product-rail";
-import { DealsSection } from "@/components/storefront/home/deals-section";
+import { HomeDealsSection } from "@/components/storefront/home/home-deals-section";
 import { BrandsStrip } from "@/components/storefront/home/brands-strip";
 import { ReviewsSection } from "@/components/storefront/home/reviews-section";
 import { BlogSection } from "@/components/storefront/home/blog-section";
@@ -14,7 +14,6 @@ import {
   bestSellers,
   blogPosts,
   customerReviews,
-  dealProducts,
   featuredCategories,
   featuredProducts,
   heroSlides,
@@ -45,7 +44,7 @@ export default function StorefrontHomePage() {
         <ProductRail products={featuredProducts} />
       </section>
 
-      <DealsSection products={dealProducts} />
+      <HomeDealsSection />
 
       <section>
         <SectionHeader

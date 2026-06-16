@@ -10,6 +10,7 @@ import { CompareButton } from "@/components/storefront/compare/compare-button";
 import { cn, formatCurrency } from "@/lib/utils";
 import { useStorefrontCart } from "@/lib/store/storefront-cart-store";
 import { storefrontPaths } from "@/lib/url-slug/storefront-paths";
+import { useProductOffer } from "@/hooks/use-storefront-offers";
 import type { Product } from "@/lib/mock-data/products";
 import type { ProductVariant } from "@/lib/mock-data/products";
 
@@ -40,14 +41,18 @@ export function ProductPurchasePanel({
     [variants, variantId],
   );
 
-  const price = variant?.price ?? product.price;
+  const catalogPrice = variant?.price ?? product.price;
+  const offer = useProductOffer(
+    product.id,
+    catalogPrice,
+    product.compareAtPrice,
+    product.category,
+  );
+  const price = offer.displayPrice;
   const stock = variant?.stock ?? product.stock;
   const inStock = stock > 0;
   const lowStock = inStock && stock <= 5;
-  const discount =
-    product.compareAtPrice && product.compareAtPrice > price
-      ? Math.round(((product.compareAtPrice - price) / product.compareAtPrice) * 100)
-      : null;
+  const discount = offer.discountPercent > 0 ? offer.discountPercent : null;
 
   const selectVariant = (id: string) => {
     setVariantId(id);
@@ -64,10 +69,7 @@ export function ProductPurchasePanel({
       name: product.name,
       image,
       price,
-      compareAtPrice:
-        product.compareAtPrice && product.compareAtPrice > price
-          ? product.compareAtPrice
-          : undefined,
+      compareAtPrice: offer.compareAtPrice,
       qty,
       variantLabel: variant?.label,
     };
@@ -110,10 +112,10 @@ export function ProductPurchasePanel({
 
       <div className="flex flex-wrap items-baseline gap-3">
         <span className="text-3xl font-bold">{formatCurrency(price)}</span>
-        {product.compareAtPrice && product.compareAtPrice > price && (
+        {offer.compareAtPrice && offer.compareAtPrice > price && (
           <>
             <span className="text-lg text-muted-foreground line-through">
-              {formatCurrency(product.compareAtPrice)}
+              {formatCurrency(offer.compareAtPrice)}
             </span>
             {discount && (
               <Badge className="border-transparent bg-red-500 text-white">Save {discount}%</Badge>
@@ -121,6 +123,24 @@ export function ProductPurchasePanel({
           </>
         )}
       </div>
+
+      {offer.labels.length > 0 && (
+        <div className="space-y-1.5 rounded-lg border border-violet-200 bg-violet-50/60 px-3 py-2.5 dark:border-violet-900 dark:bg-violet-950/20">
+          {offer.flashSale && (
+            <p className="text-xs font-semibold text-red-600 dark:text-red-400">
+              ⚡ {offer.flashSale.name}
+            </p>
+          )}
+          {offer.labels
+            .filter((l) => l.type !== "flash" || !offer.flashSale)
+            .slice(0, 3)
+            .map((label, i) => (
+              <p key={`${label.type}-${i}`} className="text-xs text-violet-800 dark:text-violet-200">
+                {label.text}
+              </p>
+            ))}
+        </div>
+      )}
 
       {colors.length > 0 && (
         <div>
@@ -250,10 +270,7 @@ export function ProductPurchasePanel({
             name: product.name,
             image: variant?.gallery?.[0] ?? `https://picsum.photos/seed/${product.id}/600/600`,
             price,
-            compareAtPrice:
-              product.compareAtPrice && product.compareAtPrice > price
-                ? product.compareAtPrice
-                : undefined,
+            compareAtPrice: offer.compareAtPrice,
             brand: product.brand,
           }}
         />
@@ -266,10 +283,7 @@ export function ProductPurchasePanel({
             name: product.name,
             image: variant?.gallery?.[0] ?? `https://picsum.photos/seed/${product.id}/600/600`,
             price,
-            compareAtPrice:
-              product.compareAtPrice && product.compareAtPrice > price
-                ? product.compareAtPrice
-                : undefined,
+            compareAtPrice: offer.compareAtPrice,
             brand: product.brand,
             category: product.category,
             stock,

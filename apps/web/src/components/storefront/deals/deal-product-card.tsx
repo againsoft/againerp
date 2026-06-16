@@ -30,6 +30,11 @@ export function DealProductCard({ product, className }: DealProductCardProps) {
         <span className="absolute left-2 top-2 rounded-md bg-red-500 px-2 py-0.5 text-xs font-bold text-white">
           -{product.discountPercent}%
         </span>
+        {product.flashSaleName && (
+          <span className="absolute bottom-2 left-2 right-2 truncate rounded bg-black/60 px-2 py-0.5 text-center text-[10px] text-white">
+            {product.flashSaleName}
+          </span>
+        )}
       </Link>
 
       <div className="flex flex-1 flex-col gap-1.5 p-3">

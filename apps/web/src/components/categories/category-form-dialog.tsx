@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import { ImagePlus, X } from "lucide-react";
+import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,6 +10,7 @@ import { Select } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { WordPressClassicEditor } from "@/components/products/wordpress-classic-editor";
+import { MediaField } from "@/components/media/media-field";
 import { SlugInput } from "@/components/ui/slug-input";
 import type { Category } from "@/lib/mock-data/categories";
 import { validateSlug } from "@/lib/url-slug/validate-slug";
@@ -45,6 +46,8 @@ export function CategoryFormDialog({
   const [parentId, setParentId] = useState<string | null>(null);
   const [iconUrl, setIconUrl] = useState<string | undefined>();
   const [bannerUrl, setBannerUrl] = useState<string | undefined>();
+  const [iconMediaId, setIconMediaId] = useState<string | undefined>();
+  const [bannerMediaId, setBannerMediaId] = useState<string | undefined>();
 
   useEffect(() => {
     if (open) {
@@ -56,6 +59,8 @@ export function CategoryFormDialog({
       setParentId(category?.parentId ?? defaultParentId ?? null);
       setIconUrl(category?.iconUrl);
       setBannerUrl(category?.bannerUrl);
+      setIconMediaId(category?.iconMediaId);
+      setBannerMediaId(category?.bannerMediaId);
     }
   }, [open, category, defaultParentId]);
 
@@ -121,6 +126,8 @@ export function CategoryFormDialog({
       metaKeywords: String(fd.get("metaKeywords") ?? ""),
       iconUrl,
       bannerUrl,
+      iconMediaId,
+      bannerMediaId,
     });
     toast.success(mode === "create" ? "Category created (mock)" : "Category updated (mock)");
     onOpenChange(false);
@@ -199,6 +206,8 @@ export function CategoryFormDialog({
                   onChange={setDescription}
                   placeholder="Category page description…"
                   minRows={5}
+                  aiContext="category.description"
+                  aiVariables={{ category_name: caption }}
                 />
               </section>
 
@@ -234,19 +243,29 @@ export function CategoryFormDialog({
                 </h3>
                 <div className="grid gap-3 sm:grid-cols-2">
                   <Field label="Icon" hint="Category image">
-                    <MediaPicker
-                      url={iconUrl}
-                      onPick={() => setIconUrl(`https://picsum.photos/seed/icon${Date.now()}/64/64`)}
-                      onClear={() => setIconUrl(undefined)}
+                    <MediaField
+                      value={iconUrl}
+                      mediaId={iconMediaId}
+                      onChange={(item) => {
+                        setIconMediaId(item?.id);
+                        setIconUrl(item?.url);
+                      }}
                       aspect="square"
+                      emptyLabel="Add icon"
+                      modalTitle="Select category icon"
                     />
                   </Field>
                   <Field label="Banner" hint="Shown on category page if set">
-                    <MediaPicker
-                      url={bannerUrl}
-                      onPick={() => setBannerUrl(`https://picsum.photos/seed/banner${Date.now()}/800/200`)}
-                      onClear={() => setBannerUrl(undefined)}
+                    <MediaField
+                      value={bannerUrl}
+                      mediaId={bannerMediaId}
+                      onChange={(item) => {
+                        setBannerMediaId(item?.id);
+                        setBannerUrl(item?.url);
+                      }}
                       aspect="banner"
+                      emptyLabel="Add banner"
+                      modalTitle="Select category banner"
                     />
                   </Field>
                 </div>
@@ -312,49 +331,6 @@ function Field({
         {hint && <span className="ml-1 font-normal text-muted-foreground">({hint})</span>}
       </Label>
       <div className="mt-1">{children}</div>
-    </div>
-  );
-}
-
-function MediaPicker({
-  url,
-  onPick,
-  onClear,
-  aspect,
-}: {
-  url?: string;
-  onPick: () => void;
-  onClear: () => void;
-  aspect: "square" | "banner";
-}) {
-  return (
-    <div className="rounded-md border border-dashed border-input bg-muted/20 p-2">
-      {url ? (
-        <div className="space-y-2">
-          <img
-            src={url}
-            alt=""
-            className={aspect === "square" ? "mx-auto h-16 w-16 rounded-md object-cover" : "h-20 w-full rounded-md object-cover"}
-          />
-          <div className="flex gap-1">
-            <Button type="button" variant="outline" size="sm" className="flex-1" onClick={onPick}>
-              Change
-            </Button>
-            <Button type="button" variant="ghost" size="sm" onClick={onClear}>
-              Remove
-            </Button>
-          </div>
-        </div>
-      ) : (
-        <button
-          type="button"
-          onClick={onPick}
-          className="flex w-full flex-col items-center gap-1 py-4 text-xs text-muted-foreground hover:text-foreground"
-        >
-          <ImagePlus className="h-5 w-5" />
-          Upload or pick image
-        </button>
-      )}
     </div>
   );
 }

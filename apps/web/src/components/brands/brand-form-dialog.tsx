@@ -2,13 +2,14 @@
 
 import { useCallback, useEffect, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import { ImagePlus, X } from "lucide-react";
+import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { WordPressClassicEditor } from "@/components/products/wordpress-classic-editor";
+import { MediaField } from "@/components/media/media-field";
 import { SlugInput } from "@/components/ui/slug-input";
 import type { Brand } from "@/lib/mock-data/brands";
 import { validateSlug } from "@/lib/url-slug/validate-slug";
@@ -36,6 +37,8 @@ export function BrandFormDialog({
   const [active, setActive] = useState(true);
   const [logoUrl, setLogoUrl] = useState<string | undefined>();
   const [bannerUrl, setBannerUrl] = useState<string | undefined>();
+  const [logoMediaId, setLogoMediaId] = useState<string | undefined>();
+  const [bannerMediaId, setBannerMediaId] = useState<string | undefined>();
 
   useEffect(() => {
     if (open) {
@@ -44,6 +47,8 @@ export function BrandFormDialog({
       setActive(brand?.active ?? true);
       setLogoUrl(brand?.logoUrl);
       setBannerUrl(brand?.bannerUrl);
+      setLogoMediaId(brand?.logoMediaId);
+      setBannerMediaId(brand?.bannerMediaId);
     }
   }, [open, brand]);
 
@@ -83,6 +88,8 @@ export function BrandFormDialog({
       metaKeywords: String(fd.get("metaKeywords") ?? ""),
       logoUrl,
       bannerUrl,
+      logoMediaId,
+      bannerMediaId,
     });
     toast.success(mode === "create" ? "Brand created (mock)" : "Brand updated (mock)");
     onOpenChange(false);
@@ -149,6 +156,8 @@ export function BrandFormDialog({
                   onChange={setDescription}
                   placeholder="Brand page description…"
                   minRows={5}
+                  aiContext="brand.description"
+                  aiVariables={{ brand_name: brand?.name ?? "" }}
                 />
               </section>
 
@@ -184,19 +193,29 @@ export function BrandFormDialog({
                 </h3>
                 <div className="grid gap-3 sm:grid-cols-2">
                   <Field label="Logo">
-                    <MediaPicker
-                      url={logoUrl}
-                      onPick={() => setLogoUrl(`https://picsum.photos/seed/logo${Date.now()}/64/64`)}
-                      onClear={() => setLogoUrl(undefined)}
+                    <MediaField
+                      value={logoUrl}
+                      mediaId={logoMediaId}
+                      onChange={(item) => {
+                        setLogoMediaId(item?.id);
+                        setLogoUrl(item?.url);
+                      }}
                       aspect="square"
+                      emptyLabel="Add logo"
+                      modalTitle="Select brand logo"
                     />
                   </Field>
                   <Field label="Banner">
-                    <MediaPicker
-                      url={bannerUrl}
-                      onPick={() => setBannerUrl(`https://picsum.photos/seed/bbanner${Date.now()}/800/200`)}
-                      onClear={() => setBannerUrl(undefined)}
+                    <MediaField
+                      value={bannerUrl}
+                      mediaId={bannerMediaId}
+                      onChange={(item) => {
+                        setBannerMediaId(item?.id);
+                        setBannerUrl(item?.url);
+                      }}
                       aspect="banner"
+                      emptyLabel="Add banner"
+                      modalTitle="Select brand banner"
                     />
                   </Field>
                 </div>
@@ -254,53 +273,6 @@ function Field({
         {hint && <span className="ml-1 font-normal text-muted-foreground">({hint})</span>}
       </Label>
       <div className="mt-1">{children}</div>
-    </div>
-  );
-}
-
-function MediaPicker({
-  url,
-  onPick,
-  onClear,
-  aspect,
-}: {
-  url?: string;
-  onPick: () => void;
-  onClear: () => void;
-  aspect: "square" | "banner";
-}) {
-  return (
-    <div className="rounded-md border border-dashed border-input bg-muted/20 p-2">
-      {url ? (
-        <div className="space-y-2">
-          <img
-            src={url}
-            alt=""
-            className={
-              aspect === "square"
-                ? "mx-auto h-16 w-16 rounded-md object-cover"
-                : "h-20 w-full rounded-md object-cover"
-            }
-          />
-          <div className="flex gap-1">
-            <Button type="button" variant="outline" size="sm" className="flex-1" onClick={onPick}>
-              Change
-            </Button>
-            <Button type="button" variant="ghost" size="sm" onClick={onClear}>
-              Remove
-            </Button>
-          </div>
-        </div>
-      ) : (
-        <button
-          type="button"
-          onClick={onPick}
-          className="flex w-full flex-col items-center gap-1 py-4 text-xs text-muted-foreground hover:text-foreground"
-        >
-          <ImagePlus className="h-5 w-5" />
-          Upload or pick image
-        </button>
-      )}
     </div>
   );
 }

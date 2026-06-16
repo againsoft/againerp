@@ -93,7 +93,10 @@ export function BusinessSettingsHome() {
         </div>
       </div>
 
-      <PluginsEntryCard installedCount={installedPluginCount} />
+      <div className="grid gap-3 sm:grid-cols-2">
+        <AiEntryCard />
+        <PluginsEntryCard installedCount={installedPluginCount} />
+      </div>
 
       <div className="grid gap-5 xl:grid-cols-[1fr_280px]">
         <div className="space-y-6">
@@ -165,6 +168,30 @@ export function BusinessSettingsHome() {
         </aside>
       </div>
     </div>
+  );
+}
+
+function AiEntryCard() {
+  return (
+    <Link
+      href="/settings/ai"
+      className="group flex items-center justify-between gap-4 rounded-2xl border border-violet-200/80 bg-gradient-to-r from-violet-50/80 via-card to-card p-4 shadow-sm transition-all hover:border-violet-300 hover:shadow-md dark:border-violet-900/50 dark:from-violet-950/30"
+    >
+      <div className="flex items-center gap-3">
+        <div className="rounded-xl bg-violet-100 p-2.5 dark:bg-violet-950/60">
+          <Sparkles className="h-5 w-5 text-violet-600 dark:text-violet-400" />
+        </div>
+        <div>
+          <p className="text-sm font-semibold">AI Settings</p>
+          <p className="mt-0.5 text-[11px] text-muted-foreground">
+            Editor prompts (Preset), কোথায় AI পাবেন, AI OS লিংক
+          </p>
+        </div>
+      </div>
+      <span className="inline-flex shrink-0 items-center gap-0.5 text-xs font-medium text-violet-600 opacity-80 transition-opacity group-hover:opacity-100 dark:text-violet-400">
+        Open <ArrowRight className="h-3.5 w-3.5" />
+      </span>
+    </Link>
   );
 }
 

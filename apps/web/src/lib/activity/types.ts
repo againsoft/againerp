@@ -16,7 +16,12 @@ export type ActivityEntityType =
   | "user"
   | "role"
   | "workflow"
-  | "settings";
+  | "settings"
+  | "configurator_profile"
+  | "configurator_category"
+  | "configurator_rule"
+  | "configurator_template"
+  | "configurator_build";
 
 export type ActivityActionType =
   | "create"

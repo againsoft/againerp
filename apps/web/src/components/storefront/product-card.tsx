@@ -28,6 +28,8 @@ export function ProductCard({ product, className }: ProductCardProps) {
       ? Math.round(((product.compareAtPrice - product.price) / product.compareAtPrice) * 100)
       : null;
 
+  const offerLabel = product.offerLabels?.[0];
+
   return (
     <article
       className={cn(
@@ -62,6 +64,15 @@ export function ProductCard({ product, className }: ProductCardProps) {
             </span>
           )}
         </Link>
+        {offerLabel && (
+          <Badge
+            variant="secondary"
+            title={offerLabel.text}
+            className="absolute bottom-10 left-2 max-w-[calc(100%-3rem)] truncate text-[9px] shadow-sm border-transparent bg-violet-600 text-white"
+          >
+            {offerLabel.text}
+          </Badge>
+        )}
         <div className="absolute bottom-2 left-2 z-10">
           <CompareButton product={compareInputFromStorefrontProduct(product)} />
         </div>

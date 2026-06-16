@@ -1,5 +1,5 @@
-import { ProductForm } from "@/components/products/product-form";
+import { redirect } from "next/navigation";
 
 export default function AddProductPage() {
-  return <ProductForm mode="create" />;
+  redirect("/catalog/products?create=1");
 }

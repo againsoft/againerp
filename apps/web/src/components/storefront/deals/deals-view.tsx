@@ -8,16 +8,17 @@ import { DealsHero } from "@/components/storefront/deals/deals-hero";
 import { DealSpotlight } from "@/components/storefront/deals/deal-spotlight";
 import { DealProductCard } from "@/components/storefront/deals/deal-product-card";
 import { CatalogBreadcrumbs } from "@/components/storefront/catalog/catalog-breadcrumbs";
+import { useAdminDealProducts } from "@/hooks/use-storefront-offers";
 import {
   DEAL_CATEGORIES,
   DEAL_SORT_OPTIONS,
   DEAL_TIERS,
   parseDealSort,
   parseDealTier,
-  queryDeals,
   type DealSort,
   type DealTier,
 } from "@/lib/mock-data/storefront-deals";
+import { products } from "@/lib/mock-data/products";
 import { cn } from "@/lib/utils";
 
 export function DealsView() {
@@ -30,10 +31,54 @@ export function DealsView() {
   const sort = parseDealSort(searchParams.get("sort"));
   const page = Number(searchParams.get("page") ?? "1") || 1;
 
-  const result = useMemo(
-    () => queryDeals({ tier, category, sort, page }),
-    [tier, category, sort, page, searchParams.toString()],
-  );
+  const allDeals = useAdminDealProducts();
+
+  const result = useMemo(() => {
+    const tierMin = DEAL_TIERS.find((t) => t.value === tier)?.minPercent ?? 0;
+    let items = allDeals.filter((p) => p.discountPercent >= tierMin);
+
+    if (category !== "all") {
+      const cat = DEAL_CATEGORIES.find((c) => c.slug === category);
+      if (cat?.name) {
+        items = items.filter((p) => {
+          const product = products.find((x) => x.id === p.id);
+          return product?.category === cat.name;
+        });
+      }
+    }
+
+    switch (sort) {
+      case "price_asc":
+        items.sort((a, b) => a.price - b.price);
+        break;
+      case "price_desc":
+        items.sort((a, b) => b.price - a.price);
+        break;
+      case "newest":
+        items.sort((a, b) => {
+          const pa = products.find((x) => x.id === a.id);
+          const pb = products.find((x) => x.id === b.id);
+          return (pb?.updatedAt ?? "").localeCompare(pa?.updatedAt ?? "");
+        });
+        break;
+      default:
+        items.sort((a, b) => b.discountPercent - a.discountPercent);
+    }
+
+    const perPage = 12;
+    const total = items.length;
+    const totalPages = Math.max(1, Math.ceil(total / perPage));
+    const safePage = Math.min(page, totalPages);
+    const start = (safePage - 1) * perPage;
+
+    return {
+      products: items.slice(start, start + perPage),
+      total,
+      page: safePage,
+      totalPages,
+      spotlight: allDeals.slice(0, 3),
+    };
+  }, [allDeals, tier, category, sort, page]);
 
   const pushParams = (updates: Record<string, string | null>) => {
     const params = new URLSearchParams(searchParams.toString());

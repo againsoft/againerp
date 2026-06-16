@@ -2,6 +2,7 @@
 
 import { MoreHorizontal, Pencil, Archive } from "lucide-react";
 import type { Brand } from "@/lib/mock-data/brands";
+import { resolveMediaUrl } from "@/lib/media/resolve-media";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -33,10 +34,12 @@ export function BrandMobileCards({ brands, onEdit, onTurnOff }: Props) {
 
   return (
     <div className="space-y-2 pb-20">
-      {brands.map((b) => (
+      {brands.map((b) => {
+        const logoUrl = resolveMediaUrl(b.logoMediaId, b.logoUrl);
+        return (
         <div key={b.id} className="flex gap-3 rounded-lg border border-input bg-card p-3">
-          {b.logoUrl ? (
-            <img src={b.logoUrl} alt="" className="h-10 w-10 shrink-0 rounded object-cover" />
+          {logoUrl ? (
+            <img src={logoUrl} alt="" className="h-10 w-10 shrink-0 rounded object-cover" />
           ) : (
             <span className="h-10 w-10 shrink-0 rounded bg-muted" />
           )}
@@ -64,7 +67,8 @@ export function BrandMobileCards({ brands, onEdit, onTurnOff }: Props) {
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-      ))}
+        );
+      })}
     </div>
   );
 }

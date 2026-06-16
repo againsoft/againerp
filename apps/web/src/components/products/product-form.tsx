@@ -14,6 +14,7 @@ import {
   Sparkles,
   Tag,
   Warehouse,
+  X,
 } from "lucide-react";
 import { toast } from "sonner";
 import type { Product, ProductStatus } from "@/lib/mock-data/products";
@@ -27,6 +28,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { SlugInput } from "@/components/ui/slug-input";
 import { RichTextEditor } from "@/components/products/rich-text-editor";
 import { WordPressClassicEditor } from "@/components/products/wordpress-classic-editor";
+import { MediaLibraryModal } from "@/components/media/media-library-modal";
+import type { MediaLibraryItem } from "@/lib/mock-data/media-library";
 import { ProductSpecEditor } from "@/components/specifications/product-spec-editor";
 import { ProductVariantEditor } from "@/components/products/product-variant-editor";
 
@@ -93,10 +96,6 @@ const DEFAULT_VALUES: ProductFormValues = {
   slug: "",
 };
 
-const MOCK_MEDIA = Array.from({ length: 6 }, (_, i) => ({
-  id: `new_media_${i}`,
-  url: `https://picsum.photos/seed/newprod${i}/200/200`,
-}));
 
 type Props = {
   mode?: "create" | "edit";
@@ -111,7 +110,8 @@ export function ProductForm({ mode = "create", initialProduct, compact, inDialog
   const contentRef = useRef<HTMLDivElement>(null);
   const [section, setSection] = useState<SectionId>("general");
   const [autosave, setAutosave] = useState("All changes saved");
-  const [selectedMedia, setSelectedMedia] = useState<string[]>([]);
+  const [productMedia, setProductMedia] = useState<MediaLibraryItem[]>([]);
+  const [mediaLibraryOpen, setMediaLibraryOpen] = useState(false);
   const [values, setValues] = useState<ProductFormValues>(() => ({
     ...DEFAULT_VALUES,
     ...(initialProduct
@@ -184,6 +184,7 @@ export function ProductForm({ mode = "create", initialProduct, compact, inDialog
   );
 
   return (
+    <>
     <div
       className={
         inDialog
@@ -194,17 +195,17 @@ export function ProductForm({ mode = "create", initialProduct, compact, inDialog
       }
     >
       {/* Header */}
-      <div className={inDialog ? "shrink-0 border-b border-input pb-2" : "shrink-0 border-b border-input pb-3"}>
-        <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-          <div className="flex min-w-0 items-start gap-2">
-            {!compact && (
+      <div className={inDialog ? "shrink-0 border-b border-input pb-3" : "shrink-0 border-b border-input pb-3"}>
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div className="flex min-w-0 flex-1 items-start gap-2">
+            {!compact && !inDialog && (
               <Button variant="ghost" size="icon" className="mt-0.5 shrink-0" asChild>
                 <Link href="/catalog/products">
                   <ArrowLeft className="h-4 w-4" />
                 </Link>
               </Button>
             )}
-            <div className="min-w-0">
+            <div className="min-w-0 flex-1">
               {!inDialog && (
                 <>
                   <p className="page-subtitle hidden truncate sm:block">
@@ -215,42 +216,74 @@ export function ProductForm({ mode = "create", initialProduct, compact, inDialog
                   </p>
                 </>
               )}
-              <div className="flex flex-wrap items-center gap-2">
-                {!inDialog && <h1 className="page-title">{title}</h1>}
-                <Badge
-                  variant={
-                    values.status === "published" ? "success" : values.status === "draft" ? "warning" : "muted"
-                  }
-                  className="capitalize"
-                >
-                  {values.status}
-                </Badge>
-              </div>
-              <p className="mt-0.5 text-[11px] text-muted-foreground">{autosave}</p>
+              {inDialog ? (
+                <>
+                  <div className="mb-2 flex flex-wrap items-center gap-2">
+                    <Badge
+                      variant={
+                        values.status === "published" ? "success" : values.status === "draft" ? "warning" : "muted"
+                      }
+                      className="capitalize"
+                    >
+                      {values.status}
+                    </Badge>
+                    {values.sku && (
+                      <p className="font-mono text-[11px] text-muted-foreground">{values.sku}</p>
+                    )}
+                  </div>
+                  <h2 className="text-xl font-semibold leading-snug text-foreground sm:text-2xl">
+                    {mode === "create" ? "Add Product" : values.name || "Edit Product"}
+                  </h2>
+                  {mode === "edit" && values.name && (
+                    <p className="mt-1 text-sm text-muted-foreground">Update catalog listing details</p>
+                  )}
+                  {mode === "create" && (
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      Create a new product without leaving the catalog
+                    </p>
+                  )}
+                </>
+              ) : (
+                <div className="flex flex-wrap items-center gap-2">
+                  <h1 className="page-title">{title}</h1>
+                  <Badge
+                    variant={
+                      values.status === "published" ? "success" : values.status === "draft" ? "warning" : "muted"
+                    }
+                    className="capitalize"
+                  >
+                    {values.status}
+                  </Badge>
+                </div>
+              )}
+              <p className="mt-1 text-[11px] text-muted-foreground">{autosave}</p>
             </div>
           </div>
-          <div className={`flex-wrap gap-1.5 ${compact ? "flex" : "hidden sm:flex"}`}>
+          <div className={`flex shrink-0 flex-wrap gap-1.5 ${compact || inDialog ? "flex" : "hidden sm:flex"}`}>
             {inDialog ? (
               <>
                 <Button
                   variant="outline"
                   size="sm"
                   className="h-7 px-2 text-xs"
-                  onClick={() => (onClose ? onClose() : router.push("/catalog/products"))}
-                >
-                  Discard
-                </Button>
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  className="h-7 px-2 text-xs"
                   onClick={() => handleSave(false)}
                 >
-                  Save
+                  Save draft
                 </Button>
                 <Button size="sm" className="h-7 px-2 text-xs" onClick={() => handleSave(true)}>
                   Publish
                 </Button>
+                {onClose && (
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-7 w-7"
+                    aria-label="Close editor"
+                    onClick={onClose}
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                )}
               </>
             ) : (
               actionButtons
@@ -268,15 +301,16 @@ export function ProductForm({ mode = "create", initialProduct, compact, inDialog
             <button
               key={id}
               type="button"
+              title={label}
+              aria-label={label}
               onClick={() => selectSection(id)}
-              className={`flex shrink-0 items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] transition-colors ${
+              className={`flex shrink-0 items-center justify-center rounded-full border p-2 transition-colors ${
                 section === id
-                  ? "border-primary bg-primary/10 font-medium text-primary"
+                  ? "border-primary bg-primary/10 text-primary"
                   : "border-input text-muted-foreground"
               }`}
             >
-              <Icon className="h-3 w-3" />
-              {label}
+              <Icon className="h-3.5 w-3.5" />
             </button>
           ))}
         </div>
@@ -285,28 +319,24 @@ export function ProductForm({ mode = "create", initialProduct, compact, inDialog
       <div
         className={`flex min-h-0 flex-1 gap-3 ${inDialog ? "flex-row overflow-hidden pt-2" : "flex-col pt-2 md:flex-row md:pt-4"}`}
       >
-        {/* Left section nav */}
+        {/* Left section nav — icons only */}
         <nav
-          className={`shrink-0 border-r border-input pr-2 ${inDialog ? "block w-40 overflow-hidden" : "hidden w-44 md:block"}`}
+          className={`shrink-0 border-r border-input pr-2 ${inDialog ? "block w-11 overflow-hidden" : "hidden w-12 md:block"}`}
         >
-          <p className="mb-2 px-2 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
-            Sections
-          </p>
           {SECTIONS.map(({ id, label, icon: Icon }) => (
             <button
               key={id}
               type="button"
+              title={label}
+              aria-label={label}
               onClick={() => selectSection(id)}
-              className={`mb-0.5 flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-left transition-colors ${
-                inDialog ? "text-xs" : "text-sm"
-              } ${
+              className={`mb-0.5 flex w-full items-center justify-center rounded-md p-2 transition-colors ${
                 section === id
                   ? "bg-accent font-medium text-foreground"
                   : "text-muted-foreground hover:bg-accent/50"
               }`}
             >
-              <Icon className={`shrink-0 ${inDialog ? "h-3 w-3" : "h-3.5 w-3.5"}`} />
-              <span className="truncate">{label}</span>
+              <Icon className="h-4 w-4 shrink-0" />
             </button>
           ))}
         </nav>
@@ -389,6 +419,11 @@ export function ProductForm({ mode = "create", initialProduct, compact, inDialog
                   onChange={(v) => set("shortDescription", v)}
                   placeholder="Brief summary for listings and SEO…"
                   minRows={3}
+                  aiVariables={{
+                    product_name: values.name,
+                    category: values.category,
+                    brand: values.brand,
+                  }}
                 />
               </Field>
               <Field label="Description" className="mt-4">
@@ -396,6 +431,12 @@ export function ProductForm({ mode = "create", initialProduct, compact, inDialog
                   value={values.description}
                   onChange={(v) => set("description", v)}
                   placeholder="Full product description…"
+                  aiContext="product.description"
+                  aiVariables={{
+                    product_name: values.name,
+                    category: values.category,
+                    brand: values.brand,
+                  }}
                 />
               </Field>
             </Section>
@@ -567,42 +608,58 @@ export function ProductForm({ mode = "create", initialProduct, compact, inDialog
           )}
 
           {section === "media" && (
-            <Section title="Media" description="Images and videos — drag & drop or pick from library">
+            <Section title="Media" description="Images and videos — pick from the shared media library">
               <div className="mb-4 flex flex-col gap-2 sm:flex-row">
-                <Button type="button" variant="outline" size="sm" className="w-full sm:w-auto">
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  className="w-full sm:w-auto"
+                  onClick={() => setMediaLibraryOpen(true)}
+                >
                   <ImagePlus className="mr-1.5 h-3.5 w-3.5" />
-                  Upload files
-                </Button>
-                <Button type="button" variant="outline" size="sm" className="w-full sm:w-auto" asChild>
-                  <Link href="/media">Open media library</Link>
+                  Add Media
                 </Button>
               </div>
-              <div className="mb-4 rounded-lg border border-dashed border-input bg-muted/20 p-6 text-center text-sm text-muted-foreground sm:p-8">
-                Drag & drop images or videos here
-              </div>
-              <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-                {MOCK_MEDIA.map((m) => {
-                  const selected = selectedMedia.includes(m.id);
-                  return (
-                    <button
-                      key={m.id}
-                      type="button"
-                      onClick={() =>
-                        setSelectedMedia((prev) =>
-                          selected ? prev.filter((id) => id !== m.id) : [...prev, m.id],
-                        )
-                      }
-                      className={`relative aspect-square overflow-hidden rounded-md border-2 ${
-                        selected ? "border-primary ring-2 ring-primary/30" : "border-input"
-                      }`}
-                    >
-                      <img src={m.url} alt="" className="h-full w-full object-cover" />
-                    </button>
-                  );
-                })}
-              </div>
-              {selectedMedia.length > 0 && (
-                <p className="mt-2 text-xs text-muted-foreground">{selectedMedia.length} selected</p>
+
+              {productMedia.length === 0 ? (
+                <button
+                  type="button"
+                  onClick={() => setMediaLibraryOpen(true)}
+                  className="mb-4 w-full rounded-lg border border-dashed border-input bg-muted/20 p-6 text-center text-sm text-muted-foreground transition hover:border-primary/40 hover:text-foreground sm:p-8"
+                >
+                  Click to open Media Library — select existing files or upload new ones
+                </button>
+              ) : (
+                <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+                  {productMedia.map((item) => (
+                    <div key={item.id} className="group relative aspect-square overflow-hidden rounded-md border border-input">
+                      <img src={item.url} alt={item.alt ?? item.name} className="h-full w-full object-cover" />
+                      <button
+                        type="button"
+                        onClick={() => setProductMedia((prev) => prev.filter((m) => m.id !== item.id))}
+                        className="absolute right-1 top-1 rounded bg-black/60 px-1.5 py-0.5 text-[10px] text-white opacity-0 transition group-hover:opacity-100"
+                      >
+                        Remove
+                      </button>
+                      <p className="truncate px-1.5 py-1 text-[10px] text-muted-foreground">{item.name}</p>
+                    </div>
+                  ))}
+                  <button
+                    type="button"
+                    onClick={() => setMediaLibraryOpen(true)}
+                    className="flex aspect-square flex-col items-center justify-center gap-1 rounded-md border border-dashed border-input text-xs text-muted-foreground hover:border-primary/40 hover:text-foreground"
+                  >
+                    <ImagePlus className="h-5 w-5" />
+                    Add more
+                  </button>
+                </div>
+              )}
+
+              {productMedia.length > 0 && (
+                <p className="mt-2 text-xs text-muted-foreground">
+                  {productMedia.length} file{productMedia.length === 1 ? "" : "s"} in gallery
+                </p>
               )}
             </Section>
           )}
@@ -662,6 +719,23 @@ export function ProductForm({ mode = "create", initialProduct, compact, inDialog
         </div>
       )}
     </div>
+
+      <MediaLibraryModal
+        open={mediaLibraryOpen}
+        onOpenChange={setMediaLibraryOpen}
+        mode="multiple"
+        title="Add Media"
+        accept={["image", "video"]}
+        initialSelectedIds={productMedia.map((item) => item.id)}
+        onSelect={(items) => {
+          setProductMedia((prev) => {
+            const map = new Map(prev.map((item) => [item.id, item]));
+            for (const item of items) map.set(item.id, item);
+            return Array.from(map.values());
+          });
+        }}
+      />
+    </>
   );
 }
 

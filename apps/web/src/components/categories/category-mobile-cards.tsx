@@ -3,6 +3,7 @@
 import { MoreHorizontal, Pencil, Plus, Archive } from "lucide-react";
 import type { Category } from "@/lib/mock-data/categories";
 import { getCategoryDepth } from "@/lib/category-utils";
+import { resolveMediaUrl } from "@/lib/media/resolve-media";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -44,14 +45,15 @@ export function CategoryMobileCards({
     <div className="space-y-2 pb-20">
       {categories.map((c) => {
         const depth = getCategoryDepth(c, allCategories);
+        const iconUrl = resolveMediaUrl(c.iconMediaId, c.iconUrl);
         return (
           <div
             key={c.id}
             className="flex gap-3 rounded-lg border border-input bg-card p-3"
             style={{ marginLeft: depth * 8 }}
           >
-            {c.iconUrl ? (
-              <img src={c.iconUrl} alt="" className="h-10 w-10 shrink-0 rounded object-cover" />
+            {iconUrl ? (
+              <img src={iconUrl} alt="" className="h-10 w-10 shrink-0 rounded object-cover" />
             ) : (
               <span className="h-10 w-10 shrink-0 rounded bg-muted" />
             )}

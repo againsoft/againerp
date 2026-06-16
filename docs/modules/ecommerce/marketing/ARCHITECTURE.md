@@ -137,6 +137,12 @@ Stacking policy: configurable priority; best-deal or stackable modes.
 
 Catalog `special_price` may sync from flash sale window (async).
 
+**Web prototype (2026-06-15):** Admin UI + Zustand persist + storefront resolver implemented in `apps/web`. Developer docs:
+
+- [MARKETING_PROTOTYPE_DEV.md](../../../ui-prototype/marketing/MARKETING_PROTOTYPE_DEV.md) — master index
+- [FLASH_SALES_ADMIN.md](../../../ui-prototype/marketing/FLASH_SALES_ADMIN.md) · [SPECIAL_OFFERS_ADMIN.md](../../../ui-prototype/marketing/SPECIAL_OFFERS_ADMIN.md)
+- [STOREFRONT_OFFERS_DEV.md](../../../ui-prototype/marketing/STOREFRONT_OFFERS_DEV.md) — import/SSR rules (required reading)
+
 ---
 
 # Campaign Manager

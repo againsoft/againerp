@@ -22,6 +22,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { MediaLibraryModal } from "@/components/media/media-library-modal";
 import { STORE_STATUS_LABELS } from "@/lib/mock-data/stores";
 
 const SECTIONS = [
@@ -224,6 +225,7 @@ export function StoreSettingsForm({ store }: Props) {
   const contentRef = useRef<HTMLDivElement>(null);
   const [section, setSection] = useState<SectionId>("general");
   const [values, setValues] = useState<StoreSettingsValues>(() => valuesFromStore(store));
+  const [logoLibraryOpen, setLogoLibraryOpen] = useState(false);
 
   const set = useCallback(<K extends keyof StoreSettingsValues>(key: K, value: StoreSettingsValues[K]) => {
     setValues((v) => ({ ...v, [key]: value }));
@@ -247,6 +249,7 @@ export function StoreSettingsForm({ store }: Props) {
   };
 
   return (
+    <>
     <div className="flex min-h-0 flex-col pb-20 sm:min-h-[calc(100vh-2.75rem-1.5rem)] sm:pb-0 lg:min-h-[calc(100vh-2.75rem-2rem)]">
       <div className="shrink-0 border-b border-input pb-3">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
@@ -357,7 +360,13 @@ export function StoreSettingsForm({ store }: Props) {
                     <div>
                       <p className="text-sm font-medium">Store logo</p>
                       <p className="text-xs text-muted-foreground">Upload from Media library (prototype)</p>
-                      <Button type="button" variant="outline" size="sm" className="mt-2">
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="mt-2"
+                        onClick={() => setLogoLibraryOpen(true)}
+                      >
                         Choose image
                       </Button>
                     </div>
@@ -763,6 +772,16 @@ export function StoreSettingsForm({ store }: Props) {
         </Button>
       </div>
     </div>
+
+      <MediaLibraryModal
+        open={logoLibraryOpen}
+        onOpenChange={setLogoLibraryOpen}
+        mode="single"
+        title="Select store logo"
+        accept={["image"]}
+        onSelect={(items) => set("storeImage", items[0]?.url ?? values.storeImage)}
+      />
+    </>
   );
 }
 

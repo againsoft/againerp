@@ -1,96 +1,109 @@
 # Promotions
 
-> **Status:** Draft  
-> **Prototype Phase:** 1 — UI Only  
+> **Status:** Prototype implemented (UI + mock store)  
+> **Prototype Phase:** 1 — UI + client persist  
 > **Module:** Ecommerce · Marketing  
-> **Menu Location:** Ecommerce → Marketing → Promotions  
-> **Menu Doc:** [Menus mirror](../../modules/ecommerce/Menus/Marketing/Promotions.md)  
-> **UI Standards:** [ENTERPRISE_UI_ARCHITECTURE.md](../../ui-ux/ENTERPRISE_UI_ARCHITECTURE.md)
+> **Route:** `/marketing/promotions`  
+> **Menu Location:** Marketing → Promotions  
+> **Dev guide:** [PROMOTIONS_ADMIN.md](./PROMOTIONS_ADMIN.md) · [MARKETING_PROTOTYPE_DEV.md](./MARKETING_PROTOTYPE_DEV.md)  
+> **Architecture:** [ARCHITECTURE.md](../../modules/ecommerce/marketing/ARCHITECTURE.md)
 
 ---
 
 ## Purpose
 
-_TBD — prototype specification for Promotions._
+Rule-based **auto discounts** at checkout — cart subtotal thresholds, products in cart, customer segments, and category rules. No coupon code required.
+
+**Not for:** scheduled product price drops (Flash Sales) or BOGO/bundles (Special Offers).
+
+---
 
 ## Business Goal
 
-- 
+- Merchandising rules that apply automatically when conditions match
+- Priority and stacking control when multiple promotions are active
+- Attribution for revenue impact without manual coupon entry
+
+---
 
 ## User Roles
 
 | Role | Access | Notes |
 |------|--------|-------|
-| Admin | Full | |
-| Manager | Read/Write | |
-| Staff | Read | |
+| Admin | Full | Create, activate, delete |
+| Manager | Read/Write | Same in prototype |
+| Staff | Read | View list |
 
-## Menu Location
-
-`Ecommerce → Marketing → Promotions`
-
-## Breadcrumb
-
-`AgainERP › Ecommerce › Marketing › Promotions`
+---
 
 ## UI Layout
 
-_See [ENTERPRISE_UI_ARCHITECTURE.md](../../ui-ux/ENTERPRISE_UI_ARCHITECTURE.md)._
+- **List:** rule engine flow banner, KPI cards, search + status filter, promotion cards
+- **Create/Edit:** right sheet — conditions (WHEN), actions (THEN), schedule, engine settings
+
+See [PROMOTIONS_ADMIN.md](./PROMOTIONS_ADMIN.md).
+
+---
+
+## Rule types
+
+| Type | Field | Example |
+|------|-------|---------|
+| Cart subtotal | `minSubtotal` | Spend ৳3,000+ |
+| Product in cart | `productId`, `minQuantity` | T-shirt in cart |
+| Customer group | `customerGroup` | VIP |
+| Category | `category` | Electronics |
+
+---
+
+## Action types
+
+| Type | Field | Example |
+|------|-------|---------|
+| % off cart | `value`, `maxDiscount` | 10% off, cap ৳2,000 |
+| Fixed off cart | `value` | ৳500 off |
+| % off item | `value` | 15% off matching SKUs |
+| Free item | `productId` | Free mug |
+| Free shipping | — | Waive shipping |
+
+---
 
 ## Components
 
-_TBD_
+| Component | Path |
+|-----------|------|
+| `PromotionsList` | `components/marketing/promotions-list.tsx` |
+| `PromotionFormSheet` | `components/marketing/promotion-form-sheet.tsx` |
 
-## Fields
+---
 
-_TBD_
+## Data & persist
 
-## Actions
+- Seed: `lib/mock-data/promotions.ts`
+- Store: `lib/store/promotion-store.ts` → key `againerp-promotions`
 
-_TBD_
-
-## Filters
-
-_TBD_
-
-## Tables
-
-_TBD_
-
-## Permissions
-
-_TBD_
-
-## Workflows
-
-_TBD_
+---
 
 ## Related Pages
 
-_TBD_
+| Page | Relation |
+|------|----------|
+| [Flash Sales](./FlashSales.md) | Scheduled catalog price |
+| [Special Offers](./SpecialOffers.md) | BOGO / bundle / gift |
+| [Coupons](./Coupons.md) | Code-based discounts |
 
-## AI Features
+---
 
-_TBD — see [AI_FIRST_ARCHITECTURE.md](../../modules/ai/AI_FIRST_ARCHITECTURE.md)_
+## Backend (future)
 
-## Reports
+Tables: `marketing_promotions`, `marketing_promotion_rules`, `marketing_promotion_actions`.  
+API: `GET/POST /promotions`, `POST /evaluate` at checkout.
 
-_TBD_
-
-## Future Enhancements
-
-- 
-
-## Prototype Notes
-
-| Item | Detail |
-|------|--------|
-| Fixture | `data/` TBD |
-| Mock route | `/prototype/marketing/...` |
+---
 
 ## Change History
 
 | Date | Change |
 |------|--------|
 | 2026-06-12 | Stub generated |
-
+| 2026-06-15 | Full admin UI + store documented |

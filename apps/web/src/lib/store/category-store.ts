@@ -80,6 +80,8 @@ export const useCategoryStore = create<CategoryState>()(
             metaKeywords: data.metaKeywords,
             iconUrl: data.iconUrl,
             bannerUrl: data.bannerUrl,
+            iconMediaId: data.iconMediaId,
+            bannerMediaId: data.bannerMediaId,
           };
           return { categories: [...state.categories, created] };
         });

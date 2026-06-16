@@ -18,7 +18,9 @@ import {
 import { toast } from "sonner";
 import type { Brand } from "@/lib/mock-data/brands";
 import { brandsSeed } from "@/lib/mock-data/brands";
+import { resolveMediaUrl } from "@/lib/media/resolve-media";
 import { useBrandStore } from "@/lib/store/brand-store";
+import { useMediaStore } from "@/lib/store/media-store";
 import { cn } from "@/lib/utils";
 import { useIsDark } from "@/lib/use-is-dark";
 import { Button } from "@/components/ui/button";
@@ -156,6 +158,7 @@ export function BrandGrid({ className, addTrigger = 0 }: Props) {
   const reorderBrands = useBrandStore((s) => s.reorderBrands);
   const deleteBrands = useBrandStore((s) => s.deleteBrands);
   const setBrands = useBrandStore((s) => s.setBrands);
+  const mediaItems = useMediaStore((s) => s.items);
 
   const [filters, setFilters] = useState<FilterState>(DEFAULT_FILTERS);
   const [formOpen, setFormOpen] = useState(false);
@@ -190,6 +193,10 @@ export function BrandGrid({ className, addTrigger = 0 }: Props) {
   useEffect(() => {
     if (addTrigger > 0) openCreate();
   }, [addTrigger, openCreate]);
+
+  useEffect(() => {
+    gridRef.current?.api?.refreshCells({ columns: ["logo"], force: true });
+  }, [mediaItems]);
 
   const turnOff = useCallback(
     (brand: Brand) => {
@@ -363,12 +370,14 @@ export function BrandGrid({ className, addTrigger = 0 }: Props) {
         suppressMovable: true,
         sortable: false,
         suppressHeaderMenuButton: true,
-        cellRenderer: (p: ICellRendererParams<Brand>) =>
-          p.data?.logoUrl ? (
-            <img src={p.data.logoUrl} alt="" className="h-7 w-7 rounded object-cover" />
+        cellRenderer: (p: ICellRendererParams<Brand>) => {
+          const url = resolveMediaUrl(p.data?.logoMediaId, p.data?.logoUrl);
+          return url ? (
+            <img src={url} alt="" className="h-7 w-7 rounded object-cover" />
           ) : (
             <span className="inline-block h-7 w-7 rounded bg-muted" />
-          ),
+          );
+        },
       },
       {
         field: "name",
@@ -436,7 +445,7 @@ export function BrandGrid({ className, addTrigger = 0 }: Props) {
         suppressHeaderMenuButton: true,
       },
     ],
-    [RowActions, visibleCols, liveEdit, StatusCell],
+    [RowActions, visibleCols, liveEdit, StatusCell, mediaItems],
   );
 
   const pageStart = page * PAGE_SIZE + 1;

@@ -6,6 +6,7 @@ import {
   LayoutDashboard,
   Megaphone,
   Package,
+  Puzzle,
   Search,
   Settings,
   ShoppingCart,
@@ -48,6 +49,19 @@ export const sidebarNav: NavItem[] = [
       { title: "Variants", href: "/catalog/variants" },
       { title: "Filters", href: "/catalog/filters" },
       { title: "Bundles", href: "/catalog/bundles" },
+      {
+        title: "Product Configurator",
+        children: [
+          { title: "Overview", href: "/catalog/product-configurator" },
+          { title: "Profiles", href: "/catalog/product-configurator/profiles" },
+          { title: "Categories", href: "/catalog/product-configurator/categories" },
+          { title: "Rules", href: "/catalog/product-configurator/rules" },
+          { title: "Templates", href: "/catalog/product-configurator/templates" },
+          { title: "Saved Builds", href: "/catalog/product-configurator/builds" },
+          { title: "Analytics", href: "/catalog/product-configurator/analytics" },
+          { title: "Component Attributes", href: "/configurator/attributes" },
+        ],
+      },
     ],
   },
   {
@@ -96,7 +110,25 @@ export const sidebarNav: NavItem[] = [
       { title: "Summary", href: "/suppliers" },
     ],
   },
-  { title: "Marketing", href: "/marketing", icon: Megaphone },
+  {
+    title: "Marketing",
+    icon: Megaphone,
+    children: [
+      { title: "Overview", href: "/marketing" },
+      { title: "Flash Sales", href: "/marketing/flash-sales" },
+      { title: "Promotions", href: "/marketing/promotions" },
+      { title: "Special Offers", href: "/marketing/special-offers" },
+    ],
+  },
+  {
+    title: "Configurator",
+    icon: Puzzle,
+    children: [
+      { title: "Admin hub", href: "/catalog/product-configurator" },
+      { title: "Component Attributes", href: "/configurator/attributes" },
+      { title: "Compatibility Rules", href: "/catalog/product-configurator/rules" },
+    ],
+  },
   { title: "SEO", href: "/seo", icon: Search },
   { title: "Media", href: "/media", icon: Image },
   { title: "Reports", href: "/reports", icon: BarChart3 },
@@ -109,6 +141,7 @@ export const sidebarNav: NavItem[] = [
         href: "/settings",
         children: [
           { title: "Business", href: "/settings/business" },
+          { title: "AI", href: "/settings/ai" },
           { title: "Plugins", href: "/settings/plugins" },
           {
             title: "Localisation",
@@ -135,7 +168,7 @@ export const sidebarNav: NavItem[] = [
 ];
 
 export const quickCreateItems = [
-  { label: "Product", href: "/catalog/products/new" },
+  { label: "Product", href: "/catalog/products?create=1" },
   { label: "Order", href: "/orders/create" },
   { label: "Customer", href: "/customers?create=1" },
   { label: "Category", href: "/catalog/categories?create=1" },

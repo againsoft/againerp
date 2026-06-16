@@ -21,6 +21,9 @@ export type Category = {
   metaKeywords?: string;
   iconUrl?: string;
   bannerUrl?: string;
+  /** Canonical media library reference — survives rename via central store */
+  iconMediaId?: string;
+  bannerMediaId?: string;
 };
 
 export type CategoryNode = Category & { children: CategoryNode[] };

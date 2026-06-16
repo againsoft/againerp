@@ -1,9 +1,13 @@
 import { products } from "./products";
-import { toStorefrontProduct, type StorefrontProduct } from "./storefront-home";
+import { toStorefrontProduct, type StorefrontProduct } from "@/lib/mock-data/storefront-home";
+import type { OfferLabel } from "@/lib/storefront/storefront-offer-types";
+import { buildDealProductsFromAdmin, getOfferSourcesWithFallback } from "@/lib/storefront/storefront-offers";
 
 export type DealProduct = StorefrontProduct & {
   discountPercent: number;
   savings: number;
+  offerLabels?: OfferLabel[];
+  flashSaleName?: string;
 };
 
 export type DealTier = "all" | "20" | "30" | "40";
@@ -51,6 +55,9 @@ function toDealProduct(p: (typeof products)[0], i: number): DealProduct {
 }
 
 export function getAllDealProducts(): DealProduct[] {
+  const adminDeals = buildDealProductsFromAdmin(getOfferSourcesWithFallback().flashSales);
+  if (adminDeals.length > 0) return adminDeals;
+
   return products
     .filter((p) => p.status === "published" && p.compareAtPrice != null && p.compareAtPrice > p.price)
     .map(toDealProduct)
