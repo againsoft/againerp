@@ -1,0 +1,31 @@
+---
+description: AgainERP project-wide common rules — modules, SaaS, drawers, mobile, docs-first
+alwaysApply: true
+---
+
+# AgainERP — Common Rules
+
+**Full spec:** `docs/PROJECT_COMMON_RULES.md` — read before architecture or multi-module work.
+
+## Modules
+- **Core** (Users, RBAC, Tenant, Contacts, Workflow, Events) = always on.
+- **Business/Industry** (Inventory, Manufacturing, CRM, …) = optional per tenant/plan.
+- **Module off must not break others:** no cross-module DB; Services/Events/APIs only; graceful UI hide (no crash).
+- Declare deps in `ModuleManifest.md` + `MODULE_DEPENDENCY_MAP.md`.
+
+## SaaS & scale
+- Multi-tenant (`tenant_id`); API-first `/api/v1/{module}/`; modules independently developable/deployable.
+- New module → full docs package under `docs/modules/{module}/` before code.
+
+## UI (prototype & product)
+- **CRUD = List page + right Sheet drawer** — `?create=1` · `?view={id}` · `?edit={id}`.
+- **Never** `/new` or `/[id]/edit` routes for standard entity CRUD. Reference: `/catalog/products`.
+- **Mobile-first mandatory:** full-width drawer on small screens, table scroll/card fallback, 44px tap targets.
+
+## Documentation-first
+- New plan/feature → update `Architecture.md`, build guide, `MODULE_DEPENDENCY_MAP.md`, `CHANGELOG.md` **before** code.
+- Docs status **Ready** per `docs/GOVERNANCE.md` / `PRE_CODE_GATE.md`.
+
+## Code
+- Zustand: never `.slice()`/`.filter()` inside selectors (causes infinite re-render).
+- Minimal focused diffs; match existing conventions.
