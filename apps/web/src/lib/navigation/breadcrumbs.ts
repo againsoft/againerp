@@ -1,5 +1,6 @@
 import { flattenModuleNav } from "@/components/navigation/module-nav-types";
 import { flattenHrNav, HR_MODULE_ROOT } from "@/lib/mock-data/hr-navigation";
+import { flattenSmwNav, SMW_MODULE_ROOT } from "@/lib/mock-data/smw-navigation";
 import { sidebarNav } from "@/lib/navigation";
 
 export type BreadcrumbItem = {
@@ -8,6 +9,7 @@ export type BreadcrumbItem = {
 };
 
 const HR_FLAT = flattenHrNav();
+const SMW_FLAT = flattenSmwNav();
 
 function flattenSidebarNav() {
   const out: { title: string; href: string; path: string[] }[] = [];
@@ -36,6 +38,15 @@ const SEGMENT_LABELS: Record<string, string> = {
   suppliers: "Suppliers",
   partners: "Business Partners",
   manufacturing: "Manufacturing",
+  "sales-marketing": "Sales & Marketing",
+  leads: "Leads",
+  opportunities: "Opportunities",
+  quotations: "Quotations",
+  campaigns: "Campaigns",
+  activities: "Activities",
+  targets: "Targets",
+  commission: "Commission",
+  teams: "Teams",
   settings: "Settings",
   inbox: "Inbox",
   approvals: "Approvals",
@@ -59,6 +70,7 @@ function findNavMatch(pathname: string, search: string) {
   const full = normalizeHref(pathname, search);
   const pools = [
     ...HR_FLAT.map((e) => ({ title: e.title, href: e.href, path: e.path })),
+    ...SMW_FLAT.map((e) => ({ title: e.title, href: e.href, path: e.path })),
     ...SIDEBAR_FLAT,
   ];
 
@@ -69,6 +81,7 @@ function findNavMatch(pathname: string, search: string) {
     .filter((e) => {
       const [path] = e.href.split("?");
       if (path === "/hr" && pathname !== "/hr") return false;
+      if (path === "/sales-marketing" && pathname !== "/sales-marketing") return false;
       return pathname === path || pathname.startsWith(`${path}/`);
     })
     .sort((a, b) => b.href.length - a.href.length);
@@ -112,8 +125,23 @@ export function resolveBreadcrumbs(pathname: string, search = ""): BreadcrumbIte
       pathname.startsWith("/payroll") ||
       pathname.startsWith("/inbox/approvals");
 
+    const isSmw = pathname.startsWith("/sales-marketing");
+
     if (isHr) {
       crumbs.push({ label: HR_MODULE_ROOT.title, href: "/hr" });
+      const modulePath = match.path;
+      modulePath.forEach((label, index) => {
+        const isLast = index === modulePath.length - 1;
+        crumbs.push({
+          label,
+          href: isLast ? undefined : match.href.split("?")[0],
+        });
+      });
+      return crumbs;
+    }
+
+    if (isSmw) {
+      crumbs.push({ label: SMW_MODULE_ROOT.title, href: "/sales-marketing/dashboard" });
       const modulePath = match.path;
       modulePath.forEach((label, index) => {
         const isLast = index === modulePath.length - 1;

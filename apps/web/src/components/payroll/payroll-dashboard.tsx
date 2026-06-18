@@ -32,6 +32,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { chartTooltipBdtMillions } from "@/lib/charts/recharts-tooltip";
 import { DashboardWidget } from "@/components/hr/dashboard/dashboard-widget";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -253,7 +254,7 @@ export function PayrollDashboard() {
                   <CartesianGrid strokeDasharray="3 3" className="stroke-border" />
                   <XAxis dataKey="month" tick={{ fontSize: 10 }} />
                   <YAxis tick={{ fontSize: 10 }} width={36} unit="M" />
-                  <Tooltip formatter={(v) => [`৳${Number(v ?? 0)}M`, ""]} />
+                  <Tooltip formatter={chartTooltipBdtMillions} />
                   <Legend wrapperStyle={{ fontSize: 11 }} />
                   <Area type="monotone" dataKey="gross" name="Gross" stroke="#6366f1" fill="#6366f1" fillOpacity={0.15} />
                   <Area type="monotone" dataKey="net" name="Net pay" stroke="#10b981" fill="#10b981" fillOpacity={0.2} />
@@ -276,7 +277,7 @@ export function PayrollDashboard() {
                   <CartesianGrid strokeDasharray="3 3" className="stroke-border" />
                   <XAxis dataKey="department" tick={{ fontSize: 9 }} interval={0} angle={-18} textAnchor="end" height={52} />
                   <YAxis tick={{ fontSize: 10 }} width={36} unit="M" />
-                  <Tooltip formatter={(v) => [`৳${Number(v ?? 0)}M`, ""]} />
+                  <Tooltip formatter={chartTooltipBdtMillions} />
                   <Legend wrapperStyle={{ fontSize: 11 }} />
                   <Bar dataKey="gross" name="Gross" fill="#6366f1" radius={[2, 2, 0, 0]} />
                   <Bar dataKey="net" name="Net" fill="#10b981" radius={[2, 2, 0, 0]} />
@@ -308,7 +309,7 @@ export function PayrollDashboard() {
                       <Cell key={entry.component} fill={entry.fill} />
                     ))}
                   </Pie>
-                  <Tooltip formatter={(v) => [`৳${Number(v ?? 0)}M`, ""]} />
+                  <Tooltip formatter={chartTooltipBdtMillions} />
                   <Legend wrapperStyle={{ fontSize: 9 }} />
                 </PieChart>
               </ResponsiveContainer>

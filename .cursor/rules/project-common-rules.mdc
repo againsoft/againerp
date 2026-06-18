@@ -28,4 +28,5 @@ alwaysApply: true
 
 ## Code
 - Zustand: never `.slice()`/`.filter()` inside selectors (causes infinite re-render).
+- Recharts: never type Tooltip `formatter` param as `number` — use `@/lib/charts/recharts-tooltip` or `(v) => Number(v ?? 0)`. See `docs/ui-ux/recharts-conventions.md`.
 - Minimal focused diffs; match existing conventions.
