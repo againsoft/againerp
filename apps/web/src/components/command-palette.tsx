@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Command } from "cmdk";
 import { Search } from "lucide-react";
+import { COMMAND_PALETTE_OPEN_EVENT } from "@/lib/navigation/command-palette";
 import { sidebarNav } from "@/lib/navigation";
 import { useAppStore } from "@/lib/store/app-store";
 
@@ -33,8 +34,13 @@ export function CommandPalette() {
         setOpen((o) => !o);
       }
     };
+    const openFromEvent = () => setOpen(true);
     document.addEventListener("keydown", down);
-    return () => document.removeEventListener("keydown", down);
+    document.addEventListener(COMMAND_PALETTE_OPEN_EVENT, openFromEvent);
+    return () => {
+      document.removeEventListener("keydown", down);
+      document.removeEventListener(COMMAND_PALETTE_OPEN_EVENT, openFromEvent);
+    };
   }, []);
 
   if (!open) return null;

@@ -1,3 +1,7 @@
+/**
+ * Canonical vendor ↔ catalog mapping (`purchase_vendor_items`).
+ * Business Partners catalog UI reads via `business-partner-catalog-store.ts` (M3 facade).
+ */
 import { create } from "zustand";
 import {
   enrichMapping,

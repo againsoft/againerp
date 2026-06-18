@@ -1,24 +1,14 @@
 "use client";
 
-import { useEffect } from "react";
 import { Toaster } from "sonner";
-import { useAppStore } from "@/lib/store/app-store";
+import { ThemeProvider } from "@/components/theme/theme-provider";
 import { CommandPalette } from "@/components/command-palette";
 import { AiAssistantDrawer } from "@/components/ai-assistant-drawer";
 import { ActivityDrawer } from "@/components/activity/activity-drawer";
 
 export function AppProviders({ children }: { children: React.ReactNode }) {
-  const theme = useAppStore((s) => s.theme);
-
-  useEffect(() => {
-    const root = document.documentElement;
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const isDark = theme === "dark" || (theme === "system" && prefersDark);
-    root.classList.toggle("dark", isDark);
-  }, [theme]);
-
   return (
-    <>
+    <ThemeProvider>
       {children}
       <Toaster
         richColors
@@ -38,6 +28,6 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
       <CommandPalette />
       <AiAssistantDrawer />
       <ActivityDrawer />
-    </>
+    </ThemeProvider>
   );
 }

@@ -26,7 +26,7 @@ export const SUPPLIER_TABS = [
 export type SupplierTab = (typeof SUPPLIER_TABS)[number];
 
 export const SUPPLIER_TAB_LABELS: Record<SupplierTab, string> = {
-  suppliers: "All Suppliers",
+  suppliers: "Vendor directory",
   "purchase-orders": "Purchase Orders",
   rfq: "RFQ",
   quotations: "Quotations",
@@ -338,7 +338,7 @@ export function tabFromPath(pathname: string): SupplierTab {
 
 export function pathFromTab(tab: SupplierTab): string {
   if (tab === "summary") return "/suppliers";
-  if (tab === "suppliers") return "/suppliers/all";
+  if (tab === "suppliers") return "/partners/directory?role=vendor";
   return `/suppliers/${tab}`;
 }
 

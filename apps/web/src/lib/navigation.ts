@@ -14,6 +14,9 @@ import {
   Users,
   Warehouse,
   BarChart3,
+  Briefcase,
+  Factory,
+  Handshake,
   Image,
 } from "lucide-react";
 
@@ -100,10 +103,40 @@ export const sidebarNav: NavItem[] = [
   },
   { title: "Inventory", href: "/inventory", icon: Warehouse },
   {
+    title: "Manufacturing",
+    icon: Factory,
+    children: [
+      { title: "Overview", href: "/manufacturing" },
+      { title: "Work Orders", href: "/manufacturing/work-orders" },
+      { title: "Bills of Materials", href: "/manufacturing/boms" },
+      { title: "Work Centers", href: "/manufacturing/work-centers" },
+      { title: "Routings", href: "/manufacturing/routings" },
+      { title: "MRP", href: "/manufacturing/mrp" },
+    ],
+  },
+  {
+    title: "HR & Payroll",
+    href: "/hr",
+    icon: Briefcase,
+  },
+  {
+    title: "Business Partners",
+    icon: Handshake,
+    children: [
+      { title: "Overview", href: "/partners" },
+      { title: "Directory", href: "/partners/directory" },
+      { title: "Onboarding", href: "/partners/onboarding" },
+      { title: "Tiers", href: "/partners/tiers" },
+      { title: "Territories", href: "/partners/territories" },
+      { title: "Performance", href: "/partners/performance" },
+      { title: "Settings", href: "/partners/settings" },
+    ],
+  },
+  {
     title: "Suppliers",
     icon: Truck,
     children: [
-      { title: "All Suppliers", href: "/suppliers/all" },
+      { title: "Vendor directory", href: "/partners/directory?role=vendor" },
       { title: "Purchase Orders", href: "/suppliers/purchase-orders" },
       { title: "RFQ", href: "/suppliers/rfq" },
       { title: "Quotations", href: "/suppliers/quotations" },
@@ -175,6 +208,12 @@ export const quickCreateItems = [
   { label: "Product", href: "/catalog/products?create=1" },
   { label: "Order", href: "/orders/create" },
   { label: "Customer", href: "/customers?create=1" },
+  { label: "Employee", href: "/hr/employees?create=1" },
+  { label: "Leave request", href: "/hr/leave/requests?create=1" },
+  { label: "Payroll run", href: "/payroll/runs?create=1" },
+  { label: "Job requisition", href: "/hr/recruitment/requisitions?create=1" },
+  { label: "Training session", href: "/hr/training/sessions?create=1" },
+  { label: "Work Order", href: "/manufacturing/work-orders?create=1" },
   { label: "Category", href: "/catalog/categories?create=1" },
 ];
 

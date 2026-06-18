@@ -31,7 +31,6 @@ import {
   lowStockAlerts,
   reservationsSeed,
   STOCK_STATUS_LABELS,
-  stockItemsSeed,
   stockMovementChart,
   transfersSeed,
   warehouseDistribution,
@@ -39,6 +38,7 @@ import {
   type InventoryTab,
   type StockStatus,
 } from "@/lib/mock-data/inventory";
+import { useInventoryStore } from "@/lib/store/inventory-store";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -56,6 +56,8 @@ function stockStatusVariant(status: StockStatus) {
 function DashboardTab() {
   const inTransit = transfersSeed.filter((t) => t.status === "in_transit").length;
   const pendingAdj = adjustmentsSeed.filter((a) => a.status === "pending").length;
+  const movements = useInventoryStore((s) => s.movements);
+  const recentMovements = movements.slice(0, 5);
 
   return (
     <div className="space-y-4">
@@ -184,6 +186,25 @@ function DashboardTab() {
               </div>
             ))}
           </div>
+
+          {recentMovements.length > 0 && (
+            <div className="rounded-lg border border-input bg-card p-3 lg:col-span-2">
+              <h2 className="mb-2 text-sm font-medium">Recent stock movements</h2>
+              <ul className="space-y-1.5 text-xs">
+                {recentMovements.map((m) => (
+                  <li key={m.id} className="flex flex-wrap justify-between gap-1 border-b border-input/60 pb-1.5 last:border-0">
+                    <span>
+                      <span className="font-mono">{m.sku}</span>
+                      <span className="text-muted-foreground"> · {m.referenceLabel}</span>
+                    </span>
+                    <span className="text-muted-foreground">
+                      {m.type.replace(/_/g, " ")} {m.quantity} @ {m.warehouse}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -194,16 +215,17 @@ function StockTab() {
   const [search, setSearch] = useState("");
   const [warehouse, setWarehouse] = useState("all");
   const [status, setStatus] = useState("all");
+  const stockItems = useInventoryStore((s) => s.stockItems);
 
   const filtered = useMemo(() => {
     const q = search.toLowerCase().trim();
-    return stockItemsSeed.filter((s) => {
+    return stockItems.filter((s) => {
       if (q && !s.name.toLowerCase().includes(q) && !s.sku.toLowerCase().includes(q)) return false;
       if (warehouse !== "all" && s.warehouse !== warehouse) return false;
       if (status !== "all" && s.status !== status) return false;
       return true;
     });
-  }, [search, warehouse, status]);
+  }, [search, warehouse, status, stockItems]);
 
   return (
     <div className="space-y-3">

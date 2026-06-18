@@ -8,6 +8,22 @@ Format follows [GOVERNANCE.md](./GOVERNANCE.md#changelog-system).
 
 ## [Unreleased]
 
+### Added — 2026-06-17 — Business Partners Module (Planning Docs)
+
+| Field | Value |
+|-------|-------|
+| **Version** | `0.1.0-bp-plan` |
+| **Module** | Business Partners |
+| **Change Type** | Added |
+| **Reason** | Unify vendor, partner, retailer, wholesaler under one commercial module; SaaS-ready optional module |
+| **Impact** | New docs package; UI prototype plan `/partners/*`; MODULE_DEPENDENCY_MAP; future migration from `/suppliers` vendor master |
+
+**Docs:** `docs/modules/business-partners/` · `docs/ui-prototype/business-partners/` · [MODULE_DEPENDENCY_MAP.md](./MODULE_DEPENDENCY_MAP.md)
+
+**Next:** Architect review (A9) → UI prototype P1–P3
+
+---
+
 ### Added — 2026-06-15 — Bank EMI Calculator Plugin (Documentation)
 
 | Field | Value |

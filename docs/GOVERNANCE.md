@@ -25,6 +25,7 @@ These root-level files **must always exist** and **must stay updated**:
 | [CHANGELOG.md](./CHANGELOG.md) | Change history |
 | [ADR_INDEX.md](./ADR_INDEX.md) | Architecture decisions |
 | [TRACEABILITY_MATRIX.md](./TRACEABILITY_MATRIX.md) | **Traceability Matrix** — requirements → registries (v2.0) |
+| [PROJECT_COMMON_RULES.md](./PROJECT_COMMON_RULES.md) | **Universal project rules** — modules, SaaS, drawers, mobile, docs-first |
 | [DOCUMENTATION_HEALTH_REPORT.md](./DOCUMENTATION_HEALTH_REPORT.md) | Doc quality dashboard |
 | [TECHNOLOGY_CONSTITUTION.md](./TECHNOLOGY_CONSTITUTION.md) | **Official technology stack** — supersedes conflicting choices |
 | [PRE_CODE_GATE.md](./PRE_CODE_GATE.md) | **Before any code** — mandatory 6-step review |
@@ -279,6 +280,7 @@ Whenever changes are detected, the AI must:
 | Document | Purpose |
 |----------|---------|
 | [DEVELOPMENT_STANDARDS.md](./DEVELOPMENT_STANDARDS.md) | Global dev standards (mobile, API, DB, security) |
+| [PROJECT_COMMON_RULES.md](./PROJECT_COMMON_RULES.md) | **Universal rules** — core vs optional modules, SaaS, drawers, mobile, doc updates |
 | [DOCUMENTATION_STANDARD.md](./DOCUMENTATION_STANDARD.md) | Section templates and status labels |
 | [FILE_NAMING_STANDARD.md](./FILE_NAMING_STANDARD.md) | Naming conventions |
 | [MODULE_STRUCTURE.md](./MODULE_STRUCTURE.md) | Module folder layout |
@@ -292,5 +294,5 @@ Whenever changes are detected, the AI must:
 ---
 
 **Platform:** AgainERP  
-**Last Updated:** 2026-06-12  
+**Last Updated:** 2026-06-17  
 **Status:** Active

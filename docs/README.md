@@ -48,8 +48,9 @@ Deliver a **documentation-first, API-first, AI-first** platform that:
 | 6 | **AI OS** — AI never accesses database directly |
 | 7 | **Modular** — install · remove · upgrade independently |
 | 8 | **Governed** — every document registered, indexed, versioned |
+| 9 | **Common rules** — [PROJECT_COMMON_RULES.md](./PROJECT_COMMON_RULES.md) (drawers, mobile, module independence, SaaS) |
 
-Full principles: [UNIVERSAL_MODULE_FRAMEWORK.md](./UNIVERSAL_MODULE_FRAMEWORK.md) · [GOVERNANCE.md](./GOVERNANCE.md)
+Full principles: [UNIVERSAL_MODULE_FRAMEWORK.md](./UNIVERSAL_MODULE_FRAMEWORK.md) · [GOVERNANCE.md](./GOVERNANCE.md) · [PROJECT_COMMON_RULES.md](./PROJECT_COMMON_RULES.md)
 
 ---
 

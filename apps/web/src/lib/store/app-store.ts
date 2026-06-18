@@ -2,16 +2,16 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 type AppState = {
-  theme: "light" | "dark" | "system";
   sidebarCollapsed: boolean;
+  hrModuleNavCollapsed: boolean;
   utilityPanelOpen: boolean;
   aiDrawerOpen: boolean;
   companyId: string;
   branchId: string;
   favorites: string[];
   recentPages: { title: string; href: string }[];
-  setTheme: (theme: AppState["theme"]) => void;
   toggleSidebar: () => void;
+  toggleHrModuleNavCollapsed: () => void;
   toggleUtilityPanel: () => void;
   toggleAiDrawer: () => void;
   setCompany: (id: string) => void;
@@ -20,19 +20,38 @@ type AppState = {
   toggleFavorite: (href: string) => void;
 };
 
+type LegacyAppState = AppState & {
+  theme?: "light" | "dark" | "system";
+};
+
+function migrateLegacyThemePreference(legacyTheme?: string) {
+  if (typeof window === "undefined" || !legacyTheme) return;
+  try {
+    if (!localStorage.getItem("againerp-theme")) {
+      localStorage.setItem(
+        "againerp-theme",
+        JSON.stringify({ state: { preference: legacyTheme }, version: 1 }),
+      );
+    }
+  } catch {
+    /* ignore quota / private mode */
+  }
+}
+
 export const useAppStore = create<AppState>()(
   persist(
     (set, get) => ({
-      theme: "system",
       sidebarCollapsed: false,
+      hrModuleNavCollapsed: false,
       utilityPanelOpen: false,
       aiDrawerOpen: false,
       companyId: "co1",
       branchId: "br1",
       favorites: [],
       recentPages: [],
-      setTheme: (theme) => set({ theme }),
       toggleSidebar: () => set((s) => ({ sidebarCollapsed: !s.sidebarCollapsed })),
+      toggleHrModuleNavCollapsed: () =>
+        set((s) => ({ hrModuleNavCollapsed: !s.hrModuleNavCollapsed })),
       toggleUtilityPanel: () => set((s) => ({ utilityPanelOpen: !s.utilityPanelOpen })),
       toggleAiDrawer: () => set((s) => ({ aiDrawerOpen: !s.aiDrawerOpen })),
       setCompany: (companyId) => set({ companyId }),
@@ -52,12 +71,21 @@ export const useAppStore = create<AppState>()(
     }),
     {
       name: "againerp-prototype",
-      version: 1,
+      version: 3,
       migrate: (persistedState, version) => {
+        const state = persistedState as LegacyAppState;
         if (version < 1) {
-          return { ...(persistedState as object), utilityPanelOpen: false };
+          return { ...state, utilityPanelOpen: false };
         }
-        return persistedState as AppState;
+        if (version < 2) {
+          return { ...state, hrModuleNavCollapsed: false };
+        }
+        if (version < 3) {
+          migrateLegacyThemePreference(state.theme);
+          const { theme: _theme, ...rest } = state;
+          return rest as AppState;
+        }
+        return state;
       },
     },
   ),

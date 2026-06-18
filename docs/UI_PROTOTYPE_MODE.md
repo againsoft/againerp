@@ -89,6 +89,18 @@ Create a **fully navigable ERP prototype**:
 | **Tables show data** | AG Grid with realistic rows |
 | **Dummy data** | Plausible names, SKUs, amounts — not empty lorem |
 
+**Universal rules:** [PROJECT_COMMON_RULES.md](./PROJECT_COMMON_RULES.md) — module independence, drawer CRUD, mobile, SaaS, doc updates.
+
+### Drawer CRUD (mandatory for entity screens)
+
+| Action | Pattern |
+|--------|---------|
+| List | AG Grid on list page |
+| Create / View / Edit | Right **Sheet** drawer via `?create=1` · `?view={id}` · `?edit={id}` |
+| Forbidden | Separate `/new` or `/[id]/edit` routes |
+
+Reference: `/catalog/products` · [ui-prototype/manufacturing/MANUFACTURING_UI_BUILD_GUIDE.md](./ui-prototype/manufacturing/MANUFACTURING_UI_BUILD_GUIDE.md) §2
+
 ---
 
 ## Application Shell

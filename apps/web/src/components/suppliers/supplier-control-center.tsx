@@ -29,6 +29,10 @@ import {
   type RfqStatus,
   type SupplierStatus,
 } from "@/lib/mock-data/suppliers";
+import {
+  partnerDirectoryUrlForSupplier,
+  VENDOR_DIRECTORY_HREF,
+} from "@/lib/mock-data/business-partners";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -143,11 +147,13 @@ function SummaryTab() {
             <p className="text-sm font-medium">Top suppliers by spend</p>
             <ul className="mt-2 space-y-2">
               {topSuppliers.map((s) => (
-                <li
-                  key={s.id}
-                  className="flex items-center justify-between text-xs"
-                >
-                  <span>{s.name}</span>
+                <li key={s.id} className="flex items-center justify-between text-xs">
+                  <Link
+                    href={partnerDirectoryUrlForSupplier(s.id)}
+                    className="text-primary hover:underline"
+                  >
+                    {s.name}
+                  </Link>
                   <span className="font-medium">{formatBdt(s.spendYtd)}</span>
                 </li>
               ))}
@@ -178,6 +184,13 @@ function SuppliersTab() {
 
   return (
     <div className="space-y-3">
+      <p className="text-xs text-muted-foreground">
+        Legacy preview — use{" "}
+        <Link href={VENDOR_DIRECTORY_HREF} className="text-primary hover:underline">
+          Business Partners vendor directory
+        </Link>{" "}
+        for the canonical list.
+      </p>
       <div className="flex flex-wrap items-center gap-2">
         <Input
           placeholder="Search suppliers…"
@@ -195,9 +208,11 @@ function SuppliersTab() {
           <option value="active">Active</option>
           <option value="blocked">Blocked</option>
         </Select>
-        <Button size="sm" className="ml-auto" onClick={() => toast.info("Add supplier — prototype")}>
-          <UserPlus className="mr-1.5 h-3.5 w-3.5" />
-          Add supplier
+        <Button size="sm" className="ml-auto" asChild>
+          <Link href="/partners/directory?create=1&role=vendor">
+            <UserPlus className="mr-1.5 h-3.5 w-3.5" />
+            New vendor
+          </Link>
         </Button>
       </div>
 
@@ -219,7 +234,7 @@ function SuppliersTab() {
             {rows.map((s) => (
               <tr key={s.id} className="border-b last:border-0 hover:bg-muted/20">
                 <td className="px-3 py-2">
-                  <Link href={`/suppliers/${s.id}`} className="group block">
+                  <Link href={partnerDirectoryUrlForSupplier(s.id)} className="group block">
                     <p className="font-medium text-primary group-hover:underline">{s.name}</p>
                     <p className="text-muted-foreground">{s.vendorCode}</p>
                   </Link>

@@ -1,15 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowLeft, Plus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import {
   PURCHASE_ORDER_WAREHOUSES,
   buildPurchaseOrderDraft,
 } from "@/lib/mock-data/purchase-orders";
+import { businessPartnersSeed } from "@/lib/mock-data/business-partners";
 import { suppliersSeed } from "@/lib/mock-data/suppliers";
+import { useBusinessPartnerStore } from "@/lib/store/business-partner-store";
 import { usePurchaseOrderStore } from "@/lib/store/purchase-order-store";
 import { formatCurrency } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -35,9 +37,23 @@ const EMPTY_LINE = (): LineDraft => ({
 
 export function PurchaseOrderForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const addOrder = usePurchaseOrderStore((s) => s.addOrder);
 
-  const [supplierId, setSupplierId] = useState(suppliersSeed[0]?.id ?? "");
+  const partnerId = searchParams.get("partnerId");
+  const storePartners = useBusinessPartnerStore((s) => s.partners);
+  const resolvedPartner = useMemo(() => {
+    if (!partnerId) return undefined;
+    return storePartners.find((p) => p.id === partnerId) ?? businessPartnersSeed.find((p) => p.id === partnerId);
+  }, [partnerId, storePartners]);
+
+  const initialSupplierId =
+    searchParams.get("supplierId") ??
+    resolvedPartner?.supplierId ??
+    suppliersSeed[0]?.id ??
+    "";
+
+  const [supplierId, setSupplierId] = useState(initialSupplierId);
   const [warehouse, setWarehouse] = useState(PURCHASE_ORDER_WAREHOUSES[0]);
   const [expectedDate, setExpectedDate] = useState("2026-06-30");
   const [notes, setNotes] = useState("");
@@ -52,6 +68,18 @@ export function PurchaseOrderForm() {
   ]);
 
   const total = lines.reduce((s, l) => s + l.quantityOrdered * l.unitPrice, 0);
+
+  useEffect(() => {
+    if (initialSupplierId) setSupplierId(initialSupplierId);
+  }, [initialSupplierId]);
+
+  useEffect(() => {
+    if (resolvedPartner) {
+      toast.info(`PO pre-filled from partner ${resolvedPartner.name}`, {
+        description: resolvedPartner.partnerCode,
+      });
+    }
+  }, [resolvedPartner]);
 
   const updateLine = (key: string, patch: Partial<LineDraft>) => {
     setLines((rows) => rows.map((r) => (r.key === key ? { ...r, ...patch } : r)));
@@ -101,6 +129,15 @@ export function PurchaseOrderForm() {
         <h2 className="text-base font-semibold">Create purchase order</h2>
         <p className="mt-0.5 text-xs text-muted-foreground">
           Draft PO — submit sends to approval workflow (mock)
+          {resolvedPartner && (
+            <>
+              {" "}
+              · from partner{" "}
+              <Link href={`/partners/directory?view=${resolvedPartner.id}`} className="text-primary hover:underline">
+                {resolvedPartner.partnerCode}
+              </Link>
+            </>
+          )}
         </p>
       </div>
 

@@ -195,6 +195,165 @@ export const stockItemsSeed: StockItem[] = [
   },
 ];
 
+/** Raw materials for manufacturing integration (merged into inventory store). */
+export const rawMaterialStockSeed: StockItem[] = [
+  {
+    id: "inv_rm_001",
+    sku: "RM-EAR-HOUSING",
+    name: "Earbud housing set (L/R)",
+    warehouse: "Dhaka HQ",
+    onHand: 820,
+    reserved: 320,
+    available: 500,
+    incoming: 0,
+    minQty: 200,
+    maxQty: 2000,
+    status: "in_stock",
+    unitCost: 80,
+    updatedAt: "2026-06-15",
+  },
+  {
+    id: "inv_rm_002",
+    sku: "RM-PCB-AUDIO",
+    name: "Audio PCB + BT module",
+    warehouse: "Dhaka HQ",
+    onHand: 640,
+    reserved: 320,
+    available: 320,
+    incoming: 100,
+    minQty: 150,
+    maxQty: 1500,
+    status: "in_stock",
+    unitCost: 120,
+    updatedAt: "2026-06-15",
+  },
+  {
+    id: "inv_rm_003",
+    sku: "RM-CASE-USB",
+    name: "Charge case shell + lid",
+    warehouse: "Dhaka HQ",
+    onHand: 380,
+    reserved: 160,
+    available: 220,
+    incoming: 0,
+    minQty: 80,
+    maxQty: 800,
+    status: "in_stock",
+    unitCost: 150,
+    updatedAt: "2026-06-15",
+  },
+  {
+    id: "inv_rm_004",
+    sku: "RM-USB-CABLE",
+    name: "USB-C charge cable (0.5m)",
+    warehouse: "Dhaka HQ",
+    onHand: 450,
+    reserved: 160,
+    available: 290,
+    incoming: 0,
+    minQty: 100,
+    maxQty: 1000,
+    status: "in_stock",
+    unitCost: 45,
+    updatedAt: "2026-06-15",
+  },
+  {
+    id: "inv_rm_005",
+    sku: "RM-EAR-TIPS",
+    name: "Silicone ear tips (S/M/L)",
+    warehouse: "Dhaka HQ",
+    onHand: 1200,
+    reserved: 480,
+    available: 720,
+    incoming: 0,
+    minQty: 300,
+    maxQty: 3000,
+    status: "in_stock",
+    unitCost: 15,
+    updatedAt: "2026-06-15",
+  },
+  {
+    id: "inv_rm_006",
+    sku: "RM-COTTON",
+    name: "Premium cotton fabric roll",
+    warehouse: "Chittagong",
+    onHand: 2400,
+    reserved: 0,
+    available: 2400,
+    incoming: 500,
+    minQty: 500,
+    maxQty: 5000,
+    status: "in_stock",
+    unitCost: 95,
+    updatedAt: "2026-06-14",
+  },
+  {
+    id: "inv_rm_007",
+    sku: "RM-THREAD",
+    name: "Polyester thread spool",
+    warehouse: "Chittagong",
+    onHand: 180,
+    reserved: 0,
+    available: 180,
+    incoming: 0,
+    minQty: 40,
+    maxQty: 400,
+    status: "in_stock",
+    unitCost: 12,
+    updatedAt: "2026-06-14",
+  },
+  {
+    id: "inv_rm_008",
+    sku: "RM-LABEL",
+    name: "Woven brand label",
+    warehouse: "Chittagong",
+    onHand: 5200,
+    reserved: 0,
+    available: 5200,
+    incoming: 0,
+    minQty: 500,
+    maxQty: 10000,
+    status: "in_stock",
+    unitCost: 8,
+    updatedAt: "2026-06-14",
+  },
+];
+
+export type StockMovementType = "stock_in" | "stock_out" | "reserve" | "unreserve";
+
+export type StockMovementReferenceType =
+  | "work_order"
+  | "purchase_receipt"
+  | "adjustment"
+  | "transfer";
+
+export type StockMovement = {
+  id: string;
+  type: StockMovementType;
+  sku: string;
+  productName: string;
+  warehouse: string;
+  quantity: number;
+  unitCost?: number;
+  totalValue?: number;
+  referenceType: StockMovementReferenceType;
+  referenceId: string;
+  referenceLabel: string;
+  event: string;
+  postedAt: string;
+};
+
+/** Manufacturing WH codes → inventory warehouse names. */
+export const MANUFACTURING_WAREHOUSE_MAP: Record<string, string> = {
+  "WH-DHK": "Dhaka HQ",
+  "WH-CTG": "Chittagong",
+  "WH-SYL": "Online FC",
+};
+
+export function mapManufacturingWarehouse(mfgCode: string): string {
+  return MANUFACTURING_WAREHOUSE_MAP[mfgCode] ?? mfgCode;
+}
+
 export type Warehouse = {
   id: string;
   code: string;

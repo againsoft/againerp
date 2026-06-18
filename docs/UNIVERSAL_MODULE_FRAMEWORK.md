@@ -3,6 +3,7 @@
 > **Status:** Draft  
 > **Version:** 1.0  
 > **Governance:** [GOVERNANCE.md](./GOVERNANCE.md) · [DEVELOPMENT_STANDARDS.md](./DEVELOPMENT_STANDARDS.md)  
+> **Common rules:** [PROJECT_COMMON_RULES.md](./PROJECT_COMMON_RULES.md)  
 > **Related:** [MASTER_MODULE_ARCHITECTURE.md](./MASTER_MODULE_ARCHITECTURE.md) · [SAAS_PLATFORM_ARCHITECTURE.md](./SAAS_PLATFORM_ARCHITECTURE.md)
 
 **No code. No migrations.**  

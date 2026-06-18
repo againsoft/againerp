@@ -319,6 +319,7 @@ Business modules implement **ERP and commerce domains**. Each depends on **Core 
 |--------|---------------|--------------|
 | Catalog | `catalog_*` | Product master — SKU, variants, pricing, attributes |
 | Inventory | `inventory_*` | Stock ledger, warehouses, movements |
+| **Business Partners** | `bp_*` | Commercial profiles — vendor, retailer, wholesaler, channel |
 | Purchase | `purchase_*` | RFQ, PO, vendor bills, receipts |
 | Sales | `sales_*` | Quotations, SO, invoices, shipments |
 | CRM | `crm_*` | Leads, opportunities, pipeline |
@@ -366,8 +367,28 @@ Business modules implement **ERP and commerce domains**. Each depends on **Core 
 | **Consumes From** | Catalog (`CatalogService.getVariant`), Inventory (`InventoryService.getStock`, reorder), Contacts (`ContactService.get` — vendors) |
 | **Events Produced** | `purchase.rfq.sent`, `purchase.order.created`, `purchase.order.approved`, `purchase.receipt.posted`, `purchase.bill.posted`, `purchase.bill.paid` |
 | **Events Consumed** | `inventory.reorder.suggested`, `core.approval.approved`, `core.approval.rejected`, `finance.payment.posted` |
-| **Services Used** | `CatalogService`, `ContactService`, `InventoryService`, `WorkflowService`, `ApprovalService`, `MediaService`, `NotificationService` |
+| **Services Used** | `CatalogService`, `ContactService`, `InventoryService`, `WorkflowService`, `ApprovalService`, `MediaService`, `NotificationService`, `BusinessPartnerService` (optional — vendor profile) |
 | **Services Provided** | `PurchaseService.getPO`, `PurchaseService.createPO`, `PurchaseService.postReceipt`, `PurchaseService.getBill` |
+
+**Note:** When Business Partners module is disabled, Purchase uses `ContactService` only (vendor `contact_type`).
+
+---
+
+### Business Partners
+
+| Field | Value |
+|-------|-------|
+| **Depends On** | Core: Users, Permissions, Settings, Contacts, Addresses, Workflow, Approvals, Search, Notifications, Media |
+| **Provides To** | Purchase (vendor profile), Sales (wholesale/retail terms), CRM (channel), Catalog (sourcing), Inventory (supplier feed) |
+| **Consumes From** | Catalog (`CatalogService.getProduct` — mapping UI), Purchase/Sales (performance rollup via service APIs, async) |
+| **Events Produced** | `bp.partner.created`, `bp.partner.role.enabled`, `bp.partner.blocked`, `bp.partner.terms.updated`, `bp.onboarding.approved`, `bp.catalog.item.mapped` |
+| **Events Consumed** | `purchase.order.created`, `purchase.receipt.posted`, `sales.order.confirmed`, `sales.invoice.posted` (optional KPI subscribers) |
+| **Services Used** | `ContactService`, `CatalogService`, `WorkflowService`, `ApprovalService`, `PermissionService`, `NotificationService` |
+| **Services Provided** | `BusinessPartnerService.getPartner`, `BusinessPartnerService.listByRole`, `BusinessPartnerService.getCommercialTerms`, `BusinessPartnerService.getPriceTier`, `BusinessPartnerService.checkCredit`, `BusinessPartnerService.getCatalogItems` |
+
+**Module off:** Consumers fall back to Core contacts; no `bp_*` queries; nav hidden.
+
+**Deep dive:** [modules/business-partners/Architecture.md](./modules/business-partners/Architecture.md) · [INTEGRATION.md](./modules/business-partners/INTEGRATION.md)
 
 ---
 

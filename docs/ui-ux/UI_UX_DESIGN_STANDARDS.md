@@ -68,7 +68,7 @@ Every screen must embody:
 └──────────┴──────────────────────────────────────────────┴───────────────┘
 ```
 
-**Detail:** [layout-architecture.md](./layout-architecture.md) · [navigation.md](./navigation.md)
+**Detail:** [layout-architecture.md](./layout-architecture.md) · [navigation.md](./navigation.md) · [PROJECT_COMMON_RULES.md](../PROJECT_COMMON_RULES.md) §4 (drawer CRUD)
 
 | Zone | Responsibility |
 |------|----------------|

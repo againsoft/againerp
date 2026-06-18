@@ -41,7 +41,13 @@ import {
   getMappingsForSupplier,
   stockStatusVariant,
 } from "@/lib/mock-data/vendor-product-mapping";
+import {
+  getPartnerBySupplierId,
+  partnerDirectoryUrlForSupplier,
+  VENDOR_DIRECTORY_HREF,
+} from "@/lib/mock-data/business-partners";
 import { useVendorMappingStore } from "@/lib/store/vendor-mapping-store";
+import { VendorMigrationBanner } from "@/components/partners/vendor-migration-banner";
 import { getProductById, type Product } from "@/lib/mock-data/products";
 import { ProductViewDialog } from "@/components/products/product-view-dialog";
 import { cn } from "@/lib/utils";
@@ -163,8 +169,8 @@ export function SupplierDetailWorkspace({ supplierId }: Props) {
     return (
       <div className="flex flex-col items-center justify-center p-16 text-muted-foreground">
         <p className="text-sm">Supplier not found.</p>
-        <Link href="/suppliers/all" className="mt-2 text-xs text-primary hover:underline">
-          ← Back to All Suppliers
+        <Link href={VENDOR_DIRECTORY_HREF} className="mt-2 text-xs text-primary hover:underline">
+          ← Vendor directory (Business Partners)
         </Link>
       </div>
     );
@@ -183,15 +189,25 @@ export function SupplierDetailWorkspace({ supplierId }: Props) {
     document.getElementById("supplier-detail-tabs")?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const partner = getPartnerBySupplierId(supplierId);
+
   return (
     <div className="space-y-4">
+      {partner && (
+        <VendorMigrationBanner
+          compact
+          partnerHref={partnerDirectoryUrlForSupplier(supplierId)}
+          partnerLabel={`Open ${partner.partnerCode}`}
+        />
+      )}
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <Link
-            href="/suppliers/all"
+            href={partner ? partnerDirectoryUrlForSupplier(supplierId) : VENDOR_DIRECTORY_HREF}
             className="mb-1 flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
           >
-            <ArrowLeft className="h-3.5 w-3.5" /> All Suppliers
+            <ArrowLeft className="h-3.5 w-3.5" />{" "}
+            {partner ? "Business Partners" : "Vendor directory"}
           </Link>
           <div className="flex flex-wrap items-center gap-2">
             <h1 className="text-xl font-bold">{supplier.name}</h1>

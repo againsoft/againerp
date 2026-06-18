@@ -2,6 +2,7 @@
 
 import { Truck } from "lucide-react";
 import { tabFromPath } from "@/lib/mock-data/suppliers";
+import { VendorMigrationBanner } from "@/components/partners/vendor-migration-banner";
 import { SupplierBreadcrumb } from "@/components/suppliers/supplier-nav";
 import { SupplierControlCenter } from "@/components/suppliers/supplier-control-center";
 import { usePathname } from "next/navigation";
@@ -29,8 +30,9 @@ export function SupplierPageShell({ children, title, subtitle }: Props) {
         </div>
         <p className="mt-1 max-w-3xl text-xs text-muted-foreground">
           {subtitle ??
-            "Vendor directory, purchase orders, RFQs, and supplier stock feeds — procurement from a single control center."}
+            "Purchase orders, RFQs, receipts, and bills — vendor master is in Business Partners."}
         </p>
+        <VendorMigrationBanner className="mt-3" compact />
       </div>
 
       <div className="mt-4 min-h-0 flex-1">{children ?? <SupplierControlCenter />}</div>

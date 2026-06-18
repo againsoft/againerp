@@ -1,47 +1,7 @@
 @import "tailwindcss";
+@import "../design-system/css/tokens.css";
 @import "ag-grid-community/styles/ag-grid.css";
 @import "ag-grid-community/styles/ag-theme-quartz.css";
-
-:root {
-  --background: #fafafa;
-  --foreground: #0f172a;
-  --card: #ffffff;
-  --popover: #ffffff;
-  --primary: #4f46e5;
-  --primary-foreground: #ffffff;
-  --secondary: #f1f5f9;
-  --secondary-foreground: #0f172a;
-  --muted: #f1f5f9;
-  --muted-foreground: #64748b;
-  --accent: #f1f5f9;
-  --accent-foreground: #0f172a;
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
-  --border: #e2e8f0;
-  --input: #e2e8f0;
-  --ring: #4f46e5;
-  --radius: 0.375rem;
-  --density-scale: 0.9;
-}
-
-.dark {
-  --background: #0b0f19;
-  --foreground: #f8fafc;
-  --card: #111827;
-  --popover: #111827;
-  --primary: #6366f1;
-  --primary-foreground: #ffffff;
-  --secondary: #1e293b;
-  --secondary-foreground: #f8fafc;
-  --muted: #1e293b;
-  --muted-foreground: #94a3b8;
-  --accent: #1e293b;
-  --accent-foreground: #f8fafc;
-  /* Subtle borders — same as live search input (not white/currentColor) */
-  --border: #2a3544;
-  --input: #2a3544;
-  --ring: #6366f1;
-}
 
 @theme inline {
   --color-background: var(--background);
@@ -60,6 +20,11 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --color-danger: var(--color-danger);
+  --color-info: var(--color-info);
+  --color-surface: var(--color-surface);
   --font-sans: var(--font-geist-sans);
 }
 

@@ -4,6 +4,7 @@
 > **Version:** 1.1  
 > **Document Type:** Platform Blueprint  
 > **Governance:** [GOVERNANCE.md](./GOVERNANCE.md) · **Standards:** [DEVELOPMENT_STANDARDS.md](./DEVELOPMENT_STANDARDS.md)  
+> **Common rules:** [PROJECT_COMMON_RULES.md](./PROJECT_COMMON_RULES.md)  
 > **Universal Framework:** [UNIVERSAL_MODULE_FRAMEWORK.md](./UNIVERSAL_MODULE_FRAMEWORK.md)
 
 **No code. No migrations. No controllers.**  
@@ -26,6 +27,8 @@ This is the long-term enterprise blueprint for AgainERP module design.
 | Multi-tenant | Tenant → company → branch → warehouse from day one |
 | SaaS platform | Subscriptions, billing, metering, white label — [SAAS_PLATFORM_ARCHITECTURE.md](./SAAS_PLATFORM_ARCHITECTURE.md) |
 | Scale | 10k+ tenants, 1M+ products, 100+ modules |
+
+**Operational rules:** [PROJECT_COMMON_RULES.md](./PROJECT_COMMON_RULES.md) — optional modules must not break others when disabled; drawer CRUD; mobile-first; plan → MD update.
 
 **Phase 1 (active):** Ecommerce layer (Dashboard, Catalog, …)  
 **Platform goal:** Add CRM, Inventory, Sales, Accounting, POS, HR, AI without redesign.

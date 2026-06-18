@@ -1,6 +1,7 @@
 # AgainERP — Global Development Standards
 
 > **Mandatory:** Every module, screen, API, and database table must follow these standards.  
+> **Common rules:** [PROJECT_COMMON_RULES.md](./PROJECT_COMMON_RULES.md) — core vs optional modules, SaaS, drawer CRUD, mobile, doc updates  
 > **Technology:** [TECHNOLOGY_CONSTITUTION.md](./TECHNOLOGY_CONSTITUTION.md) — official stack (Next.js, FastAPI, PostgreSQL, …)  
 > Governance: [GOVERNANCE.md](./GOVERNANCE.md) · Documentation: [DOCUMENTATION_STANDARD.md](./DOCUMENTATION_STANDARD.md)
 
@@ -267,6 +268,8 @@ CRM · Sales · Purchase · Inventory · Accounting · HR · POS · Ecommerce ·
 | Core framework services | Tight circular dependencies |
 
 See [MODULE_DEPENDENCY_MAP.md](./MODULE_DEPENDENCY_MAP.md) and [SERVICE_REGISTRY.md](./SERVICE_REGISTRY.md).
+
+**Module off rule:** Optional modules disabled for a tenant must not break other modules — see [PROJECT_COMMON_RULES.md](./PROJECT_COMMON_RULES.md) §2.
 
 ---
 
