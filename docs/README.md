@@ -1,6 +1,7 @@
 # AgainERP
 
 > **Project Entry Point** — Read this first.  
+> **Before any code:** [PROJECT_BRAIN.md](./PROJECT_BRAIN.md) → [PRE_CODE_GATE.md](./PRE_CODE_GATE.md)  
 > **Documentation First:** Documentation is the source of truth. No production code until docs are **Ready**.
 
 ---
@@ -161,7 +162,7 @@ AgainERP includes a platform-wide **AI OS** — Chief AI Agent orchestrating dom
 | Data access | Module APIs only — never direct DB |
 | Audit | All AI actions logged and approval-gated |
 
-**Docs:** [modules/ai/AI_OS_ARCHITECTURE.md](./modules/ai/AI_OS_ARCHITECTURE.md) · [AI_KNOWLEDGE_INDEX.md](./AI_KNOWLEDGE_INDEX.md)
+**Docs:** [ai_os/README.md](./ai_os/README.md) · [modules/ai/AI_OS_ARCHITECTURE.md](./modules/ai/AI_OS_ARCHITECTURE.md) · [AI_KNOWLEDGE_INDEX.md](./AI_KNOWLEDGE_INDEX.md)
 
 ---
 
@@ -169,6 +170,7 @@ AgainERP includes a platform-wide **AI OS** — Chief AI Agent orchestrating dom
 
 | File | Purpose |
 |------|---------|
+| [PROJECT_BRAIN.md](./PROJECT_BRAIN.md) | **Project Brain** — mandatory first read; repo map, rules, UI patterns, AI readiness |
 | [README.md](./README.md) | **This file** — project entry |
 | [TECHNOLOGY_CONSTITUTION.md](./TECHNOLOGY_CONSTITUTION.md) | **Official tech stack** — mandatory for all dev |
 | [PRE_CODE_GATE.md](./PRE_CODE_GATE.md) | **Before any code** — 6 mandatory reviews |
@@ -192,6 +194,7 @@ AgainERP includes a platform-wide **AI OS** — Chief AI Agent orchestrating dom
 
 | Document | Description |
 |----------|-------------|
+| [PROJECT_BRAIN.md](./PROJECT_BRAIN.md) | **Project Brain** — read before any implementation |
 | [PRD](./PRD.md) | Product Requirements |
 | [MASTER_DEVELOPMENT_SEQUENCE](./MASTER_DEVELOPMENT_SEQUENCE.md) | 100-step roadmap |
 | [HYBRID_LICENSED_ERP_ARCHITECTURE](./HYBRID_LICENSED_ERP_ARCHITECTURE.md) | Hybrid licensed ERP — SaaS, hybrid, enterprise |
@@ -202,6 +205,7 @@ AgainERP includes a platform-wide **AI OS** — Chief AI Agent orchestrating dom
 | [Ecommerce Module](./modules/ecommerce/Architecture.md) | Phase 1 active module (admin) |
 | [Ecommerce Storefront](./modules/ecommerce/ECOMMERCE_STOREFRONT_ARCHITECTURE.md) | **Customer storefront** (v1.0) |
 | [Storefront UI Prototype (as-built)](./ui-prototype/storefront/IMPLEMENTED_DESIGN.md) | **AgainShop `/shop/*`** prototype screens |
+| [AI OS Experience](./ai_os/README.md) | Vision, admin, storefront, and cross-cutting AI UX |
 | [Plugins](./plugins/README.md) | **Installable integrations** — Bank EMI, Pathao, bKash, … |
 | [Module Dependency Map](./MODULE_DEPENDENCY_MAP.md) | Cross-module dependencies (master) |
 | [Entity Relationship Registry](./ENTITY_RELATIONSHIP_REGISTRY.md) | Business entity profiles |

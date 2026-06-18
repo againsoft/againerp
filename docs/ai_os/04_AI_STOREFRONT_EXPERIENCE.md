@@ -7,7 +7,7 @@
 > **Audience:** Product, design, engineering, AI agents  
 > **Parent:** [01_AI_COMMERCE_OS_VISION.md](./01_AI_COMMERCE_OS_VISION.md)  
 > **Related:** [02_AI_USER_EXPERIENCE.md](./02_AI_USER_EXPERIENCE.md) · [03_AI_ADMIN_EXPERIENCE.md](./03_AI_ADMIN_EXPERIENCE.md)  
-> **Technical baseline:** [ECOMMERCE_STOREFRONT_ARCHITECTURE.md](../docs/modules/ecommerce/ECOMMERCE_STOREFRONT_ARCHITECTURE.md)
+> **Technical baseline:** [ECOMMERCE_STOREFRONT_ARCHITECTURE.md](../modules/ecommerce/ECOMMERCE_STOREFRONT_ARCHITECTURE.md)
 
 **A traditional storefront shows the same page to everyone.**  
 **An AI-native storefront adapts to every visitor — intent, context, and journey.**
@@ -745,9 +745,10 @@ Current AgainShop prototype (`apps/web/(storefront)/`) implements static home, k
 |----------|--------------|
 | [01_AI_COMMERCE_OS_VISION.md](./01_AI_COMMERCE_OS_VISION.md) | Platform vision |
 | [03_AI_ADMIN_EXPERIENCE.md](./03_AI_ADMIN_EXPERIENCE.md) | Merchant-side AI (merchandising commands feed storefront) |
-| [ECOMMERCE_STOREFRONT_ARCHITECTURE.md](../docs/modules/ecommerce/ECOMMERCE_STOREFRONT_ARCHITECTURE.md) | Technical storefront §10–§11 |
-| [IMPLEMENTED_DESIGN.md](../docs/ui-prototype/storefront/IMPLEMENTED_DESIGN.md) | Current prototype as-built |
-| [global-search.md](../docs/ui-ux/global-search.md) | Search UX standards |
+| [ECOMMERCE_STOREFRONT_ARCHITECTURE.md](../modules/ecommerce/ECOMMERCE_STOREFRONT_ARCHITECTURE.md) | Technical storefront §10–§11 |
+| [IMPLEMENTED_DESIGN.md](../ui-prototype/storefront/IMPLEMENTED_DESIGN.md) | Current prototype as-built |
+| [global-search.md](../ui-ux/global-search.md) | Search UX standards |
+| [README.md](./README.md) | AI OS experience doc index |
 
 ---
 

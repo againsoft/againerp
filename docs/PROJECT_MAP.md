@@ -177,7 +177,7 @@ AI OS Layer (platform service — not a business module)
 └── Credits & routing      Model provider abstraction
 ```
 
-| Doc | [modules/ai/AI_OS_ARCHITECTURE.md](./modules/ai/AI_OS_ARCHITECTURE.md) |
+| Doc | [ai_os/README.md](./ai_os/README.md) (vision & UX) · [modules/ai/AI_OS_ARCHITECTURE.md](./modules/ai/AI_OS_ARCHITECTURE.md) (platform) |
 
 ---
 

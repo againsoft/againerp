@@ -37,6 +37,7 @@
 
 | Document | Role |
 |----------|------|
+| [PROJECT_BRAIN.md](./PROJECT_BRAIN.md) | **Mandatory first read** — repo map, rules, UI patterns, AI readiness |
 | [README.md](./README.md) | **Human entry** — project overview, principles, quick links |
 | [MASTER_INDEX.md](./MASTER_INDEX.md) | **This file** — full navigation hub |
 | [AI_KNOWLEDGE_INDEX.md](./AI_KNOWLEDGE_INDEX.md) | **AI entry** — ChatGPT, Claude, Gemini, Cursor, AI OS |
@@ -318,6 +319,11 @@ Installable verticals on shared Core — see [framework/INDUSTRY_MODULES.md](./f
 
 | Document | Description | Status |
 |----------|-------------|--------|
+| [ai_os/README.md](./ai_os/README.md) | **AI OS experience index** — vision, UX, admin, storefront | Vision |
+| [ai_os/01_AI_COMMERCE_OS_VISION.md](./ai_os/01_AI_COMMERCE_OS_VISION.md) | AI Commerce OS strategic vision | Vision |
+| [ai_os/02_AI_USER_EXPERIENCE.md](./ai_os/02_AI_USER_EXPERIENCE.md) | Cross-cutting AI UX patterns | Vision |
+| [ai_os/03_AI_ADMIN_EXPERIENCE.md](./ai_os/03_AI_ADMIN_EXPERIENCE.md) | Merchant AI Command Center UX | Vision |
+| [ai_os/04_AI_STOREFRONT_EXPERIENCE.md](./ai_os/04_AI_STOREFRONT_EXPERIENCE.md) | Adaptive storefront AI UX | Vision |
 | [AI_KNOWLEDGE_INDEX.md](./AI_KNOWLEDGE_INDEX.md) | **Master AI knowledge map** | Approved |
 | [modules/ai/AI_OS_ARCHITECTURE.md](./modules/ai/AI_OS_ARCHITECTURE.md) | AI OS platform service | Approved |
 | [modules/ai/AI_FIRST_ARCHITECTURE.md](./modules/ai/AI_FIRST_ARCHITECTURE.md) | AI-first principles | Draft |
@@ -474,25 +480,28 @@ AgainERP Documentation
 
 ```text
 1. README.md
-2. MASTER_INDEX.md (this file)
-3. PROJECT_MAP.md
-4. TECHNOLOGY_CONSTITUTION.md
-5. UNIVERSAL_MODULE_FRAMEWORK.md
-6. Target MODULE_REGISTRY → module ARCHITECTURE.md
-7. PRE_CODE_GATE.md (before any code)
+2. PROJECT_BRAIN.md
+3. MASTER_INDEX.md (this file)
+4. PROJECT_MAP.md
+5. TECHNOLOGY_CONSTITUTION.md
+6. UNIVERSAL_MODULE_FRAMEWORK.md
+7. Target MODULE_REGISTRY → module ARCHITECTURE.md
+8. PRE_CODE_GATE.md (before any code)
 ```
 
 ### AI Agents (Cursor, ChatGPT, Claude, Gemini, AI OS)
 
 ```text
-1. README.md
-2. MASTER_INDEX.md
-3. PROJECT_MAP.md
-4. AI_KNOWLEDGE_INDEX.md
-5. TECHNOLOGY_CONSTITUTION.md
-6. PRE_CODE_GATE.md
-7. Relevant registry (Module, Service, Entity, API, …)
-8. Module ARCHITECTURE.md
+1. PROJECT_BRAIN.md
+2. README.md
+3. MASTER_INDEX.md
+4. PROJECT_MAP.md
+5. AI_KNOWLEDGE_INDEX.md
+6. ai_os/README.md (vision + UX surfaces)
+7. TECHNOLOGY_CONSTITUTION.md
+8. PRE_CODE_GATE.md
+9. Relevant registry (Module, Service, Entity, API, …)
+10. Module ARCHITECTURE.md
 ```
 
 ### Implementation Gate (Feature Work)
@@ -518,7 +527,7 @@ AgainERP Documentation
 | **Core** | Platform Team | Users, RBAC, engines, shared entities |
 | **Business modules** | Module owner | Per-module 9-file package + ARCHITECTURE |
 | **Ecommerce** | Ecommerce Team | 167 screens, Menus/, catalog prototype |
-| **AI OS** | AI Platform Team | AI_OS_ARCHITECTURE, agents, audit |
+| **AI OS** | AI Platform Team | `ai_os/`, AI_OS_ARCHITECTURE, agents, audit |
 | **Database** | Platform Team | DATABASE_REGISTRY, MASTER_DATABASE_ARCHITECTURE |
 | **UI/UX** | Design / Frontend | ui-ux/, ui-prototype/ |
 | **DevOps** | Infrastructure | deployment/ |

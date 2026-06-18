@@ -5,6 +5,7 @@ alwaysApply: true
 
 # AgainERP — Common Rules
 
+**Read first:** `docs/PROJECT_BRAIN.md` — mandatory before any implementation.  
 **Full spec:** `docs/PROJECT_COMMON_RULES.md` — read before architecture or multi-module work.
 
 ## Modules

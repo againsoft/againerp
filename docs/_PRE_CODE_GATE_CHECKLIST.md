@@ -78,9 +78,10 @@
 | # | Check | Pass | STOP | N/A |
 |---|-------|------|------|-----|
 | 6.1 | [AI_KNOWLEDGE_INDEX.md](./AI_KNOWLEDGE_INDEX.md) reviewed | [ ] | [ ] | [ ] |
-| 6.2 | [AI_OS_ARCHITECTURE.md](./modules/ai/AI_OS_ARCHITECTURE.md) reviewed | [ ] | [ ] | [ ] |
-| 6.3 | Module `AI.md` documents tools (if AI feature) | [ ] | [ ] | [ ] |
-| 6.4 | No direct DB access by AI | [ ] | [ ] | [ ] |
+| 6.2 | [ai_os/README.md](./ai_os/README.md) reviewed (if AI UX surface) | [ ] | [ ] | [ ] |
+| 6.3 | [AI_OS_ARCHITECTURE.md](./modules/ai/AI_OS_ARCHITECTURE.md) reviewed | [ ] | [ ] | [ ] |
+| 6.4 | Module `AI.md` documents tools (if AI feature) | [ ] | [ ] | [ ] |
+| 6.5 | No direct DB access by AI | [ ] | [ ] | [ ] |
 
 ---
 

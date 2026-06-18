@@ -711,10 +711,11 @@ Agent detects exception → Creates task → Assigns to Orders team
 | Document | Relationship |
 |----------|--------------|
 | [01_AI_COMMERCE_OS_VISION.md](./01_AI_COMMERCE_OS_VISION.md) | Strategic vision parent |
-| [docs/ui-ux/ai-assistant-ui.md](../docs/ui-ux/ai-assistant-ui.md) | Global assistant panel spec |
-| [docs/ui-ux/UX_SMART_INTERACTION_STANDARDS.md](../docs/ui-ux/UX_SMART_INTERACTION_STANDARDS.md) | Platform interaction standards |
-| [docs/modules/ai/AI_OS_ARCHITECTURE.md](../docs/modules/ai/AI_OS_ARCHITECTURE.md) | AI OS UI surfaces §18 |
-| [docs/modules/ai/AI_AUDIT_AND_APPROVAL.md](../docs/modules/ai/AI_AUDIT_AND_APPROVAL.md) | Approval and audit UX |
+| [ai-assistant-ui.md](../ui-ux/ai-assistant-ui.md) | Global assistant panel spec |
+| [UX_SMART_INTERACTION_STANDARDS.md](../ui-ux/UX_SMART_INTERACTION_STANDARDS.md) | Platform interaction standards |
+| [AI_OS_ARCHITECTURE.md](../modules/ai/AI_OS_ARCHITECTURE.md) | AI OS UI surfaces §18 |
+| [AI_AUDIT_AND_APPROVAL.md](../modules/ai/AI_AUDIT_AND_APPROVAL.md) | Approval and audit UX |
+| [README.md](./README.md) | AI OS experience doc index |
 
 ---
 

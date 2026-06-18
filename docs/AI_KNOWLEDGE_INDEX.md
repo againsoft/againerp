@@ -21,7 +21,7 @@ Used by ChatGPT, Claude, Gemini, Cursor, and AgainERP AI OS Agents as the **mast
 | Governance, security, approval, audit, memory, expansion | §15 |
 | Final rule — no direct DB | §16 |
 
-**Read order:** [README.md](./README.md) → [MASTER_INDEX.md](./MASTER_INDEX.md) → [PROJECT_MAP.md](./PROJECT_MAP.md) → **this file** → target registry → module doc.
+**Read order:** [PROJECT_BRAIN.md](./PROJECT_BRAIN.md) → [README.md](./README.md) → [MASTER_INDEX.md](./MASTER_INDEX.md) → [PROJECT_MAP.md](./PROJECT_MAP.md) → **this file** → [ai_os/README.md](./ai_os/README.md) (UX surfaces) → target registry → module doc.
 
 ---
 
@@ -65,15 +65,17 @@ Without this index, AI hallucinates endpoints, duplicates entities, or bypasses 
 ### What AI Must Do Before Acting
 
 ```text
-1. Read README.md — principles and stack
-2. Read MASTER_INDEX.md — locate documents
-3. Read PROJECT_MAP.md — layers and flows
-4. Read AI_KNOWLEDGE_INDEX.md — this file
-5. Read TECHNOLOGY_CONSTITUTION.md — mandatory stack (codegen)
-6. Read PRE_CODE_GATE.md — stop if docs not Ready
-7. Open target registry (module, page, service, entity, …)
-8. Open module ARCHITECTURE.md for task scope
-9. Execute via Service / API / Tool — never SQL
+1. Read PROJECT_BRAIN.md — repo map, rules, patterns (mandatory)
+2. Read README.md — principles and stack
+3. Read MASTER_INDEX.md — locate documents
+4. Read PROJECT_MAP.md — layers and flows
+5. Read AI_KNOWLEDGE_INDEX.md — this file
+6. Read TECHNOLOGY_CONSTITUTION.md — mandatory stack (codegen)
+7. Read PRE_CODE_GATE.md — stop if docs not Ready
+8. Read ai_os/README.md — vision & UX surfaces (admin/storefront AI work)
+9. Open target registry (module, page, service, entity, …)
+10. Open module ARCHITECTURE.md for task scope
+11. Execute via Service / API / Tool — never SQL
 ```
 
 ---
@@ -156,6 +158,7 @@ flowchart TB
 | Database blueprint | [database/MASTER_DATABASE_ARCHITECTURE.md](./database/MASTER_DATABASE_ARCHITECTURE.md) |
 | UI shell | [ui-ux/ENTERPRISE_UI_ARCHITECTURE.md](./ui-ux/ENTERPRISE_UI_ARCHITECTURE.md) |
 | AI OS | [modules/ai/AI_OS_ARCHITECTURE.md](./modules/ai/AI_OS_ARCHITECTURE.md) |
+| AI OS experience | [ai_os/README.md](./ai_os/README.md) |
 
 ### Integration Channels (AI Uses These)
 
@@ -737,6 +740,8 @@ You are working on AgainERP — a modular ERP platform.
 
 | Document | Role |
 |----------|------|
+| [PROJECT_BRAIN.md](./PROJECT_BRAIN.md) | **Project Brain** — mandatory first read; repo map, rules, patterns |
+| [ai_os/README.md](./ai_os/README.md) | AI OS vision & experience (admin, storefront, UX) |
 | [AI_OS_ARCHITECTURE.md](./modules/ai/AI_OS_ARCHITECTURE.md) | AI platform deep dive |
 | [AI_FIRST_ARCHITECTURE.md](./modules/ai/AI_FIRST_ARCHITECTURE.md) | AI-native product principles |
 | [MASTER_INDEX.md](./MASTER_INDEX.md) | Full doc navigation |
