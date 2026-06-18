@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { BillFromPoRedirect } from "@/components/purchase/bill-from-po-redirect";
 
 export default function CreateBillPage() {
@@ -8,7 +9,9 @@ export default function CreateBillPage() {
       <div className="mb-1 shrink-0">
         <p className="page-subtitle">AgainERP › Suppliers › Vendor Bills › Create</p>
       </div>
-      <BillFromPoRedirect />
+      <Suspense fallback={<p className="py-16 text-center text-sm text-muted-foreground">Creating vendor bill…</p>}>
+        <BillFromPoRedirect />
+      </Suspense>
     </div>
   );
 }

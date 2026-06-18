@@ -323,7 +323,7 @@ function GlobalActivityTimelineContent() {
           <p className="mt-2 line-clamp-4 text-xs text-muted-foreground">
             {GLOBAL_TIMELINE_AI_SUMMARY.dailySummary}
           </p>
-          <Button type="button" variant="link" className="mt-2 h-auto p-0 text-xs" onClick={() => setViewMode("ai")}>
+          <Button type="button" variant="ghost" className="mt-2 h-auto p-0 text-xs text-primary hover:bg-transparent hover:underline" onClick={() => setViewMode("ai")}>
             View full AI summary →
           </Button>
         </div>
