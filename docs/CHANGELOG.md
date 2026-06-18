@@ -8,6 +8,34 @@ Format follows [GOVERNANCE.md](./GOVERNANCE.md#changelog-system).
 
 ## [Unreleased]
 
+### Added — 2026-06-18 — Project Brain (mandatory implementation context)
+
+| Field | Value |
+|-------|-------|
+| **Version** | `0.1.0-project-brain` |
+| **Module** | Platform |
+| **Change Type** | Added |
+| **Reason** | Single doc so devs/AI understand repo structure, rules, patterns without reading every file |
+| **Impact** | `docs/PROJECT_BRAIN.md`; README, MASTER_INDEX, PRE_CODE_GATE, AI_KNOWLEDGE_INDEX, Cursor rules updated |
+
+**Docs:** `docs/PROJECT_BRAIN.md` — repo map · module UI pattern · database contract · AI readiness matrix
+
+---
+
+### Changed — 2026-06-18 — AI OS docs relocated under `docs/ai_os/`
+
+| Field | Value |
+|-------|-------|
+| **Version** | `0.1.0-ai-os-docs` |
+| **Module** | AI OS |
+| **Change Type** | Changed |
+| **Reason** | Consolidate AI OS vision & experience docs inside `docs/` for Pre-Code Gate and agent discoverability |
+| **Impact** | `ai_docs/` → `docs/ai_os/`; README, MASTER_INDEX, DOCUMENT_REGISTRY, AI_KNOWLEDGE_INDEX, PRE_CODE_GATE updated |
+
+**Docs:** `docs/ai_os/README.md` · `01`–`04` experience specs · cross-links fixed
+
+---
+
 ### Added — 2026-06-18 — Sales & Marketing Workspace (UI Design Steps UI-01–05)
 
 | Field | Value |

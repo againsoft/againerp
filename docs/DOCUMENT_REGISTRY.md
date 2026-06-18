@@ -98,10 +98,21 @@ Every new document must include:
 | DOC-DB-MASTER | [database/MASTER_DATABASE_ARCHITECTURE.md](./database/MASTER_DATABASE_ARCHITECTURE.md) | Draft |
 | DOC-DB-ER | [database/ER_DIAGRAM.md](./database/ER_DIAGRAM.md) | Draft |
 
+### Governance
+
+| ID | Document | Status |
+|----|----------|--------|
+| DOC-PROJECT-BRAIN | [PROJECT_BRAIN.md](./PROJECT_BRAIN.md) | Active |
+
 ### AI
 
 | ID | Document | Status |
 |----|----------|--------|
+| DOC-AI-OS-INDEX | [ai_os/README.md](./ai_os/README.md) | Vision |
+| DOC-AI-OS-VISION | [ai_os/01_AI_COMMERCE_OS_VISION.md](./ai_os/01_AI_COMMERCE_OS_VISION.md) | Vision |
+| DOC-AI-OS-UX | [ai_os/02_AI_USER_EXPERIENCE.md](./ai_os/02_AI_USER_EXPERIENCE.md) | Vision |
+| DOC-AI-OS-ADMIN | [ai_os/03_AI_ADMIN_EXPERIENCE.md](./ai_os/03_AI_ADMIN_EXPERIENCE.md) | Vision |
+| DOC-AI-OS-STOREFRONT | [ai_os/04_AI_STOREFRONT_EXPERIENCE.md](./ai_os/04_AI_STOREFRONT_EXPERIENCE.md) | Vision |
 | DOC-AI-OS | [modules/ai/AI_OS_ARCHITECTURE.md](./modules/ai/AI_OS_ARCHITECTURE.md) | Draft |
 | DOC-AI-FIRST | [modules/ai/AI_FIRST_ARCHITECTURE.md](./modules/ai/AI_FIRST_ARCHITECTURE.md) | Draft |
 

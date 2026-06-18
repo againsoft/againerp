@@ -821,9 +821,10 @@ Current AgainERP prototype uses traditional sidebar admin. Migration path:
 |----------|--------------|
 | [01_AI_COMMERCE_OS_VISION.md](./01_AI_COMMERCE_OS_VISION.md) | Strategic vision |
 | [02_AI_USER_EXPERIENCE.md](./02_AI_USER_EXPERIENCE.md) | Cross-cutting UX patterns |
-| [docs/ui-ux/ai-assistant-ui.md](../docs/ui-ux/ai-assistant-ui.md) | Assistant panel spec |
-| [docs/modules/ai/AI_OS_ARCHITECTURE.md](../docs/modules/ai/AI_OS_ARCHITECTURE.md) | AI OS UI §18 |
-| [docs/ECOMMERCE_ADMIN_PROTOTYPE_PHASE1.md](../docs/ECOMMERCE_ADMIN_PROTOTYPE_PHASE1.md) | Current prototype baseline |
+| [ai-assistant-ui.md](../ui-ux/ai-assistant-ui.md) | Assistant panel spec |
+| [AI_OS_ARCHITECTURE.md](../modules/ai/AI_OS_ARCHITECTURE.md) | AI OS UI §18 |
+| [ECOMMERCE_ADMIN_PROTOTYPE_PHASE1.md](../ECOMMERCE_ADMIN_PROTOTYPE_PHASE1.md) | Current prototype baseline |
+| [README.md](./README.md) | AI OS experience doc index |
 
 ---
 

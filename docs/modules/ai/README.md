@@ -10,6 +10,7 @@
 
 | Document | Purpose |
 |----------|---------|
+| [**ai_os/README.md**](../../ai_os/README.md) | **Experience entry** — vision, admin, storefront, cross-cutting UX |
 | [**AI_OS_ARCHITECTURE.md**](./AI_OS_ARCHITECTURE.md) | **Canonical AI OS** — 14 engines, Chief Agent, tools, agents, twin |
 | [AI_FIRST_ARCHITECTURE.md](./AI_FIRST_ARCHITECTURE.md) | AI-first platform principles |
 | [ARCHITECTURE.md](./ARCHITECTURE.md) | Services, schema, forecasting, search |

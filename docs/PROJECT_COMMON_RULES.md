@@ -7,6 +7,8 @@
 
 **এই ফাইল AgainERP-এর universal rules।** নতুন module, screen, plan, বা architecture যেকোনো কাজে এই rules maintain করতে হবে।
 
+**Implementation শুরুর আগে:** [PROJECT_BRAIN.md](./PROJECT_BRAIN.md) পড়তে হবে।
+
 ---
 
 ## 1. Module tiers — Core vs optional

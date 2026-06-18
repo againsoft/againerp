@@ -431,11 +431,12 @@ AI Commerce OS:         "What do you want to achieve today?"
 
 | Document | Relationship |
 |----------|--------------|
-| [docs/modules/ai/AI_OS_ARCHITECTURE.md](../docs/modules/ai/AI_OS_ARCHITECTURE.md) | Technical architecture of the AI OS |
-| [docs/modules/ai/AI_FIRST_ARCHITECTURE.md](../docs/modules/ai/AI_FIRST_ARCHITECTURE.md) | Platform-wide AI-first principles |
-| [docs/modules/ai/AI_AUDIT_AND_APPROVAL.md](../docs/modules/ai/AI_AUDIT_AND_APPROVAL.md) | Governance implementation |
-| [docs/modules/ecommerce/ECOMMERCE_STOREFRONT_ARCHITECTURE.md](../docs/modules/ecommerce/ECOMMERCE_STOREFRONT_ARCHITECTURE.md) | Customer-facing commerce layer |
-| [docs/GOVERNANCE.md](../docs/GOVERNANCE.md) | Documentation and change governance |
+| [AI_OS_ARCHITECTURE.md](../modules/ai/AI_OS_ARCHITECTURE.md) | Technical architecture of the AI OS |
+| [AI_FIRST_ARCHITECTURE.md](../modules/ai/AI_FIRST_ARCHITECTURE.md) | Platform-wide AI-first principles |
+| [AI_AUDIT_AND_APPROVAL.md](../modules/ai/AI_AUDIT_AND_APPROVAL.md) | Governance implementation |
+| [ECOMMERCE_STOREFRONT_ARCHITECTURE.md](../modules/ecommerce/ECOMMERCE_STOREFRONT_ARCHITECTURE.md) | Customer-facing commerce layer |
+| [GOVERNANCE.md](../GOVERNANCE.md) | Documentation and change governance |
+| [README.md](./README.md) | AI OS experience doc index |
 
 ---
 

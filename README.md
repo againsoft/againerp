@@ -8,7 +8,8 @@ ERP + Ecommerce + AI OS platform (UI prototype phase).
 |------|-------------|
 | `apps/web` | Next.js admin + storefront UI prototype |
 | `docs/` | Platform architecture & module documentation |
-| `ai_docs/` | AI commerce OS vision docs |
+| `docs/PROJECT_BRAIN.md` | **Read first** — project map, rules, patterns, AI readiness |
+| `docs/ai_os/` | AI OS vision & experience specs (admin, storefront, UX) |
 
 ## Local development
 

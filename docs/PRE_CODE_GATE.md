@@ -120,6 +120,7 @@ Complete **in order**. Do not skip steps.
 | Review | Document |
 |--------|----------|
 | AI knowledge entry | [AI_KNOWLEDGE_INDEX.md](./AI_KNOWLEDGE_INDEX.md) |
+| AI OS experience (vision & UX) | [ai_os/README.md](./ai_os/README.md) |
 | AI OS architecture | [modules/ai/AI_OS_ARCHITECTURE.md](./modules/ai/AI_OS_ARCHITECTURE.md) |
 | AI-first rules | [modules/ai/AI_FIRST_ARCHITECTURE.md](./modules/ai/AI_FIRST_ARCHITECTURE.md) |
 | Audit & approval | [modules/ai/AI_AUDIT_AND_APPROVAL.md](./modules/ai/AI_AUDIT_AND_APPROVAL.md) |
@@ -137,6 +138,7 @@ Complete **in order**. Do not skip steps.
 
 | Document | When |
 |----------|------|
+| [PROJECT_BRAIN.md](./PROJECT_BRAIN.md) | **Always first** — before any implementation |
 | [README.md](./README.md) | Project context |
 | [MASTER_INDEX.md](./MASTER_INDEX.md) | Navigation |
 | [MODULE_REGISTRY.md](./MODULE_REGISTRY.md) | Module scope |
