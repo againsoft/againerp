@@ -10,7 +10,7 @@ ERP + Ecommerce + AI OS platform (UI prototype phase).
 | `docs/` | Platform architecture & module documentation |
 | `ai_docs/` | AI commerce OS vision docs |
 
-## Local development
+## Local development.
 
 ```bash
 cd apps/web
