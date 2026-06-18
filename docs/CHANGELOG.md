@@ -8,6 +8,22 @@ Format follows [GOVERNANCE.md](./GOVERNANCE.md#changelog-system).
 
 ## [Unreleased]
 
+### Added — 2026-06-18 — Sales & Marketing Workspace (UI Design Steps UI-01–05)
+
+| Field | Value |
+|-------|-------|
+| **Version** | `0.1.0-smw-ui-design` |
+| **Module** | Sales & Marketing Workspace |
+| **Change Type** | Added |
+| **Reason** | UI design documentation before frontend implementation; step-by-step impl workflow |
+| **Impact** | New docs under `docs/modules/sales-marketing/ui-design/`; build guide; no app code yet |
+
+**Docs:** `docs/modules/sales-marketing/README.md` · `SMW_UI_BUILD_GUIDE.md` · `ui-design/01`–`05`
+
+**Next:** Impl Step 01 — master layout shell in `apps/web`
+
+---
+
 ### Added — 2026-06-17 — Business Partners Module (Planning Docs)
 
 | Field | Value |

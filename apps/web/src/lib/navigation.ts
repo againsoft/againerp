@@ -18,6 +18,7 @@ import {
   Factory,
   Handshake,
   Image,
+  TrendingUp,
 } from "lucide-react";
 
 export type NavItem = {
@@ -120,6 +121,11 @@ export const sidebarNav: NavItem[] = [
     icon: Briefcase,
   },
   {
+    title: "Sales & Marketing",
+    href: "/sales-marketing",
+    icon: TrendingUp,
+  },
+  {
     title: "Business Partners",
     icon: Handshake,
     children: [
@@ -214,6 +220,9 @@ export const quickCreateItems = [
   { label: "Job requisition", href: "/hr/recruitment/requisitions?create=1" },
   { label: "Training session", href: "/hr/training/sessions?create=1" },
   { label: "Work Order", href: "/manufacturing/work-orders?create=1" },
+  { label: "Lead", href: "/sales-marketing/leads?create=1" },
+  { label: "Opportunity", href: "/sales-marketing/opportunities?create=1" },
+  { label: "Quotation", href: "/sales-marketing/quotations/create" },
   { label: "Category", href: "/catalog/categories?create=1" },
 ];
 

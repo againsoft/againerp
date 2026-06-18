@@ -4,6 +4,7 @@ import { persist } from "zustand/middleware";
 type AppState = {
   sidebarCollapsed: boolean;
   hrModuleNavCollapsed: boolean;
+  smwModuleNavCollapsed: boolean;
   utilityPanelOpen: boolean;
   aiDrawerOpen: boolean;
   companyId: string;
@@ -12,6 +13,7 @@ type AppState = {
   recentPages: { title: string; href: string }[];
   toggleSidebar: () => void;
   toggleHrModuleNavCollapsed: () => void;
+  toggleSmwModuleNavCollapsed: () => void;
   toggleUtilityPanel: () => void;
   toggleAiDrawer: () => void;
   setCompany: (id: string) => void;
@@ -43,6 +45,7 @@ export const useAppStore = create<AppState>()(
     (set, get) => ({
       sidebarCollapsed: false,
       hrModuleNavCollapsed: false,
+      smwModuleNavCollapsed: false,
       utilityPanelOpen: false,
       aiDrawerOpen: false,
       companyId: "co1",
@@ -52,6 +55,8 @@ export const useAppStore = create<AppState>()(
       toggleSidebar: () => set((s) => ({ sidebarCollapsed: !s.sidebarCollapsed })),
       toggleHrModuleNavCollapsed: () =>
         set((s) => ({ hrModuleNavCollapsed: !s.hrModuleNavCollapsed })),
+      toggleSmwModuleNavCollapsed: () =>
+        set((s) => ({ smwModuleNavCollapsed: !s.smwModuleNavCollapsed })),
       toggleUtilityPanel: () => set((s) => ({ utilityPanelOpen: !s.utilityPanelOpen })),
       toggleAiDrawer: () => set((s) => ({ aiDrawerOpen: !s.aiDrawerOpen })),
       setCompany: (companyId) => set({ companyId }),
@@ -71,7 +76,7 @@ export const useAppStore = create<AppState>()(
     }),
     {
       name: "againerp-prototype",
-      version: 3,
+      version: 4,
       migrate: (persistedState, version) => {
         const state = persistedState as LegacyAppState;
         if (version < 1) {
@@ -84,6 +89,9 @@ export const useAppStore = create<AppState>()(
           migrateLegacyThemePreference(state.theme);
           const { theme: _theme, ...rest } = state;
           return rest as AppState;
+        }
+        if (version < 4) {
+          return { ...state, smwModuleNavCollapsed: false };
         }
         return state;
       },
