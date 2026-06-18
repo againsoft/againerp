@@ -359,6 +359,7 @@ export const GLOBAL_TIMELINE_ACTIVITIES: TimelineActivity[] = [
     priority: "low",
     source: "ui",
     attachments: [{ id: "att2", name: "payroll-audit-may-2026.zip", size: "2.4 MB", type: "ZIP" }],
+    relatedRecords: [{ id: "r1", label: "May 2026 payroll", href: "/payroll/runs?view=may-2026", type: "Payroll run" }],
     auditMeta: { correlationId: "corr-export-8821", ipAddress: "192.168.1.42" },
   },
   {
