@@ -57,7 +57,7 @@ export function TopNavigation({
           ) : null}
 
           <Link
-            href="/dashboard"
+            href="/home"
             className="hidden shrink-0 text-sm font-semibold tracking-tight text-foreground sm:block"
           >
             AgainERP

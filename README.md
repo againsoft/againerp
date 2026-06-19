@@ -8,8 +8,12 @@ ERP + Ecommerce + AI OS platform (UI prototype phase).
 |------|-------------|
 | `apps/web` | Next.js admin + storefront UI prototype |
 | `docs/` | Platform architecture & module documentation |
-| `docs/PROJECT_BRAIN.md` | **Read first** — project map, rules, patterns, AI readiness |
-| `docs/ai_os/` | AI OS vision & experience specs (admin, storefront, UX) |
+| **Reading hierarchy** | [docs/BRAIN.md](./docs/BRAIN.md#reading-hierarchy-token-efficient) — stop at lowest level for your task |
+| `docs/BRAIN.md` | Level 1 — AI Brain entry |
+| `docs/PROJECT_MAP.md` | Level 2 — doc locations |
+| `docs/ARCHITECTURE_DECISIONS.md` | Level 2 — core decisions |
+| `docs/MODULE_REGISTRY.md` | Level 2 — module index → `{module}/README.md` |
+| `docs/00-foundation/PROJECT_BRAIN.md` | Extended brain — checklists, AI matrix |
 
 ## Local development
 

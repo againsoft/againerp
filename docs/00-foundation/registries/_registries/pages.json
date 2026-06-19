@@ -1,0 +1,5402 @@
+[
+  {
+    "page": "AI Analytics Assistant",
+    "module": "ecommerce",
+    "menu": "AI",
+    "url": "/admin/ecommerce/ai/ai-analytics-assistant",
+    "permissions": "ecommerce.ai.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/AI/AI Analytics Assistant.md",
+    "status": "Draft"
+  },
+  {
+    "page": "AI Banner Generator",
+    "module": "ecommerce",
+    "menu": "AI",
+    "url": "/admin/ecommerce/ai/ai-banner-generator",
+    "permissions": "ecommerce.ai.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/AI/AI Banner Generator.md",
+    "status": "Draft"
+  },
+  {
+    "page": "AI Blog Writer",
+    "module": "ecommerce",
+    "menu": "AI",
+    "url": "/admin/ecommerce/ai/ai-blog-writer",
+    "permissions": "ecommerce.ai.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/AI/AI Blog Writer.md",
+    "status": "Draft"
+  },
+  {
+    "page": "AI Customer Support",
+    "module": "ecommerce",
+    "menu": "AI",
+    "url": "/admin/ecommerce/ai/ai-customer-support",
+    "permissions": "ecommerce.ai.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/AI/AI Customer Support.md",
+    "status": "Draft"
+  },
+  {
+    "page": "AI Dashboard",
+    "module": "ecommerce",
+    "menu": "AI",
+    "url": "/admin/ecommerce/ai/ai-dashboard",
+    "permissions": "ecommerce.ai.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/AI/AI Dashboard.md",
+    "status": "Draft"
+  },
+  {
+    "page": "AI Image Generation",
+    "module": "ecommerce",
+    "menu": "AI",
+    "url": "/admin/ecommerce/ai/ai-image-generation",
+    "permissions": "ecommerce.ai.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/AI/AI Image Generation.md",
+    "status": "Draft"
+  },
+  {
+    "page": "AI Inventory Forecast",
+    "module": "ecommerce",
+    "menu": "AI",
+    "url": "/admin/ecommerce/ai/ai-inventory-forecast",
+    "permissions": "ecommerce.ai.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/AI/AI Inventory Forecast.md",
+    "status": "Draft"
+  },
+  {
+    "page": "AI Meta Generator",
+    "module": "ecommerce",
+    "menu": "AI",
+    "url": "/admin/ecommerce/ai/ai-meta-generator",
+    "permissions": "ecommerce.ai.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/AI/AI Meta Generator.md",
+    "status": "Draft"
+  },
+  {
+    "page": "AI Product Description",
+    "module": "ecommerce",
+    "menu": "AI",
+    "url": "/admin/ecommerce/ai/ai-product-description",
+    "permissions": "ecommerce.ai.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/AI/AI Product Description.md",
+    "status": "Draft"
+  },
+  {
+    "page": "AI Product Recommendation",
+    "module": "ecommerce",
+    "menu": "AI",
+    "url": "/admin/ecommerce/ai/ai-product-recommendation",
+    "permissions": "ecommerce.ai.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/AI/AI Product Recommendation.md",
+    "status": "Draft"
+  },
+  {
+    "page": "AI Product Tags",
+    "module": "ecommerce",
+    "menu": "AI",
+    "url": "/admin/ecommerce/ai/ai-product-tags",
+    "permissions": "ecommerce.ai.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/AI/AI Product Tags.md",
+    "status": "Draft"
+  },
+  {
+    "page": "AI Review Summary",
+    "module": "ecommerce",
+    "menu": "AI",
+    "url": "/admin/ecommerce/ai/ai-review-summary",
+    "permissions": "ecommerce.ai.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/AI/AI Review Summary.md",
+    "status": "Draft"
+  },
+  {
+    "page": "AI SEO Generator",
+    "module": "ecommerce",
+    "menu": "AI",
+    "url": "/admin/ecommerce/ai/ai-seo-generator",
+    "permissions": "ecommerce.ai.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/AI/AI SEO Generator.md",
+    "status": "Draft"
+  },
+  {
+    "page": "AI Sales Forecast",
+    "module": "ecommerce",
+    "menu": "AI",
+    "url": "/admin/ecommerce/ai/ai-sales-forecast",
+    "permissions": "ecommerce.ai.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/AI/AI Sales Forecast.md",
+    "status": "Draft"
+  },
+  {
+    "page": "AI Translation",
+    "module": "ecommerce",
+    "menu": "AI",
+    "url": "/admin/ecommerce/ai/ai-translation",
+    "permissions": "ecommerce.ai.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/AI/AI Translation.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Block Library",
+    "module": "ecommerce",
+    "menu": "Builder",
+    "url": "/admin/ecommerce/builder/block-library",
+    "permissions": "ecommerce.builder.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Builder/Block Library.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Category Page Builder",
+    "module": "ecommerce",
+    "menu": "Builder",
+    "url": "/admin/ecommerce/builder/category-page-builder",
+    "permissions": "ecommerce.builder.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Builder/Category Page Builder.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Checkout Builder",
+    "module": "ecommerce",
+    "menu": "Builder",
+    "url": "/admin/ecommerce/builder/checkout-builder",
+    "permissions": "ecommerce.builder.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Builder/Checkout Builder.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Footer Builder",
+    "module": "ecommerce",
+    "menu": "Builder",
+    "url": "/admin/ecommerce/builder/footer-builder",
+    "permissions": "ecommerce.builder.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Builder/Footer Builder.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Form Builder",
+    "module": "ecommerce",
+    "menu": "Builder",
+    "url": "/admin/ecommerce/builder/form-builder",
+    "permissions": "ecommerce.builder.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Builder/Form Builder.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Header Builder",
+    "module": "ecommerce",
+    "menu": "Builder",
+    "url": "/admin/ecommerce/builder/header-builder",
+    "permissions": "ecommerce.builder.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Builder/Header Builder.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Homepage Builder",
+    "module": "ecommerce",
+    "menu": "Builder",
+    "url": "/admin/ecommerce/builder/homepage-builder",
+    "permissions": "ecommerce.builder.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Builder/Homepage Builder.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Landing Page Builder",
+    "module": "ecommerce",
+    "menu": "Builder",
+    "url": "/admin/ecommerce/builder/landing-page-builder",
+    "permissions": "ecommerce.builder.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Builder/Landing Page Builder.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Menu Builder",
+    "module": "ecommerce",
+    "menu": "Builder",
+    "url": "/admin/ecommerce/builder/menu-builder",
+    "permissions": "ecommerce.builder.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Builder/Menu Builder.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Popup Builder",
+    "module": "ecommerce",
+    "menu": "Builder",
+    "url": "/admin/ecommerce/builder/popup-builder",
+    "permissions": "ecommerce.builder.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Builder/Popup Builder.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Product Page Builder",
+    "module": "ecommerce",
+    "menu": "Builder",
+    "url": "/admin/ecommerce/builder/product-page-builder",
+    "permissions": "ecommerce.builder.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Builder/Product Page Builder.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Template Manager",
+    "module": "ecommerce",
+    "menu": "Builder",
+    "url": "/admin/ecommerce/builder/template-manager",
+    "permissions": "ecommerce.builder.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Builder/Template Manager.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Theme Manager",
+    "module": "ecommerce",
+    "menu": "Builder",
+    "url": "/admin/ecommerce/builder/theme-manager",
+    "permissions": "ecommerce.builder.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Builder/Theme Manager.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Widget Builder",
+    "module": "ecommerce",
+    "menu": "Builder",
+    "url": "/admin/ecommerce/builder/widget-builder",
+    "permissions": "ecommerce.builder.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Builder/Widget Builder.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Attribute Groups",
+    "module": "ecommerce",
+    "menu": "Catalog",
+    "url": "/admin/ecommerce/catalog/attribute-groups",
+    "permissions": "ecommerce.catalog.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Catalog/Attribute Groups.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Attributes",
+    "module": "ecommerce",
+    "menu": "Catalog",
+    "url": "/admin/ecommerce/catalog/attributes",
+    "permissions": "ecommerce.catalog.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Catalog/Attributes.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Brands",
+    "module": "ecommerce",
+    "menu": "Catalog",
+    "url": "/admin/ecommerce/catalog/brands",
+    "permissions": "ecommerce.catalog.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Catalog/Brands.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Categories",
+    "module": "ecommerce",
+    "menu": "Catalog",
+    "url": "/admin/ecommerce/catalog/categories",
+    "permissions": "ecommerce.catalog.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Catalog/Categories.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Filters",
+    "module": "ecommerce",
+    "menu": "Catalog",
+    "url": "/admin/ecommerce/catalog/filters",
+    "permissions": "ecommerce.catalog.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Catalog/Filters.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Product Bundles",
+    "module": "ecommerce",
+    "menu": "Catalog",
+    "url": "/admin/ecommerce/catalog/product-bundles",
+    "permissions": "ecommerce.catalog.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Catalog/Product Bundles.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Product Collections",
+    "module": "ecommerce",
+    "menu": "Catalog",
+    "url": "/admin/ecommerce/catalog/product-collections",
+    "permissions": "ecommerce.catalog.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Catalog/Product Collections.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Product Comparison",
+    "module": "ecommerce",
+    "menu": "Catalog",
+    "url": "/admin/ecommerce/catalog/product-comparison",
+    "permissions": "ecommerce.catalog.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Catalog/Product Comparison.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Add Product",
+    "module": "ecommerce",
+    "menu": "Catalog",
+    "url": "/admin/ecommerce/catalog/add-product",
+    "permissions": "ecommerce.catalog.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Catalog/Products/Add Product.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Bulk Export",
+    "module": "ecommerce",
+    "menu": "Catalog",
+    "url": "/admin/ecommerce/catalog/bulk-export",
+    "permissions": "ecommerce.catalog.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Catalog/Products/Bulk Export.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Bulk Import",
+    "module": "ecommerce",
+    "menu": "Catalog",
+    "url": "/admin/ecommerce/catalog/bulk-import",
+    "permissions": "ecommerce.catalog.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Catalog/Products/Bulk Import.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Product Approval",
+    "module": "ecommerce",
+    "menu": "Catalog",
+    "url": "/admin/ecommerce/catalog/product-approval",
+    "permissions": "ecommerce.catalog.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Catalog/Products/Product Approval.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Product History",
+    "module": "ecommerce",
+    "menu": "Catalog",
+    "url": "/admin/ecommerce/catalog/product-history",
+    "permissions": "ecommerce.catalog.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Catalog/Products/Product History.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Product List",
+    "module": "ecommerce",
+    "menu": "Catalog",
+    "url": "/admin/ecommerce/catalog/product-list",
+    "permissions": "ecommerce.catalog.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Catalog/Products/Product List.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Questions & Answers",
+    "module": "ecommerce",
+    "menu": "Catalog",
+    "url": "/admin/ecommerce/catalog/questions-&-answers",
+    "permissions": "ecommerce.catalog.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Catalog/Questions & Answers.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Related Products",
+    "module": "ecommerce",
+    "menu": "Catalog",
+    "url": "/admin/ecommerce/catalog/related-products",
+    "permissions": "ecommerce.catalog.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Catalog/Related Products.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Reviews",
+    "module": "ecommerce",
+    "menu": "Catalog",
+    "url": "/admin/ecommerce/catalog/reviews",
+    "permissions": "ecommerce.catalog.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Catalog/Reviews.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Tags",
+    "module": "ecommerce",
+    "menu": "Catalog",
+    "url": "/admin/ecommerce/catalog/tags",
+    "permissions": "ecommerce.catalog.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Catalog/Tags.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Variants",
+    "module": "ecommerce",
+    "menu": "Catalog",
+    "url": "/admin/ecommerce/catalog/variants",
+    "permissions": "ecommerce.catalog.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Catalog/Variants.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Announcements",
+    "module": "ecommerce",
+    "menu": "Content",
+    "url": "/admin/ecommerce/content/announcements",
+    "permissions": "ecommerce.content.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Content/Announcements.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Blog Categories",
+    "module": "ecommerce",
+    "menu": "Content",
+    "url": "/admin/ecommerce/content/blog-categories",
+    "permissions": "ecommerce.content.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Content/Blog Categories.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Blog Comments",
+    "module": "ecommerce",
+    "menu": "Content",
+    "url": "/admin/ecommerce/content/blog-comments",
+    "permissions": "ecommerce.content.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Content/Blog Comments.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Blog Posts",
+    "module": "ecommerce",
+    "menu": "Content",
+    "url": "/admin/ecommerce/content/blog-posts",
+    "permissions": "ecommerce.content.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Content/Blog Posts.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Custom HTML Blocks",
+    "module": "ecommerce",
+    "menu": "Content",
+    "url": "/admin/ecommerce/content/custom-html-blocks",
+    "permissions": "ecommerce.content.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Content/Custom HTML Blocks.md",
+    "status": "Draft"
+  },
+  {
+    "page": "FAQs",
+    "module": "ecommerce",
+    "menu": "Content",
+    "url": "/admin/ecommerce/content/faqs",
+    "permissions": "ecommerce.content.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Content/FAQs.md",
+    "status": "Draft"
+  },
+  {
+    "page": "News",
+    "module": "ecommerce",
+    "menu": "Content",
+    "url": "/admin/ecommerce/content/news",
+    "permissions": "ecommerce.content.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Content/News.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Pages",
+    "module": "ecommerce",
+    "menu": "Content",
+    "url": "/admin/ecommerce/content/pages",
+    "permissions": "ecommerce.content.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Content/Pages.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Team Members",
+    "module": "ecommerce",
+    "menu": "Content",
+    "url": "/admin/ecommerce/content/team-members",
+    "permissions": "ecommerce.content.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Content/Team Members.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Testimonials",
+    "module": "ecommerce",
+    "menu": "Content",
+    "url": "/admin/ecommerce/content/testimonials",
+    "permissions": "ecommerce.content.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Content/Testimonials.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Customer Activities",
+    "module": "ecommerce",
+    "menu": "Customers",
+    "url": "/admin/ecommerce/customers/customer-activities",
+    "permissions": "ecommerce.customers.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Customers/Customer Activities.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Customer Addresses",
+    "module": "ecommerce",
+    "menu": "Customers",
+    "url": "/admin/ecommerce/customers/customer-addresses",
+    "permissions": "ecommerce.customers.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Customers/Customer Addresses.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Customer Groups",
+    "module": "ecommerce",
+    "menu": "Customers",
+    "url": "/admin/ecommerce/customers/customer-groups",
+    "permissions": "ecommerce.customers.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Customers/Customer Groups.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Customer Support Tickets",
+    "module": "ecommerce",
+    "menu": "Customers",
+    "url": "/admin/ecommerce/customers/customer-support-tickets",
+    "permissions": "ecommerce.customers.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Customers/Customer Support Tickets.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Customer Wallet",
+    "module": "ecommerce",
+    "menu": "Customers",
+    "url": "/admin/ecommerce/customers/customer-wallet",
+    "permissions": "ecommerce.customers.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Customers/Customer Wallet.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Customers",
+    "module": "ecommerce",
+    "menu": "Customers",
+    "url": "/admin/ecommerce/customers/customers",
+    "permissions": "ecommerce.customers.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Customers/Customers.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Reward Points",
+    "module": "ecommerce",
+    "menu": "Customers",
+    "url": "/admin/ecommerce/customers/reward-points",
+    "permissions": "ecommerce.customers.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Customers/Reward Points.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Saved Carts",
+    "module": "ecommerce",
+    "menu": "Customers",
+    "url": "/admin/ecommerce/customers/saved-carts",
+    "permissions": "ecommerce.customers.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Customers/Saved Carts.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Wishlists",
+    "module": "ecommerce",
+    "menu": "Customers",
+    "url": "/admin/ecommerce/customers/wishlists",
+    "permissions": "ecommerce.customers.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Customers/Wishlists.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Activity Logs",
+    "module": "ecommerce",
+    "menu": "Dashboard",
+    "url": "/admin/ecommerce/dashboard/activity-logs",
+    "permissions": "ecommerce.dashboard.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Dashboard/Activity Logs.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Customer Analytics",
+    "module": "ecommerce",
+    "menu": "Dashboard",
+    "url": "/admin/ecommerce/dashboard/customer-analytics",
+    "permissions": "ecommerce.dashboard.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Dashboard/Customer Analytics.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Inventory Alerts",
+    "module": "ecommerce",
+    "menu": "Dashboard",
+    "url": "/admin/ecommerce/dashboard/inventory-alerts",
+    "permissions": "ecommerce.dashboard.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Dashboard/Inventory Alerts.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Overview",
+    "module": "ecommerce",
+    "menu": "Dashboard",
+    "url": "/admin/ecommerce/dashboard/overview",
+    "permissions": "ecommerce.dashboard.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Dashboard/Overview.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Product Analytics",
+    "module": "ecommerce",
+    "menu": "Dashboard",
+    "url": "/admin/ecommerce/dashboard/product-analytics",
+    "permissions": "ecommerce.dashboard.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Dashboard/Product Analytics.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Recent Orders",
+    "module": "ecommerce",
+    "menu": "Dashboard",
+    "url": "/admin/ecommerce/dashboard/recent-orders",
+    "permissions": "ecommerce.dashboard.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Dashboard/Recent Orders.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Revenue Analytics",
+    "module": "ecommerce",
+    "menu": "Dashboard",
+    "url": "/admin/ecommerce/dashboard/revenue-analytics",
+    "permissions": "ecommerce.dashboard.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Dashboard/Revenue Analytics.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Sales Analytics",
+    "module": "ecommerce",
+    "menu": "Dashboard",
+    "url": "/admin/ecommerce/dashboard/sales-analytics",
+    "permissions": "ecommerce.dashboard.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Dashboard/Sales Analytics.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Barcode Management",
+    "module": "ecommerce",
+    "menu": "Inventory",
+    "url": "/admin/ecommerce/inventory/barcode-management",
+    "permissions": "ecommerce.inventory.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Inventory/Barcode Management.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Low Stock Alerts",
+    "module": "ecommerce",
+    "menu": "Inventory",
+    "url": "/admin/ecommerce/inventory/low-stock-alerts",
+    "permissions": "ecommerce.inventory.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Inventory/Low Stock Alerts.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Purchase Suggestions",
+    "module": "ecommerce",
+    "menu": "Inventory",
+    "url": "/admin/ecommerce/inventory/purchase-suggestions",
+    "permissions": "ecommerce.inventory.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Inventory/Purchase Suggestions.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Stock Adjustment",
+    "module": "ecommerce",
+    "menu": "Inventory",
+    "url": "/admin/ecommerce/inventory/stock-adjustment",
+    "permissions": "ecommerce.inventory.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Inventory/Stock Adjustment.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Stock Management",
+    "module": "ecommerce",
+    "menu": "Inventory",
+    "url": "/admin/ecommerce/inventory/stock-management",
+    "permissions": "ecommerce.inventory.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Inventory/Stock Management.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Stock Transfer",
+    "module": "ecommerce",
+    "menu": "Inventory",
+    "url": "/admin/ecommerce/inventory/stock-transfer",
+    "permissions": "ecommerce.inventory.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Inventory/Stock Transfer.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Supplier Stock Feed",
+    "module": "ecommerce",
+    "menu": "Inventory",
+    "url": "/admin/ecommerce/inventory/supplier-stock-feed",
+    "permissions": "ecommerce.inventory.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Inventory/Supplier Stock Feed.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Warehouses",
+    "module": "ecommerce",
+    "menu": "Inventory",
+    "url": "/admin/ecommerce/inventory/warehouses",
+    "permissions": "ecommerce.inventory.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Inventory/Warehouses.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Abandoned Cart Recovery",
+    "module": "ecommerce",
+    "menu": "Marketing",
+    "url": "/admin/ecommerce/marketing/abandoned-cart-recovery",
+    "permissions": "ecommerce.marketing.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Marketing/Abandoned Cart Recovery.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Affiliate Program",
+    "module": "ecommerce",
+    "menu": "Marketing",
+    "url": "/admin/ecommerce/marketing/affiliate-program",
+    "permissions": "ecommerce.marketing.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Marketing/Affiliate Program.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Announcement Bar",
+    "module": "ecommerce",
+    "menu": "Marketing",
+    "url": "/admin/ecommerce/marketing/announcement-bar",
+    "permissions": "ecommerce.marketing.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Marketing/Announcement Bar.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Campaign Manager",
+    "module": "ecommerce",
+    "menu": "Marketing",
+    "url": "/admin/ecommerce/marketing/campaign-manager",
+    "permissions": "ecommerce.marketing.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Marketing/Campaign Manager.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Coupons",
+    "module": "ecommerce",
+    "menu": "Marketing",
+    "url": "/admin/ecommerce/marketing/coupons",
+    "permissions": "ecommerce.marketing.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Marketing/Coupons.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Email Marketing",
+    "module": "ecommerce",
+    "menu": "Marketing",
+    "url": "/admin/ecommerce/marketing/email-marketing",
+    "permissions": "ecommerce.marketing.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Marketing/Email Marketing.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Flash Sales",
+    "module": "ecommerce",
+    "menu": "Marketing",
+    "url": "/admin/ecommerce/marketing/flash-sales",
+    "permissions": "ecommerce.marketing.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Marketing/Flash Sales.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Loyalty Program",
+    "module": "ecommerce",
+    "menu": "Marketing",
+    "url": "/admin/ecommerce/marketing/loyalty-program",
+    "permissions": "ecommerce.marketing.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Marketing/Loyalty Program.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Popup Manager",
+    "module": "ecommerce",
+    "menu": "Marketing",
+    "url": "/admin/ecommerce/marketing/popup-manager",
+    "permissions": "ecommerce.marketing.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Marketing/Popup Manager.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Promotions",
+    "module": "ecommerce",
+    "menu": "Marketing",
+    "url": "/admin/ecommerce/marketing/promotions",
+    "permissions": "ecommerce.marketing.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Marketing/Promotions.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Push Notifications",
+    "module": "ecommerce",
+    "menu": "Marketing",
+    "url": "/admin/ecommerce/marketing/push-notifications",
+    "permissions": "ecommerce.marketing.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Marketing/Push Notifications.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Referral Program",
+    "module": "ecommerce",
+    "menu": "Marketing",
+    "url": "/admin/ecommerce/marketing/referral-program",
+    "permissions": "ecommerce.marketing.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Marketing/Referral Program.md",
+    "status": "Draft"
+  },
+  {
+    "page": "SMS Marketing",
+    "module": "ecommerce",
+    "menu": "Marketing",
+    "url": "/admin/ecommerce/marketing/sms-marketing",
+    "permissions": "ecommerce.marketing.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Marketing/SMS Marketing.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Special Offers",
+    "module": "ecommerce",
+    "menu": "Marketing",
+    "url": "/admin/ecommerce/marketing/special-offers",
+    "permissions": "ecommerce.marketing.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Marketing/Special Offers.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Vouchers",
+    "module": "ecommerce",
+    "menu": "Marketing",
+    "url": "/admin/ecommerce/marketing/vouchers",
+    "permissions": "ecommerce.marketing.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Marketing/Vouchers.md",
+    "status": "Draft"
+  },
+  {
+    "page": "WhatsApp Marketing",
+    "module": "ecommerce",
+    "menu": "Marketing",
+    "url": "/admin/ecommerce/marketing/whatsapp-marketing",
+    "permissions": "ecommerce.marketing.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Marketing/WhatsApp Marketing.md",
+    "status": "Draft"
+  },
+  {
+    "page": "CDN Manager",
+    "module": "ecommerce",
+    "menu": "Media",
+    "url": "/admin/ecommerce/media/cdn-manager",
+    "permissions": "ecommerce.media.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Media/CDN Manager.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Documents",
+    "module": "ecommerce",
+    "menu": "Media",
+    "url": "/admin/ecommerce/media/documents",
+    "permissions": "ecommerce.media.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Media/Documents.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Folders",
+    "module": "ecommerce",
+    "menu": "Media",
+    "url": "/admin/ecommerce/media/folders",
+    "permissions": "ecommerce.media.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Media/Folders.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Image Optimizer",
+    "module": "ecommerce",
+    "menu": "Media",
+    "url": "/admin/ecommerce/media/image-optimizer",
+    "permissions": "ecommerce.media.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Media/Image Optimizer.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Images",
+    "module": "ecommerce",
+    "menu": "Media",
+    "url": "/admin/ecommerce/media/images",
+    "permissions": "ecommerce.media.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Media/Images.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Media Library",
+    "module": "ecommerce",
+    "menu": "Media",
+    "url": "/admin/ecommerce/media/media-library",
+    "permissions": "ecommerce.media.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Media/Media Library.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Media Usage Tracker",
+    "module": "ecommerce",
+    "menu": "Media",
+    "url": "/admin/ecommerce/media/media-usage-tracker",
+    "permissions": "ecommerce.media.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Media/Media Usage Tracker.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Videos",
+    "module": "ecommerce",
+    "menu": "Media",
+    "url": "/admin/ecommerce/media/videos",
+    "permissions": "ecommerce.media.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Media/Videos.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Watermark Manager",
+    "module": "ecommerce",
+    "menu": "Media",
+    "url": "/admin/ecommerce/media/watermark-manager",
+    "permissions": "ecommerce.media.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Media/Watermark Manager.md",
+    "status": "Draft"
+  },
+  {
+    "page": "AI Reports",
+    "module": "ecommerce",
+    "menu": "Reports",
+    "url": "/admin/ecommerce/reports/ai-reports",
+    "permissions": "ecommerce.reports.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Reports/AI Reports.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Affiliate Reports",
+    "module": "ecommerce",
+    "menu": "Reports",
+    "url": "/admin/ecommerce/reports/affiliate-reports",
+    "permissions": "ecommerce.reports.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Reports/Affiliate Reports.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Brand Reports",
+    "module": "ecommerce",
+    "menu": "Reports",
+    "url": "/admin/ecommerce/reports/brand-reports",
+    "permissions": "ecommerce.reports.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Reports/Brand Reports.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Category Reports",
+    "module": "ecommerce",
+    "menu": "Reports",
+    "url": "/admin/ecommerce/reports/category-reports",
+    "permissions": "ecommerce.reports.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Reports/Category Reports.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Custom Reports",
+    "module": "ecommerce",
+    "menu": "Reports",
+    "url": "/admin/ecommerce/reports/custom-reports",
+    "permissions": "ecommerce.reports.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Reports/Custom Reports.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Customer Reports",
+    "module": "ecommerce",
+    "menu": "Reports",
+    "url": "/admin/ecommerce/reports/customer-reports",
+    "permissions": "ecommerce.reports.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Reports/Customer Reports.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Inventory Reports",
+    "module": "ecommerce",
+    "menu": "Reports",
+    "url": "/admin/ecommerce/reports/inventory-reports",
+    "permissions": "ecommerce.reports.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Reports/Inventory Reports.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Marketing Reports",
+    "module": "ecommerce",
+    "menu": "Reports",
+    "url": "/admin/ecommerce/reports/marketing-reports",
+    "permissions": "ecommerce.reports.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Reports/Marketing Reports.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Product Reports",
+    "module": "ecommerce",
+    "menu": "Reports",
+    "url": "/admin/ecommerce/reports/product-reports",
+    "permissions": "ecommerce.reports.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Reports/Product Reports.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Profit Reports",
+    "module": "ecommerce",
+    "menu": "Reports",
+    "url": "/admin/ecommerce/reports/profit-reports",
+    "permissions": "ecommerce.reports.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Reports/Profit Reports.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Return Reports",
+    "module": "ecommerce",
+    "menu": "Reports",
+    "url": "/admin/ecommerce/reports/return-reports",
+    "permissions": "ecommerce.reports.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Reports/Return Reports.md",
+    "status": "Draft"
+  },
+  {
+    "page": "SEO Reports",
+    "module": "ecommerce",
+    "menu": "Reports",
+    "url": "/admin/ecommerce/reports/seo-reports",
+    "permissions": "ecommerce.reports.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Reports/SEO Reports.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Sales Reports",
+    "module": "ecommerce",
+    "menu": "Reports",
+    "url": "/admin/ecommerce/reports/sales-reports",
+    "permissions": "ecommerce.reports.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Reports/Sales Reports.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Tax Reports",
+    "module": "ecommerce",
+    "menu": "Reports",
+    "url": "/admin/ecommerce/reports/tax-reports",
+    "permissions": "ecommerce.reports.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Reports/Tax Reports.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Broken Link Checker",
+    "module": "ecommerce",
+    "menu": "SEO",
+    "url": "/admin/ecommerce/seo/broken-link-checker",
+    "permissions": "ecommerce.seo.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/SEO/Broken Link Checker.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Internal Linking",
+    "module": "ecommerce",
+    "menu": "SEO",
+    "url": "/admin/ecommerce/seo/internal-linking",
+    "permissions": "ecommerce.seo.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/SEO/Internal Linking.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Keyword Tracking",
+    "module": "ecommerce",
+    "menu": "SEO",
+    "url": "/admin/ecommerce/seo/keyword-tracking",
+    "permissions": "ecommerce.seo.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/SEO/Keyword Tracking.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Meta Manager",
+    "module": "ecommerce",
+    "menu": "SEO",
+    "url": "/admin/ecommerce/seo/meta-manager",
+    "permissions": "ecommerce.seo.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/SEO/Meta Manager.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Page Speed Analysis",
+    "module": "ecommerce",
+    "menu": "SEO",
+    "url": "/admin/ecommerce/seo/page-speed-analysis",
+    "permissions": "ecommerce.seo.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/SEO/Page Speed Analysis.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Redirect Manager",
+    "module": "ecommerce",
+    "menu": "SEO",
+    "url": "/admin/ecommerce/seo/redirect-manager",
+    "permissions": "ecommerce.seo.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/SEO/Redirect Manager.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Robots Manager",
+    "module": "ecommerce",
+    "menu": "SEO",
+    "url": "/admin/ecommerce/seo/robots-manager",
+    "permissions": "ecommerce.seo.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/SEO/Robots Manager.md",
+    "status": "Draft"
+  },
+  {
+    "page": "SEO Audit",
+    "module": "ecommerce",
+    "menu": "SEO",
+    "url": "/admin/ecommerce/seo/seo-audit",
+    "permissions": "ecommerce.seo.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/SEO/SEO Audit.md",
+    "status": "Draft"
+  },
+  {
+    "page": "SEO Dashboard",
+    "module": "ecommerce",
+    "menu": "SEO",
+    "url": "/admin/ecommerce/seo/seo-dashboard",
+    "permissions": "ecommerce.seo.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/SEO/SEO Dashboard.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Schema Manager",
+    "module": "ecommerce",
+    "menu": "SEO",
+    "url": "/admin/ecommerce/seo/schema-manager",
+    "permissions": "ecommerce.seo.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/SEO/Schema Manager.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Sitemap Manager",
+    "module": "ecommerce",
+    "menu": "SEO",
+    "url": "/admin/ecommerce/seo/sitemap-manager",
+    "permissions": "ecommerce.seo.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/SEO/Sitemap Manager.md",
+    "status": "Draft"
+  },
+  {
+    "page": "URL Manager",
+    "module": "ecommerce",
+    "menu": "SEO",
+    "url": "/admin/ecommerce/seo/url-manager",
+    "permissions": "ecommerce.seo.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/SEO/URL Manager.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Abandoned Carts",
+    "module": "ecommerce",
+    "menu": "Sales",
+    "url": "/admin/ecommerce/sales/abandoned-carts",
+    "permissions": "ecommerce.sales.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Sales/Abandoned Carts.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Invoices",
+    "module": "ecommerce",
+    "menu": "Sales",
+    "url": "/admin/ecommerce/sales/invoices",
+    "permissions": "ecommerce.sales.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Sales/Invoices.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Order Status",
+    "module": "ecommerce",
+    "menu": "Sales",
+    "url": "/admin/ecommerce/sales/order-status",
+    "permissions": "ecommerce.sales.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Sales/Order Status.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Orders",
+    "module": "ecommerce",
+    "menu": "Sales",
+    "url": "/admin/ecommerce/sales/orders",
+    "permissions": "ecommerce.sales.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Sales/Orders.md",
+    "status": "Draft"
+  },
+  {
+    "page": "POS Orders",
+    "module": "ecommerce",
+    "menu": "Sales",
+    "url": "/admin/ecommerce/sales/pos-orders",
+    "permissions": "ecommerce.sales.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Sales/POS Orders.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Quotations",
+    "module": "ecommerce",
+    "menu": "Sales",
+    "url": "/admin/ecommerce/sales/quotations",
+    "permissions": "ecommerce.sales.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Sales/Quotations.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Refunds",
+    "module": "ecommerce",
+    "menu": "Sales",
+    "url": "/admin/ecommerce/sales/refunds",
+    "permissions": "ecommerce.sales.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Sales/Refunds.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Returns",
+    "module": "ecommerce",
+    "menu": "Sales",
+    "url": "/admin/ecommerce/sales/returns",
+    "permissions": "ecommerce.sales.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Sales/Returns.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Transactions",
+    "module": "ecommerce",
+    "menu": "Sales",
+    "url": "/admin/ecommerce/sales/transactions",
+    "permissions": "ecommerce.sales.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/Sales/Transactions.md",
+    "status": "Draft"
+  },
+  {
+    "page": "API Management",
+    "module": "ecommerce",
+    "menu": "System",
+    "url": "/admin/ecommerce/system/api-management",
+    "permissions": "ecommerce.system.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/System/API Management.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Activity Logs",
+    "module": "ecommerce",
+    "menu": "System",
+    "url": "/admin/ecommerce/system/activity-logs",
+    "permissions": "ecommerce.system.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/System/Activity Logs.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Audit Logs",
+    "module": "ecommerce",
+    "menu": "System",
+    "url": "/admin/ecommerce/system/audit-logs",
+    "permissions": "ecommerce.system.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/System/Audit Logs.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Backup Manager",
+    "module": "ecommerce",
+    "menu": "System",
+    "url": "/admin/ecommerce/system/backup-manager",
+    "permissions": "ecommerce.system.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/System/Backup Manager.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Branch Settings",
+    "module": "ecommerce",
+    "menu": "System",
+    "url": "/admin/ecommerce/system/branch-settings",
+    "permissions": "ecommerce.system.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/System/Branch Settings.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Cache Manager",
+    "module": "ecommerce",
+    "menu": "System",
+    "url": "/admin/ecommerce/system/cache-manager",
+    "permissions": "ecommerce.system.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/System/Cache Manager.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Company Settings",
+    "module": "ecommerce",
+    "menu": "System",
+    "url": "/admin/ecommerce/system/company-settings",
+    "permissions": "ecommerce.system.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/System/Company Settings.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Cron Jobs",
+    "module": "ecommerce",
+    "menu": "System",
+    "url": "/admin/ecommerce/system/cron-jobs",
+    "permissions": "ecommerce.system.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/System/Cron Jobs.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Currencies",
+    "module": "ecommerce",
+    "menu": "System",
+    "url": "/admin/ecommerce/system/currencies",
+    "permissions": "ecommerce.system.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/System/Currencies.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Email Settings",
+    "module": "ecommerce",
+    "menu": "System",
+    "url": "/admin/ecommerce/system/email-settings",
+    "permissions": "ecommerce.system.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/System/Email Settings.md",
+    "status": "Draft"
+  },
+  {
+    "page": "General Settings",
+    "module": "ecommerce",
+    "menu": "System",
+    "url": "/admin/ecommerce/system/general-settings",
+    "permissions": "ecommerce.system.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/System/General Settings.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Languages",
+    "module": "ecommerce",
+    "menu": "System",
+    "url": "/admin/ecommerce/system/languages",
+    "permissions": "ecommerce.system.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/System/Languages.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Localization",
+    "module": "ecommerce",
+    "menu": "System",
+    "url": "/admin/ecommerce/system/localization",
+    "permissions": "ecommerce.system.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/System/Localization.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Payment Gateways",
+    "module": "ecommerce",
+    "menu": "System",
+    "url": "/admin/ecommerce/system/payment-gateways",
+    "permissions": "ecommerce.system.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/System/Payment Gateways.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Permissions",
+    "module": "ecommerce",
+    "menu": "System",
+    "url": "/admin/ecommerce/system/permissions",
+    "permissions": "ecommerce.system.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/System/Permissions.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Roles",
+    "module": "ecommerce",
+    "menu": "System",
+    "url": "/admin/ecommerce/system/roles",
+    "permissions": "ecommerce.system.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/System/Roles.md",
+    "status": "Draft"
+  },
+  {
+    "page": "SMS Settings",
+    "module": "ecommerce",
+    "menu": "System",
+    "url": "/admin/ecommerce/system/sms-settings",
+    "permissions": "ecommerce.system.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/System/SMS Settings.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Security Settings",
+    "module": "ecommerce",
+    "menu": "System",
+    "url": "/admin/ecommerce/system/security-settings",
+    "permissions": "ecommerce.system.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/System/Security Settings.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Shipping Methods",
+    "module": "ecommerce",
+    "menu": "System",
+    "url": "/admin/ecommerce/system/shipping-methods",
+    "permissions": "ecommerce.system.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/System/Shipping Methods.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Shipping Zones",
+    "module": "ecommerce",
+    "menu": "System",
+    "url": "/admin/ecommerce/system/shipping-zones",
+    "permissions": "ecommerce.system.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/System/Shipping Zones.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Store Settings",
+    "module": "ecommerce",
+    "menu": "System",
+    "url": "/admin/ecommerce/system/store-settings",
+    "permissions": "ecommerce.system.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/System/Store Settings.md",
+    "status": "Draft"
+  },
+  {
+    "page": "Taxes",
+    "module": "ecommerce",
+    "menu": "System",
+    "url": "/admin/ecommerce/system/taxes",
+    "permissions": "ecommerce.system.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/System/Taxes.md",
+    "status": "Draft"
+  },
+  {
+    "page": "User Management",
+    "module": "ecommerce",
+    "menu": "System",
+    "url": "/admin/ecommerce/system/user-management",
+    "permissions": "ecommerce.system.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/System/User Management.md",
+    "status": "Draft"
+  },
+  {
+    "page": "WhatsApp Settings",
+    "module": "ecommerce",
+    "menu": "System",
+    "url": "/admin/ecommerce/system/whatsapp-settings",
+    "permissions": "ecommerce.system.view",
+    "doc_path": "03-business-modules/ecommerce/Menus/System/WhatsApp Settings.md",
+    "status": "Draft"
+  },
+  {
+    "page": "DUMMY_DATA_STANDARDS",
+    "module": "ui-prototype",
+    "menu": "root",
+    "url": "/prototype/root/DUMMY_DATA_STANDARDS",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/DUMMY_DATA_STANDARDS.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ImprovementIdeas",
+    "module": "ui-prototype",
+    "menu": "root",
+    "url": "/prototype/root/ImprovementIdeas",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ImprovementIdeas.md",
+    "status": "Stub"
+  },
+  {
+    "page": "MODULE_SCOPE",
+    "module": "ui-prototype",
+    "menu": "root",
+    "url": "/prototype/root/MODULE_SCOPE",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/MODULE_SCOPE.md",
+    "status": "Stub"
+  },
+  {
+    "page": "MissingFeatures",
+    "module": "ui-prototype",
+    "menu": "root",
+    "url": "/prototype/root/MissingFeatures",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/MissingFeatures.md",
+    "status": "Stub"
+  },
+  {
+    "page": "PRODUCTION_READINESS",
+    "module": "ui-prototype",
+    "menu": "root",
+    "url": "/prototype/root/PRODUCTION_READINESS",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/PRODUCTION_READINESS.md",
+    "status": "Stub"
+  },
+  {
+    "page": "PROTOTYPE_SHELL",
+    "module": "ui-prototype",
+    "menu": "root",
+    "url": "/prototype/root/PROTOTYPE_SHELL",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/PROTOTYPE_SHELL.md",
+    "status": "Stub"
+  },
+  {
+    "page": "REVIEW_CYCLE",
+    "module": "ui-prototype",
+    "menu": "root",
+    "url": "/prototype/root/REVIEW_CYCLE",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/REVIEW_CYCLE.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ReviewQuestions",
+    "module": "ui-prototype",
+    "menu": "root",
+    "url": "/prototype/root/ReviewQuestions",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ReviewQuestions.md",
+    "status": "Stub"
+  },
+  {
+    "page": "_PAGE_CHANGES_TEMPLATE",
+    "module": "ui-prototype",
+    "menu": "root",
+    "url": "/prototype/root/_PAGE_CHANGES_TEMPLATE",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/_PAGE_CHANGES_TEMPLATE.md",
+    "status": "Stub"
+  },
+  {
+    "page": "_PAGE_PROTOTYPE_TEMPLATE",
+    "module": "ui-prototype",
+    "menu": "root",
+    "url": "/prototype/root/_PAGE_PROTOTYPE_TEMPLATE",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/_PAGE_PROTOTYPE_TEMPLATE.md",
+    "status": "Stub"
+  },
+  {
+    "page": "_PAGE_REVIEW_TEMPLATE",
+    "module": "ui-prototype",
+    "menu": "root",
+    "url": "/prototype/root/_PAGE_REVIEW_TEMPLATE",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/_PAGE_REVIEW_TEMPLATE.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiBannerGenerator",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiBannerGenerator",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiBannerGenerator.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiBannerGeneratorChanges",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiBannerGeneratorChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiBannerGeneratorChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiBannerGeneratorReview",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiBannerGeneratorReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiBannerGeneratorReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiBlogWriter",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiBlogWriter",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiBlogWriter.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiBlogWriterChanges",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiBlogWriterChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiBlogWriterChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiBlogWriterReview",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiBlogWriterReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiBlogWriterReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiCustomerSupport",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiCustomerSupport",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiCustomerSupport.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiCustomerSupportChanges",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiCustomerSupportChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiCustomerSupportChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiCustomerSupportReview",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiCustomerSupportReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiCustomerSupportReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiDashboard",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiDashboard",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiDashboard.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiDashboardChanges",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiDashboardChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiDashboardChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiDashboardReview",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiDashboardReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiDashboardReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiImageGeneration",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiImageGeneration",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiImageGeneration.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiImageGenerationChanges",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiImageGenerationChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiImageGenerationChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiImageGenerationReview",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiImageGenerationReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiImageGenerationReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiInventoryForecast",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiInventoryForecast",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiInventoryForecast.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiInventoryForecastChanges",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiInventoryForecastChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiInventoryForecastChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiInventoryForecastReview",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiInventoryForecastReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiInventoryForecastReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiMetaGenerator",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiMetaGenerator",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiMetaGenerator.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiMetaGeneratorChanges",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiMetaGeneratorChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiMetaGeneratorChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiMetaGeneratorReview",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiMetaGeneratorReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiMetaGeneratorReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiProductDescription",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiProductDescription",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiProductDescription.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiProductDescriptionChanges",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiProductDescriptionChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiProductDescriptionChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiProductDescriptionReview",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiProductDescriptionReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiProductDescriptionReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiProductRecommendation",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiProductRecommendation",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiProductRecommendation.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiProductRecommendationChanges",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiProductRecommendationChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiProductRecommendationChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiProductRecommendationReview",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiProductRecommendationReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiProductRecommendationReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiProductTags",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiProductTags",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiProductTags.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiProductTagsChanges",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiProductTagsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiProductTagsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiProductTagsReview",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiProductTagsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiProductTagsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiReviewSummary",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiReviewSummary",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiReviewSummary.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiReviewSummaryChanges",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiReviewSummaryChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiReviewSummaryChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiReviewSummaryReview",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiReviewSummaryReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiReviewSummaryReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiSalesForecast",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiSalesForecast",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiSalesForecast.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiSalesForecastChanges",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiSalesForecastChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiSalesForecastChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiSalesForecastReview",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiSalesForecastReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiSalesForecastReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiSeoGenerator",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiSeoGenerator",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiSeoGenerator.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiSeoGeneratorChanges",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiSeoGeneratorChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiSeoGeneratorChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiSeoGeneratorReview",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiSeoGeneratorReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiSeoGeneratorReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiTranslation",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiTranslation",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiTranslation.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiTranslationChanges",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiTranslationChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiTranslationChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiTranslationReview",
+    "module": "ui-prototype",
+    "menu": "ai-os",
+    "url": "/prototype/ai-os/AiTranslationReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/ai-os/AiTranslationReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "BUSINESS_PARTNERS_UI_BUILD_GUIDE",
+    "module": "ui-prototype",
+    "menu": "business-partners",
+    "url": "/prototype/business-partners/BUSINESS_PARTNERS_UI_BUILD_GUIDE",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/business-partners/BUSINESS_PARTNERS_UI_BUILD_GUIDE.md",
+    "status": "Stub"
+  },
+  {
+    "page": "PartnerDirectory",
+    "module": "ui-prototype",
+    "menu": "business-partners",
+    "url": "/prototype/business-partners/PartnerDirectory",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/business-partners/PartnerDirectory.md",
+    "status": "Stub"
+  },
+  {
+    "page": "PartnerOnboarding",
+    "module": "ui-prototype",
+    "menu": "business-partners",
+    "url": "/prototype/business-partners/PartnerOnboarding",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/business-partners/PartnerOnboarding.md",
+    "status": "Stub"
+  },
+  {
+    "page": "PartnerTerms",
+    "module": "ui-prototype",
+    "menu": "business-partners",
+    "url": "/prototype/business-partners/PartnerTerms",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/business-partners/PartnerTerms.md",
+    "status": "Stub"
+  },
+  {
+    "page": "PartnerTiers",
+    "module": "ui-prototype",
+    "menu": "business-partners",
+    "url": "/prototype/business-partners/PartnerTiers",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/business-partners/PartnerTiers.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Categories",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/Categories",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/categories/Categories.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CategoriesChanges",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/CategoriesChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/categories/CategoriesChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CategoriesReview",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/CategoriesReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/categories/CategoriesReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AddProduct",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/AddProduct",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/AddProduct.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AddProductChanges",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/AddProductChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/AddProductChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AddProductReview",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/AddProductReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/AddProductReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AttributeGroups",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/AttributeGroups",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/AttributeGroups.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AttributeGroupsChanges",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/AttributeGroupsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/AttributeGroupsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AttributeGroupsReview",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/AttributeGroupsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/AttributeGroupsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AttributeProfiles",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/AttributeProfiles",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/AttributeProfiles.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Attributes",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/Attributes",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/Attributes.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AttributesChanges",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/AttributesChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/AttributesChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AttributesReview",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/AttributesReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/AttributesReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Brands",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/Brands",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/Brands.md",
+    "status": "Stub"
+  },
+  {
+    "page": "BrandsChanges",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/BrandsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/BrandsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "BrandsReview",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/BrandsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/BrandsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "BulkExport",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/BulkExport",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/BulkExport.md",
+    "status": "Stub"
+  },
+  {
+    "page": "BulkExportChanges",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/BulkExportChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/BulkExportChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "BulkExportReview",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/BulkExportReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/BulkExportReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "BulkImport",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/BulkImport",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/BulkImport.md",
+    "status": "Stub"
+  },
+  {
+    "page": "BulkImportChanges",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/BulkImportChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/BulkImportChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "BulkImportReview",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/BulkImportReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/BulkImportReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Categories",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/Categories",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/Categories.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CategoriesChanges",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/CategoriesChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/CategoriesChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CategoriesReview",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/CategoriesReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/CategoriesReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "EDITOR_AI_RULES",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/EDITOR_AI_RULES",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/EDITOR_AI_RULES.md",
+    "status": "Stub"
+  },
+  {
+    "page": "EditProduct",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/EditProduct",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/EditProduct.md",
+    "status": "Stub"
+  },
+  {
+    "page": "EditProductChanges",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/EditProductChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/EditProductChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "EditProductReview",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/EditProductReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/EditProductReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Filters",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/Filters",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/Filters.md",
+    "status": "Stub"
+  },
+  {
+    "page": "FiltersChanges",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/FiltersChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/FiltersChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "FiltersReview",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/FiltersReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/FiltersReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "IMPLEMENTED_DESIGN",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/IMPLEMENTED_DESIGN",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/IMPLEMENTED_DESIGN.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ProductApproval",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/ProductApproval",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/ProductApproval.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ProductApprovalChanges",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/ProductApprovalChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/ProductApprovalChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ProductApprovalReview",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/ProductApprovalReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/ProductApprovalReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ProductBundles",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/ProductBundles",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/ProductBundles.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ProductBundlesChanges",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/ProductBundlesChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/ProductBundlesChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ProductBundlesReview",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/ProductBundlesReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/ProductBundlesReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ProductCollections",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/ProductCollections",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/ProductCollections.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ProductCollectionsChanges",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/ProductCollectionsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/ProductCollectionsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ProductCollectionsReview",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/ProductCollectionsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/ProductCollectionsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ProductDetails",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/ProductDetails",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/ProductDetails.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ProductDetailsChanges",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/ProductDetailsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/ProductDetailsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ProductDetailsReview",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/ProductDetailsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/ProductDetailsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ProductList",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/ProductList",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/ProductList.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ProductListChanges",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/ProductListChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/ProductListChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ProductListReview",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/ProductListReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/ProductListReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "QuestionsAnswers",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/QuestionsAnswers",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/QuestionsAnswers.md",
+    "status": "Stub"
+  },
+  {
+    "page": "QuestionsAnswersChanges",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/QuestionsAnswersChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/QuestionsAnswersChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "QuestionsAnswersReview",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/QuestionsAnswersReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/QuestionsAnswersReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "RelatedProducts",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/RelatedProducts",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/RelatedProducts.md",
+    "status": "Stub"
+  },
+  {
+    "page": "RelatedProductsChanges",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/RelatedProductsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/RelatedProductsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "RelatedProductsReview",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/RelatedProductsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/RelatedProductsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Reviews",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/Reviews",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/Reviews.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ReviewsChanges",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/ReviewsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/ReviewsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ReviewsReview",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/ReviewsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/ReviewsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SpecificationsProfiles",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/SpecificationsProfiles",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/SpecificationsProfiles.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Tags",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/Tags",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/Tags.md",
+    "status": "Stub"
+  },
+  {
+    "page": "TagsChanges",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/TagsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/TagsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "TagsReview",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/TagsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/TagsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Variants",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/Variants",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/Variants.md",
+    "status": "Stub"
+  },
+  {
+    "page": "VariantsChanges",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/VariantsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/VariantsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "VariantsReview",
+    "module": "ui-prototype",
+    "menu": "catalog",
+    "url": "/prototype/catalog/VariantsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/catalog/products/VariantsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Announcements",
+    "module": "ui-prototype",
+    "menu": "content",
+    "url": "/prototype/content/Announcements",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/content/Announcements.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AnnouncementsChanges",
+    "module": "ui-prototype",
+    "menu": "content",
+    "url": "/prototype/content/AnnouncementsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/content/AnnouncementsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AnnouncementsReview",
+    "module": "ui-prototype",
+    "menu": "content",
+    "url": "/prototype/content/AnnouncementsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/content/AnnouncementsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "BlogCategories",
+    "module": "ui-prototype",
+    "menu": "content",
+    "url": "/prototype/content/BlogCategories",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/content/BlogCategories.md",
+    "status": "Stub"
+  },
+  {
+    "page": "BlogCategoriesChanges",
+    "module": "ui-prototype",
+    "menu": "content",
+    "url": "/prototype/content/BlogCategoriesChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/content/BlogCategoriesChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "BlogCategoriesReview",
+    "module": "ui-prototype",
+    "menu": "content",
+    "url": "/prototype/content/BlogCategoriesReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/content/BlogCategoriesReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "BlogComments",
+    "module": "ui-prototype",
+    "menu": "content",
+    "url": "/prototype/content/BlogComments",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/content/BlogComments.md",
+    "status": "Stub"
+  },
+  {
+    "page": "BlogCommentsChanges",
+    "module": "ui-prototype",
+    "menu": "content",
+    "url": "/prototype/content/BlogCommentsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/content/BlogCommentsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "BlogCommentsReview",
+    "module": "ui-prototype",
+    "menu": "content",
+    "url": "/prototype/content/BlogCommentsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/content/BlogCommentsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "BlogPosts",
+    "module": "ui-prototype",
+    "menu": "content",
+    "url": "/prototype/content/BlogPosts",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/content/BlogPosts.md",
+    "status": "Stub"
+  },
+  {
+    "page": "BlogPostsChanges",
+    "module": "ui-prototype",
+    "menu": "content",
+    "url": "/prototype/content/BlogPostsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/content/BlogPostsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "BlogPostsReview",
+    "module": "ui-prototype",
+    "menu": "content",
+    "url": "/prototype/content/BlogPostsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/content/BlogPostsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Faqs",
+    "module": "ui-prototype",
+    "menu": "content",
+    "url": "/prototype/content/Faqs",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/content/Faqs.md",
+    "status": "Stub"
+  },
+  {
+    "page": "FaqsChanges",
+    "module": "ui-prototype",
+    "menu": "content",
+    "url": "/prototype/content/FaqsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/content/FaqsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "FaqsReview",
+    "module": "ui-prototype",
+    "menu": "content",
+    "url": "/prototype/content/FaqsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/content/FaqsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "News",
+    "module": "ui-prototype",
+    "menu": "content",
+    "url": "/prototype/content/News",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/content/News.md",
+    "status": "Stub"
+  },
+  {
+    "page": "NewsChanges",
+    "module": "ui-prototype",
+    "menu": "content",
+    "url": "/prototype/content/NewsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/content/NewsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "NewsReview",
+    "module": "ui-prototype",
+    "menu": "content",
+    "url": "/prototype/content/NewsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/content/NewsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Pages",
+    "module": "ui-prototype",
+    "menu": "content",
+    "url": "/prototype/content/Pages",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/content/Pages.md",
+    "status": "Stub"
+  },
+  {
+    "page": "PagesChanges",
+    "module": "ui-prototype",
+    "menu": "content",
+    "url": "/prototype/content/PagesChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/content/PagesChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "PagesReview",
+    "module": "ui-prototype",
+    "menu": "content",
+    "url": "/prototype/content/PagesReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/content/PagesReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "TeamMembers",
+    "module": "ui-prototype",
+    "menu": "content",
+    "url": "/prototype/content/TeamMembers",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/content/TeamMembers.md",
+    "status": "Stub"
+  },
+  {
+    "page": "TeamMembersChanges",
+    "module": "ui-prototype",
+    "menu": "content",
+    "url": "/prototype/content/TeamMembersChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/content/TeamMembersChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "TeamMembersReview",
+    "module": "ui-prototype",
+    "menu": "content",
+    "url": "/prototype/content/TeamMembersReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/content/TeamMembersReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Testimonials",
+    "module": "ui-prototype",
+    "menu": "content",
+    "url": "/prototype/content/Testimonials",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/content/Testimonials.md",
+    "status": "Stub"
+  },
+  {
+    "page": "TestimonialsChanges",
+    "module": "ui-prototype",
+    "menu": "content",
+    "url": "/prototype/content/TestimonialsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/content/TestimonialsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "TestimonialsReview",
+    "module": "ui-prototype",
+    "menu": "content",
+    "url": "/prototype/content/TestimonialsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/content/TestimonialsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CustomerActivities",
+    "module": "ui-prototype",
+    "menu": "customers",
+    "url": "/prototype/customers/CustomerActivities",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/customers/CustomerActivities.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CustomerActivitiesChanges",
+    "module": "ui-prototype",
+    "menu": "customers",
+    "url": "/prototype/customers/CustomerActivitiesChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/customers/CustomerActivitiesChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CustomerActivitiesReview",
+    "module": "ui-prototype",
+    "menu": "customers",
+    "url": "/prototype/customers/CustomerActivitiesReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/customers/CustomerActivitiesReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CustomerGroups",
+    "module": "ui-prototype",
+    "menu": "customers",
+    "url": "/prototype/customers/CustomerGroups",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/customers/CustomerGroups.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CustomerGroupsChanges",
+    "module": "ui-prototype",
+    "menu": "customers",
+    "url": "/prototype/customers/CustomerGroupsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/customers/CustomerGroupsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CustomerGroupsReview",
+    "module": "ui-prototype",
+    "menu": "customers",
+    "url": "/prototype/customers/CustomerGroupsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/customers/CustomerGroupsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CustomerSupportTickets",
+    "module": "ui-prototype",
+    "menu": "customers",
+    "url": "/prototype/customers/CustomerSupportTickets",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/customers/CustomerSupportTickets.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CustomerSupportTicketsChanges",
+    "module": "ui-prototype",
+    "menu": "customers",
+    "url": "/prototype/customers/CustomerSupportTicketsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/customers/CustomerSupportTicketsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CustomerSupportTicketsReview",
+    "module": "ui-prototype",
+    "menu": "customers",
+    "url": "/prototype/customers/CustomerSupportTicketsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/customers/CustomerSupportTicketsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CustomerWallet",
+    "module": "ui-prototype",
+    "menu": "customers",
+    "url": "/prototype/customers/CustomerWallet",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/customers/CustomerWallet.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CustomerWalletChanges",
+    "module": "ui-prototype",
+    "menu": "customers",
+    "url": "/prototype/customers/CustomerWalletChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/customers/CustomerWalletChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CustomerWalletReview",
+    "module": "ui-prototype",
+    "menu": "customers",
+    "url": "/prototype/customers/CustomerWalletReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/customers/CustomerWalletReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Customers",
+    "module": "ui-prototype",
+    "menu": "customers",
+    "url": "/prototype/customers/Customers",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/customers/Customers.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CustomersChanges",
+    "module": "ui-prototype",
+    "menu": "customers",
+    "url": "/prototype/customers/CustomersChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/customers/CustomersChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CustomersReview",
+    "module": "ui-prototype",
+    "menu": "customers",
+    "url": "/prototype/customers/CustomersReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/customers/CustomersReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "RewardPoints",
+    "module": "ui-prototype",
+    "menu": "customers",
+    "url": "/prototype/customers/RewardPoints",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/customers/RewardPoints.md",
+    "status": "Stub"
+  },
+  {
+    "page": "RewardPointsChanges",
+    "module": "ui-prototype",
+    "menu": "customers",
+    "url": "/prototype/customers/RewardPointsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/customers/RewardPointsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "RewardPointsReview",
+    "module": "ui-prototype",
+    "menu": "customers",
+    "url": "/prototype/customers/RewardPointsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/customers/RewardPointsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SavedCarts",
+    "module": "ui-prototype",
+    "menu": "customers",
+    "url": "/prototype/customers/SavedCarts",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/customers/SavedCarts.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SavedCartsChanges",
+    "module": "ui-prototype",
+    "menu": "customers",
+    "url": "/prototype/customers/SavedCartsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/customers/SavedCartsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SavedCartsReview",
+    "module": "ui-prototype",
+    "menu": "customers",
+    "url": "/prototype/customers/SavedCartsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/customers/SavedCartsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Wishlists",
+    "module": "ui-prototype",
+    "menu": "customers",
+    "url": "/prototype/customers/Wishlists",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/customers/Wishlists.md",
+    "status": "Stub"
+  },
+  {
+    "page": "WishlistsChanges",
+    "module": "ui-prototype",
+    "menu": "customers",
+    "url": "/prototype/customers/WishlistsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/customers/WishlistsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "WishlistsReview",
+    "module": "ui-prototype",
+    "menu": "customers",
+    "url": "/prototype/customers/WishlistsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/customers/WishlistsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CustomerAnalytics",
+    "module": "ui-prototype",
+    "menu": "dashboard",
+    "url": "/prototype/dashboard/CustomerAnalytics",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/dashboard/CustomerAnalytics.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CustomerAnalyticsChanges",
+    "module": "ui-prototype",
+    "menu": "dashboard",
+    "url": "/prototype/dashboard/CustomerAnalyticsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/dashboard/CustomerAnalyticsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CustomerAnalyticsReview",
+    "module": "ui-prototype",
+    "menu": "dashboard",
+    "url": "/prototype/dashboard/CustomerAnalyticsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/dashboard/CustomerAnalyticsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "InventoryAlerts",
+    "module": "ui-prototype",
+    "menu": "dashboard",
+    "url": "/prototype/dashboard/InventoryAlerts",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/dashboard/InventoryAlerts.md",
+    "status": "Stub"
+  },
+  {
+    "page": "InventoryAlertsChanges",
+    "module": "ui-prototype",
+    "menu": "dashboard",
+    "url": "/prototype/dashboard/InventoryAlertsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/dashboard/InventoryAlertsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "InventoryAlertsReview",
+    "module": "ui-prototype",
+    "menu": "dashboard",
+    "url": "/prototype/dashboard/InventoryAlertsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/dashboard/InventoryAlertsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Overview",
+    "module": "ui-prototype",
+    "menu": "dashboard",
+    "url": "/prototype/dashboard/Overview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/dashboard/Overview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "OverviewChanges",
+    "module": "ui-prototype",
+    "menu": "dashboard",
+    "url": "/prototype/dashboard/OverviewChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/dashboard/OverviewChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "OverviewReview",
+    "module": "ui-prototype",
+    "menu": "dashboard",
+    "url": "/prototype/dashboard/OverviewReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/dashboard/OverviewReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ProductAnalytics",
+    "module": "ui-prototype",
+    "menu": "dashboard",
+    "url": "/prototype/dashboard/ProductAnalytics",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/dashboard/ProductAnalytics.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ProductAnalyticsChanges",
+    "module": "ui-prototype",
+    "menu": "dashboard",
+    "url": "/prototype/dashboard/ProductAnalyticsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/dashboard/ProductAnalyticsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ProductAnalyticsReview",
+    "module": "ui-prototype",
+    "menu": "dashboard",
+    "url": "/prototype/dashboard/ProductAnalyticsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/dashboard/ProductAnalyticsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "RecentOrders",
+    "module": "ui-prototype",
+    "menu": "dashboard",
+    "url": "/prototype/dashboard/RecentOrders",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/dashboard/RecentOrders.md",
+    "status": "Stub"
+  },
+  {
+    "page": "RecentOrdersChanges",
+    "module": "ui-prototype",
+    "menu": "dashboard",
+    "url": "/prototype/dashboard/RecentOrdersChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/dashboard/RecentOrdersChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "RecentOrdersReview",
+    "module": "ui-prototype",
+    "menu": "dashboard",
+    "url": "/prototype/dashboard/RecentOrdersReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/dashboard/RecentOrdersReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "RevenueAnalytics",
+    "module": "ui-prototype",
+    "menu": "dashboard",
+    "url": "/prototype/dashboard/RevenueAnalytics",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/dashboard/RevenueAnalytics.md",
+    "status": "Stub"
+  },
+  {
+    "page": "RevenueAnalyticsChanges",
+    "module": "ui-prototype",
+    "menu": "dashboard",
+    "url": "/prototype/dashboard/RevenueAnalyticsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/dashboard/RevenueAnalyticsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "RevenueAnalyticsReview",
+    "module": "ui-prototype",
+    "menu": "dashboard",
+    "url": "/prototype/dashboard/RevenueAnalyticsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/dashboard/RevenueAnalyticsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SalesAnalytics",
+    "module": "ui-prototype",
+    "menu": "dashboard",
+    "url": "/prototype/dashboard/SalesAnalytics",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/dashboard/SalesAnalytics.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SalesAnalyticsChanges",
+    "module": "ui-prototype",
+    "menu": "dashboard",
+    "url": "/prototype/dashboard/SalesAnalyticsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/dashboard/SalesAnalyticsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SalesAnalyticsReview",
+    "module": "ui-prototype",
+    "menu": "dashboard",
+    "url": "/prototype/dashboard/SalesAnalyticsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/dashboard/SalesAnalyticsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "LowStockAlerts",
+    "module": "ui-prototype",
+    "menu": "inventory",
+    "url": "/prototype/inventory/LowStockAlerts",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/inventory/LowStockAlerts.md",
+    "status": "Stub"
+  },
+  {
+    "page": "LowStockAlertsChanges",
+    "module": "ui-prototype",
+    "menu": "inventory",
+    "url": "/prototype/inventory/LowStockAlertsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/inventory/LowStockAlertsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "LowStockAlertsReview",
+    "module": "ui-prototype",
+    "menu": "inventory",
+    "url": "/prototype/inventory/LowStockAlertsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/inventory/LowStockAlertsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "PurchaseSuggestions",
+    "module": "ui-prototype",
+    "menu": "inventory",
+    "url": "/prototype/inventory/PurchaseSuggestions",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/inventory/PurchaseSuggestions.md",
+    "status": "Stub"
+  },
+  {
+    "page": "PurchaseSuggestionsChanges",
+    "module": "ui-prototype",
+    "menu": "inventory",
+    "url": "/prototype/inventory/PurchaseSuggestionsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/inventory/PurchaseSuggestionsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "PurchaseSuggestionsReview",
+    "module": "ui-prototype",
+    "menu": "inventory",
+    "url": "/prototype/inventory/PurchaseSuggestionsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/inventory/PurchaseSuggestionsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "StockAdjustment",
+    "module": "ui-prototype",
+    "menu": "inventory",
+    "url": "/prototype/inventory/StockAdjustment",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/inventory/StockAdjustment.md",
+    "status": "Stub"
+  },
+  {
+    "page": "StockAdjustmentChanges",
+    "module": "ui-prototype",
+    "menu": "inventory",
+    "url": "/prototype/inventory/StockAdjustmentChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/inventory/StockAdjustmentChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "StockAdjustmentReview",
+    "module": "ui-prototype",
+    "menu": "inventory",
+    "url": "/prototype/inventory/StockAdjustmentReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/inventory/StockAdjustmentReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "StockManagement",
+    "module": "ui-prototype",
+    "menu": "inventory",
+    "url": "/prototype/inventory/StockManagement",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/inventory/StockManagement.md",
+    "status": "Stub"
+  },
+  {
+    "page": "StockManagementChanges",
+    "module": "ui-prototype",
+    "menu": "inventory",
+    "url": "/prototype/inventory/StockManagementChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/inventory/StockManagementChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "StockManagementReview",
+    "module": "ui-prototype",
+    "menu": "inventory",
+    "url": "/prototype/inventory/StockManagementReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/inventory/StockManagementReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "StockTransfer",
+    "module": "ui-prototype",
+    "menu": "inventory",
+    "url": "/prototype/inventory/StockTransfer",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/inventory/StockTransfer.md",
+    "status": "Stub"
+  },
+  {
+    "page": "StockTransferChanges",
+    "module": "ui-prototype",
+    "menu": "inventory",
+    "url": "/prototype/inventory/StockTransferChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/inventory/StockTransferChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "StockTransferReview",
+    "module": "ui-prototype",
+    "menu": "inventory",
+    "url": "/prototype/inventory/StockTransferReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/inventory/StockTransferReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SupplierStockFeed",
+    "module": "ui-prototype",
+    "menu": "inventory",
+    "url": "/prototype/inventory/SupplierStockFeed",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/inventory/SupplierStockFeed.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SupplierStockFeedChanges",
+    "module": "ui-prototype",
+    "menu": "inventory",
+    "url": "/prototype/inventory/SupplierStockFeedChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/inventory/SupplierStockFeedChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SupplierStockFeedReview",
+    "module": "ui-prototype",
+    "menu": "inventory",
+    "url": "/prototype/inventory/SupplierStockFeedReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/inventory/SupplierStockFeedReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Warehouses",
+    "module": "ui-prototype",
+    "menu": "inventory",
+    "url": "/prototype/inventory/Warehouses",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/inventory/Warehouses.md",
+    "status": "Stub"
+  },
+  {
+    "page": "WarehousesChanges",
+    "module": "ui-prototype",
+    "menu": "inventory",
+    "url": "/prototype/inventory/WarehousesChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/inventory/WarehousesChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "WarehousesReview",
+    "module": "ui-prototype",
+    "menu": "inventory",
+    "url": "/prototype/inventory/WarehousesReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/inventory/WarehousesReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Boms",
+    "module": "ui-prototype",
+    "menu": "manufacturing",
+    "url": "/prototype/manufacturing/Boms",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/manufacturing/Boms.md",
+    "status": "Stub"
+  },
+  {
+    "page": "MANUFACTURING_UI_BUILD_GUIDE",
+    "module": "ui-prototype",
+    "menu": "manufacturing",
+    "url": "/prototype/manufacturing/MANUFACTURING_UI_BUILD_GUIDE",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/manufacturing/MANUFACTURING_UI_BUILD_GUIDE.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Mrp",
+    "module": "ui-prototype",
+    "menu": "manufacturing",
+    "url": "/prototype/manufacturing/Mrp",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/manufacturing/Mrp.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Routings",
+    "module": "ui-prototype",
+    "menu": "manufacturing",
+    "url": "/prototype/manufacturing/Routings",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/manufacturing/Routings.md",
+    "status": "Stub"
+  },
+  {
+    "page": "WorkCenters",
+    "module": "ui-prototype",
+    "menu": "manufacturing",
+    "url": "/prototype/manufacturing/WorkCenters",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/manufacturing/WorkCenters.md",
+    "status": "Stub"
+  },
+  {
+    "page": "WorkOrders",
+    "module": "ui-prototype",
+    "menu": "manufacturing",
+    "url": "/prototype/manufacturing/WorkOrders",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/manufacturing/WorkOrders.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AbandonedCartRecovery",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/AbandonedCartRecovery",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/AbandonedCartRecovery.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AbandonedCartRecoveryChanges",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/AbandonedCartRecoveryChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/AbandonedCartRecoveryChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AbandonedCartRecoveryReview",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/AbandonedCartRecoveryReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/AbandonedCartRecoveryReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AffiliateProgram",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/AffiliateProgram",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/AffiliateProgram.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AffiliateProgramChanges",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/AffiliateProgramChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/AffiliateProgramChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AffiliateProgramReview",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/AffiliateProgramReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/AffiliateProgramReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CampaignManager",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/CampaignManager",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/CampaignManager.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CampaignManagerChanges",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/CampaignManagerChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/CampaignManagerChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CampaignManagerReview",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/CampaignManagerReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/CampaignManagerReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Coupons",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/Coupons",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/Coupons.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CouponsChanges",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/CouponsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/CouponsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CouponsReview",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/CouponsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/CouponsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "EmailMarketing",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/EmailMarketing",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/EmailMarketing.md",
+    "status": "Stub"
+  },
+  {
+    "page": "EmailMarketingChanges",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/EmailMarketingChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/EmailMarketingChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "EmailMarketingReview",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/EmailMarketingReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/EmailMarketingReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "FLASH_SALES_ADMIN",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/FLASH_SALES_ADMIN",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/FLASH_SALES_ADMIN.md",
+    "status": "Stub"
+  },
+  {
+    "page": "FlashSales",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/FlashSales",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/FlashSales.md",
+    "status": "Stub"
+  },
+  {
+    "page": "FlashSalesChanges",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/FlashSalesChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/FlashSalesChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "FlashSalesReview",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/FlashSalesReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/FlashSalesReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "LoyaltyProgram",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/LoyaltyProgram",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/LoyaltyProgram.md",
+    "status": "Stub"
+  },
+  {
+    "page": "LoyaltyProgramChanges",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/LoyaltyProgramChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/LoyaltyProgramChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "LoyaltyProgramReview",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/LoyaltyProgramReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/LoyaltyProgramReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "MARKETING_PROTOTYPE_DEV",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/MARKETING_PROTOTYPE_DEV",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/MARKETING_PROTOTYPE_DEV.md",
+    "status": "Stub"
+  },
+  {
+    "page": "PROMOTIONS_ADMIN",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/PROMOTIONS_ADMIN",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/PROMOTIONS_ADMIN.md",
+    "status": "Stub"
+  },
+  {
+    "page": "PopupManager",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/PopupManager",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/PopupManager.md",
+    "status": "Stub"
+  },
+  {
+    "page": "PopupManagerChanges",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/PopupManagerChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/PopupManagerChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "PopupManagerReview",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/PopupManagerReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/PopupManagerReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Promotions",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/Promotions",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/Promotions.md",
+    "status": "Stub"
+  },
+  {
+    "page": "PromotionsChanges",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/PromotionsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/PromotionsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "PromotionsReview",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/PromotionsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/PromotionsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "PushNotifications",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/PushNotifications",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/PushNotifications.md",
+    "status": "Stub"
+  },
+  {
+    "page": "PushNotificationsChanges",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/PushNotificationsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/PushNotificationsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "PushNotificationsReview",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/PushNotificationsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/PushNotificationsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ReferralProgram",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/ReferralProgram",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/ReferralProgram.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ReferralProgramChanges",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/ReferralProgramChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/ReferralProgramChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ReferralProgramReview",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/ReferralProgramReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/ReferralProgramReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SPECIAL_OFFERS_ADMIN",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/SPECIAL_OFFERS_ADMIN",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/SPECIAL_OFFERS_ADMIN.md",
+    "status": "Stub"
+  },
+  {
+    "page": "STOREFRONT_OFFERS_DEV",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/STOREFRONT_OFFERS_DEV",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/STOREFRONT_OFFERS_DEV.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SmsMarketing",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/SmsMarketing",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/SmsMarketing.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SmsMarketingChanges",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/SmsMarketingChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/SmsMarketingChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SmsMarketingReview",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/SmsMarketingReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/SmsMarketingReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SpecialOffers",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/SpecialOffers",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/SpecialOffers.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SpecialOffersChanges",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/SpecialOffersChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/SpecialOffersChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SpecialOffersReview",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/SpecialOffersReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/SpecialOffersReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Vouchers",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/Vouchers",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/Vouchers.md",
+    "status": "Stub"
+  },
+  {
+    "page": "VouchersChanges",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/VouchersChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/VouchersChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "VouchersReview",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/VouchersReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/VouchersReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "WhatsappMarketing",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/WhatsappMarketing",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/WhatsappMarketing.md",
+    "status": "Stub"
+  },
+  {
+    "page": "WhatsappMarketingChanges",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/WhatsappMarketingChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/WhatsappMarketingChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "WhatsappMarketingReview",
+    "module": "ui-prototype",
+    "menu": "marketing",
+    "url": "/prototype/marketing/WhatsappMarketingReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/marketing/WhatsappMarketingReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CdnManager",
+    "module": "ui-prototype",
+    "menu": "media",
+    "url": "/prototype/media/CdnManager",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/media/CdnManager.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CdnManagerChanges",
+    "module": "ui-prototype",
+    "menu": "media",
+    "url": "/prototype/media/CdnManagerChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/media/CdnManagerChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CdnManagerReview",
+    "module": "ui-prototype",
+    "menu": "media",
+    "url": "/prototype/media/CdnManagerReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/media/CdnManagerReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Documents",
+    "module": "ui-prototype",
+    "menu": "media",
+    "url": "/prototype/media/Documents",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/media/Documents.md",
+    "status": "Stub"
+  },
+  {
+    "page": "DocumentsChanges",
+    "module": "ui-prototype",
+    "menu": "media",
+    "url": "/prototype/media/DocumentsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/media/DocumentsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "DocumentsReview",
+    "module": "ui-prototype",
+    "menu": "media",
+    "url": "/prototype/media/DocumentsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/media/DocumentsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Folders",
+    "module": "ui-prototype",
+    "menu": "media",
+    "url": "/prototype/media/Folders",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/media/Folders.md",
+    "status": "Stub"
+  },
+  {
+    "page": "FoldersChanges",
+    "module": "ui-prototype",
+    "menu": "media",
+    "url": "/prototype/media/FoldersChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/media/FoldersChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "FoldersReview",
+    "module": "ui-prototype",
+    "menu": "media",
+    "url": "/prototype/media/FoldersReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/media/FoldersReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ImageOptimizer",
+    "module": "ui-prototype",
+    "menu": "media",
+    "url": "/prototype/media/ImageOptimizer",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/media/ImageOptimizer.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ImageOptimizerChanges",
+    "module": "ui-prototype",
+    "menu": "media",
+    "url": "/prototype/media/ImageOptimizerChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/media/ImageOptimizerChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ImageOptimizerReview",
+    "module": "ui-prototype",
+    "menu": "media",
+    "url": "/prototype/media/ImageOptimizerReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/media/ImageOptimizerReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Images",
+    "module": "ui-prototype",
+    "menu": "media",
+    "url": "/prototype/media/Images",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/media/Images.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ImagesChanges",
+    "module": "ui-prototype",
+    "menu": "media",
+    "url": "/prototype/media/ImagesChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/media/ImagesChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ImagesReview",
+    "module": "ui-prototype",
+    "menu": "media",
+    "url": "/prototype/media/ImagesReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/media/ImagesReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "MEDIA_ID_REFERENCES",
+    "module": "ui-prototype",
+    "menu": "media",
+    "url": "/prototype/media/MEDIA_ID_REFERENCES",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/media/MEDIA_ID_REFERENCES.md",
+    "status": "Stub"
+  },
+  {
+    "page": "MediaLibrary",
+    "module": "ui-prototype",
+    "menu": "media",
+    "url": "/prototype/media/MediaLibrary",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/media/MediaLibrary.md",
+    "status": "Stub"
+  },
+  {
+    "page": "MediaLibraryChanges",
+    "module": "ui-prototype",
+    "menu": "media",
+    "url": "/prototype/media/MediaLibraryChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/media/MediaLibraryChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "MediaLibraryReview",
+    "module": "ui-prototype",
+    "menu": "media",
+    "url": "/prototype/media/MediaLibraryReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/media/MediaLibraryReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Videos",
+    "module": "ui-prototype",
+    "menu": "media",
+    "url": "/prototype/media/Videos",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/media/Videos.md",
+    "status": "Stub"
+  },
+  {
+    "page": "VideosChanges",
+    "module": "ui-prototype",
+    "menu": "media",
+    "url": "/prototype/media/VideosChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/media/VideosChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "VideosReview",
+    "module": "ui-prototype",
+    "menu": "media",
+    "url": "/prototype/media/VideosReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/media/VideosReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "WatermarkManager",
+    "module": "ui-prototype",
+    "menu": "media",
+    "url": "/prototype/media/WatermarkManager",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/media/WatermarkManager.md",
+    "status": "Stub"
+  },
+  {
+    "page": "WatermarkManagerChanges",
+    "module": "ui-prototype",
+    "menu": "media",
+    "url": "/prototype/media/WatermarkManagerChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/media/WatermarkManagerChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "WatermarkManagerReview",
+    "module": "ui-prototype",
+    "menu": "media",
+    "url": "/prototype/media/WatermarkManagerReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/media/WatermarkManagerReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AbandonedCarts",
+    "module": "ui-prototype",
+    "menu": "orders",
+    "url": "/prototype/orders/AbandonedCarts",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/orders/AbandonedCarts.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AbandonedCartsChanges",
+    "module": "ui-prototype",
+    "menu": "orders",
+    "url": "/prototype/orders/AbandonedCartsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/orders/AbandonedCartsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AbandonedCartsReview",
+    "module": "ui-prototype",
+    "menu": "orders",
+    "url": "/prototype/orders/AbandonedCartsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/orders/AbandonedCartsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Invoices",
+    "module": "ui-prototype",
+    "menu": "orders",
+    "url": "/prototype/orders/Invoices",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/orders/Invoices.md",
+    "status": "Stub"
+  },
+  {
+    "page": "InvoicesChanges",
+    "module": "ui-prototype",
+    "menu": "orders",
+    "url": "/prototype/orders/InvoicesChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/orders/InvoicesChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "InvoicesReview",
+    "module": "ui-prototype",
+    "menu": "orders",
+    "url": "/prototype/orders/InvoicesReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/orders/InvoicesReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "OrderStatus",
+    "module": "ui-prototype",
+    "menu": "orders",
+    "url": "/prototype/orders/OrderStatus",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/orders/OrderStatus.md",
+    "status": "Stub"
+  },
+  {
+    "page": "OrderStatusChanges",
+    "module": "ui-prototype",
+    "menu": "orders",
+    "url": "/prototype/orders/OrderStatusChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/orders/OrderStatusChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "OrderStatusReview",
+    "module": "ui-prototype",
+    "menu": "orders",
+    "url": "/prototype/orders/OrderStatusReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/orders/OrderStatusReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Orders",
+    "module": "ui-prototype",
+    "menu": "orders",
+    "url": "/prototype/orders/Orders",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/orders/Orders.md",
+    "status": "Stub"
+  },
+  {
+    "page": "OrdersChanges",
+    "module": "ui-prototype",
+    "menu": "orders",
+    "url": "/prototype/orders/OrdersChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/orders/OrdersChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "OrdersReview",
+    "module": "ui-prototype",
+    "menu": "orders",
+    "url": "/prototype/orders/OrdersReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/orders/OrdersReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Quotations",
+    "module": "ui-prototype",
+    "menu": "orders",
+    "url": "/prototype/orders/Quotations",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/orders/Quotations.md",
+    "status": "Stub"
+  },
+  {
+    "page": "QuotationsChanges",
+    "module": "ui-prototype",
+    "menu": "orders",
+    "url": "/prototype/orders/QuotationsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/orders/QuotationsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "QuotationsReview",
+    "module": "ui-prototype",
+    "menu": "orders",
+    "url": "/prototype/orders/QuotationsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/orders/QuotationsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Refunds",
+    "module": "ui-prototype",
+    "menu": "orders",
+    "url": "/prototype/orders/Refunds",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/orders/Refunds.md",
+    "status": "Stub"
+  },
+  {
+    "page": "RefundsChanges",
+    "module": "ui-prototype",
+    "menu": "orders",
+    "url": "/prototype/orders/RefundsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/orders/RefundsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "RefundsReview",
+    "module": "ui-prototype",
+    "menu": "orders",
+    "url": "/prototype/orders/RefundsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/orders/RefundsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Returns",
+    "module": "ui-prototype",
+    "menu": "orders",
+    "url": "/prototype/orders/Returns",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/orders/Returns.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ReturnsChanges",
+    "module": "ui-prototype",
+    "menu": "orders",
+    "url": "/prototype/orders/ReturnsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/orders/ReturnsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ReturnsReview",
+    "module": "ui-prototype",
+    "menu": "orders",
+    "url": "/prototype/orders/ReturnsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/orders/ReturnsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Transactions",
+    "module": "ui-prototype",
+    "menu": "orders",
+    "url": "/prototype/orders/Transactions",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/orders/Transactions.md",
+    "status": "Stub"
+  },
+  {
+    "page": "TransactionsChanges",
+    "module": "ui-prototype",
+    "menu": "orders",
+    "url": "/prototype/orders/TransactionsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/orders/TransactionsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "TransactionsReview",
+    "module": "ui-prototype",
+    "menu": "orders",
+    "url": "/prototype/orders/TransactionsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/orders/TransactionsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AIApprovalCenter",
+    "module": "ui-prototype",
+    "menu": "platform",
+    "url": "/prototype/platform/AIApprovalCenter",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/platform/AIApprovalCenter.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AIApprovalCenterChanges",
+    "module": "ui-prototype",
+    "menu": "platform",
+    "url": "/prototype/platform/AIApprovalCenterChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/platform/AIApprovalCenterChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AIApprovalCenterReview",
+    "module": "ui-prototype",
+    "menu": "platform",
+    "url": "/prototype/platform/AIApprovalCenterReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/platform/AIApprovalCenterReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AIUsageDashboard",
+    "module": "ui-prototype",
+    "menu": "platform",
+    "url": "/prototype/platform/AIUsageDashboard",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/platform/AIUsageDashboard.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AIUsageDashboardChanges",
+    "module": "ui-prototype",
+    "menu": "platform",
+    "url": "/prototype/platform/AIUsageDashboardChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/platform/AIUsageDashboardChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AIUsageDashboardReview",
+    "module": "ui-prototype",
+    "menu": "platform",
+    "url": "/prototype/platform/AIUsageDashboardReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/platform/AIUsageDashboardReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "BillingOverview",
+    "module": "ui-prototype",
+    "menu": "platform",
+    "url": "/prototype/platform/BillingOverview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/platform/BillingOverview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "BillingOverviewChanges",
+    "module": "ui-prototype",
+    "menu": "platform",
+    "url": "/prototype/platform/BillingOverviewChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/platform/BillingOverviewChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "BillingOverviewReview",
+    "module": "ui-prototype",
+    "menu": "platform",
+    "url": "/prototype/platform/BillingOverviewReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/platform/BillingOverviewReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "PlanManagement",
+    "module": "ui-prototype",
+    "menu": "platform",
+    "url": "/prototype/platform/PlanManagement",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/platform/PlanManagement.md",
+    "status": "Stub"
+  },
+  {
+    "page": "PlanManagementChanges",
+    "module": "ui-prototype",
+    "menu": "platform",
+    "url": "/prototype/platform/PlanManagementChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/platform/PlanManagementChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "PlanManagementReview",
+    "module": "ui-prototype",
+    "menu": "platform",
+    "url": "/prototype/platform/PlanManagementReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/platform/PlanManagementReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "RevenueDashboard",
+    "module": "ui-prototype",
+    "menu": "platform",
+    "url": "/prototype/platform/RevenueDashboard",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/platform/RevenueDashboard.md",
+    "status": "Stub"
+  },
+  {
+    "page": "RevenueDashboardChanges",
+    "module": "ui-prototype",
+    "menu": "platform",
+    "url": "/prototype/platform/RevenueDashboardChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/platform/RevenueDashboardChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "RevenueDashboardReview",
+    "module": "ui-prototype",
+    "menu": "platform",
+    "url": "/prototype/platform/RevenueDashboardReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/platform/RevenueDashboardReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "TenantList",
+    "module": "ui-prototype",
+    "menu": "platform",
+    "url": "/prototype/platform/TenantList",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/platform/TenantList.md",
+    "status": "Stub"
+  },
+  {
+    "page": "TenantListChanges",
+    "module": "ui-prototype",
+    "menu": "platform",
+    "url": "/prototype/platform/TenantListChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/platform/TenantListChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "TenantListReview",
+    "module": "ui-prototype",
+    "menu": "platform",
+    "url": "/prototype/platform/TenantListReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/platform/TenantListReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "TenantOverview",
+    "module": "ui-prototype",
+    "menu": "platform",
+    "url": "/prototype/platform/TenantOverview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/platform/TenantOverview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "TenantOverviewChanges",
+    "module": "ui-prototype",
+    "menu": "platform",
+    "url": "/prototype/platform/TenantOverviewChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/platform/TenantOverviewChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "TenantOverviewReview",
+    "module": "ui-prototype",
+    "menu": "platform",
+    "url": "/prototype/platform/TenantOverviewReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/platform/TenantOverviewReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "UsageDashboard",
+    "module": "ui-prototype",
+    "menu": "platform",
+    "url": "/prototype/platform/UsageDashboard",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/platform/UsageDashboard.md",
+    "status": "Stub"
+  },
+  {
+    "page": "UsageDashboardChanges",
+    "module": "ui-prototype",
+    "menu": "platform",
+    "url": "/prototype/platform/UsageDashboardChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/platform/UsageDashboardChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "UsageDashboardReview",
+    "module": "ui-prototype",
+    "menu": "platform",
+    "url": "/prototype/platform/UsageDashboardReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/platform/UsageDashboardReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "BankEmi",
+    "module": "ui-prototype",
+    "menu": "plugins",
+    "url": "/prototype/plugins/BankEmi",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/plugins/BankEmi.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ADMIN_COMPATIBILITY_UX",
+    "module": "ui-prototype",
+    "menu": "product-configurator",
+    "url": "/prototype/product-configurator/ADMIN_COMPATIBILITY_UX",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/product-configurator/ADMIN_COMPATIBILITY_UX.md",
+    "status": "Stub"
+  },
+  {
+    "page": "PC_BUILDER_UX_BLUEPRINT",
+    "module": "ui-prototype",
+    "menu": "product-configurator",
+    "url": "/prototype/product-configurator/PC_BUILDER_UX_BLUEPRINT",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/product-configurator/PC_BUILDER_UX_BLUEPRINT.md",
+    "status": "Stub"
+  },
+  {
+    "page": "PROJECT",
+    "module": "ui-prototype",
+    "menu": "product-configurator",
+    "url": "/prototype/product-configurator/PROJECT",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/product-configurator/PROJECT.md",
+    "status": "Stub"
+  },
+  {
+    "page": "WOOTWARE_BUILDER_STUDY",
+    "module": "ui-prototype",
+    "menu": "product-configurator",
+    "url": "/prototype/product-configurator/WOOTWARE_BUILDER_STUDY",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/product-configurator/WOOTWARE_BUILDER_STUDY.md",
+    "status": "Stub"
+  },
+  {
+    "page": "GoodsReceipts",
+    "module": "ui-prototype",
+    "menu": "purchase",
+    "url": "/prototype/purchase/GoodsReceipts",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/purchase/GoodsReceipts.md",
+    "status": "Stub"
+  },
+  {
+    "page": "PURCHASE_UI_BUILD_GUIDE",
+    "module": "ui-prototype",
+    "menu": "purchase",
+    "url": "/prototype/purchase/PURCHASE_UI_BUILD_GUIDE",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/purchase/PURCHASE_UI_BUILD_GUIDE.md",
+    "status": "Stub"
+  },
+  {
+    "page": "PurchaseOrders",
+    "module": "ui-prototype",
+    "menu": "purchase",
+    "url": "/prototype/purchase/PurchaseOrders",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/purchase/PurchaseOrders.md",
+    "status": "Stub"
+  },
+  {
+    "page": "RfqQuotations",
+    "module": "ui-prototype",
+    "menu": "purchase",
+    "url": "/prototype/purchase/RfqQuotations",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/purchase/RfqQuotations.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SUPPLIERS_IMPLEMENTED_DESIGN",
+    "module": "ui-prototype",
+    "menu": "purchase",
+    "url": "/prototype/purchase/SUPPLIERS_IMPLEMENTED_DESIGN",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/purchase/SUPPLIERS_IMPLEMENTED_DESIGN.md",
+    "status": "Stub"
+  },
+  {
+    "page": "VendorBills",
+    "module": "ui-prototype",
+    "menu": "purchase",
+    "url": "/prototype/purchase/VendorBills",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/purchase/VendorBills.md",
+    "status": "Stub"
+  },
+  {
+    "page": "VendorReturns",
+    "module": "ui-prototype",
+    "menu": "purchase",
+    "url": "/prototype/purchase/VendorReturns",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/purchase/VendorReturns.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AffiliateReports",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/AffiliateReports",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/AffiliateReports.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AffiliateReportsChanges",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/AffiliateReportsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/AffiliateReportsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AffiliateReportsReview",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/AffiliateReportsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/AffiliateReportsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiReports",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/AiReports",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/AiReports.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiReportsChanges",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/AiReportsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/AiReportsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AiReportsReview",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/AiReportsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/AiReportsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "BrandReports",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/BrandReports",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/BrandReports.md",
+    "status": "Stub"
+  },
+  {
+    "page": "BrandReportsChanges",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/BrandReportsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/BrandReportsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "BrandReportsReview",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/BrandReportsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/BrandReportsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CategoryReports",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/CategoryReports",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/CategoryReports.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CategoryReportsChanges",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/CategoryReportsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/CategoryReportsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CategoryReportsReview",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/CategoryReportsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/CategoryReportsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CustomerReports",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/CustomerReports",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/CustomerReports.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CustomerReportsChanges",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/CustomerReportsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/CustomerReportsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "CustomerReportsReview",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/CustomerReportsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/CustomerReportsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "InventoryReports",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/InventoryReports",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/InventoryReports.md",
+    "status": "Stub"
+  },
+  {
+    "page": "InventoryReportsChanges",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/InventoryReportsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/InventoryReportsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "InventoryReportsReview",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/InventoryReportsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/InventoryReportsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "MarketingReports",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/MarketingReports",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/MarketingReports.md",
+    "status": "Stub"
+  },
+  {
+    "page": "MarketingReportsChanges",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/MarketingReportsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/MarketingReportsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "MarketingReportsReview",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/MarketingReportsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/MarketingReportsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ProductReports",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/ProductReports",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/ProductReports.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ProductReportsChanges",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/ProductReportsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/ProductReportsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ProductReportsReview",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/ProductReportsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/ProductReportsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ProfitReports",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/ProfitReports",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/ProfitReports.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ProfitReportsChanges",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/ProfitReportsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/ProfitReportsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ProfitReportsReview",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/ProfitReportsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/ProfitReportsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ReturnReports",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/ReturnReports",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/ReturnReports.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ReturnReportsChanges",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/ReturnReportsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/ReturnReportsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "ReturnReportsReview",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/ReturnReportsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/ReturnReportsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SalesReports",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/SalesReports",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/SalesReports.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SalesReportsChanges",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/SalesReportsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/SalesReportsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SalesReportsReview",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/SalesReportsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/SalesReportsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SeoReports",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/SeoReports",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/SeoReports.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SeoReportsChanges",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/SeoReportsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/SeoReportsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SeoReportsReview",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/SeoReportsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/SeoReportsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "TaxReports",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/TaxReports",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/TaxReports.md",
+    "status": "Stub"
+  },
+  {
+    "page": "TaxReportsChanges",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/TaxReportsChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/TaxReportsChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "TaxReportsReview",
+    "module": "ui-prototype",
+    "menu": "reports",
+    "url": "/prototype/reports/TaxReportsReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/reports/TaxReportsReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "BrokenLinkChecker",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/BrokenLinkChecker",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/BrokenLinkChecker.md",
+    "status": "Stub"
+  },
+  {
+    "page": "BrokenLinkCheckerChanges",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/BrokenLinkCheckerChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/BrokenLinkCheckerChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "BrokenLinkCheckerReview",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/BrokenLinkCheckerReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/BrokenLinkCheckerReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "InternalLinking",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/InternalLinking",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/InternalLinking.md",
+    "status": "Stub"
+  },
+  {
+    "page": "InternalLinkingChanges",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/InternalLinkingChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/InternalLinkingChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "InternalLinkingReview",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/InternalLinkingReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/InternalLinkingReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "KeywordTracking",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/KeywordTracking",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/KeywordTracking.md",
+    "status": "Stub"
+  },
+  {
+    "page": "KeywordTrackingChanges",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/KeywordTrackingChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/KeywordTrackingChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "KeywordTrackingReview",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/KeywordTrackingReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/KeywordTrackingReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "MetaManager",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/MetaManager",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/MetaManager.md",
+    "status": "Stub"
+  },
+  {
+    "page": "MetaManagerChanges",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/MetaManagerChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/MetaManagerChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "MetaManagerReview",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/MetaManagerReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/MetaManagerReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "RedirectManager",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/RedirectManager",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/RedirectManager.md",
+    "status": "Stub"
+  },
+  {
+    "page": "RedirectManagerChanges",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/RedirectManagerChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/RedirectManagerChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "RedirectManagerReview",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/RedirectManagerReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/RedirectManagerReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "RobotsManager",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/RobotsManager",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/RobotsManager.md",
+    "status": "Stub"
+  },
+  {
+    "page": "RobotsManagerChanges",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/RobotsManagerChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/RobotsManagerChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "RobotsManagerReview",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/RobotsManagerReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/RobotsManagerReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SchemaManager",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/SchemaManager",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/SchemaManager.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SchemaManagerChanges",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/SchemaManagerChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/SchemaManagerChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SchemaManagerReview",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/SchemaManagerReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/SchemaManagerReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SeoAudit",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/SeoAudit",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/SeoAudit.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SeoAuditChanges",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/SeoAuditChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/SeoAuditChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SeoAuditReview",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/SeoAuditReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/SeoAuditReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SeoDashboard",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/SeoDashboard",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/SeoDashboard.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SeoDashboardChanges",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/SeoDashboardChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/SeoDashboardChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SeoDashboardReview",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/SeoDashboardReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/SeoDashboardReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SitemapManager",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/SitemapManager",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/SitemapManager.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SitemapManagerChanges",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/SitemapManagerChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/SitemapManagerChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "SitemapManagerReview",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/SitemapManagerReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/SitemapManagerReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "UrlManager",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/UrlManager",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/UrlManager.md",
+    "status": "Stub"
+  },
+  {
+    "page": "UrlManagerChanges",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/UrlManagerChanges",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/UrlManagerChanges.md",
+    "status": "Stub"
+  },
+  {
+    "page": "UrlManagerReview",
+    "module": "ui-prototype",
+    "menu": "seo",
+    "url": "/prototype/seo/UrlManagerReview",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/seo/UrlManagerReview.md",
+    "status": "Stub"
+  },
+  {
+    "page": "AI_SETTINGS_DEV",
+    "module": "ui-prototype",
+    "menu": "settings",
+    "url": "/prototype/settings/AI_SETTINGS_DEV",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/settings/AI_SETTINGS_DEV.md",
+    "status": "Stub"
+  },
+  {
+    "page": "BusinessSettings",
+    "module": "ui-prototype",
+    "menu": "settings",
+    "url": "/prototype/settings/BusinessSettings",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/settings/BusinessSettings.md",
+    "status": "Stub"
+  },
+  {
+    "page": "Plugins",
+    "module": "ui-prototype",
+    "menu": "settings",
+    "url": "/prototype/settings/Plugins",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/settings/Plugins.md",
+    "status": "Stub"
+  },
+  {
+    "page": "IMPLEMENTED_DESIGN",
+    "module": "ui-prototype",
+    "menu": "storefront",
+    "url": "/prototype/storefront/IMPLEMENTED_DESIGN",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/storefront/IMPLEMENTED_DESIGN.md",
+    "status": "Stub"
+  },
+  {
+    "page": "URL_SLUG_MANAGEMENT",
+    "module": "ui-prototype",
+    "menu": "storefront",
+    "url": "/prototype/storefront/URL_SLUG_MANAGEMENT",
+    "permissions": "prototype.access",
+    "doc_path": "04-uiux/prototype/storefront/URL_SLUG_MANAGEMENT.md",
+    "status": "Stub"
+  }
+]

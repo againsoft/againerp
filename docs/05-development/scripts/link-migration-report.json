@@ -1,0 +1,318 @@
+{
+  "dry_run": false,
+  "files_modified": 609,
+  "links_fixed": 3797,
+  "files_skipped": 255,
+  "before": {
+    "checked": 8264,
+    "broken": 3356
+  },
+  "after": {
+    "checked": 8264,
+    "broken": 3879
+  },
+  "modified_files": [
+    "00-foundation/CHANGELOG.md",
+    "00-foundation/GOVERNANCE.md",
+    "00-foundation/MASTER_INDEX.md",
+    "00-foundation/MODULE_STRUCTURE.md",
+    "00-foundation/PRD.md",
+    "00-foundation/PRE_CODE_GATE.md",
+    "00-foundation/PROJECT_BRAIN.md",
+    "00-foundation/PROJECT_COMMON_RULES.md",
+    "00-foundation/README.md",
+    "00-foundation/TECHNOLOGY_CONSTITUTION.md",
+    "00-foundation/UNIVERSAL_MODULE_FRAMEWORK.md",
+    "00-foundation/registries/AI_KNOWLEDGE_INDEX.md",
+    "00-foundation/registries/API_REGISTRY.md",
+    "00-foundation/registries/DATABASE_REGISTRY.md",
+    "00-foundation/registries/DOCUMENT_REGISTRY.md",
+    "00-foundation/registries/ENTITY_RELATIONSHIP_REGISTRY.md",
+    "00-foundation/registries/MODULE_REGISTRY.md",
+    "00-foundation/registries/PAGE_REGISTRY.md",
+    "00-foundation/registries/SERVICE_REGISTRY.md",
+    "00-foundation/registries/WORKFLOW_REGISTRY.md",
+    "00-foundation/standards/DEVELOPMENT_STANDARDS.md",
+    "00-foundation/standards/DOCUMENTATION_STANDARD.md",
+    "00-foundation/standards/PROJECT_DOCUMENT_AUDIT.md",
+    "00-foundation/templates/_ARCHITECTURE_SYNC_REPORT_TEMPLATE.md",
+    "00-foundation/templates/_CHANGE_IMPACT_TEMPLATE.md",
+    "00-foundation/templates/_COMMIT_CHECKLIST.md",
+    "00-foundation/templates/_MODULE_MANIFEST_TEMPLATE.md",
+    "00-foundation/templates/_PAGE_TEMPLATE.md",
+    "00-foundation/templates/_PRE_CODE_GATE_CHECKLIST.md",
+    "00-foundation/traceability/ADR_INDEX.md",
+    "00-foundation/traceability/TRACEABILITY_MATRIX.md",
+    "01-architecture/DependencyMap.md",
+    "01-architecture/HYBRID_LICENSED_ERP_ARCHITECTURE.md",
+    "01-architecture/MASTER_MODULE_ARCHITECTURE.md",
+    "01-architecture/MODULE_DEPENDENCY_MAP.md",
+    "01-architecture/PROJECT_MAP.md",
+    "01-architecture/SAAS_PLATFORM_ARCHITECTURE.md",
+    "01-architecture/decisions/ADR-001-postgresql.md",
+    "01-architecture/decisions/ADR-002-laravel.md",
+    "01-architecture/decisions/ADR-003-vue.md",
+    "01-architecture/decisions/ADR-004-ai-os.md",
+    "01-architecture/decisions/ADR-005-multi-tenant.md",
+    "01-architecture/decisions/ADR-006-event-driven.md",
+    "01-architecture/decisions/ADR-007-documentation-first.md",
+    "01-architecture/decisions/ADR-008-unified-contacts.md",
+    "01-architecture/decisions/ADR-009-universal-modules.md",
+    "01-architecture/decisions/ADR-010-no-cross-module-db.md",
+    "01-architecture/decisions/ADR-011-nextjs-typescript.md",
+    "01-architecture/decisions/ADR-013-hybrid-licensed-erp.md",
+    "02-core-platform/ARCHITECTURE.md",
+    "02-core-platform/PERMISSION_SYSTEM_ARCHITECTURE.md",
+    "02-core-platform/engines/APPROVAL_ENGINE_ARCHITECTURE.md",
+    "02-core-platform/engines/EVENT_ARCHITECTURE.md",
+    "02-core-platform/engines/GLOBAL_SEARCH_ARCHITECTURE.md",
+    "02-core-platform/engines/NOTIFICATION_ENGINE_ARCHITECTURE.md",
+    "02-core-platform/engines/WORKFLOW_ENGINE_ARCHITECTURE.md",
+    "02-core-platform/entities/media-library.md",
+    "02-core-platform/shared-entities.md",
+    "02-core-platform/subsystems/PRODUCT_MASTER_ARCHITECTURE.md",
+    "02-core-platform/subsystems/SETTINGS_ARCHITECTURE.md",
+    "03-business-modules/README.md",
+    "03-business-modules/accounting/Architecture.md",
+    "03-business-modules/accounting/README.md",
+    "03-business-modules/bi-system/ARCHITECTURE.md",
+    "03-business-modules/bi-system/README.md",
+    "03-business-modules/booking/ARCHITECTURE.md",
+    "03-business-modules/booking/README.md",
+    "03-business-modules/business-partners/Architecture.md",
+    "03-business-modules/business-partners/Database.md",
+    "03-business-modules/business-partners/Development.md",
+    "03-business-modules/business-partners/INTEGRATION.md",
+    "03-business-modules/business-partners/ModuleManifest.md",
+    "03-business-modules/business-partners/Permissions.md",
+    "03-business-modules/business-partners/README.md",
+    "03-business-modules/crm/Architecture.md",
+    "03-business-modules/crm/CRM_MODULE_ARCHITECTURE.md",
+    "03-business-modules/crm/README.md",
+    "03-business-modules/data-warehouse/ARCHITECTURE.md",
+    "03-business-modules/data-warehouse/README.md",
+    "03-business-modules/documents/Architecture.md",
+    "03-business-modules/documents/README.md",
+    "03-business-modules/ecommerce/Architecture.md",
+    "03-business-modules/ecommerce/Database.md",
+    "03-business-modules/ecommerce/ECOMMERCE_STOREFRONT_ARCHITECTURE.md",
+    "03-business-modules/ecommerce/MENU_STRUCTURE.md",
+    "03-business-modules/ecommerce/ModuleManifest.md",
+    "03-business-modules/ecommerce/Permissions.md",
+    "03-business-modules/ecommerce/README.md",
+    "03-business-modules/ecommerce/UI.md",
+    "03-business-modules/ecommerce/URL_SLUG_ARCHITECTURE.md",
+    "03-business-modules/ecommerce/analytics/ARCHITECTURE.md",
+    "03-business-modules/ecommerce/builder/ARCHITECTURE.md",
+    "03-business-modules/ecommerce/catalog/ARCHITECTURE.md",
+    "03-business-modules/ecommerce/catalog/ENTITY_CATALOG.md",
+    "03-business-modules/ecommerce/catalog/SPECIFICATIONS_ARCHITECTURE.md",
+    "03-business-modules/ecommerce/customers/README.md",
+    "03-business-modules/ecommerce/dashboard/ARCHITECTURE.md",
+    "03-business-modules/ecommerce/dashboard/README.md",
+    "03-business-modules/ecommerce/inventory/ARCHITECTURE.md",
+    "03-business-modules/ecommerce/marketing/ARCHITECTURE.md"
+  ],
+  "remaining_broken_sample": [
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./01-architecture/01-architecture/MASTER_MODULE_ARCHITECTURE.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./01-architecture/01-architecture/MODULE_DEPENDENCY_MAP.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./02-core-07-saas/ARCHITECTURE.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./00-foundation/traceability/01-architecture/decisions/ADR_INDEX.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./01-architecture/01-architecture/MODULE_DEPENDENCY_MAP.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./01-architecture/01-architecture/MODULE_DEPENDENCY_MAP.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./02-core-07-saas/ARCHITECTURE.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./00-foundation/registries/00-foundation/registries/DOCUMENT_REGISTRY.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./02-core-07-saas/API.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./05-development/05-development/framework/COMMUNICATION_CONTRACTS.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./01-architecture/01-architecture/MODULE_DEPENDENCY_MAP.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./05-development/05-development/database/MASTER_DATABASE_ARCHITECTURE.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./05-development/05-development/database/standards.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./05-development/05-development/database/naming-conventions.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./05-development/05-development/database/audit-trail.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./05-development/05-development/database/multi-company.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./05-development/05-development/database/ER_DIAGRAM.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./00-foundation/registries/00-foundation/registries/DATABASE_REGISTRY.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./00-foundation/registries/00-foundation/registries/ENTITY_RELATIONSHIP_REGISTRY.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./02-core-07-saas/shared-entities.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./05-development/05-development/database/MASTER_DATABASE_ARCHITECTURE.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./05-development/05-development/database/standards.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./02-core-07-saas/entities/contacts.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./06-ai/07-saas/ai/AI_OS_ARCHITECTURE.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./06-ai/07-saas/ai/AI_FIRST_ARCHITECTURE.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./06-ai/07-saas/ai/AI_AUDIT_AND_APPROVAL.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./06-ai/07-saas/ai/AI_CONTEXT_ENGINE.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./05-development/05-development/framework/templates/AI_TEMPLATE.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./06-ai/07-saas/ai/AI_OS_ARCHITECTURE.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./06-ai/07-saas/ai/AI_AUDIT_AND_APPROVAL.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./02-core-07-saas/engines/APPROVAL_ENGINE_ARCHITECTURE.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./05-development/05-development/qa/"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./05-development/05-development/deployment/"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./10-10-roadmap/MASTER_DEVELOPMENT_SEQUENCE.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "../.cursor/rules/project-common-rules.mdc"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./01-architecture/01-architecture/MODULE_DEPENDENCY_MAP.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./00-foundation/registries/00-foundation/registries/DATABASE_REGISTRY.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./01-architecture/01-architecture/MODULE_DEPENDENCY_MAP.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./05-development/05-development/database/MASTER_DATABASE_ARCHITECTURE.md"
+    },
+    {
+      "file": "GOVERNANCE_FRAMEWORK.md",
+      "target": "./06-ai/07-saas/ai/AI_OS_ARCHITECTURE.md"
+    },
+    {
+      "file": "PROJECT_MAP.md",
+      "target": "./01-architecture/01-architecture/MODULE_DEPENDENCY_MAP.md"
+    },
+    {
+      "file": "PROJECT_MAP.md",
+      "target": "./02-core-07-saas/"
+    },
+    {
+      "file": "PROJECT_MAP.md",
+      "target": "./03-business-03-business-modules/"
+    },
+    {
+      "file": "PROJECT_MAP.md",
+      "target": "./10-10-roadmap/"
+    },
+    {
+      "file": "PROJECT_MAP.md",
+      "target": "./00-foundation/05-development/framework/INDUSTRY_MODULES.md"
+    },
+    {
+      "file": "PROJECT_MAP.md",
+      "target": "./01-architecture/01-architecture/MODULE_DEPENDENCY_MAP.md"
+    },
+    {
+      "file": "PROJECT_MAP.md",
+      "target": "./01-architecture/01-architecture/MASTER_MODULE_ARCHITECTURE.md"
+    },
+    {
+      "file": "PROJECT_MAP.md",
+      "target": "./02-core-07-saas/ARCHITECTURE.md"
+    },
+    {
+      "file": "PROJECT_MAP.md",
+      "target": "./02-core-07-saas/API.md"
+    },
+    {
+      "file": "PROJECT_MAP.md",
+      "target": "./02-core-07-saas/PERMISSION_SYSTEM_ARCHITECTURE.md"
+    }
+  ]
+}
