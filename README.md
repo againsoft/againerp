@@ -1,4 +1,4 @@
-# AgainERP.
+# AgainERP..
 
 ERP + Ecommerce + AI OS platform (UI prototype phase).
 
