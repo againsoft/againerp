@@ -1,805 +1,279 @@
-# AgainERP — Project Map
+# AgainERP — Project Map (AI Navigation)
 
-> **Status:** Approved  
-> **Version:** 2.0  
-> **Project:** AgainERP  
-> **Document Type:** Visual Platform Map  
-> **Purpose:** Complete visual map — understand the entire platform in minutes  
-> **Governance:** [GOVERNANCE.md](./GOVERNANCE.md)
+## Purpose
+Complete map of where documentation lives — folder index and path migration.
 
-**Audience:** New developers · Architects · AI agents (Cursor, ChatGPT, Claude, Gemini, AI OS)
+## When To Read
+Read after BRAIN.md when you need to locate a document or folder.
 
-### Step 25 Requirements (Satisfied)
+## Related Files
+- [Cursor entry](BRAIN.md)
+- [Module index](MODULE_REGISTRY.md)
+- [Full hierarchy](MASTER_DOCUMENT_MAP.md)
 
-| Requirement | Section |
-|-------------|---------|
-| Visual platform map | §1 |
-| Six architecture layers | §2 |
-| Module, service, entity maps | §3–§5 |
-| Event, permission, API, search, AI maps | §6–§10 |
-| Industry expansion | §11 |
-| ASCII + dependency + architecture diagrams | Throughout |
-
-**Read with:** [MASTER_INDEX.md](./MASTER_INDEX.md) · [AI_KNOWLEDGE_INDEX.md](./AI_KNOWLEDGE_INDEX.md) · [MODULE_DEPENDENCY_MAP.md](./MODULE_DEPENDENCY_MAP.md)
+## Read Next
+- [Pick a module](MODULE_REGISTRY.md)
 
 ---
 
-## 1. Platform Overview
-
-**AgainERP** is a **hybrid licensed, modular ERP + Ecommerce platform** — one PostgreSQL modular monolith with service-oriented boundaries, event-driven integration, and AI OS as a platform intelligence layer.
-
-```text
-┌─────────────────────────────────────────────────────────────────────────┐
-│                         AgainERP Platform                                │
-│  Documentation-First · API-First · AI-First · Multi-Tenant SaaS         │
-└─────────────────────────────────────────────────────────────────────────┘
-         │                    │                    │
-    Admin UI            Storefront            Mobile / API / AI
-    (Next.js)           (Next.js)             (REST + Tools)
-         │                    │                    │
-         └────────────────────┼────────────────────┘
-                              ▼
-                    FastAPI Service Layer
-                              │
-              ┌───────────────┼───────────────┐
-              ▼               ▼               ▼
-         Business         Core           Platform
-         Modules         Engines        (Tenant/Billing)
-              │               │               │
-              └───────────────┼───────────────┘
-                              ▼
-              PostgreSQL · Redis · Meilisearch · Object Storage
-```
-
-| Attribute | Value |
-|-----------|-------|
-| **Architecture** | DDD · Service Oriented · Modular Monolith |
-| **Tenancy** | Platform → Company → Branch → Warehouse |
-| **Integration** | Services (sync) · Events (async) · HTTP APIs |
-| **Search** | Meilisearch (primary) → Elasticsearch (future) |
-| **AI** | AI OS — tools via services only, never direct DB |
-| **Docs** | 560+ registered · [MASTER_INDEX.md](./MASTER_INDEX.md) |
-
-### One-Minute Mental Model
-
-```text
-Users & AI  →  APIs  →  Services  →  Owner DB tables  →  Events  →  Side effects
-                     ↑
-              Permissions + Workflow + Approval on every mutation
-```
+> **Status:** Active — **documentation navigation hub**  
+> **Version:** 1.0 · **Date:** 2026-06-19  
+> **Purpose:** Complete map of where information lives — read after [BRAIN.md](./BRAIN.md)  
+> **Not duplicate of:** [01-architecture/PROJECT_MAP.md](./01-architecture/PROJECT_MAP.md) (visual platform architecture — 800+ lines)
 
 ---
 
-## 2. Architecture Layers
 
-### Layer Stack (Bottom → Top)
+## When To Read
+Read after BRAIN.md when you need to locate a document or folder.
 
-```text
-┌─────────────────────────────────────────────────────────────────────────┐
-│ L6  Clients        Web Admin · Storefront · Mobile · Webhooks · AI UI   │
-├─────────────────────────────────────────────────────────────────────────┤
-│ L5  AI OS          Chief Agent · Domain Agents · Tools · Audit · Credits│
-├─────────────────────────────────────────────────────────────────────────┤
-│ L4  Industry       Hospital · School · Restaurant · Manufacturing · …   │
-├─────────────────────────────────────────────────────────────────────────┤
-│ L3  Business       Catalog · Inventory · Sales · CRM · Finance · …     │
-├─────────────────────────────────────────────────────────────────────────┤
-│ L2  Core           Users · RBAC · Workflow · Events · Search · Media    │
-├─────────────────────────────────────────────────────────────────────────┤
-│ L1  Platform       Tenant · Billing · License · Feature Flags · Modules │
-├─────────────────────────────────────────────────────────────────────────┤
-│ L0  Infrastructure PostgreSQL · Redis · Meilisearch · S3 · K8s/Docker │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+## Related Files
+- [Cursor entry](BRAIN.md)
+- [Module index](MODULE_REGISTRY.md)
+- [Full hierarchy](MASTER_DOCUMENT_MAP.md)
 
-**Rule:** Upper layers depend downward only. Business modules never depend on Industry modules.
+## Read Next
+- [Pick a module](MODULE_REGISTRY.md)
 
 ---
 
-### Platform Layer
+## How to Use
 
-```text
-Platform Layer
-├── Tenant provisioning      platform.tenant.*
-├── Plans & billing          Subscriptions · AI credits
-├── License agent            Hybrid on-prem sync
-├── Feature flags            Module install gating
-├── Module install registry  Which business modules active
-└── White label              Branding per tenant
-```
-
-| Doc | [SAAS_PLATFORM_ARCHITECTURE.md](./SAAS_PLATFORM_ARCHITECTURE.md) · [HYBRID_LICENSED_ERP_ARCHITECTURE.md](./HYBRID_LICENSED_ERP_ARCHITECTURE.md) |
+| Question | Answer in | Deep dive |
+|----------|-----------|-----------|
+| What is AgainERP? | [BRAIN.md](./BRAIN.md) §1 | [00-foundation/PRD.md](./00-foundation/PRD.md) |
+| Where does code live? | [BRAIN.md](./BRAIN.md) §5–6 | [FINAL_ERP_STRUCTURE_MAP.md](./FINAL_ERP_STRUCTURE_MAP.md) §1 |
+| What modules exist? | [MODULE_REGISTRY.md](./MODULE_REGISTRY.md) | [01-architecture/MODULE_DEPENDENCY_MAP.md](./01-architecture/MODULE_DEPENDENCY_MAP.md) |
+| How do layers stack? | [BRAIN.md](./BRAIN.md) §3 | [01-architecture/PROJECT_MAP.md](./01-architecture/PROJECT_MAP.md) |
+| UI patterns? | [BRAIN.md](./BRAIN.md) §4.2 | [04-uiux/standards/](./04-uiux/standards/) |
+| Before coding? | [00-foundation/PRE_CODE_GATE.md](./00-foundation/PRE_CODE_GATE.md) | [GOVERNANCE_FRAMEWORK.md](./GOVERNANCE_FRAMEWORK.md) |
 
 ---
 
-### Core Layer
+## 1. Reading Hierarchy (Token-Efficient)
+
+**Full spec:** [BRAIN.md § AI Reading Policy](./BRAIN.md#ai-reading-policy)
 
 ```text
-Core Layer (mandatory for all modules)
-├── Identity        Users · Sessions · Roles
-├── RBAC            PermissionService · Field ACL
-├── Tenant scope    Companies · Branches
-├── Parties         Contacts · Addresses  (Customer & Vendor = Contact roles)
-├── Collaboration   Activities · Comments · Notes · Tags
-├── Media           MediaService · Attachments
-├── Engines         Workflow · Approval · Notification · Search · Event
-├── Settings        Company/branch/module config
-└── Audit           Immutable mutation log
+Level 1  BRAIN.md
+Level 2  PROJECT_MAP · ARCHITECTURE_DECISIONS · MODULE_REGISTRY   (pick ONE)
+Level 3  03-business-modules/{module}/README.md
+Level 4  Architecture.md
+Level 5  Database.md · API.md · Workflow.md · UI.md · AI.md · Reports.md   (pick ONE)
 ```
 
-| Doc | [core/ARCHITECTURE.md](./core/ARCHITECTURE.md) · [PERMISSION_SYSTEM_ARCHITECTURE.md](./core/PERMISSION_SYSTEM_ARCHITECTURE.md) |
+**Forbidden** (unless explicitly requested): `MASTER_INDEX.md` · `MASTER_DOCUMENT_MAP.md` · `API_REGISTRY.md` · `DATABASE_REGISTRY.md` · `SERVICE_REGISTRY.md`
+
+This file is **Level 2** — open when you need doc locations, not module business logic.
 
 ---
 
-### Business Layer
+## 2. AI Brain Stack
 
-```text
-Business Layer
-├── Catalog / Product Master    catalog_*     (product spine)
-├── Inventory                   inventory_*   (stock ledger)
-├── Purchase                    purchase_*    (procurement)
-├── Sales                       sales_*       (quote-to-cash)
-├── CRM                         crm_*         (pipeline)
-├── Marketing                   marketing_*   (campaigns, coupons)
-├── Finance                     finance_*     (GL, AR/AP)
-└── Ecommerce                   commerce_*      (storefront, carts, checkout)
-```
-
-| Doc | [MASTER_MODULE_ARCHITECTURE.md](./MASTER_MODULE_ARCHITECTURE.md) |
+| File | Lines (approx) | Role |
+|------|----------------|------|
+| [BRAIN.md](./BRAIN.md) | ~320 | Cursor single entry |
+| [PROJECT_MAP.md](./PROJECT_MAP.md) | ~280 | Doc location index |
+| [MODULE_REGISTRY.md](./MODULE_REGISTRY.md) | ~200 | Module index |
 
 ---
 
-### Industry Layer
+## 3. Master Documents (docs/ root)
 
-```text
-Industry Layer (installable add-ons)
-├── hospital_*      Patients, admissions, appointments
-├── school_*        Students, enrollments, fees
-├── restaurant_*    Tables, orders, kitchen
-├── mfg_*           BOM, work orders
-└── …               Each: Core + Business services only
-```
-
-| Doc | [framework/INDUSTRY_MODULES.md](./framework/INDUSTRY_MODULES.md) |
-
----
-
-### AI OS Layer
-
-```text
-AI OS Layer (platform service — not a business module)
-├── Chief AI Agent         Orchestration · delegation
-├── Domain Agents          Catalog, Sales, CRM, Finance, …
-├── Tool Registry          Maps to Service methods
-├── Context Engine         Sanitized record snapshots
-├── Approval integration   High-risk tool gates
-├── Audit                  ai_audit_logs (append-only)
-└── Credits & routing      Model provider abstraction
-```
-
-| Doc | [ai_os/README.md](./ai_os/README.md) (vision & UX) · [modules/ai/AI_OS_ARCHITECTURE.md](./modules/ai/AI_OS_ARCHITECTURE.md) (platform) |
+| Document | Purpose |
+|----------|---------|
+| [BRAIN.md](./BRAIN.md) | **Cursor entry** — start here |
+| [ARCHITECTURE_DECISIONS.md](./ARCHITECTURE_DECISIONS.md) | **Core decisions SSOT** — why, not how |
+| [PROJECT_MAP.md](./PROJECT_MAP.md) | **Doc navigation** — this file |
+| [MODULE_REGISTRY.md](./MODULE_REGISTRY.md) | **Module index** |
+| [README.md](./README.md) | Human docs landing |
+| [FINAL_ERP_STRUCTURE_MAP.md](./FINAL_ERP_STRUCTURE_MAP.md) | Structure SSOT |
+| [GOVERNANCE_FRAMEWORK.md](./GOVERNANCE_FRAMEWORK.md) | 7 governance domains |
+| [MASTER_DOCUMENT_MAP.md](./MASTER_DOCUMENT_MAP.md) | Full folder hierarchy + migration table — **forbidden bulk-read** ([AI Reading Policy](./BRAIN.md#ai-reading-policy)) |
+| [MASTER_ARCHITECTURE_INDEX.md](./MASTER_ARCHITECTURE_INDEX.md) | Architecture doc index |
+| [STANDARD_MODULE_TEMPLATE.md](./STANDARD_MODULE_TEMPLATE.md) | 10-section module template |
+| [architecture/MODULE_ISOLATION_REPORT.md](./architecture/MODULE_ISOLATION_REPORT.md) | Isolation audit |
 
 ---
 
-### Infrastructure Layer
+## 4. Enterprise Folders (00–10)
 
-```text
-Infrastructure Layer
-├── PostgreSQL          OLTP · single DB · prefix isolation
-├── Redis               Cache · sessions · queue
-├── Meilisearch         Global search indexes
-├── Object storage      Media · exports
-├── Docker / K8s / VPS  Deployment targets
-└── CI/CD · Monitoring  DevOps pipeline
-```
-
-| Doc | [deployment/README.md](./deployment/README.md) · [database/MASTER_DATABASE_ARCHITECTURE.md](./database/MASTER_DATABASE_ARCHITECTURE.md) |
-
----
-
-### Platform Architecture Diagram
-
-```mermaid
-flowchart TB
-    subgraph L0["Infrastructure"]
-        PG[(PostgreSQL)]
-        RD[(Redis)]
-        MS[Meilisearch]
-        S3[Object Storage]
-    end
-
-    subgraph L1["Platform"]
-        TEN[Tenant & Billing]
-        FF[Feature Flags]
-    end
-
-    subgraph L2["Core"]
-        ID[Users & RBAC]
-        WF[Workflow & Approval]
-        EVT[Event Bus]
-        SRCH[Search]
-        MED[Media]
-    end
-
-    subgraph L3["Business"]
-        CAT[Catalog]
-        INV[Inventory]
-        SAL[Sales]
-        FIN[Finance]
-        CRM[CRM]
-        MKT[Marketing]
-        PUR[Purchase]
-    end
-
-    subgraph L4["Industry"]
-        IND[Vertical Modules]
-    end
-
-    subgraph L5["AI OS"]
-        AI[Chief Agent & Tools]
-    end
-
-    subgraph L6["Clients"]
-        WEB[Web Admin]
-        STORE[Storefront]
-    end
-
-    WEB --> L3
-    WEB --> L2
-    STORE --> L3
-    AI --> L2
-    AI -.->|tools| L3
-    L4 --> L2
-    L4 -.->|services| L3
-    L3 --> L2
-    L2 --> L1
-    L1 --> L0
-    L3 --> PG
-    L2 --> PG
-    SRCH --> MS
-    MED --> S3
-    L2 --> RD
-```
+| Folder | Docs | Information lives here |
+|--------|------|------------------------|
+| [00-foundation/](./00-foundation/) | Governance, registries, standards | **Rules, PRD, gates, templates, traceability** |
+| [01-architecture/](./01-architecture/) | Platform architecture, ADRs | **Layer diagrams, SaaS arch, dependency maps** |
+| [02-core-platform/](./02-core-platform/) | Core engines, entities | **Users, contacts, workflow, events, permissions** |
+| [03-business-modules/](./03-business-modules/) | 29 modules | **Per-module Architecture, DB, API, Menus** |
+| [04-uiux/](./04-uiux/) | Standards, prototypes | **UI patterns, build guides, design tokens** |
+| [05-development/](./05-development/) | API, DB, deploy, QA | **Dev standards, scripts, deployment** |
+| [06-ai/](./06-ai/) | AI platform + experience | **AI OS arch, agents, UX specs** |
+| [07-saas/](./07-saas/) | Multi-tenant SaaS | **Tenant, billing, licensing** |
+| [08-builder/](./08-builder/) | Storefront builder | **Page/theme/form builder UI** |
+| [09-integrations/](./09-integrations/) | Plugins, workflows | **External connectors, automation** |
+| [10-roadmap/](./10-roadmap/) | Sequencing | **Module roadmap, dev sequence** |
 
 ---
 
-## 3. Module Map
+## 5. Foundation (00-foundation/)
 
-### Module Layer Diagram
-
-```text
-                         ┌──────────────┐
-                         │   AI OS      │
-                         └──────┬───────┘
-                                │ tools
-         ┌──────────────────────┼──────────────────────┐
-         │                      │                      │
-    ┌────▼────┐  ┌───────┐  ┌───▼───┐  ┌───────┐  ┌────▼────┐
-    │ Catalog │  │  CRM  │  │ Sales │  │Finance│  │Marketing│
-    └────┬────┘  └───┬───┘  └───┬───┘  └───┬───┘  └────┬────┘
-         │           │          │          │           │
-    ┌────▼────┐  ┌───▼──────────▼──────────▼───────────┘
-    │Inventory│  │         Purchase                      │
-    └────┬────┘  └───────────────────────────────────────┘
-         │
-    ┌────▼────────────────────────────────────────────┐
-    │  CORE: Media · Workflow · Approvals ·             │
-    │        Notifications · Search · Users · Settings  │
-    └───────────────────────────────────────────────────┘
-```
-
-### Module Registry
-
-| Module | Prefix | Route | Owner Doc | Status |
-|--------|--------|-------|-----------|--------|
-| **Catalog** | `catalog_*` | `/catalog/*` | [PRODUCT_MASTER_ARCHITECTURE.md](./modules/core/PRODUCT_MASTER_ARCHITECTURE.md) | Approved |
-| **Inventory** | `inventory_*` | `/inventory/*` | [INVENTORY_MODULE_ARCHITECTURE.md](./modules/inventory/INVENTORY_MODULE_ARCHITECTURE.md) | Approved |
-| **Purchase** | `purchase_*` | `/purchase/*` | [PURCHASE_MODULE_ARCHITECTURE.md](./modules/purchase/PURCHASE_MODULE_ARCHITECTURE.md) | Approved |
-| **Sales** | `sales_*` | `/sales/*` | [SALES_MODULE_ARCHITECTURE.md](./modules/sales/SALES_MODULE_ARCHITECTURE.md) | Approved |
-| **CRM** | `crm_*` | `/crm/*` | [CRM_MODULE_ARCHITECTURE.md](./modules/crm/CRM_MODULE_ARCHITECTURE.md) | Approved |
-| **Marketing** | `marketing_*` | `/marketing/*` | [MARKETING_MODULE_ARCHITECTURE.md](./modules/marketing/MARKETING_MODULE_ARCHITECTURE.md) | Approved |
-| **Finance** | `finance_*` | `/finance/*` | [FINANCE_MODULE_ARCHITECTURE.md](./modules/finance/FINANCE_MODULE_ARCHITECTURE.md) | Approved |
-| **Media** | `media_*` | `/core/media/*` | [core/entities/media-library.md](./core/entities/media-library.md) | Core |
-| **Workflow** | `workflow_*` | `/core/workflow/*` | [WORKFLOW_ENGINE_ARCHITECTURE.md](./core/engines/WORKFLOW_ENGINE_ARCHITECTURE.md) | Approved |
-| **Approvals** | `approval_*` | `/core/approvals/*` | [APPROVAL_ENGINE_ARCHITECTURE.md](./core/engines/APPROVAL_ENGINE_ARCHITECTURE.md) | Approved |
-| **Notifications** | `notification_*` | `/core/notifications/*` | [NOTIFICATION_ENGINE_ARCHITECTURE.md](./core/engines/NOTIFICATION_ENGINE_ARCHITECTURE.md) | Approved |
-| **Search** | `search_*` | `/core/search/*` | [GLOBAL_SEARCH_ARCHITECTURE.md](./core/engines/GLOBAL_SEARCH_ARCHITECTURE.md) | Approved |
-| **AI OS** | `ai_*` | `/ai/*` | [AI_OS_ARCHITECTURE.md](./modules/ai/AI_OS_ARCHITECTURE.md) | Approved |
-
-**Full list:** [MODULE_REGISTRY.md](./MODULE_REGISTRY.md)
-
-### Module Dependency Diagram
-
-```mermaid
-flowchart LR
-    CAT[Catalog]
-    INV[Inventory]
-    PUR[Purchase]
-    SAL[Sales]
-    CRM[CRM]
-    MKT[Marketing]
-    FIN[Finance]
-
-    CAT -.-> INV
-    CAT -.-> SAL
-    CAT -.-> PUR
-    CAT -.-> MKT
-    INV -.-> SAL
-    INV -.-> PUR
-    PUR -.-> FIN
-    SAL -.-> FIN
-    SAL -.-> INV
-    SAL -.-> CRM
-    CRM -.-> SAL
-    MKT -.-> SAL
-    MKT -.-> CRM
-```
-
-**Legend:** Dotted = service/event only · No direct DB between business modules  
-**Full map:** [MODULE_DEPENDENCY_MAP.md](./MODULE_DEPENDENCY_MAP.md)
+| Topic | Path |
+|-------|------|
+| Extended project brain | [PROJECT_BRAIN.md](./00-foundation/PROJECT_BRAIN.md) |
+| Common rules (full) | [PROJECT_COMMON_RULES.md](./00-foundation/PROJECT_COMMON_RULES.md) |
+| Pre-code gate | [PRE_CODE_GATE.md](./00-foundation/PRE_CODE_GATE.md) |
+| Governance workflow | [GOVERNANCE.md](./00-foundation/GOVERNANCE.md) |
+| Product requirements | [PRD.md](./00-foundation/PRD.md) |
+| Tech constitution | [TECHNOLOGY_CONSTITUTION.md](./00-foundation/TECHNOLOGY_CONSTITUTION.md) |
+| Change log | [CHANGELOG.md](./00-foundation/CHANGELOG.md) |
+| Module framework | [UNIVERSAL_MODULE_FRAMEWORK.md](./00-foundation/UNIVERSAL_MODULE_FRAMEWORK.md) |
+| Detailed module registry | [registries/MODULE_REGISTRY.md](./00-foundation/registries/MODULE_REGISTRY.md) |
+| Doc audit (reorg basis) | [standards/PROJECT_DOCUMENT_AUDIT.md](./00-foundation/standards/PROJECT_DOCUMENT_AUDIT.md) |
+| Industry catalog | [framework/INDUSTRY_MODULES.md](05-development/framework/INDUSTRY_MODULES.md) |
+| Legacy full index | [MASTER_INDEX.md](./00-foundation/MASTER_INDEX.md) |
 
 ---
 
-## 4. Service Map
+## 6. Architecture (01-architecture/)
 
-### Service Layer Diagram
-
-```text
-                    ┌─────────────────────────────────┐
-                    │         Client / AI Tool         │
-                    └───────────────┬─────────────────┘
-                                    │
-                    ┌───────────────▼─────────────────┐
-                    │      PermissionService.check     │
-                    └───────────────┬─────────────────┘
-                                    │
-        ┌───────────────────────────┼───────────────────────────┐
-        │                           │                           │
-   Business Services          Platform Services            EventService
-   Catalog · Sales · …         Activity · Workflow · …       publish
-        │                           │                           │
-        └───────────────────────────┼───────────────────────────┘
-                                    ▼
-                           Owner Module Tables
-                                    │
-                                    ▼
-                           AuditService.log
-```
-
-### Platform Services
-
-| Service | Role | Registry |
-|---------|------|----------|
-| **Activity Service** | Timeline, tasks, assignments | [SERVICE_REGISTRY.md](./SERVICE_REGISTRY.md) §3 |
-| **Notification Service** | Email, SMS, push, in-app | §3 |
-| **Approval Service** | Human approval gates | §3 |
-| **Workflow Service** | State machines | §3 |
-| **Permission Service** | RBAC on every call | §3 |
-| **Search Service** | Query, index, autocomplete | §3 |
-| **Media Service** | Upload, attach, URLs | §3 |
-| **AI Service** | Agents, tools, credits | §3 |
-| **Audit Service** | Immutable logs | §3 |
-| **Event Service** | Bus, outbox, DLQ | §3 |
-| **Settings Service** | Hierarchical config | §3 |
-
-### Business Services
-
-| Service | Owns | Consumers |
-|---------|------|-----------|
-| **CatalogService** | Products, variants | Sales, Inventory, Purchase, Marketing, AI |
-| **InventoryService** | Stock, warehouses | Sales, Purchase, Catalog |
-| **PurchaseService** | PO, receipts, bills | Inventory, Finance |
-| **SalesService** | Orders, invoices | Finance, CRM, Inventory |
-| **CRMService** | Leads, opportunities | Sales, Marketing |
-| **MarketingService** | Campaigns, coupons | Sales, CRM |
-| **FinanceService** | GL, AR/AP | All (via events) |
-
-**Full registry:** [SERVICE_REGISTRY.md](./SERVICE_REGISTRY.md)
+| Topic | Path |
+|-------|------|
+| Visual platform map (deep) | [PROJECT_MAP.md](./01-architecture/PROJECT_MAP.md) |
+| Module dependency matrix | [MODULE_DEPENDENCY_MAP.md](./01-architecture/MODULE_DEPENDENCY_MAP.md) |
+| Master module architecture | [MASTER_MODULE_ARCHITECTURE.md](./01-architecture/MASTER_MODULE_ARCHITECTURE.md) |
+| SaaS platform | [SAAS_PLATFORM_ARCHITECTURE.md](./01-architecture/SAAS_PLATFORM_ARCHITECTURE.md) |
+| Hybrid licensed ERP | [HYBRID_LICENSED_ERP_ARCHITECTURE.md](./01-architecture/HYBRID_LICENSED_ERP_ARCHITECTURE.md) |
+| Vision pointer | [project.md](./01-architecture/project.md) → PRD |
+| ADRs | [decisions/](./01-architecture/decisions/) |
 
 ---
 
-## 5. Entity Map
+## 7. Core Platform (02-core-platform/)
 
-### Entity Relationship Overview
-
-```text
-Organization (Company)
-├── Branch
-├── User ──► Role ──► Permission
-├── Contact ──┬── Customer (role)
-│             └── Vendor (role)
-│
-├── Product ──► Category, Brand, Variant
-│       │
-│       └──► Stock Level ◄── Warehouse
-│
-├── Purchase Order ──► Goods Receipt ──► Stock Movement
-├── Sales Order ──► Shipment ──► Sales Invoice ──event──► AR Invoice (Finance)
-├── Lead ──convert──► Contact + Opportunity
-├── Campaign ──► Audience (Contacts)
-│
-├── Workflow Instance ──► host record (Product, PO, SO, …)
-├── Approval Request ──► host record
-├── Notification ──► User
-└── AI Task ──► optional context entity
-```
-
-### Core Entities
-
-| Entity | Owner | Doc |
-|--------|-------|-----|
-| User | Core | [ENTITY_RELATIONSHIP_REGISTRY.md](./ENTITY_RELATIONSHIP_REGISTRY.md) |
-| Organization | Core (Company) | §3 |
-| Customer | Core Contact | §4 — not separate table |
-| Product | Catalog | §4 |
-| Workflow | Core Engine | §4 |
-| Approval | Core Engine | §4 |
-| Notification | Core | §4 |
-| AI Task | AI OS | §4 |
-
-### Business Entities
-
-| Entity | Owner | Key Relationships |
-|--------|-------|-------------------|
-| **Product** | Catalog | → Category, Brand, Variants, Media |
-| **Order** | Sales / Commerce | → Customer, Lines, Shipments |
-| **Inventory (Stock)** | Inventory | → Variant, Warehouse, Movements |
-| **Purchase Order** | Purchase | → Vendor, Lines, Receipt |
-| **Sales Order** | Sales | → Customer, Quotation, Invoice |
-| **Invoice** | Sales + Finance | Commercial (Sales) · AR (Finance event) |
-
-**Full profiles:** [ENTITY_RELATIONSHIP_REGISTRY.md](./ENTITY_RELATIONSHIP_REGISTRY.md) · [DATABASE_REGISTRY.md](./DATABASE_REGISTRY.md)
+| Topic | Path |
+|-------|------|
+| Core hub | [ARCHITECTURE.md](./02-core-platform/ARCHITECTURE.md) |
+| Core API | [API.md](./02-core-platform/API.md) |
+| Permissions | [PERMISSION_SYSTEM_ARCHITECTURE.md](./02-core-platform/PERMISSION_SYSTEM_ARCHITECTURE.md) |
+| Engines | [engines/](./02-core-platform/engines/) — workflow, events, approval, notification, search |
+| Entities | [entities/](./02-core-platform/entities/) — contacts, users, companies |
+| Subsystems | [subsystems/](./02-core-platform/subsystems/) — activity-chatter, product-master, settings |
 
 ---
 
-## 6. Event Map
+## 8. Business Modules (03-business-modules/)
 
-### Event Bus Architecture
+**Index:** [MODULE_REGISTRY.md](./MODULE_REGISTRY.md) · **Template:** [STANDARD_MODULE_TEMPLATE.md](./STANDARD_MODULE_TEMPLATE.md)
 
-```text
-Domain Service saves aggregate
-         │
-         ▼ COMMIT
-EventService.publish("{module}.{entity}.{action}")
-         │
-         ├──────────┬──────────┬──────────┬──────────┐
-         ▼          ▼          ▼          ▼          ▼
-     Search     Notify    Finance    Marketing   AI context
-     index      rules     handler    handler     cache
-```
-
-### Primary Event Flows
+Each module folder typically contains:
 
 ```text
-catalog.product.published
-  ├──► Search (index)
-  ├──► Marketing (eligibility)
-  └──► Notification (subscribers)
-
-sales.order.confirmed
-  ├──► Inventory (reserve)
-  ├──► Finance (accrual hook)
-  ├──► CRM (activity)
-  └──► Search (index)
-
-purchase.receipt.posted
-  ├──► Inventory (stock in)
-  └──► Finance (AP hook)
-
-finance.invoice.paid
-  ├──► Sales (payment status)
-  └──► Notification (receipt)
+ModuleManifest.md · Architecture.md · Database.md · API.md
+Workflow.md · Permissions.md · Reports.md · AI.md · CHANGELOG.md · Menus/
 ```
 
-### Event Naming
+### 7.1 By domain
 
-```text
-{module}.{entity}.{action}
+| Domain | Modules | Registry section |
+|--------|---------|------------------|
+| Commerce | `ecommerce` (+ 12 sub-areas) | § Commerce |
+| Revenue & supply | crm, sales, purchase, inventory, finance, accounting, manufacturing, pos | § ERP — Revenue |
+| People & projects | hr, payroll, hr-payroll, project, timesheet | § ERP — People |
+| Growth & partners | marketing, sales-marketing, business-partners, product-configurator | § ERP — Growth |
+| Support & analytics | helpdesk, documents, knowledge, bi-system, data-warehouse | § ERP — Support |
+| Operations | fleet, logistics, booking, marketplace, subscription | § ERP — Operations |
 
-Examples:
-  catalog.product.created
-  inventory.stock_level.updated
-  crm.lead.converted
-  core.approval.approved
-  ai.tool.invoked
-```
+### 7.2 Ecommerce sub-areas (documentation views)
 
-| Registry | [EVENT_ARCHITECTURE.md](./core/engines/EVENT_ARCHITECTURE.md) · [MODULE_DEPENDENCY_MAP.md](./MODULE_DEPENDENCY_MAP.md) |
+| Area | Architecture |
+|------|--------------|
+| Hub | [ecommerce/Architecture.md](./03-business-modules/ecommerce/Architecture.md) |
+| Catalog | [ecommerce/catalog/ARCHITECTURE.md](./03-business-modules/ecommerce/catalog/ARCHITECTURE.md) |
+| Orders | [ecommerce/orders/ARCHITECTURE.md](./03-business-modules/ecommerce/orders/ARCHITECTURE.md) |
+| Customers | [ecommerce/customers/ARCHITECTURE.md](./03-business-modules/ecommerce/customers/ARCHITECTURE.md) |
+| Builder | [ecommerce/builder/ARCHITECTURE.md](./03-business-modules/ecommerce/builder/ARCHITECTURE.md) |
+| Storefront | [ecommerce/ECOMMERCE_STOREFRONT_ARCHITECTURE.md](./03-business-modules/ecommerce/ECOMMERCE_STOREFRONT_ARCHITECTURE.md) |
+| Admin menus | [ecommerce/Menus/](./03-business-modules/ecommerce/Menus/) (167 screens) |
 
 ---
 
-## 7. Permission Map
+## 9. UI / UX (04-uiux/)
 
-### Authorization Flow
+| Topic | Path |
+|-------|------|
+| UI standards (mandatory) | [standards/](./04-uiux/standards/) |
+| Per-screen build guides | [prototype/](./04-uiux/prototype/) |
+| Design system / tokens | [design-system/](./04-uiux/design-system/) |
+| Prototype strategy | [strategy/](./04-uiux/strategy/) |
+| Recharts conventions | [standards/recharts-conventions.md](./04-uiux/standards/recharts-conventions.md) |
+| Mobile-first | [standards/mobile-first.md](./04-uiux/standards/mobile-first.md) |
 
-```text
-Request
-  → Authenticate (JWT)
-  → Resolve company_id / branch_id
-  → PermissionService.check("{module}.{resource}.{action}")
-  → Field ACL filter on response
-  → Service.execute
-```
-
-### Permission Layers
-
-```text
-┌─────────────────────────────────────────┐
-│ Platform     platform.tenant.*          │
-├─────────────────────────────────────────┤
-│ Core         core.user.* · core.search.*│
-├─────────────────────────────────────────┤
-│ Business     catalog.product.*          │
-│              sales.order.*              │
-│              finance.journal.*          │
-├─────────────────────────────────────────┤
-│ AI           ai.tool.execute            │
-│              ai.agent.run                 │
-└─────────────────────────────────────────┘
-```
-
-### Key Permission Patterns
-
-| Pattern | Example | Gate |
-|---------|---------|------|
-| View | `catalog.product.view` | List, get, search result |
-| Create | `sales.order.create` | POST create |
-| Action | `sales.order.confirm` | Workflow transition |
-| Approve | `purchase.order.approve` | Approval step |
-| AI | `ai.tool.execute` + domain edit | Tool invocation |
-
-| Registry | [PERMISSION_SYSTEM_ARCHITECTURE.md](./core/PERMISSION_SYSTEM_ARCHITECTURE.md) |
+**Code mirror:** `apps/web/src/components/` · `apps/web/design-system/`
 
 ---
 
-## 8. API Map
+## 10. Development (05-development/)
 
-### API Surface
-
-```text
-/api/v1/
-├── core/          users · permissions · media · settings
-│                  workflow · approvals · notifications · search
-├── catalog/       products · categories · brands
-├── inventory/     stock · warehouses · adjustments
-├── purchase/      po · receipts · bills
-├── sales/         orders · invoices · shipments
-├── crm/           leads · opportunities
-├── marketing/     campaigns · coupons
-├── finance/       journals · ar · ap · payments
-├── commerce/      carts · checkout · orders (storefront)
-├── ai/            chat · tools · agents
-└── platform/      tenant · billing · modules
-```
-
-### API Request Path
-
-```text
-Client
-  → API Gateway (FastAPI)
-  → Auth (JWT + X-Company-Id)
-  → Permission middleware
-  → Controller (thin)
-  → Service
-  → JSON envelope { data, meta, links }
-```
-
-| Registry | [API_REGISTRY.md](./API_REGISTRY.md) · [api/architecture.md](./api/architecture.md) |
+| Topic | Path |
+|-------|------|
+| Development hub | [05-development/](./05-development/) |
+| API conventions | Subfolder per topic under `05-development/` |
+| Database standards | Subfolder per topic under `05-development/` |
+| Governance scripts | [scripts/generate-governance-registries.py](./05-development/scripts/generate-governance-registries.py) |
 
 ---
 
-## 9. Search Map
+## 11. AI Layer (06-ai/)
 
-### Search Architecture
+| Topic | Path |
+|-------|------|
+| AI OS platform architecture | [platform/ai/AI_OS_ARCHITECTURE.md](./06-ai/platform/ai/AI_OS_ARCHITECTURE.md) |
+| AI experience specs | [experience/](./06-ai/experience/) |
+| AI knowledge index | [00-foundation/AI_KNOWLEDGE_INDEX.md](./00-foundation/AI_KNOWLEDGE_INDEX.md) |
 
-```text
-                    ┌─────────────────┐
-                    │  Global Bar     │
-                    │  Ctrl+K         │
-                    └────────┬────────┘
-                             │
-                    ┌────────▼────────┐
-                    │ SearchService   │
-                    │ (Core)          │
-                    └────────┬────────┘
-                             │
-              ┌──────────────┼──────────────┐
-              ▼              ▼              ▼
-         Meilisearch    Permission      AI NL parse
-         indexes        filter          (optional)
-```
-
-### Indexed Domains
-
-```text
-Products · Orders · Customers · Inventory · Purchase
-Sales · CRM · Marketing · Finance · Documents
-Activities · Users
-```
-
-### Index Pipeline
-
-```text
-Domain event (e.g. catalog.product.updated)
-  → Search indexer handler
-  → SearchService.upsert(document)
-  → Meilisearch index (company_id filterable)
-```
-
-| Registry | [GLOBAL_SEARCH_ARCHITECTURE.md](./core/engines/GLOBAL_SEARCH_ARCHITECTURE.md) |
+**Code:** `apps/web/src/app/(admin)/ai-os/` · `components/ai-os/`
 
 ---
 
-## 10. AI Agent Map
+## 12. SaaS (07-saas/)
 
-### AI OS Topology
-
-```text
-                         User / Automation
-                                │
-                                ▼
-                       ┌────────────────┐
-                       │ Chief AI Agent │
-                       └───────┬────────┘
-                               │ delegate
-       ┌───────────┬───────────┼───────────┬───────────┐
-       ▼           ▼           ▼           ▼           ▼
-  Catalog      Sales        CRM      Finance     Developer
-  Agent        Agent       Agent      Agent        Agent
-       │           │           │           │           │
-       └───────────┴───────────┴───────────┴───────────┘
-                               │
-                    Tool Registry → Service methods
-                               │
-                    Permission + Approval + Audit
-```
-
-### Domain Agents
-
-| Agent | Primary Service | Risk |
-|-------|-----------------|------|
-| Catalog Agent | CatalogService | Medium (publish) |
-| Inventory Agent | InventoryService | Medium (adjustment) |
-| Purchase Agent | PurchaseService | High (PO approve) |
-| Sales Agent | SalesService | High (confirm/discount) |
-| CRM Agent | CRMService | Low–Medium |
-| Marketing Agent | MarketingService | Medium (launch) |
-| Finance Agent | FinanceService | High (journal post) |
-| SEO Agent | CatalogService | Low |
-| Support Agent | SupportService | Low |
-| Developer Agent | Read-only docs | Low |
-| Analytics Agent | Report services | Low (read) |
-
-### AI Execution Pipeline
-
-```text
-Prompt → Context Engine → Permission check → Tool invoke
-      → [Approval if high-risk] → Service call → Audit log → Response
-```
-
-**Never:** `SELECT` · cross-module ORM · skip audit
-
-| Registry | [AI_KNOWLEDGE_INDEX.md](./AI_KNOWLEDGE_INDEX.md) · [AI_OS_ARCHITECTURE.md](./modules/ai/AI_OS_ARCHITECTURE.md) |
+| Topic | Path |
+|-------|------|
+| Tenant architecture | [TENANT_ARCHITECTURE.md](./07-saas/TENANT_ARCHITECTURE.md) |
+| Billing / subscription module | [03-business-modules/subscription/](./03-business-modules/subscription/) |
 
 ---
 
-## 11. Future Industry Expansion Map
+## 13. Application Code Map
 
-### Expansion Model
+| Path | Contents |
+|------|----------|
+| `apps/web/src/app/(admin)/` | Admin module routes |
+| `apps/web/src/app/(storefront)/` | Storefront routes |
+| `apps/web/src/app/api/v1/` | Mock REST APIs |
+| `apps/web/src/components/{module}/` | Module UI components |
+| `apps/web/src/lib/mock-data/` | Prototype seed data |
+| `apps/web/src/lib/store/` | Zustand stores |
+| `apps/web/src/lib/navigation.ts` | Global nav |
 
-```text
-New Industry Module
-  ├── docs/modules/{industry}/
-  ├── table prefix {industry}_*
-  ├── manifest: requires_services [Catalog, Finance, …]
-  ├── events: {industry}.{entity}.{action}
-  └── NEVER duplicates Core entities (User, Contact, Product)
-```
-
-### Planned Verticals
-
-```text
-                    ┌──────────────┐
-                    │  AgainERP    │
-                    │  Core + Biz  │
-                    └──────┬───────┘
-           ┌───────────────┼───────────────┐
-           │               │               │
-     ┌─────▼─────┐   ┌─────▼─────┐   ┌─────▼─────┐
-     │ Hospital  │   │  School   │   │Restaurant │
-     │ hospital_*│   │ school_*  │   │restaurant*│
-     └───────────┘   └───────────┘   └───────────┘
-           │               │               │
-     ┌─────▼─────┐   ┌─────▼─────┐   ┌─────▼─────┐
-     │Manufacturing│ │Real Estate│   │   NGO     │
-     │   mfg_*   │   │realestate*│   │  ngo_*    │
-     └───────────┘   └───────────┘   └───────────┘
-                           │
-                     ┌─────▼─────┐
-                     │  Courier  │
-                     │ courier_* │
-                     └───────────┘
-```
-
-| Industry | Prefix | Uses (services) | Status |
-|----------|--------|-----------------|--------|
-| **Hospital** | `hospital_*` | Contact, Catalog, Inventory, Finance | Planned |
-| **School** | `school_*` | Contact, Finance, CRM | Planned |
-| **Restaurant** | `restaurant_*` | Catalog, Sales, Inventory | Planned |
-| **Manufacturing** | `mfg_*` | Catalog, Inventory, Purchase | Planned |
-| **Real Estate** | `realestate_*` | CRM, Contact, Finance | Planned |
-| **NGO** | `ngo_*` | Contact, Finance, CRM | Planned |
-| **Courier** | `courier_*` | Sales, Inventory, Contact | Planned |
-
-| Doc | [framework/INDUSTRY_MODULES.md](./framework/INDUSTRY_MODULES.md) · [UNIVERSAL_MODULE_FRAMEWORK.md](./UNIVERSAL_MODULE_FRAMEWORK.md) |
+**Not in repo yet:** `apps/api/` (FastAPI)
 
 ---
 
-## End-to-End Flows
+## 14. Path Migration (Legacy Links)
 
-### Order-to-Cash
+Moved files may still link to old paths. Resolve via [MASTER_DOCUMENT_MAP.md](./MASTER_DOCUMENT_MAP.md) §4:
 
-```text
-Catalog (Product) → Sales (Order) → Inventory (Reserve/Ship)
-                 → Sales (Invoice) → Finance (AR via event)
-                 → Notification (customer email)
-                 → Search (index)
-```
-
-### Procure-to-Pay
-
-```text
-Catalog (Variant) → Purchase (PO) → Approval → Inventory (Receipt)
-                 → Purchase (Bill) → Finance (AP via event)
-```
-
-### Product Publish
-
-```text
-Catalog (draft) → Workflow → Approval → catalog.product.published
-  → Search index · Storefront · Marketing eligibility
-```
+| Old path | New path |
+|----------|----------|
+| `docs/modules/{m}/` | `docs/03-business-modules/{m}/` |
+| `docs/modules/core/` | `docs/02-core-platform/subsystems/` |
+| `docs/modules/ai/` | `docs/06-ai/platform/ai/` |
+| `docs/ui-ux/` | `docs/04-uiux/standards/` |
+| `docs/ui-prototype/` | `docs/04-uiux/prototype/` |
+| `docs/GOVERNANCE.md` (root) | `docs/00-foundation/GOVERNANCE.md` |
 
 ---
 
-## Documentation Navigation
-
-```text
-New to AgainERP?
-  README.md → MASTER_INDEX.md → PROJECT_MAP.md (this file)
-  → AI_KNOWLEDGE_INDEX.md (if AI)
-  → Target registry → Module ARCHITECTURE.md
-```
-
-| Map Type | Master Document |
-|----------|-----------------|
-| All docs | [MASTER_INDEX.md](./MASTER_INDEX.md) |
-| Modules | [MODULE_REGISTRY.md](./MODULE_REGISTRY.md) |
-| Dependencies | [MODULE_DEPENDENCY_MAP.md](./MODULE_DEPENDENCY_MAP.md) |
-| Services | [SERVICE_REGISTRY.md](./SERVICE_REGISTRY.md) |
-| Entities | [ENTITY_RELATIONSHIP_REGISTRY.md](./ENTITY_RELATIONSHIP_REGISTRY.md) |
-| APIs | [API_REGISTRY.md](./API_REGISTRY.md) |
-| Events | [EVENT_ARCHITECTURE.md](./core/engines/EVENT_ARCHITECTURE.md) |
-| Permissions | [PERMISSION_SYSTEM_ARCHITECTURE.md](./core/PERMISSION_SYSTEM_ARCHITECTURE.md) |
-| Search | [GLOBAL_SEARCH_ARCHITECTURE.md](./core/engines/GLOBAL_SEARCH_ARCHITECTURE.md) |
-| AI | [AI_KNOWLEDGE_INDEX.md](./AI_KNOWLEDGE_INDEX.md) |
-| Workflows | [WORKFLOW_REGISTRY.md](./WORKFLOW_REGISTRY.md) |
-
 ---
 
-## Golden Rules (Platform)
-
-| # | Rule |
-|---|------|
-| 1 | **No cross-module DB** — services and events only |
-| 2 | **Single entity owner** — one writer per table |
-| 3 | **Customer = Contact** — no duplicate customer table |
-| 4 | **Product spine** — Catalog owns products; all lines reference variants |
-| 5 | **Permission every call** — including AI tools |
-| 6 | **Events after COMMIT** — async side effects |
-| 7 | **AI never SQL** — tools → services only |
-| 8 | **Docs before code** — PRE_CODE_GATE |
-
----
-
-*End of Project Map — Step 25 · Maintainer: Platform Team · Last Updated: 2026-06-13*
+**Maintainer:** Platform Architecture · **Last Updated:** 2026-06-19

@@ -5,18 +5,18 @@ alwaysApply: true
 
 # AgainERP — Common Rules
 
-**Read first:** `docs/PROJECT_BRAIN.md` — mandatory before any implementation.  
-**Full spec:** `docs/PROJECT_COMMON_RULES.md` — read before architecture or multi-module work.
+**Read first:** `docs/BRAIN.md` → stop at lowest [AI Reading Policy](./docs/BRAIN.md#ai-reading-policy) level for your task.  
+**Deep dive:** `docs/00-foundation/PROJECT_BRAIN.md` · **Full spec:** `docs/00-foundation/PROJECT_COMMON_RULES.md`
 
 ## Modules
 - **Core** (Users, RBAC, Tenant, Contacts, Workflow, Events) = always on.
 - **Business/Industry** (Inventory, Manufacturing, CRM, …) = optional per tenant/plan.
 - **Module off must not break others:** no cross-module DB; Services/Events/APIs only; graceful UI hide (no crash).
-- Declare deps in `ModuleManifest.md` + `MODULE_DEPENDENCY_MAP.md`.
+- Declare deps in `ModuleManifest.md` + `docs/01-architecture/MODULE_DEPENDENCY_MAP.md`.
 
 ## SaaS & scale
 - Multi-tenant (`tenant_id`); API-first `/api/v1/{module}/`; modules independently developable/deployable.
-- New module → full docs package under `docs/modules/{module}/` before code.
+- New module → full docs package under `docs/03-business-modules/{module}/` before code.
 
 ## UI (prototype & product)
 - **CRUD = List page + right Sheet drawer** — `?create=1` · `?view={id}` · `?edit={id}`.
@@ -25,9 +25,9 @@ alwaysApply: true
 
 ## Documentation-first
 - New plan/feature → update `Architecture.md`, build guide, `MODULE_DEPENDENCY_MAP.md`, `CHANGELOG.md` **before** code.
-- Docs status **Ready** per `docs/GOVERNANCE.md` / `PRE_CODE_GATE.md`.
+- Docs status **Ready** per `docs/00-foundation/GOVERNANCE.md` / `docs/00-foundation/PRE_CODE_GATE.md`.
 
 ## Code
 - Zustand: never `.slice()`/`.filter()` inside selectors (causes infinite re-render).
-- Recharts: never type Tooltip `formatter` param as `number` — use `@/lib/charts/recharts-tooltip` or `(v) => Number(v ?? 0)`. See `docs/ui-ux/recharts-conventions.md`.
+- Recharts: never type Tooltip `formatter` param as `number` — use `@/lib/charts/recharts-tooltip` or `(v) => Number(v ?? 0)`. See `docs/04-uiux/standards/recharts-conventions.md`.
 - Minimal focused diffs; match existing conventions.

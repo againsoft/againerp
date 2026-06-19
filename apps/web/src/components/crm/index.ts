@@ -1,0 +1,9 @@
+export { CrmDashboard } from "./dashboard/crm-dashboard";
+export { CrmLeadListWorkspace } from "./leads/crm-lead-list-workspace";
+export { CrmLeadDetailSheet } from "./leads/crm-lead-detail-sheet";
+export { CrmPipelineBoard } from "./pipeline/crm-pipeline-board";
+export { CrmContactListWorkspace } from "./contacts/crm-contact-list-workspace";
+export { CrmActivityListWorkspace } from "./activities/crm-activity-list-workspace";
+export { CrmAiWorkspace } from "./ai/crm-ai-workspace";
+export { CrmPageHeader } from "./crm-page-header";
+export { CrmStatusBadge } from "./crm-status-badge";

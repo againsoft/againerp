@@ -19,6 +19,7 @@ import {
   Handshake,
   Image,
   TrendingUp,
+  Globe,
 } from "lucide-react";
 
 export type NavItem = {
@@ -161,6 +162,22 @@ export const sidebarNav: NavItem[] = [
       { title: "Flash Sales", href: "/marketing/flash-sales" },
       { title: "Promotions", href: "/marketing/promotions" },
       { title: "Special Offers", href: "/marketing/special-offers" },
+    ],
+  },
+  {
+    title: "Website",
+    icon: Globe,
+    children: [
+      { title: "Overview", href: "/website" },
+      { title: "Pages", href: "/website/pages" },
+      { title: "Blog Posts", href: "/website/blog/posts" },
+      { title: "Portfolio", href: "/website/portfolio" },
+      { title: "Team Members", href: "/website/team" },
+      { title: "Form List", href: "/website/forms" },
+      { title: "SEO Meta", href: "/website/seo/meta" },
+      { title: "Domain Manager", href: "/website/domain" },
+      { title: "AI Tools", href: "/website/ai" },
+      { title: "Settings", href: "/website/settings" },
     ],
   },
   {

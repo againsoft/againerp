@@ -1,12 +1,16 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+export type UtilityPanelTab = "ai" | "activity" | "comments" | "notes" | "files";
+
 type AppState = {
   sidebarCollapsed: boolean;
   hrModuleNavCollapsed: boolean;
   smwModuleNavCollapsed: boolean;
   utilityPanelOpen: boolean;
+  utilityPanelTab: UtilityPanelTab;
   aiDrawerOpen: boolean;
+  mobileSidebarOpen: boolean;
   companyId: string;
   branchId: string;
   favorites: string[];
@@ -15,7 +19,10 @@ type AppState = {
   toggleHrModuleNavCollapsed: () => void;
   toggleSmwModuleNavCollapsed: () => void;
   toggleUtilityPanel: () => void;
+  openUtilityPanel: (tab?: UtilityPanelTab) => void;
+  setUtilityPanelTab: (tab: UtilityPanelTab) => void;
   toggleAiDrawer: () => void;
+  setMobileSidebarOpen: (open: boolean) => void;
   setCompany: (id: string) => void;
   setBranch: (id: string) => void;
   addRecent: (title: string, href: string) => void;
@@ -47,7 +54,9 @@ export const useAppStore = create<AppState>()(
       hrModuleNavCollapsed: false,
       smwModuleNavCollapsed: false,
       utilityPanelOpen: false,
+      utilityPanelTab: "activity",
       aiDrawerOpen: false,
+      mobileSidebarOpen: false,
       companyId: "co1",
       branchId: "br1",
       favorites: [],
@@ -58,7 +67,19 @@ export const useAppStore = create<AppState>()(
       toggleSmwModuleNavCollapsed: () =>
         set((s) => ({ smwModuleNavCollapsed: !s.smwModuleNavCollapsed })),
       toggleUtilityPanel: () => set((s) => ({ utilityPanelOpen: !s.utilityPanelOpen })),
-      toggleAiDrawer: () => set((s) => ({ aiDrawerOpen: !s.aiDrawerOpen })),
+      openUtilityPanel: (tab) =>
+        set((s) => ({
+          utilityPanelOpen: true,
+          utilityPanelTab: tab ?? s.utilityPanelTab,
+        })),
+      setUtilityPanelTab: (utilityPanelTab) => set({ utilityPanelTab }),
+      toggleAiDrawer: () =>
+        set((s) => ({
+          aiDrawerOpen: !s.aiDrawerOpen,
+          utilityPanelOpen: true,
+          utilityPanelTab: "ai",
+        })),
+      setMobileSidebarOpen: (mobileSidebarOpen) => set({ mobileSidebarOpen }),
       setCompany: (companyId) => set({ companyId }),
       setBranch: (branchId) => set({ branchId }),
       addRecent: (title, href) => {
@@ -76,7 +97,7 @@ export const useAppStore = create<AppState>()(
     }),
     {
       name: "againerp-prototype",
-      version: 4,
+      version: 5,
       migrate: (persistedState, version) => {
         const state = persistedState as LegacyAppState;
         if (version < 1) {
@@ -92,6 +113,13 @@ export const useAppStore = create<AppState>()(
         }
         if (version < 4) {
           return { ...state, smwModuleNavCollapsed: false };
+        }
+        if (version < 5) {
+          return {
+            ...state,
+            utilityPanelTab: "activity" as UtilityPanelTab,
+            mobileSidebarOpen: false,
+          };
         }
         return state;
       },
