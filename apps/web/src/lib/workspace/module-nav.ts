@@ -58,6 +58,41 @@ const MODULE_TABS: Record<string, Omit<ModuleContext, "moduleId">> = {
       { id: "WS-MODNAV-AUTO", label: "AI CRM", href: "/crm/ai" },
     ],
   },
+  finance: {
+    moduleLabel: "Finance",
+    tabs: [
+      { id: "WS-MODNAV-DASH", label: "Dashboard", href: "/finance" },
+      { id: "WS-MODNAV-OPS", label: "Journals", href: "/finance/journals" },
+      { id: "WS-MODNAV-OPS", label: "Invoices", href: "/finance/invoices" },
+      { id: "WS-MODNAV-OPS", label: "Bills", href: "/finance/bills" },
+      { id: "WS-MODNAV-OPS", label: "Cheques", href: "/finance/cheques" },
+      { id: "WS-MODNAV-RPT", label: "Reports", href: "/finance/reports" },
+    ],
+  },
+  website: {
+    moduleLabel: "Website",
+    tabs: [
+      { id: "WS-MODNAV-DASH", label: "Dashboard", href: "/website/dashboard" },
+      { id: "WS-MODNAV-OPS", label: "Pages", href: "/website/pages" },
+      { id: "WS-MODNAV-OPS", label: "Blog", href: "/website/blog/posts" },
+      { id: "WS-MODNAV-OPS", label: "Portfolio", href: "/website/portfolio" },
+      { id: "WS-MODNAV-OPS", label: "Forms", href: "/website/forms" },
+      { id: "WS-MODNAV-OPS", label: "Domain", href: "/website/domain" },
+      { id: "WS-MODNAV-AUTO", label: "AI Tools", href: "/website/ai" },
+      { id: "WS-MODNAV-SET", label: "Settings", href: "/website/settings" },
+    ],
+  },
+  service: {
+    moduleLabel: "Service",
+    tabs: [
+      { id: "WS-MODNAV-DASH", label: "Dashboard", href: "/service" },
+      { id: "WS-MODNAV-OPS", label: "Orders", href: "/service/orders" },
+      { id: "WS-MODNAV-OPS", label: "Work Orders", href: "/service/work-orders" },
+      { id: "WS-MODNAV-OPS", label: "Schedule", href: "/service/schedule" },
+      { id: "WS-MODNAV-OPS", label: "Assets", href: "/service/assets" },
+      { id: "WS-MODNAV-RPT", label: "Reports", href: "/service/reports" },
+    ],
+  },
 };
 
 export function resolveModuleContext(pathname: string): ModuleContext | null {
@@ -75,6 +110,15 @@ export function resolveModuleContext(pathname: string): ModuleContext | null {
   }
   if (pathname.startsWith("/crm")) {
     return { moduleId: "crm", ...MODULE_TABS.crm };
+  }
+  if (pathname.startsWith("/finance")) {
+    return { moduleId: "finance", ...MODULE_TABS.finance };
+  }
+  if (pathname.startsWith("/service")) {
+    return { moduleId: "service", ...MODULE_TABS.service };
+  }
+  if (pathname.startsWith("/website")) {
+    return { moduleId: "website", ...MODULE_TABS.website };
   }
   return null;
 }

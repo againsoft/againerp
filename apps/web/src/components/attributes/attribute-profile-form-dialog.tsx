@@ -1,20 +1,31 @@
 "use client";
 
-import * as Dialog from "@radix-ui/react-dialog";
-import { X } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
+import { ChevronDown, ChevronRight, FolderOpen, GripVertical, ImageIcon, Layers, Plus, Save, Trash2, X } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import { Sheet, SheetContent } from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
+import {
+  createEmptyBulkGroup,
+  profileToBulkForm,
+  type BulkAttributeFormState,
+  type BulkAttributeGroupRow,
+} from "@/lib/mock-data/attribute-profiles";
+import { useAttributeProfileStore } from "@/lib/store/attribute-profile-store";
+import {
+  reorderGroupsByKey,
+  SortableAttributeGrid,
+} from "@/components/attributes/sortable-attribute-grid";
 import type { AttributeProfile } from "@/lib/mock-data/attribute-profiles";
-import { toast } from "sonner";
 
 type Props = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   mode?: "create" | "edit";
   profile?: AttributeProfile | null;
-  onSave: (data: Partial<AttributeProfile>) => void;
+  onSave?: (data: Partial<AttributeProfile>) => void;
 };
 
 export function AttributeProfileFormDialog({
@@ -24,95 +35,247 @@ export function AttributeProfileFormDialog({
   profile,
   onSave,
 }: Props) {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const fd = new FormData(e.currentTarget);
-    const categories = String(fd.get("categoryLabels") ?? "")
-      .split(",")
-      .map((s) => s.trim())
-      .filter(Boolean);
-    onSave({
-      name: String(fd.get("name") ?? ""),
-      code: String(fd.get("code") ?? ""),
-      description: String(fd.get("description") ?? ""),
-      active: fd.get("active") === "on",
-      categoryLabels: categories,
-      iconUrl: profile?.iconUrl ?? `https://picsum.photos/seed/prof${Date.now()}/64/64`,
+  const storeGroups = useAttributeProfileStore((s) => s.groups);
+  const storeAttributes = useAttributeProfileStore((s) => s.attributes);
+  const saveProfileBulk = useAttributeProfileStore((s) => s.saveProfileBulk);
+
+  const [activeProfileId, setActiveProfileId] = useState<string | null>(null);
+
+  const [form, setForm] = useState<BulkAttributeFormState>({ profileName: "", groups: [] });
+  const [imageUrl, setImageUrl] = useState("");
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [dragGroupKey, setDragGroupKey] = useState<string | null>(null);
+  const [overGroupKey, setOverGroupKey] = useState<string | null>(null);
+  const [collapsedGroups, setCollapsedGroups] = useState<Set<string>>(new Set());
+  const [profileCollapsed, setProfileCollapsed] = useState(false);
+
+  const toggleCollapse = (key: string) =>
+    setCollapsedGroups((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key); else next.add(key);
+      return next;
     });
-    toast.success(mode === "create" ? "Profile created (mock)" : "Profile updated (mock)");
+
+  useEffect(() => {
+    if (!open) return;
+    if (mode === "edit" && profile) {
+      setActiveProfileId(profile.id);
+      setForm(profileToBulkForm(profile, storeGroups, storeAttributes));
+      setImageUrl(profile.imageUrl ?? "");
+      setErrors({});
+    } else {
+      setActiveProfileId(null);
+      setForm({ profileName: "", groups: [] });
+      setErrors({});
+    }
+  }, [open, mode, profile]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // ── Step 2: save groups & attributes ─────────────────────────────────────
+  const validate = useCallback(() => {
+    const next: Record<string, string> = {};
+    if (!form.profileName.trim()) next.profileName = "Profile name is required.";
+    setErrors(next);
+    return Object.keys(next).length === 0;
+  }, [form.profileName]);
+
+  const handleSave = () => {
+    if (!validate()) {
+      toast.error("Profile name is required.");
+      return;
+    }
+    const payloadGroups = form.groups
+      .filter((g) => g.name.trim())
+      .map((g) => ({
+        id: g.id,
+        name: g.name.trim(),
+        attributes: g.attributes
+          .filter((a) => a.name.trim())
+          .map((a) => ({ id: a.id, name: a.name.trim(), filterable: a.filterable, predefinedValues: a.predefinedValues })),
+      }));
+    saveProfileBulk({
+      profileId: activeProfileId ?? undefined,
+      profileName: form.profileName.trim(),
+      imageUrl: imageUrl.trim() || undefined,
+      groups: payloadGroups,
+    });
+    toast.success("Attribute profile saved");
+    onSave?.({ name: form.profileName.trim() });
     onOpenChange(false);
   };
 
+  // ── Group helpers ─────────────────────────────────────────────────────────
+  const addGroup = () =>
+    setForm((f) => ({ ...f, groups: [...f.groups, createEmptyBulkGroup()] }));
+
+  const removeGroup = (key: string) =>
+    setForm((f) => ({ ...f, groups: f.groups.filter((g) => g.key !== key) }));
+
+  const updateGroup = (key: string, patch: Partial<BulkAttributeGroupRow>) =>
+    setForm((f) => ({
+      ...f,
+      groups: f.groups.map((g) => (g.key === key ? { ...g, ...patch } : g)),
+    }));
+
+  const handleGroupDrop = (targetKey: string) => {
+    if (!dragGroupKey || dragGroupKey === targetKey) return;
+    setForm((f) => ({
+      ...f,
+      groups: reorderGroupsByKey(f.groups, dragGroupKey, targetKey),
+    }));
+    setDragGroupKey(null);
+    setOverGroupKey(null);
+  };
+
   return (
-    <Dialog.Root open={open} onOpenChange={onOpenChange}>
-      <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-50 bg-black/50" />
-        <Dialog.Content className="fixed left-1/2 top-1/2 z-50 w-[min(520px,95vw)] -translate-x-1/2 -translate-y-1/2 rounded-xl border border-input bg-background p-5 shadow-xl">
-          <div className="mb-4 flex items-center justify-between">
-            <Dialog.Title className="text-base font-semibold">
-              {mode === "create" ? "Add Attribute Profile" : "Edit Profile"}
-            </Dialog.Title>
-            <Dialog.Close asChild>
-              <button type="button" className="rounded-md p-1 hover:bg-accent">
+    <Sheet open={open} onOpenChange={onOpenChange}>
+      <SheetContent
+        side="right"
+        className="w-full max-w-xl gap-0 overflow-hidden p-0 sm:max-w-xl [&>button.absolute]:hidden"
+        aria-describedby={undefined}
+      >
+        <div className="flex h-full min-h-0 flex-col">
+
+          {/* ── Header ──────────────────────────────────────────────────────── */}
+          <div className="flex shrink-0 items-center justify-between border-b border-input px-5 py-4">
+            <p className="text-base font-semibold">
+              {mode === "edit" ? (form.profileName || profile?.name || "Edit Profile") : "Add Attribute Profile"}
+            </p>
+            <div className="flex items-center gap-2">
+              <Button size="sm" onClick={handleSave}>
+                <Save className="mr-1.5 h-3.5 w-3.5" />
+                Save
+              </Button>
+              <button
+                type="button"
+                className="rounded-md p-1 hover:bg-accent"
+                onClick={() => onOpenChange(false)}
+                aria-label="Close"
+              >
                 <X className="h-4 w-4" />
               </button>
-            </Dialog.Close>
-          </div>
-          <form onSubmit={handleSubmit} className="space-y-3">
-            <Field label="Profile name" required>
-              <Input name="name" required defaultValue={profile?.name} placeholder="Laptop" />
-            </Field>
-            <Field label="Code" required hint="unique key">
-              <Input name="code" required defaultValue={profile?.code} placeholder="laptop" />
-            </Field>
-            <Field label="Description">
-              <Textarea name="description" rows={2} defaultValue={profile?.description} />
-            </Field>
-            <Field label="Category mapping" hint="comma separated">
-              <Input
-                name="categoryLabels"
-                defaultValue={profile?.categoryLabels.join(", ")}
-                placeholder="Computers, Laptops"
-              />
-            </Field>
-            <label className="flex items-center gap-2 text-sm">
-              <input type="checkbox" name="active" defaultChecked={profile?.active ?? true} />
-              Active profile
-            </label>
-            <div className="flex justify-end gap-2 pt-2">
-              <Button type="button" variant="outline" size="sm" onClick={() => onOpenChange(false)}>
-                Cancel
-              </Button>
-              <Button type="submit" size="sm">
-                {mode === "create" ? "Create profile" : "Save"}
-              </Button>
             </div>
-          </form>
-        </Dialog.Content>
-      </Dialog.Portal>
-    </Dialog.Root>
-  );
-}
+          </div>
 
-function Field({
-  label,
-  hint,
-  required,
-  children,
-}: {
-  label: string;
-  hint?: string;
-  required?: boolean;
-  children: React.ReactNode;
-}) {
-  return (
-    <div>
-      <Label>
-        {label}
-        {required && <span className="text-destructive"> *</span>}
-        {hint && <span className="ml-1 font-normal text-muted-foreground">({hint})</span>}
-      </Label>
-      <div className="mt-1">{children}</div>
-    </div>
+          {/* ── Editor: Profile root → Groups → Attributes ───────────────────── */}
+          <div className="min-h-0 flex-1 overflow-y-auto">
+              <div className="space-y-3 px-5 py-4">
+                {/* Tree: Profile root → Groups → Attributes */}
+                <div>
+                  {/* Profile root row */}
+                  <div className="flex items-center gap-1.5 rounded-md px-1 py-1 hover:bg-muted/40">
+                    <button
+                      type="button"
+                      className="shrink-0 text-muted-foreground hover:text-foreground"
+                      onClick={() => setProfileCollapsed((v) => !v)}
+                      aria-label={profileCollapsed ? "Expand" : "Collapse"}
+                    >
+                      {profileCollapsed
+                        ? <ChevronRight className="h-3.5 w-3.5" />
+                        : <ChevronDown className="h-3.5 w-3.5" />}
+                    </button>
+                    <Layers className="h-3.5 w-3.5 shrink-0 text-primary" />
+                    <Input
+                      id="drawer-profile-name"
+                      value={form.profileName}
+                      onChange={(e) => setForm((f) => ({ ...f, profileName: e.target.value }))}
+                      placeholder="Profile name"
+                      className="h-6 min-w-0 flex-1 border-0 bg-transparent px-0 text-xs font-semibold shadow-none focus-visible:ring-0"
+                    />
+                    {errors.profileName && (
+                      <p className="text-xs text-destructive">{errors.profileName}</p>
+                    )}
+                  </div>
+
+                  {/* Groups indented under profile */}
+                  {!profileCollapsed && <div className="ml-[7px] border-l border-input pl-3">
+                    <div className="space-y-0.5">
+                      {form.groups.map((group, groupIndex) => (
+                        <div
+                          key={group.key}
+                          onDragOver={(e) => { e.preventDefault(); setOverGroupKey(group.key); }}
+                          onDragLeave={() => setOverGroupKey((k) => (k === group.key ? null : k))}
+                          onDrop={() => handleGroupDrop(group.key)}
+                          className={cn(overGroupKey === group.key && dragGroupKey !== group.key && "rounded-md ring-2 ring-primary/30")}
+                        >
+                          {/* Group row — draggable */}
+                          <div
+                            draggable
+                            onDragStart={() => setDragGroupKey(group.key)}
+                            onDragEnd={() => { setDragGroupKey(null); setOverGroupKey(null); }}
+                            className={cn(
+                              "flex cursor-grab items-center gap-1.5 rounded-md px-1.5 py-1 hover:bg-muted/40 active:cursor-grabbing",
+                              dragGroupKey === group.key && "opacity-50",
+                            )}
+                          >
+                            <GripVertical className="h-3.5 w-3.5 shrink-0 text-muted-foreground/50" />
+                            <button
+                              type="button"
+                              className="shrink-0 text-muted-foreground hover:text-foreground"
+                              onClick={(e) => { e.stopPropagation(); toggleCollapse(group.key); }}
+                              aria-label={collapsedGroups.has(group.key) ? "Expand" : "Collapse"}
+                            >
+                              {collapsedGroups.has(group.key)
+                                ? <ChevronRight className="h-3.5 w-3.5" />
+                                : <ChevronDown className="h-3.5 w-3.5" />}
+                            </button>
+                            <FolderOpen className="h-3.5 w-3.5 shrink-0 text-sky-600 dark:text-sky-400" />
+                            <Input
+                              value={group.name}
+                              onChange={(e) => updateGroup(group.key, { name: e.target.value })}
+                              placeholder={`Group ${groupIndex + 1} name`}
+                              className="h-6 min-w-0 flex-1 border-0 bg-transparent px-0 text-xs font-medium shadow-none focus-visible:ring-0"
+                              onClick={(e) => e.stopPropagation()}
+                            />
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="sm"
+                              className="h-5 w-5 shrink-0 p-0 text-muted-foreground/50 hover:text-destructive"
+                              onClick={() => removeGroup(group.key)}
+                            >
+                              <Trash2 className="h-3 w-3" />
+                            </Button>
+                          </div>
+
+                          {/* Attributes indented under group */}
+                          {!collapsedGroups.has(group.key) && (
+                            <div className="ml-5 border-l border-input pl-3">
+                              <SortableAttributeGrid
+                                attributes={group.attributes}
+                                onChange={(next) => updateGroup(group.key, { attributes: next })}
+                              />
+                            </div>
+                          )}
+                        </div>
+                      ))}
+
+                      {/* Add group button — at bottom of groups list */}
+                      <button
+                        type="button"
+                        onClick={addGroup}
+                        className="flex w-full items-center gap-1.5 rounded-md px-1.5 py-1 text-[11px] text-muted-foreground hover:bg-muted/40 hover:text-foreground"
+                      >
+                        <Plus className="h-3 w-3" />
+                        Add group
+                      </button>
+                    </div>
+                  </div>}
+                </div>
+
+                {/* Bottom save bar */}
+                <div className="flex justify-end gap-2 border-t border-input pt-3">
+                  <Button type="button" variant="outline" size="sm" onClick={() => onOpenChange(false)}>
+                    Cancel
+                  </Button>
+                  <Button type="button" size="sm" onClick={handleSave}>
+                    <Save className="mr-1.5 h-3.5 w-3.5" />
+                    Save
+                  </Button>
+                </div>
+              </div>
+            </div>
+        </div>
+      </SheetContent>
+    </Sheet>
   );
 }

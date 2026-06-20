@@ -139,11 +139,31 @@ Tenant C: Core + Hospital + POS
 
 | Action | URL | UI |
 |--------|-----|-----|
-| **List** | `/module/entities` | AG Grid (or responsive table) |
+| **List** | `/module/entities` | **Product List DataTable** (AG Grid — see below) |
 | **Create** | `?create=1` | Right **Sheet** drawer — form |
 | **View** | `?view={id}` | Right **Sheet** drawer — read-only |
 | **Edit** | `?edit={id}` | Same Sheet — form mode |
 | **Update** | Save in edit drawer | Store/API patch → `?view={id}` or close |
+
+**Full spec:** [datatable-and-drawer-standard.md](../04-uiux/standards/datatable-and-drawer-standard.md)
+
+### DataTable standard (Product List — MANDATORY for ALL entity lists)
+
+> **Every entity list page MUST use this pattern.** Custom `<table>` tags, `<div>`-based rows, or any other list rendering are **forbidden** for entity lists.
+
+**Reference code:** `apps/web/src/components/products/product-grid.tsx`
+
+| Item | Rule |
+|------|------|
+| Grid | `AgGridReact` · `theme="legacy"` · `ag-theme-quartz` · `control-border` · `bg-card` |
+| Dark | `useIsDark()` → add `ag-theme-quartz-dark` class — **always implement dark toggle** |
+| Layout | Parent `flex-1` · `h-0 min-h-0` — not fixed `height: 420px` only |
+| Pagination | Default **25** rows/page |
+| Row click | Opens `?view={id}` drawer |
+| Row menu | View · Edit · module actions |
+| Mobile | Hide grid `< md`; **card list fallback** + FAB `?create=1` |
+
+Categories, Brands, Inventory stock, Finance journals/invoices, CRM leads — **same table family**, module-specific columns only.
 
 ### Drawer spec
 
@@ -153,7 +173,9 @@ Tenant C: Core + Hospital + POS
     side="right"
     className="w-full max-w-3xl gap-0 overflow-hidden p-0 sm:max-w-3xl [&>button.absolute]:hidden"
   >
-    {/* DetailContent or Form */}
+    <div className="flex h-full min-h-0 flex-col px-4 pb-4 pt-3">
+      {/* DetailContent or Form — scroll inside body */}
+    </div>
   </SheetContent>
 </Sheet>
 ```
@@ -165,6 +187,7 @@ Tenant C: Core + Hospital + POS
 3. Row click / primary link → `?view={id}`; grid menu → View | Edit
 4. Header **Edit** in view drawer → `?edit={id}`
 5. **Activity** — `ActivityTriggerButton` in grid/drawer header, not a separate page
+6. **Mobile:** drawer `w-full` full viewport; content scrolls inside drawer — page body must not scroll behind
 
 **Prototype examples:** [ui-prototype/manufacturing/MANUFACTURING_UI_BUILD_GUIDE.md](../04-uiux/prototype/manufacturing/MANUFACTURING_UI_BUILD_GUIDE.md) · Catalog products
 
@@ -177,8 +200,8 @@ Tenant C: Core + Hospital + POS
 | Area | Requirement |
 |------|-------------|
 | **Layout** | Fluid grid; sidebar collapses on `< 768px` |
-| **Drawer** | Mobile-এ full-width sheet (`w-full`); scroll inside drawer |
-| **Tables** | Horizontal scroll **or** card/stacked row fallback |
+| **Drawer** | Mobile-এ full-width sheet (`w-full`); scroll **inside** drawer (`min-h-0 flex-col`) |
+| **Tables** | Product List AG Grid desktop + card fallback mobile — see [datatable-and-drawer-standard.md](../04-uiux/standards/datatable-and-drawer-standard.md) |
 | **Forms** | Single column on mobile; min 44×44px tap targets |
 | **AG Grid** | Fixed/min height container; mobile-এ column reduce বা card view |
 | **Charts** | `min-h` on container — Recharts width/height 0 error avoid |
@@ -191,6 +214,35 @@ Tenant C: Core + Hospital + POS
 প্রতিটি `Menus/*.md` ও module `UI.md`-এ mobile behavior লিখতে হবে (breakpoint, drawer, table fallback).
 
 ---
+
+## 5b. Dark mode — mandatory in all UI
+
+> **Dark mode সব screen-এ কাজ করতে হবে।** Light-only UI allowed নয়।
+
+| Area | Rule |
+|------|------|
+| **AG Grid** | `useIsDark()` hook → container-এ `ag-theme-quartz-dark` class toggle করতে হবে |
+| **Colors** | সব রঙ Tailwind/shadcn CSS variable দিয়ে — `bg-card`, `bg-background`, `text-foreground`, `border`, `muted-foreground` etc. |
+| **Forbidden** | `bg-white`, `text-gray-900`, `#ffffff`, বা যেকোনো hardcoded light color — **নিষিদ্ধ** |
+| **Icons/Badges** | `text-foreground` বা `currentColor` — fixed রঙ নয় |
+| **Charts (Recharts)** | `stroke="currentColor"` বা CSS variable; hex hardcode নয় |
+| **Sheets/Drawers** | shadcn `Sheet` auto dark — custom overrides থাকলে `dark:` variant লিখতে হবে |
+| **Images/Logos** | Dark-mode logo variant বা `invert dark:invert-0` |
+
+```tsx
+// ✅ Correct
+const isDark = useIsDark();
+<div className={cn("ag-theme-quartz", isDark && "ag-theme-quartz-dark")}>
+
+// ❌ Forbidden
+<div style={{ background: "#ffffff" }}>
+<p className="text-gray-900">
+```
+
+**Checklist before every screen:** light ✓ → dark ✓ → mobile ✓
+
+---
+
 ## 6. Documentation-first — plans must update MD
 
 > **নতুন plan = architecture/development MD update বাধ্যতামূলক।** Code আগে, doc পরে — নিষিদ্ধ।
@@ -261,6 +313,8 @@ Optional module integration (যেমন Manufacturing → Inventory + Accounti
 │ Module off → no breakage │ Services + Events + APIs only   │
 │ SaaS multi-tenant │ Scale per module independently         │
 │ CRUD = List + Drawer (?create / ?view / ?edit)              │
+│ List = AG Grid MANDATORY (product-grid.tsx pattern)         │
+│ Dark mode = MANDATORY (useIsDark + CSS vars, no hardcode)   │
 │ Mobile-first mandatory │ Tables/drawers work on phone        │
 │ New plan → update Architecture + Build Guide + CHANGELOG    │
 │ Docs Ready → then code                                      │
@@ -284,5 +338,5 @@ Optional module integration (যেমন Manufacturing → Inventory + Accounti
 ---
 
 **Platform:** AgainERP  
-**Last Updated:** 2026-06-17  
+**Last Updated:** 2026-06-21  
 **Status:** Active

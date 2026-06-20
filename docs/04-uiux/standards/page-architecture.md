@@ -82,7 +82,7 @@ Max 5 levels. Mobile: last 2 segments. See [navigation.md](./navigation.md).
 
 ## Filters (List Pages)
 
-Below header, above content:
+Below header, above content. **Grid:** Product List AG Grid pattern — [datatable-and-drawer-standard.md](./datatable-and-drawer-standard.md).
 
 | Element | Position |
 |---------|----------|

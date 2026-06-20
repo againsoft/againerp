@@ -467,6 +467,22 @@ Business modules implement **ERP and commerce domains**. Each depends on **Core 
 
 ---
 
+### Service
+
+| Field | Value |
+|-------|-------|
+| **Depends On** | Core: Users, Permissions, Settings, Contacts, Workflow, Approvals, Activities, Media, Notifications |
+| **Provides To** | CRM (service history), Sales (billable lines), Helpdesk (escalation target), Project (project-type jobs) |
+| **Consumes From** | Sales (`SalesService` — quotes/invoices), Finance (posting events), Inventory (`InventoryService.issue`), HR (technicians), optional Helpdesk, Project, Timesheet, Booking |
+| **Events Produced** | `service.order.*`, `service.work_order.*`, `service.billing.ready`, `service.parts.consumed`, `service.contract.renewal_due`, `service.sla.breached` |
+| **Events Consumed** | `sales.order.confirmed`, `helpdesk.ticket.escalated`, `inventory.stock.reserved`, `finance.invoice.posted` |
+| **Services Used** | `ContactService`, `CatalogService`, `InventoryService`, `SalesService`, `FinanceService`, `WorkflowService`, `ApprovalService`, `NotificationService`, `MediaService` |
+| **Services Provided** | `ServiceCatalogService.getItem`, `ServiceOrderService.getOrder`, `ServiceAssetService.getAssetHistory`, `ServiceContractService.getActiveContracts`, `ServiceScheduleService.getAvailability` |
+
+**Deep dive:** [SERVICE_MODULE_ARCHITECTURE.md](../03-business-modules/service/SERVICE_MODULE_ARCHITECTURE.md)
+
+---
+
 ## 6. Industry Layer Dependencies
 
 Industry modules are **installable verticals** (Hospital, School, Restaurant, Manufacturing, Marketplace, …) that plug into the Business Layer spine without forking Core.

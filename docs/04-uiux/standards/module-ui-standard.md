@@ -29,15 +29,17 @@ Every AgainERP module must implement the **same view types**. No custom page pat
 
 ## Required Views
 
-| View | Route Pattern | Description |
-|------|---------------|-------------|
-| **Dashboard** | `/{module}/dashboard` | KPIs, widgets, activity |
-| **List View** | `/{module}/{entity}` | Searchable table |
-| **Create View** | `/{module}/{entity}/create` | New record form |
-| **Edit View** | `/{module}/{entity}/{id}/edit` | Edit existing (or same as details) |
-| **Details View** | `/{module}/{entity}/{id}` | Record page + tabs + chatter |
+| View | Route / URL | Description |
+|------|-------------|-------------|
+| **Dashboard** | `/{module}` or `/{module}/dashboard` | KPIs, widgets, activity |
+| **List View** | `/{module}/{entity}` | Product List **DataTable** (AG Grid + mobile cards) |
+| **Create** | `/{module}/{entity}?create=1` | Right **Sheet** drawer — form (not `/create` route) |
+| **View** | `/{module}/{entity}?view={id}` | Right **Sheet** drawer — read-only |
+| **Edit** | `/{module}/{entity}?edit={id}` | Right **Sheet** drawer — form |
 | **Reports** | `/{module}/reports` | Module reports index |
 | **Settings** | `/{module}/settings` | Module configuration |
+
+**Standard spec:** [datatable-and-drawer-standard.md](./datatable-and-drawer-standard.md) · [PROJECT_COMMON_RULES.md](../../00-foundation/PROJECT_COMMON_RULES.md) §4
 
 ---
 

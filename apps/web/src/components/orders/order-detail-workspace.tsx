@@ -13,6 +13,7 @@ import {
   Printer,
   Sparkles,
   Truck,
+  X,
 } from "lucide-react";
 import { toast } from "sonner";
 import type { Order, OrderStatus } from "@/lib/mock-data/orders";
@@ -33,24 +34,22 @@ import { statusBadgeVariant } from "@/lib/order-status";
 import { useOrderStoreHydrated } from "@/lib/hooks/use-order-store-hydrated";
 import { ActivityTriggerButton } from "@/components/activity/activity-trigger-button";
 
-type Props = { orderId: string };
+type Props = { orderId: string; isDrawer?: boolean; onClose?: () => void };
 
-export function OrderDetailWorkspace({ orderId }: Props) {
+export function OrderDetailWorkspace({ orderId, isDrawer = false, onClose }: Props) {
   const hydrated = useOrderStoreHydrated();
   const order = useOrderStore((s) => s.orders.find((o) => o.id === orderId));
   const updateStatus = useOrderStore((s) => s.updateStatus);
 
   if (!hydrated) {
     return (
-      <div className="rounded-xl border border-input bg-card p-10 text-center text-sm text-muted-foreground">
-        Loading order…
-      </div>
+      <div className="p-10 text-center text-sm text-muted-foreground">Loading order…</div>
     );
   }
 
   if (!order) {
     return (
-      <div className="rounded-xl border border-dashed p-10 text-center">
+      <div className="p-10 text-center">
         <p className="text-sm font-medium">Order not found</p>
         <Button variant="ghost" size="sm" asChild className="mt-2">
           <Link href="/orders/all">Back to orders</Link>
@@ -70,9 +69,251 @@ export function OrderDetailWorkspace({ orderId }: Props) {
 
   const showAiHint = order.aiInsights.riskLevel !== "low";
 
+  /* ── Shared sub-components ── */
+  const metaSidebar = (
+    <div className="space-y-3">
+      <MetaBlock title="Customer">
+        <p className="font-medium">{order.customer.name}</p>
+        <p className="mt-0.5 text-[11px] text-muted-foreground capitalize">{order.customer.group}</p>
+        <div className="mt-2 space-y-1.5">
+          <a href={`tel:${order.customer.phone}`} className="flex items-center gap-1.5 text-[11px] text-primary">
+            <Phone className="h-3 w-3" /> {order.customer.phone}
+          </a>
+          <a href={`mailto:${order.customer.email}`} className="flex items-center gap-1.5 text-[11px] text-primary">
+            <Mail className="h-3 w-3" /> {order.customer.email}
+          </a>
+        </div>
+      </MetaBlock>
+
+      <MetaBlock title="Shipping">
+        <div className="flex gap-2 text-[11px] leading-relaxed text-muted-foreground">
+          <MapPin className="mt-0.5 h-3 w-3 shrink-0" />
+          <div>
+            <p>{order.shipping.address}</p>
+            <p>{order.shipping.city}, {order.shipping.region}</p>
+          </div>
+        </div>
+        <Button
+          variant="ghost" size="sm"
+          className="mt-2 h-6 px-0 text-[10px] text-primary"
+          onClick={() => { navigator.clipboard?.writeText(order.shipping.address); toast.success("Address copied"); }}
+        >
+          <Copy className="mr-1 h-3 w-3" /> Copy
+        </Button>
+      </MetaBlock>
+
+      <MetaBlock title="Payment">
+        <p className="text-sm font-medium capitalize">{order.payment.method}</p>
+        <p className="mt-1 text-[11px] text-muted-foreground">
+          Paid {formatCurrency(order.payment.paidAmount)}
+          {order.payment.dueAmount > 0 && ` · Due ${formatCurrency(order.payment.dueAmount)}`}
+        </p>
+        {order.payment.transactionId && (
+          <p className="mt-1 truncate font-mono text-[10px] text-muted-foreground">{order.payment.transactionId}</p>
+        )}
+      </MetaBlock>
+
+      {order.tags.length > 0 && (
+        <div className="flex flex-wrap gap-1 px-1">
+          {order.tags.map((t) => (
+            <Badge key={t} variant="outline" className="text-[9px]">{t}</Badge>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+
+  const itemsCard = (
+    <div className="overflow-hidden rounded-xl border border-input/70 bg-card shadow-sm">
+      <div className="border-b border-input/60 px-4 py-2.5">
+        <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+          {order.items.length} item{order.items.length !== 1 ? "s" : ""}
+        </p>
+      </div>
+      <div className="divide-y divide-input/50">
+        {order.items.map((item) => (
+          <div key={item.id} className="flex items-center gap-3 px-4 py-2.5">
+            {item.imageUrl && (
+              <img src={item.imageUrl} alt="" className="h-9 w-9 shrink-0 rounded-md object-cover" />
+            )}
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-sm font-medium">{item.name}</p>
+              <p className="text-[10px] text-muted-foreground">
+                {item.sku}{item.variant ? ` · ${item.variant}` : ""}
+              </p>
+            </div>
+            <div className="shrink-0 text-right">
+              <p className="text-sm font-medium tabular-nums">{formatCurrency(item.lineTotal)}</p>
+              <p className="text-[10px] tabular-nums text-muted-foreground">
+                {formatCurrency(item.unitPrice)} × {item.quantity}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="space-y-1 border-t border-input/60 bg-muted/10 px-4 py-3 text-xs">
+        <TotalRow label="Subtotal" value={formatCurrency(order.subtotal)} />
+        {order.discountAmount > 0 && (
+          <TotalRow label="Discount" value={`−${formatCurrency(order.discountAmount)}`} />
+        )}
+        <TotalRow label="Tax" value={formatCurrency(order.taxAmount)} />
+        <TotalRow label="Shipping" value={formatCurrency(order.shippingAmount)} />
+        <TotalRow label="Total" value={formatCurrency(order.grandTotal)} bold />
+      </div>
+    </div>
+  );
+
+  const dropdown = (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" size="sm" className="h-8 w-8 p-0">
+          <MoreHorizontal className="h-4 w-4" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        {isDrawer && (
+          <>
+            <DropdownMenuItem asChild>
+              <Link href={`/orders/${order.id}`}>Open full view</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href={`/orders/${order.id}/edit`}>
+                <Edit2 className="mr-2 h-3.5 w-3.5" /> Edit
+              </Link>
+            </DropdownMenuItem>
+          </>
+        )}
+        <DropdownMenuItem onClick={() => openOrderPrint(order.id, "invoice")}>
+          <FileText className="mr-2 h-3.5 w-3.5" /> Print invoice
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => openOrderPrint(order.id, "packing-slip")}>
+          <Printer className="mr-2 h-3.5 w-3.5" /> Packing slip
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => toast.info("Duplicate order")}>Duplicate</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => toast.info("Cancel order")}>Cancel order</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+
+  /* ── DRAWER layout ── */
+  if (isDrawer) {
+    return (
+      <div className="flex h-full flex-col overflow-hidden">
+        {/* Sticky header */}
+        <div className="shrink-0 border-b bg-background px-5 py-3">
+          {/* Row 1: order# + badge + close */}
+          <div className="flex items-center gap-2">
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-center gap-2">
+                <h2 className="text-base font-semibold">{order.orderNumber}</h2>
+                <Badge variant={statusBadgeVariant(order.status)} className="text-[10px]">
+                  {ORDER_STATUS_LABELS[order.status]}
+                </Badge>
+              </div>
+              <p className="text-[11px] text-muted-foreground">
+                {new Date(order.orderDate).toLocaleString()} · {order.source}
+              </p>
+            </div>
+            {onClose && (
+              <Button variant="ghost" size="sm" className="h-8 w-8 shrink-0 p-0" onClick={onClose}>
+                <X className="h-4 w-4" />
+              </Button>
+            )}
+          </div>
+          {/* Row 2: actions */}
+          <div className="mt-2.5 flex items-center gap-2">
+            <Select
+              className="h-8 flex-1 text-xs"
+              value={order.status}
+              onChange={(e) => {
+                updateStatus(order.id, e.target.value as OrderStatus);
+                toast.success("Status updated");
+              }}
+            >
+              {Object.entries(ORDER_STATUS_LABELS).map(([k, v]) => (
+                <option key={k} value={k}>{v}</option>
+              ))}
+            </Select>
+            <ActivityTriggerButton
+              entity={{ type: "order", id: order.id, label: order.orderNumber }}
+              className="h-8 w-8 shrink-0"
+            />
+            <Button variant="outline" size="sm" className="h-8 shrink-0 px-3" asChild>
+              <Link href={`/orders/${order.id}/edit`}>
+                <Edit2 className="mr-1.5 h-3.5 w-3.5" /> Edit
+              </Link>
+            </Button>
+            <Button size="sm" className="h-8 shrink-0 px-3" onClick={() => toast.info("Create fulfillment")}>
+              <Truck className="mr-1.5 h-3.5 w-3.5" /> Fulfill
+            </Button>
+            {dropdown}
+          </div>
+        </div>
+
+        {/* Scrollable body */}
+        <div className="flex-1 overflow-y-auto">
+          {/* Status strip */}
+          <div className="flex flex-wrap items-center gap-2 border-b bg-muted/20 px-5 py-2.5">
+            <StatusChip
+              label={order.paymentStatus === "paid" ? "Paid" : order.paymentStatus}
+              tone={order.paymentStatus === "paid" ? "success" : "warning"}
+            />
+            <StatusChip
+              label={fulfillmentLabel}
+              tone={order.shipmentStatus === "delivered" ? "success" : "info"}
+            />
+            <span className="text-[11px] text-muted-foreground">{order.branch}</span>
+            <span className="ml-auto text-sm font-semibold tabular-nums">{formatCurrency(order.grandTotal)}</span>
+          </div>
+
+          {/* AI hint */}
+          {showAiHint && (
+            <div className="flex items-center gap-2 border-b bg-amber-50/80 px-5 py-2.5 text-[11px] dark:bg-amber-950/20">
+              <Sparkles className="h-3.5 w-3.5 shrink-0 text-amber-600" />
+              <span className="text-muted-foreground">
+                AI: {order.aiInsights.riskLevel} risk ({order.aiInsights.riskScore}/100) — {order.aiInsights.riskReasons[0]}
+              </span>
+            </div>
+          )}
+
+          {/* Shipment tracking */}
+          {(order.shipment.courier || order.shipment.trackingNumber) && (
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b px-5 py-2.5">
+              <div className="flex items-center gap-2 text-xs">
+                <Truck className="h-4 w-4 text-muted-foreground" />
+                <span className="font-medium">{order.shipment.courier ?? "Courier"}</span>
+                {order.shipment.trackingNumber && (
+                  <span className="font-mono text-[11px] text-muted-foreground">{order.shipment.trackingNumber}</span>
+                )}
+              </div>
+              {order.shipment.trackingUrl && (
+                <Button variant="ghost" size="sm" className="h-7 text-xs" asChild>
+                  <a href={order.shipment.trackingUrl} target="_blank" rel="noreferrer">Track</a>
+                </Button>
+              )}
+            </div>
+          )}
+
+          {/* 2-column body */}
+          <div className="grid gap-0 sm:grid-cols-[1fr_240px]">
+            {/* Left — items */}
+            <div className="border-r p-4">
+              {itemsCard}
+            </div>
+            {/* Right — meta */}
+            <div className="p-4">
+              {metaSidebar}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  /* ── FULL PAGE layout ── */
   return (
     <div className="mx-auto max-w-6xl space-y-4">
-      {/* Compact header */}
+      {/* Header */}
       <div className="flex flex-wrap items-center gap-3">
         <Button variant="ghost" size="sm" asChild className="-ml-2 h-8 px-2">
           <Link href="/orders/all">
@@ -100,9 +341,7 @@ export function OrderDetailWorkspace({ orderId }: Props) {
           }}
         >
           {Object.entries(ORDER_STATUS_LABELS).map(([k, v]) => (
-            <option key={k} value={k}>
-              {v}
-            </option>
+            <option key={k} value={k}>{v}</option>
           ))}
         </Select>
         <ActivityTriggerButton
@@ -117,23 +356,7 @@ export function OrderDetailWorkspace({ orderId }: Props) {
         <Button size="sm" className="h-8" onClick={() => toast.info("Create fulfillment")}>
           <Truck className="mr-1 h-3.5 w-3.5" /> Fulfill
         </Button>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="sm" className="h-8 w-8 p-0">
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={() => openOrderPrint(order.id, "invoice")}>
-              <FileText className="mr-2 h-3.5 w-3.5" /> Print invoice
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => openOrderPrint(order.id, "packing-slip")}>
-              <Printer className="mr-2 h-3.5 w-3.5" /> Packing slip
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => toast.info("Duplicate order")}>Duplicate</DropdownMenuItem>
-            <DropdownMenuItem onClick={() => toast.info("Cancel order")}>Cancel order</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        {dropdown}
       </div>
 
       {/* Status strip */}
@@ -144,6 +367,7 @@ export function OrderDetailWorkspace({ orderId }: Props) {
         <span className="ml-auto text-sm font-semibold tabular-nums">{formatCurrency(order.grandTotal)}</span>
       </div>
 
+      {/* AI hint */}
       {showAiHint && (
         <div className="flex items-center gap-2 rounded-lg border border-amber-200/80 bg-amber-50/80 px-3 py-2 text-[11px] dark:border-amber-900/50 dark:bg-amber-950/20">
           <Sparkles className="h-3.5 w-3.5 shrink-0 text-amber-600" />
@@ -153,6 +377,7 @@ export function OrderDetailWorkspace({ orderId }: Props) {
         </div>
       )}
 
+      {/* Shipment tracking */}
       {(order.shipment.courier || order.shipment.trackingNumber) && (
         <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-input/70 bg-card px-4 py-2.5">
           <div className="flex items-center gap-2 text-xs">
@@ -164,126 +389,23 @@ export function OrderDetailWorkspace({ orderId }: Props) {
           </div>
           {order.shipment.trackingUrl && (
             <Button variant="ghost" size="sm" className="h-7 text-xs" asChild>
-              <a href={order.shipment.trackingUrl} target="_blank" rel="noreferrer">
-                Track shipment
-              </a>
+              <a href={order.shipment.trackingUrl} target="_blank" rel="noreferrer">Track shipment</a>
             </Button>
           )}
         </div>
       )}
 
+      {/* Items + meta grid */}
       <div className="grid gap-4 lg:grid-cols-[1fr_260px]">
-        {/* Items + totals — single card */}
-        <div className="overflow-hidden rounded-xl border border-input/70 bg-card shadow-sm">
-          <div className="border-b border-input/60 px-4 py-2.5">
-            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-              {order.items.length} item{order.items.length !== 1 ? "s" : ""}
-            </p>
-          </div>
-          <div className="divide-y divide-input/50">
-            {order.items.map((item) => (
-              <div key={item.id} className="flex items-center gap-3 px-4 py-2.5">
-                {item.imageUrl && (
-                  <img src={item.imageUrl} alt="" className="h-9 w-9 rounded-md object-cover" />
-                )}
-                <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-medium">{item.name}</p>
-                  <p className="text-[10px] text-muted-foreground">
-                    {item.sku}
-                    {item.variant ? ` · ${item.variant}` : ""}
-                  </p>
-                </div>
-                <p className="text-[11px] tabular-nums text-muted-foreground">
-                  {formatCurrency(item.unitPrice)} × {item.quantity}
-                </p>
-                <p className="w-20 text-right text-sm font-medium tabular-nums">{formatCurrency(item.lineTotal)}</p>
-              </div>
-            ))}
-          </div>
-          <div className="space-y-1 border-t border-input/60 bg-muted/10 px-4 py-3 text-xs">
-            <TotalRow label="Subtotal" value={formatCurrency(order.subtotal)} />
-            {order.discountAmount > 0 && (
-              <TotalRow label="Discount" value={`−${formatCurrency(order.discountAmount)}`} />
-            )}
-            <TotalRow label="Tax" value={formatCurrency(order.taxAmount)} />
-            <TotalRow label="Shipping" value={formatCurrency(order.shippingAmount)} />
-            <TotalRow label="Total" value={formatCurrency(order.grandTotal)} bold />
-          </div>
-        </div>
-
-        {/* Sidebar meta */}
-        <div className="space-y-3">
-          <MetaBlock title="Customer">
-            <p className="font-medium">{order.customer.name}</p>
-            <p className="mt-0.5 text-[11px] text-muted-foreground capitalize">{order.customer.group}</p>
-            <div className="mt-2 space-y-1.5">
-              <a href={`tel:${order.customer.phone}`} className="flex items-center gap-1.5 text-[11px] text-primary">
-                <Phone className="h-3 w-3" /> {order.customer.phone}
-              </a>
-              <a href={`mailto:${order.customer.email}`} className="flex items-center gap-1.5 text-[11px] text-primary">
-                <Mail className="h-3 w-3" /> {order.customer.email}
-              </a>
-            </div>
-          </MetaBlock>
-
-          <MetaBlock title="Shipping">
-            <div className="flex gap-2 text-[11px] leading-relaxed text-muted-foreground">
-              <MapPin className="mt-0.5 h-3 w-3 shrink-0" />
-              <div>
-                <p>{order.shipping.address}</p>
-                <p>
-                  {order.shipping.city}, {order.shipping.region}
-                </p>
-              </div>
-            </div>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="mt-2 h-6 px-0 text-[10px] text-primary"
-              onClick={() => {
-                navigator.clipboard?.writeText(order.shipping.address);
-                toast.success("Address copied");
-              }}
-            >
-              <Copy className="mr-1 h-3 w-3" /> Copy
-            </Button>
-          </MetaBlock>
-
-          <MetaBlock title="Payment">
-            <p className="text-sm font-medium capitalize">{order.payment.method}</p>
-            <p className="mt-1 text-[11px] text-muted-foreground">
-              Paid {formatCurrency(order.payment.paidAmount)}
-              {order.payment.dueAmount > 0 && ` · Due ${formatCurrency(order.payment.dueAmount)}`}
-            </p>
-            {order.payment.transactionId && (
-              <p className="mt-1 truncate font-mono text-[10px] text-muted-foreground">{order.payment.transactionId}</p>
-            )}
-          </MetaBlock>
-
-          {order.tags.length > 0 && (
-            <div className="flex flex-wrap gap-1 px-1">
-              {order.tags.map((t) => (
-                <Badge key={t} variant="outline" className="text-[9px]">
-                  {t}
-                </Badge>
-              ))}
-            </div>
-          )}
-        </div>
+        {itemsCard}
+        {metaSidebar}
       </div>
     </div>
   );
 }
 
-function StatusChip({
-  label,
-  tone,
-}: {
-  label: string;
-  tone: "success" | "warning" | "info";
-}) {
-  const dot =
-    tone === "success" ? "bg-emerald-500" : tone === "warning" ? "bg-amber-500" : "bg-blue-500";
+function StatusChip({ label, tone }: { label: string; tone: "success" | "warning" | "info" }) {
+  const dot = tone === "success" ? "bg-emerald-500" : tone === "warning" ? "bg-amber-500" : "bg-blue-500";
   return (
     <span className="inline-flex items-center gap-1.5 rounded-full bg-background px-2.5 py-1 text-[11px] capitalize">
       <span className={`h-1.5 w-1.5 rounded-full ${dot}`} />

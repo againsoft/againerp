@@ -162,6 +162,8 @@ Finance
 ├── /finance/tax                          Tax configuration & returns
 ├── /finance/reconciliation               Bank reconciliation
 ├── /finance/reconciliation/[id]          Reconciliation workspace
+├── /finance/cheques                      Cheque register (PDC schedule)
+├── /finance/cheques?tab=calendar         PDC maturity calendar
 ├── /finance/reports                      Financial reports hub
 ├── /finance/audit                        Audit log explorer
 ├── /finance/ai-insights                  AI Finance Assistant queue
@@ -638,6 +640,77 @@ Uses Core `tax_classes` / `tax_rules` where shared with catalog/checkout; Financ
 
 ---
 
+## 11A. Cheque Management (Post-Dated Cheques)
+
+**Route:** `/finance/cheques` · Calendar: `?tab=calendar`
+
+**Post-dated cheques (PDC)** track instruments received from customers (AR) or issued to vendors (AP) before bank clearance. One AR invoice, AP bill, receipt, or payment may have **multiple cheques** with different maturity dates (installment schedule).
+
+### Cheque Instrument Entity
+
+**Table:** `finance_cheques`
+
+| Field | Notes |
+|-------|-------|
+| `id` | UUID |
+| `tenant_id`, `company_id` | Scope |
+| `direction` | `received` (customer) · `issued` (vendor) |
+| `cheque_number` | Bank instrument number |
+| `party` | Customer or vendor name (denormalized display) |
+| `bank_account_id` | Deposit / draw account |
+| `amount` | Face value |
+| `issue_date` | Cheque date |
+| `maturity_date` | Due for deposit (received) or presentation (issued) |
+| `linked_doc_type` | `ar_invoice` · `ap_bill` · `receipt` · `payment` |
+| `linked_doc_id` | FK to source document |
+| `linked_doc_number` | Display reference (e.g. `INV-1042`) |
+| `status` | Lifecycle below |
+| `journal_entry_id` | Optional — on deposit/clear posting |
+
+### Status Lifecycle
+
+```text
+received:  issued → deposited → cleared
+           issued → bounced → re-presented → cleared
+
+issued:    issued → presented → cleared
+           issued → bounced → re-presented → cleared
+```
+
+| Status | Meaning |
+|--------|---------|
+| `issued` | Registered, not yet at bank |
+| `deposited` / `presented` | Sent to bank for collection/payment |
+| `cleared` | Funds settled — triggers bank GL posting |
+| `bounced` | Dishonoured — AR/AP balance restored |
+| `re-presented` | Bounced cheque resubmitted |
+
+### UI Surfaces
+
+| Surface | Purpose |
+|---------|---------|
+| **Cheque Register** | AG Grid — filter by direction, status, maturity; KPI row (collect/pay this week, pending deposit, bounced) |
+| **PDC Calendar** | Month grid — maturity dates, overdue panel, upcoming 14 days |
+| **Document Cheques tab** | On AR invoice, AP bill, receipt, payment drawers — list linked cheques, add schedule |
+| **Registration form** | Multi-line schedule, split evenly, validate total ≤ open balance |
+
+### GL Posting Rules
+
+| Event | Journal (simplified) |
+|-------|----------------------|
+| PDC received (register only) | No GL — off-balance memo until deposit |
+| Deposit received cheque | DR Bank in transit · CR AR (or PDC clearing account) |
+| Clear received cheque | DR Bank · CR Bank in transit |
+| Bounce received cheque | Reverse deposit + restore AR open balance |
+| Issue vendor PDC | DR AP · CR PDC payable (or memo) |
+| Clear issued cheque | DR PDC payable · CR Bank |
+
+**Events:** `finance.cheque.registered`, `finance.cheque.deposited`, `finance.cheque.cleared`, `finance.cheque.bounced`
+
+**Permissions:** `finance.cheques.view`, `finance.cheques.manage`, `finance.cheques.deposit`, `finance.cheques.clear`
+
+---
+
 ## 12. Reports
 
 **Route:** `/finance/reports`
@@ -1032,6 +1105,7 @@ Namespace: `finance.*`
 | `finance.payment.posted` | `payment_id` | Purchase |
 | `finance.expense.posted` | `expense_id` | HR (future) |
 | `finance.reconciliation.completed` | `reconciliation_id` | Notifications |
+| `finance.cheque.cleared` | `cheque_id`, `direction`, `amount` | Bank reconciliation |
 | `finance.period.closed` | `period_id` | All modules (block back-post) |
 
 ### Subscribed by Finance
@@ -1055,7 +1129,7 @@ Namespace: `finance.*`
 | **Journals** | `finance_journals`, `finance_journal_entries`, `finance_journal_entry_lines`, `finance_posting_rules` |
 | **AR** | `finance_ar_invoices`, `finance_ar_open_items`, `finance_ar_allocations` |
 | **AP** | `finance_ap_bills`, `finance_ap_open_items`, `finance_ap_allocations` |
-| **Cash** | `finance_payments`, `finance_receipts`, `finance_bank_accounts` |
+| **Cash** | `finance_payments`, `finance_receipts`, `finance_bank_accounts`, `finance_cheques` |
 | **Expenses** | `finance_expenses`, `finance_expense_lines`, `finance_expense_categories` |
 | **Tax** | `finance_taxes`, `finance_tax_groups`, `finance_tax_report_snapshots` |
 | **Reconciliation** | `finance_bank_statements`, `finance_bank_statement_lines`, `finance_reconciliations` |

@@ -1,432 +1,480 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import Link from "next/link";
 import {
-  Area,
-  AreaChart,
-  CartesianGrid,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
-import {
-  ArrowRight,
-  ExternalLink,
-  Plus,
-  RefreshCw,
-  Search,
-  Sparkles,
+  MousePointerClick, Eye, Percent, BarChart2,
+  ChevronUp, ChevronDown, FileText, Link2, ArrowRightLeft,
+  Braces, Map, Bot, KeyRound, Globe, AlertTriangle, CheckCircle2, XCircle,
+  ArrowRight, Wifi, Shield,
 } from "lucide-react";
-import { toast } from "sonner";
 import {
-  aiSeoSuggestions,
-  auditIssuesSeed,
-  ENTITY_TYPE_LABELS,
-  issueBreakdown,
-  keywordsSeed,
-  metaRecordsSeed,
-  organicTrafficChart,
-  redirectsSeed,
-  SEVERITY_LABELS,
-  seoHealthScore,
-  seoKpis,
-  sitemapsSeed,
-  type SeoEntityType,
-  type SeoIssueSeverity,
-  type SeoTab,
+  gscSummary, gscChart, gscQueriesSeed,
+  seoHealthScore, auditIssuesSeed, AUDIT_CATEGORY_SCORES, AUDIT_CATEGORY_LABELS,
+  keywordsSeed, metaRecordsSeed, redirectRulesSeed,
+  schemaSeed, sitemapIndex, sitemapFilesSeed,
+  domainOverview, gscConnection, gscIndexStatus,
 } from "@/lib/mock-data/seo";
 import { cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Select } from "@/components/ui/select";
-import { SeoNav } from "@/components/seo/seo-nav";
 
-function severityVariant(severity: SeoIssueSeverity) {
-  if (severity === "high") return "warning" as const;
-  if (severity === "medium") return "secondary" as const;
-  return "muted" as const;
-}
+/* ─── Sparkline ────────────────────────────────────────────────────────────── */
 
-function scoreColor(score: number) {
-  if (score >= 80) return "text-emerald-600";
-  if (score >= 60) return "text-amber-600";
-  return "text-red-500";
-}
-
-function DashboardTab() {
+function Spark({ data, color }: { data: number[]; color: string }) {
+  const max = Math.max(...data); const min = Math.min(...data); const range = max - min || 1;
+  const w = 120; const h = 32; const pad = 2;
+  const pts = data.map((v, i) => {
+    const x = pad + (i / (data.length - 1)) * (w - pad * 2);
+    const y = h - pad - ((v - min) / range) * (h - pad * 2);
+    return `${x},${y}`;
+  }).join(" ");
   return (
-    <div className="space-y-4">
-      <div className="flex flex-wrap gap-2">
-        {["Run audit", "Generate sitemap", "Bulk meta fix", "Add redirect"].map((label) => (
-          <Button
-            key={label}
-            variant="outline"
-            size="sm"
-            onClick={() => toast.info(`${label} — prototype`)}
-          >
-            {label === "Run audit" && <RefreshCw className="mr-1.5 h-3.5 w-3.5" />}
-            {label === "Add redirect" && <Plus className="mr-1.5 h-3.5 w-3.5" />}
-            {label}
-          </Button>
-        ))}
-      </div>
+    <svg viewBox={`0 0 ${w} ${h}`} style={{ width: 80, height: 24 }} preserveAspectRatio="none">
+      <polyline fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" points={pts} />
+    </svg>
+  );
+}
 
-      <div className="grid gap-3 lg:grid-cols-4">
-        <div className="flex flex-col items-center justify-center rounded-lg border border-input bg-card p-4 lg:col-span-1">
-          <p className="text-xs text-muted-foreground">SEO Health Score</p>
-          <p className={cn("mt-1 text-4xl font-bold", scoreColor(seoHealthScore))}>
-            {seoHealthScore}
-          </p>
-          <p className="text-xs text-muted-foreground">/ 100</p>
-          <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-muted">
-            <div
-              className="h-full rounded-full bg-emerald-500"
-              style={{ width: `${seoHealthScore}%` }}
-            />
+function Delta({ v, invert = false, suffix = "%" }: { v: number; invert?: boolean; suffix?: string }) {
+  const pos = invert ? v < 0 : v > 0;
+  if (v === 0) return <span className="text-[10px] text-muted-foreground">—</span>;
+  return (
+    <span className={cn("inline-flex items-center gap-0.5 text-[10px] font-semibold", pos ? "text-emerald-600" : "text-red-500")}>
+      {pos ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
+      {Math.abs(v)}{suffix}
+    </span>
+  );
+}
+
+/* ─── GSC KPI strip ────────────────────────────────────────────────────────── */
+
+const clicksData  = gscChart.map((d) => d.clicks);
+const impressData = gscChart.map((d) => d.impressions);
+
+function GscStrip() {
+  const kpis = [
+    { label: "Clicks",        value: gscSummary.clicks.toLocaleString(),      delta: gscSummary.clicksDelta,      color: "#6366f1", data: clicksData,  icon: <MousePointerClick className="h-3.5 w-3.5" />,              invert: false },
+    { label: "Impressions",   value: gscSummary.impressions.toLocaleString(), delta: gscSummary.impressionsDelta, color: "#22c55e", data: impressData, icon: <Eye className="h-3.5 w-3.5" />,                           invert: false },
+    { label: "Avg. CTR",      value: `${gscSummary.ctr}%`,                   delta: gscSummary.ctrDelta,         color: "#3b82f6", data: clicksData,  icon: <Percent className="h-3.5 w-3.5" />,                       invert: false },
+    { label: "Avg. Position", value: gscSummary.avgPosition.toFixed(1),       delta: gscSummary.positionDelta,    color: "#f59e0b", data: clicksData,  icon: <BarChart2 className="h-3.5 w-3.5" />,                     invert: true  },
+  ];
+  return (
+    <div className="grid grid-cols-2 gap-3 xl:grid-cols-4">
+      {kpis.map((k) => (
+        <div key={k.label} className="flex flex-col gap-1 rounded-2xl border border-input bg-card px-4 py-3 shadow-sm">
+          <div className="flex items-center justify-between text-[11px] text-muted-foreground">
+            <span className="flex items-center gap-1">{k.icon} {k.label}</span>
+            <Spark data={k.data} color={k.color} />
+          </div>
+          <div className="flex items-end justify-between">
+            <span className="text-2xl font-bold tabular-nums">{k.value}</span>
+            <Delta v={k.delta} invert={k.invert} />
+          </div>
+          <p className="text-[10px] text-muted-foreground">{gscSummary.dateRange}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* ─── Health score + category bars ────────────────────────────────────────── */
+
+function HealthPanel() {
+  const score = seoHealthScore;
+  const ring  = 2 * Math.PI * 40;
+  const dash  = (score / 100) * ring;
+  const color = score >= 80 ? "#22c55e" : score >= 60 ? "#f59e0b" : "#ef4444";
+  const label = score >= 80 ? "Good" : score >= 60 ? "Needs work" : "Poor";
+  const cats  = Object.entries(AUDIT_CATEGORY_SCORES) as [string, number][];
+  const catCl = (s: number) => s >= 75 ? "bg-emerald-500" : s >= 50 ? "bg-amber-400" : "bg-red-400";
+  const openHigh = auditIssuesSeed.filter((i) => i.status === "open" && i.severity === "high").length;
+  const openAll  = auditIssuesSeed.filter((i) => i.status === "open").length;
+
+  return (
+    <div className="rounded-2xl border border-input bg-card p-5 shadow-sm">
+      <div className="mb-4 flex items-center justify-between">
+        <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">SEO Health</p>
+        <Link href="/seo/audit" className="flex items-center gap-1 text-[11px] text-primary hover:underline">Full audit <ArrowRight className="h-3 w-3" /></Link>
+      </div>
+      <div className="flex items-center gap-5">
+        <div className="relative shrink-0">
+          <svg width="96" height="96" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" strokeWidth="8" className="text-muted/20" />
+            <circle cx="50" cy="50" r="40" fill="none" stroke={color} strokeWidth="8"
+              strokeDasharray={`${dash} ${ring - dash}`} strokeDashoffset={ring / 4} strokeLinecap="round" />
+          </svg>
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <span className="text-2xl font-bold" style={{ color }}>{score}</span>
+            <span className="text-[9px] text-muted-foreground">/ 100</span>
           </div>
         </div>
-
-        <div className="grid gap-3 sm:grid-cols-2 lg:col-span-3 lg:grid-cols-3">
-          {seoKpis.map((kpi) => (
-            <div key={kpi.label} className="rounded-lg border border-input bg-card p-3 shadow-sm">
-              <p className="text-[11px] text-muted-foreground">{kpi.label}</p>
-              <p className="mt-0.5 text-xl font-semibold">{kpi.value}</p>
-              <p className={cn("text-xs", kpi.alert ? "text-amber-600" : "text-muted-foreground")}>
-                {kpi.sub}
-              </p>
+        <div className="flex-1 space-y-1.5 min-w-0">
+          {cats.map(([cat, s]) => (
+            <div key={cat} className="flex items-center gap-2">
+              <span className="w-[72px] shrink-0 truncate text-[10px] text-muted-foreground">
+                {AUDIT_CATEGORY_LABELS[cat as keyof typeof AUDIT_CATEGORY_LABELS]}
+              </span>
+              <div className="flex-1 h-1.5 overflow-hidden rounded-full bg-muted/30">
+                <div className={cn("h-full rounded-full", catCl(s))} style={{ width: `${s}%` }} />
+              </div>
+              <span className="w-6 text-right text-[10px] font-semibold tabular-nums">{s}</span>
             </div>
           ))}
         </div>
       </div>
-
-      <div className="grid gap-3 lg:grid-cols-3">
-        <div className="rounded-lg border border-input bg-card p-3 lg:col-span-2">
-          <h2 className="mb-2 text-sm font-medium">Organic traffic (4 weeks)</h2>
-          <div className="h-44 min-h-0 w-full">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={organicTrafficChart}>
-                <CartesianGrid strokeDasharray="3 3" className="stroke-border" />
-                <XAxis dataKey="week" tick={{ fontSize: 11 }} />
-                <YAxis tick={{ fontSize: 11 }} />
-                <Tooltip />
-                <Area
-                  type="monotone"
-                  dataKey="clicks"
-                  name="Clicks"
-                  stroke="#059669"
-                  fill="#059669"
-                  fillOpacity={0.15}
-                />
-              </AreaChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-
-        <div className="rounded-lg border border-violet-200 bg-violet-50/50 p-3 dark:border-violet-900 dark:bg-violet-950/20">
-          <div className="mb-2 flex items-center gap-2">
-            <Sparkles className="h-4 w-4 text-violet-600" />
-            <h2 className="text-sm font-medium">AI suggestions</h2>
-          </div>
-          <div className="space-y-2">
-            {aiSeoSuggestions.map((s) => (
-              <div key={s.title} className="rounded-md border border-input bg-background px-3 py-2">
-                <p className="text-sm font-medium text-violet-700 dark:text-violet-300">{s.title}</p>
-                <p className="text-xs text-muted-foreground">{s.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="rounded-lg border border-input bg-card p-3">
-        <h2 className="mb-3 text-sm font-medium">Issue breakdown</h2>
-        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-5">
-          {issueBreakdown.map((issue) => (
-            <div key={issue.type} className="rounded-md border border-input px-3 py-2">
-              <div className="flex items-center justify-between gap-1">
-                <p className="text-xs font-medium">{issue.type}</p>
-                <Badge variant={severityVariant(issue.severity)} className="text-[10px]">
-                  {issue.count}
-                </Badge>
-              </div>
-            </div>
-          ))}
-        </div>
+      <div className="mt-4 flex items-center gap-4 rounded-lg bg-muted/30 px-3 py-2 text-[11px]">
+        <span className="flex items-center gap-1.5 font-semibold text-red-500">
+          <AlertTriangle className="h-3.5 w-3.5" /> {openHigh} high severity
+        </span>
+        <span className="text-muted-foreground">{openAll} open total</span>
+        <span className="ml-auto font-semibold" style={{ color }}>{label}</span>
       </div>
     </div>
   );
 }
 
-function MetaTab() {
-  const [search, setSearch] = useState("");
-  const [entityType, setEntityType] = useState("all");
+/* ─── Module cards ─────────────────────────────────────────────────────────── */
 
-  const filtered = useMemo(() => {
-    const q = search.toLowerCase().trim();
-    return metaRecordsSeed.filter((r) => {
-      if (q && !r.title.toLowerCase().includes(q) && !r.url.toLowerCase().includes(q)) return false;
-      if (entityType !== "all" && r.entityType !== entityType) return false;
-      return true;
-    });
-  }, [search, entityType]);
-
+function ModuleCard({ href, icon, iconBg, title, metric, metricLabel, status, statusOk }: {
+  href: string; icon: React.ReactNode; iconBg: string;
+  title: string; metric: string; metricLabel: string;
+  status: string; statusOk: boolean;
+}) {
   return (
-    <div className="space-y-3">
-      <div className="flex flex-wrap gap-2">
-        <Input
-          placeholder="Search title, URL…"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="max-w-[220px]"
-        />
-        <Select value={entityType} onChange={(e) => setEntityType(e.target.value)} className="w-[140px]">
-          <option value="all">All types</option>
-          {(Object.keys(ENTITY_TYPE_LABELS) as SeoEntityType[]).map((t) => (
-            <option key={t} value={t}>
-              {ENTITY_TYPE_LABELS[t]}
-            </option>
-          ))}
-        </Select>
-        <Button
-          size="sm"
-          className="ml-auto"
-          onClick={() => toast.info("AI bulk meta generate — prototype")}
-        >
-          <Sparkles className="mr-1.5 h-3.5 w-3.5" /> AI suggest
-        </Button>
-      </div>
-
-      <div className="overflow-x-auto rounded-lg border border-input">
-        <table className="w-full min-w-[720px] text-sm">
-          <thead className="border-b border-input bg-muted/40 text-left text-xs text-muted-foreground">
-            <tr>
-              <th className="px-3 py-2 font-medium">Entity</th>
-              <th className="px-3 py-2 font-medium">Meta title</th>
-              <th className="px-3 py-2 font-medium">Meta description</th>
-              <th className="px-3 py-2 font-medium">Score</th>
-              <th className="px-3 py-2 font-medium">Issues</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-border">
-            {filtered.map((r) => (
-              <tr key={r.id} className="hover:bg-muted/30">
-                <td className="px-3 py-2">
-                  <Badge variant="outline" className="mb-1 text-[10px]">
-                    {ENTITY_TYPE_LABELS[r.entityType]}
-                  </Badge>
-                  <p className="font-medium">{r.title}</p>
-                  <p className="font-mono text-[11px] text-muted-foreground">{r.url}</p>
-                </td>
-                <td className="max-w-[180px] px-3 py-2 text-xs">
-                  {r.metaTitle || <span className="text-red-500">Missing</span>}
-                </td>
-                <td className="max-w-[200px] truncate px-3 py-2 text-xs text-muted-foreground">
-                  {r.metaDescription || <span className="text-amber-600">Missing</span>}
-                </td>
-                <td className={cn("px-3 py-2 font-semibold", scoreColor(r.score))}>{r.score}</td>
-                <td className="px-3 py-2 text-xs text-muted-foreground">
-                  {r.issues.length ? r.issues.join(", ") : "—"}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-}
-
-function RedirectsTab() {
-  return (
-    <div className="space-y-3">
-      <div className="flex justify-end">
-        <Button size="sm" onClick={() => toast.info("Add redirect — prototype")}>
-          <Plus className="mr-1.5 h-3.5 w-3.5" /> Add redirect
-        </Button>
-      </div>
-      <div className="space-y-2">
-        {redirectsSeed.map((r) => (
-          <div
-            key={r.id}
-            className="flex flex-wrap items-center gap-3 rounded-lg border border-input bg-card p-4"
-          >
-            <div className="min-w-0 flex-1">
-              <div className="flex flex-wrap items-center gap-2 font-mono text-xs">
-                <span className="text-muted-foreground">{r.fromPath}</span>
-                <ArrowRight className="h-3.5 w-3.5 shrink-0" />
-                <span className="font-medium">{r.toPath}</span>
-              </div>
-              <p className="mt-1 text-xs text-muted-foreground">
-                {r.type} · {r.hitCount.toLocaleString()} hits · {r.source}
-              </p>
-            </div>
-            <Badge variant="outline">{r.type}</Badge>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function AuditTab() {
-  const [severity, setSeverity] = useState("all");
-  const filtered = useMemo(
-    () =>
-      severity === "all"
-        ? auditIssuesSeed
-        : auditIssuesSeed.filter((i) => i.severity === severity),
-    [severity],
-  );
-
-  return (
-    <div className="space-y-3">
-      <div className="flex flex-wrap items-center gap-2">
-        <Select value={severity} onChange={(e) => setSeverity(e.target.value)} className="w-[140px]">
-          <option value="all">All severity</option>
-          {(Object.keys(SEVERITY_LABELS) as SeoIssueSeverity[]).map((s) => (
-            <option key={s} value={s}>
-              {SEVERITY_LABELS[s]}
-            </option>
-          ))}
-        </Select>
-        <Button size="sm" className="ml-auto" onClick={() => toast.success("Audit started (mock)")}>
-          <RefreshCw className="mr-1.5 h-3.5 w-3.5" /> Run full audit
-        </Button>
-      </div>
-
-      <div className="space-y-2">
-        {filtered.map((issue) => (
-          <div key={issue.id} className="rounded-lg border border-input bg-card p-4">
-            <div className="flex flex-wrap items-start justify-between gap-2">
-              <div>
-                <div className="flex flex-wrap items-center gap-2">
-                  <Badge variant={severityVariant(issue.severity)} className="text-[10px]">
-                    {SEVERITY_LABELS[issue.severity]}
-                  </Badge>
-                  <span className="font-mono text-[11px] text-muted-foreground">{issue.type}</span>
-                </div>
-                <p className="mt-1 font-medium">{issue.entity}</p>
-                <p className="font-mono text-xs text-muted-foreground">{issue.url}</p>
-                <p className="mt-2 text-sm text-muted-foreground">{issue.suggestion}</p>
-              </div>
-              <Button size="sm" variant="outline" onClick={() => toast.info("Fix issue — prototype")}>
-                Fix
-              </Button>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function SitemapTab() {
-  return (
-    <div className="space-y-3">
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <p className="text-xs text-muted-foreground">
-          Auto-generated nightly · incremental on product publish
-        </p>
-        <Button size="sm" onClick={() => toast.success("Sitemap regeneration queued (mock)")}>
-          <RefreshCw className="mr-1.5 h-3.5 w-3.5" /> Regenerate all
-        </Button>
-      </div>
-      <div className="grid gap-3 sm:grid-cols-2">
-        {sitemapsSeed.map((sm) => (
-          <div key={sm.id} className="rounded-lg border border-input bg-card p-4">
-            <div className="flex items-center justify-between gap-2">
-              <h3 className="font-semibold">{sm.name}</h3>
-              <Badge variant={sm.status === "fresh" ? "success" : sm.status === "stale" ? "warning" : "secondary"}>
-                {sm.status}
-              </Badge>
-            </div>
-            <p className="mt-1 font-mono text-xs text-muted-foreground">{sm.path}</p>
-            <p className="mt-2 text-sm">{sm.urlCount.toLocaleString()} URLs</p>
-            <p className="text-xs text-muted-foreground">Last: {sm.lastGenerated}</p>
-            <Button
-              size="sm"
-              variant="outline"
-              className="mt-3 w-full"
-              onClick={() => toast.info(`Open ${sm.path}`)}
-            >
-              <ExternalLink className="mr-1.5 h-3.5 w-3.5" /> View XML
-            </Button>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function KeywordsTab() {
-  return (
-    <div className="space-y-3">
-      <div className="flex justify-end">
-        <Button size="sm" onClick={() => toast.info("Add keyword — prototype")}>
-          <Plus className="mr-1.5 h-3.5 w-3.5" /> Track keyword
-        </Button>
-      </div>
-      <div className="overflow-hidden rounded-lg border border-input">
-        <table className="w-full text-sm">
-          <thead className="border-b border-input bg-muted/40 text-left text-xs text-muted-foreground">
-            <tr>
-              <th className="px-3 py-2 font-medium">Keyword</th>
-              <th className="px-3 py-2 font-medium">Target URL</th>
-              <th className="px-3 py-2 font-medium text-right">Position</th>
-              <th className="px-3 py-2 font-medium text-right">Change</th>
-              <th className="px-3 py-2 font-medium text-right">Volume</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-border">
-            {keywordsSeed.map((kw) => (
-              <tr key={kw.id} className="hover:bg-muted/30">
-                <td className="px-3 py-2 font-medium">{kw.keyword}</td>
-                <td className="px-3 py-2 font-mono text-xs text-muted-foreground">{kw.targetUrl}</td>
-                <td className="px-3 py-2 text-right font-semibold">#{kw.position}</td>
-                <td
-                  className={cn(
-                    "px-3 py-2 text-right text-xs",
-                    kw.change > 0 ? "text-emerald-600" : kw.change < 0 ? "text-red-500" : "text-muted-foreground",
-                  )}
-                >
-                  {kw.change > 0 ? `↑${kw.change}` : kw.change < 0 ? `↓${Math.abs(kw.change)}` : "—"}
-                </td>
-                <td className="px-3 py-2 text-right text-muted-foreground">
-                  {kw.volume.toLocaleString()}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-}
-
-export function SeoControlCenter() {
-  const [tab, setTab] = useState<SeoTab>("dashboard");
-  const openIssues = auditIssuesSeed.length;
-
-  return (
-    <div className="space-y-4">
-      <div className="flex flex-wrap items-center gap-2 rounded-lg border border-emerald-200 bg-emerald-50/40 px-4 py-2.5 text-xs dark:border-emerald-900/50 dark:bg-emerald-950/20">
-        <Search className="h-4 w-4 shrink-0 text-emerald-600" />
-        <span>
-          Search visibility control plane — meta, URLs, redirects, schema, sitemaps, and audits.
-          Entity SEO fields live in Catalog/Builder; global rules in seo_* tables.
+    <Link href={href}
+      className="group flex flex-col gap-2.5 rounded-2xl border border-input bg-card p-4 shadow-sm transition-colors hover:border-primary/40 hover:bg-muted/20">
+      <div className="flex items-start justify-between">
+        <span className={cn("flex h-8 w-8 items-center justify-center rounded-xl", iconBg)}>{icon}</span>
+        <span className={cn("flex items-center gap-1 text-[10px] font-semibold",
+          statusOk ? "text-emerald-600" : "text-amber-500")}>
+          {statusOk ? <CheckCircle2 className="h-3 w-3" /> : <AlertTriangle className="h-3 w-3" />}
+          {status}
         </span>
       </div>
+      <div>
+        <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">{title}</p>
+        <p className="mt-0.5 text-lg font-bold tabular-nums leading-tight">{metric}</p>
+        <p className="text-[10px] text-muted-foreground">{metricLabel}</p>
+      </div>
+      <span className="flex items-center gap-1 text-[10px] text-primary opacity-0 transition-opacity group-hover:opacity-100">
+        Open <ArrowRight className="h-3 w-3" />
+      </span>
+    </Link>
+  );
+}
 
-      <SeoNav active={tab} onChange={setTab} issueCount={openIssues} />
+function ModuleGrid() {
+  const metaMissing  = metaRecordsSeed.filter((m) => m.metaStatus === "missing").length;
+  const redirActive  = redirectRulesSeed.filter((r) => r.status === "active").length;
+  const schemaErrors = schemaSeed.filter((s) => s.status === "error").length;
+  const smErrors     = sitemapFilesSeed.filter((f) => f.status === "error").length;
+  const topKw        = keywordsSeed.filter((k) => (k.position ?? 99) <= 10).length;
+  const avgPos       = Math.round(keywordsSeed.reduce((s, k) => s + (k.position ?? 50), 0) / keywordsSeed.length);
 
-      {tab === "dashboard" && <DashboardTab />}
-      {tab === "meta" && <MetaTab />}
-      {tab === "redirects" && <RedirectsTab />}
-      {tab === "audit" && <AuditTab />}
-      {tab === "sitemap" && <SitemapTab />}
-      {tab === "keywords" && <KeywordsTab />}
+  const modules = [
+    { href: "/seo/search-console", icon: <Globe className="h-4 w-4 text-blue-600" />,    iconBg: "bg-blue-50 dark:bg-blue-950/30",
+      title: "Search Console", metric: gscSummary.clicks.toLocaleString(), metricLabel: "clicks / 28d",
+      status: "Connected", statusOk: true },
+    { href: "/seo/meta",           icon: <FileText className="h-4 w-4 text-violet-600" />, iconBg: "bg-violet-50 dark:bg-violet-950/30",
+      title: "Meta Manager", metric: metaRecordsSeed.length.toString(), metricLabel: `pages · ${metaMissing} missing`,
+      status: metaMissing === 0 ? "All good" : `${metaMissing} missing`, statusOk: metaMissing === 0 },
+    { href: "/seo/keywords",       icon: <KeyRound className="h-4 w-4 text-emerald-600" />, iconBg: "bg-emerald-50 dark:bg-emerald-950/30",
+      title: "Keywords", metric: keywordsSeed.length.toString(), metricLabel: `tracked · ${topKw} top 10`,
+      status: `Avg #${avgPos}`, statusOk: avgPos <= 15 },
+    { href: "/seo/backlinks",      icon: <Link2 className="h-4 w-4 text-sky-600" />,    iconBg: "bg-sky-50 dark:bg-sky-950/30",
+      title: "Backlinks", metric: `DA ${domainOverview.domainAuthority}`, metricLabel: `${domainOverview.totalBacklinks.toLocaleString()} links`,
+      status: `${domainOverview.referringDomains} domains`, statusOk: true },
+    { href: "/seo/audit",          icon: <Shield className="h-4 w-4 text-amber-600" />, iconBg: "bg-amber-50 dark:bg-amber-950/30",
+      title: "SEO Audit", metric: `${seoHealthScore}/100`, metricLabel: "health score",
+      status: auditIssuesSeed.filter(i=>i.status==="open"&&i.severity==="high").length > 0
+        ? `${auditIssuesSeed.filter(i=>i.status==="open"&&i.severity==="high").length} high`
+        : "No high issues",
+      statusOk: auditIssuesSeed.filter(i=>i.status==="open"&&i.severity==="high").length === 0 },
+    { href: "/seo/urls",           icon: <Globe className="h-4 w-4 text-slate-500" />,  iconBg: "bg-slate-100 dark:bg-slate-800/40",
+      title: "URL Manager", metric: "42", metricLabel: "pages managed",
+      status: "4 redirects", statusOk: true },
+    { href: "/seo/redirects",      icon: <ArrowRightLeft className="h-4 w-4 text-amber-600" />, iconBg: "bg-amber-50 dark:bg-amber-950/30",
+      title: "Redirects", metric: redirectRulesSeed.length.toString(), metricLabel: `rules · ${redirActive} active`,
+      status: `${redirectRulesSeed.reduce((s,r)=>s+r.hits30d,0).toLocaleString()} hits/30d`, statusOk: true },
+    { href: "/seo/schema",         icon: <Braces className="h-4 w-4 text-violet-600" />, iconBg: "bg-violet-50 dark:bg-violet-950/30",
+      title: "Schema", metric: schemaSeed.length.toString(), metricLabel: `schemas · ${schemaSeed.filter(s=>s.status==="active").length} active`,
+      status: schemaErrors > 0 ? `${schemaErrors} error` : "All valid", statusOk: schemaErrors === 0 },
+    { href: "/seo/sitemap",        icon: <Map className="h-4 w-4 text-emerald-600" />,  iconBg: "bg-emerald-50 dark:bg-emerald-950/30",
+      title: "Sitemap", metric: sitemapIndex.totalUrls.toLocaleString(), metricLabel: `URLs · ${sitemapIndex.totalFiles} files`,
+      status: smErrors > 0 ? `${smErrors} file error` : "Submitted ✓", statusOk: smErrors === 0 },
+    { href: "/seo/robots",         icon: <Bot className="h-4 w-4 text-slate-500" />,    iconBg: "bg-slate-100 dark:bg-slate-800/40",
+      title: "Robots.txt", metric: "5", metricLabel: "bot groups defined",
+      status: "Valid", statusOk: true },
+  ];
+
+  return (
+    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+      {modules.map((m) => <ModuleCard key={m.href} {...m} />)}
+    </div>
+  );
+}
+
+/* ─── Index coverage mini ──────────────────────────────────────────────────── */
+
+function IndexMini() {
+  const s = gscIndexStatus;
+  const total = s.totalIndexed + s.notIndexed;
+  return (
+    <div className="rounded-2xl border border-input bg-card p-4 shadow-sm">
+      <div className="mb-3 flex items-center justify-between">
+        <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Index Coverage</p>
+        <Link href="/seo/search-console" className="flex items-center gap-1 text-[11px] text-primary hover:underline">GSC <ArrowRight className="h-3 w-3" /></Link>
+      </div>
+      <div className="flex items-end gap-2">
+        <span className="text-2xl font-bold text-emerald-600">{s.totalIndexed.toLocaleString()}</span>
+        <span className="mb-0.5 text-xs text-muted-foreground">/ {total.toLocaleString()} pages</span>
+        <span className="ml-auto text-lg font-bold text-emerald-600">{Math.round((s.totalIndexed / total) * 100)}%</span>
+      </div>
+      <div className="mt-2 flex h-2 w-full overflow-hidden rounded-full">
+        <div className="bg-emerald-500 transition-all" style={{ width: `${(s.totalIndexed / total) * 100}%` }} />
+        <div className="bg-amber-400 transition-all" style={{ width: `${((s.crawledNotIndexed + s.discoveredNotCrawled) / total) * 100}%` }} />
+        <div className="bg-red-400 transition-all"   style={{ width: `${(s.errors / total) * 100}%` }} />
+      </div>
+      <div className="mt-2 grid grid-cols-2 gap-1">
+        {[
+          { label: "Indexed",      value: s.totalIndexed,          dot: "bg-emerald-500" },
+          { label: "Errors",       value: s.errors,                dot: "bg-red-400" },
+          { label: "Not indexed",  value: s.crawledNotIndexed,     dot: "bg-amber-400" },
+          { label: "Not crawled",  value: s.discoveredNotCrawled,  dot: "bg-slate-300 dark:bg-slate-600" },
+        ].map((r) => (
+          <div key={r.label} className="flex items-center gap-1.5 text-[10px]">
+            <span className={cn("h-1.5 w-1.5 shrink-0 rounded-full", r.dot)} />
+            <span className="truncate text-muted-foreground">{r.label}</span>
+            <span className="ml-auto font-semibold">{r.value}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ─── Top queries mini ─────────────────────────────────────────────────────── */
+
+function TopQueriesMini() {
+  const top5 = gscQueriesSeed.slice(0, 5);
+  const maxC = top5[0].clicks;
+  return (
+    <div className="rounded-2xl border border-input bg-card p-4 shadow-sm">
+      <div className="mb-3 flex items-center justify-between">
+        <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Top Queries</p>
+        <Link href="/seo/search-console" className="flex items-center gap-1 text-[11px] text-primary hover:underline">All <ArrowRight className="h-3 w-3" /></Link>
+      </div>
+      <div className="space-y-2">
+        {top5.map((q) => (
+          <div key={q.query} className="space-y-0.5">
+            <div className="flex items-center justify-between gap-2 text-[11px]">
+              <span className="truncate font-medium">{q.query}</span>
+              <div className="flex shrink-0 items-center gap-1.5">
+                <span className="font-semibold tabular-nums">{q.clicks.toLocaleString()}</span>
+                <span className={cn("rounded-full px-1.5 py-0.5 text-[9px] font-bold",
+                  q.position <= 3  ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-400"
+                  : q.position <= 10 ? "bg-blue-100 text-blue-700 dark:bg-blue-950/30 dark:text-blue-400"
+                  : "bg-amber-100 text-amber-700 dark:bg-amber-950/30 dark:text-amber-400")}>
+                  #{q.position.toFixed(0)}
+                </span>
+              </div>
+            </div>
+            <div className="h-1 w-full overflow-hidden rounded-full bg-muted/30">
+              <div className="h-full rounded-full bg-primary/50" style={{ width: `${(q.clicks / maxC) * 100}%` }} />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ─── Top keywords mini ────────────────────────────────────────────────────── */
+
+function TopKeywordsMini() {
+  const top5 = [...keywordsSeed].sort((a, b) => (a.position ?? 99) - (b.position ?? 99)).slice(0, 5);
+  return (
+    <div className="rounded-2xl border border-input bg-card p-4 shadow-sm">
+      <div className="mb-3 flex items-center justify-between">
+        <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Top Keywords</p>
+        <Link href="/seo/keywords" className="flex items-center gap-1 text-[11px] text-primary hover:underline">All <ArrowRight className="h-3 w-3" /></Link>
+      </div>
+      <div className="space-y-2">
+        {top5.map((k) => {
+          const pos  = k.position ?? 99;
+          const prev = k.prevPosition ?? pos;
+          const chg  = prev - pos;
+          return (
+            <div key={k.keyword} className="flex items-center gap-2 text-[11px]">
+              <span className={cn("flex h-5 w-6 shrink-0 items-center justify-center rounded text-[9px] font-bold",
+                pos <= 3  ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-400"
+                : pos <= 10 ? "bg-blue-100 text-blue-700 dark:bg-blue-950/30 dark:text-blue-400"
+                : "bg-amber-100 text-amber-700 dark:bg-amber-950/30 dark:text-amber-400")}>
+                {pos}
+              </span>
+              <span className="flex-1 truncate font-medium">{k.keyword}</span>
+              {chg !== 0 && (
+                <span className={cn("flex shrink-0 items-center gap-0.5 text-[10px] font-semibold",
+                  chg > 0 ? "text-emerald-600" : "text-red-500")}>
+                  {chg > 0 ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
+                  {Math.abs(chg)}
+                </span>
+              )}
+              <span className="shrink-0 text-[10px] text-muted-foreground">{k.volume?.toLocaleString()}/mo</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/* ─── Open issues mini ─────────────────────────────────────────────────────── */
+
+function IssuesMini() {
+  const high = auditIssuesSeed.filter((i) => i.status === "open" && i.severity === "high").slice(0, 4);
+  return (
+    <div className="rounded-2xl border border-input bg-card p-4 shadow-sm">
+      <div className="mb-3 flex items-center justify-between">
+        <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Open Issues</p>
+        <Link href="/seo/audit" className="flex items-center gap-1 text-[11px] text-primary hover:underline">Audit <ArrowRight className="h-3 w-3" /></Link>
+      </div>
+      {high.length === 0 ? (
+        <div className="flex items-center gap-2 text-[11px] text-emerald-600">
+          <CheckCircle2 className="h-4 w-4" /> No high severity issues
+        </div>
+      ) : (
+        <div className="space-y-2">
+          {high.map((issue) => (
+            <div key={issue.id} className="flex items-start gap-2 rounded-lg bg-muted/20 px-2 py-1.5">
+              <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-red-500" />
+              <div className="min-w-0">
+                <p className="text-[11px] font-medium leading-tight">{issue.entity}</p>
+                <p className="truncate font-mono text-[10px] text-muted-foreground">{issue.url}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ─── Backlink mini ────────────────────────────────────────────────────────── */
+
+function BacklinkMini() {
+  const d = domainOverview;
+  return (
+    <div className="rounded-2xl border border-input bg-card p-4 shadow-sm">
+      <div className="mb-3 flex items-center justify-between">
+        <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Backlinks</p>
+        <Link href="/seo/backlinks" className="flex items-center gap-1 text-[11px] text-primary hover:underline">Analyze <ArrowRight className="h-3 w-3" /></Link>
+      </div>
+      <div className="space-y-2.5">
+        {[
+          { label: "Domain Authority", value: d.domainAuthority, max: 100, color: "bg-blue-500" },
+          { label: "Domain Rating",    value: d.domainRating,    max: 100, color: "bg-violet-500" },
+          { label: "PageRank",         value: d.pageRank,        max: 10,  color: "bg-emerald-500" },
+        ].map((m) => (
+          <div key={m.label} className="space-y-1">
+            <div className="flex justify-between text-[11px]">
+              <span className="text-muted-foreground">{m.label}</span>
+              <span className="font-bold">{m.value} <span className="font-normal text-muted-foreground">/ {m.max}</span></span>
+            </div>
+            <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted/30">
+              <div className={cn("h-full rounded-full", m.color)} style={{ width: `${(m.value / m.max) * 100}%` }} />
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="mt-3 flex items-center gap-3 border-t border-input pt-3 text-[11px]">
+        <div><p className="text-muted-foreground">Total</p><p className="font-bold">{d.totalBacklinks.toLocaleString()}</p></div>
+        <div><p className="text-muted-foreground">Domains</p><p className="font-bold">{d.referringDomains}</p></div>
+        <div><p className="text-muted-foreground">Spam</p><p className="font-bold">{d.spamScore}%</p></div>
+        <div className="ml-auto"><p className="text-muted-foreground">New 30d</p><p className="font-bold text-emerald-600">+{d.newLinks30d}</p></div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Main export ──────────────────────────────────────────────────────────── */
+
+export function SeoControlCenter() {
+  return (
+    <div className="flex flex-col gap-5">
+
+      {/* Connection banner */}
+      <div className="flex flex-wrap items-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-[12px] dark:border-emerald-800 dark:bg-emerald-950/20">
+        <Wifi className="h-3.5 w-3.5 text-emerald-600" />
+        <span className="font-semibold text-emerald-700 dark:text-emerald-400">Google Search Console connected</span>
+        <span className="opacity-50">·</span>
+        <span className="font-mono text-emerald-700 dark:text-emerald-400">{gscConnection.property}</span>
+        <span className="ml-auto text-[10px] text-muted-foreground">Fetched {gscConnection.lastFetchedAt} · ~2 day lag</span>
+        <Link href="/seo/search-console" className="flex items-center gap-1 text-[11px] text-primary hover:underline">
+          Details <ArrowRight className="h-3 w-3" />
+        </Link>
+      </div>
+
+      {/* GSC KPI strip */}
+      <GscStrip />
+
+      {/* Health score + module grid */}
+      <div className="grid gap-4 xl:grid-cols-[300px_1fr]">
+        <HealthPanel />
+        <ModuleGrid />
+      </div>
+
+      {/* 4-column bottom row */}
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <IndexMini />
+        <TopQueriesMini />
+        <TopKeywordsMini />
+        <IssuesMini />
+      </div>
+
+      {/* Backlink + Sitemap + Schema */}
+      <div className="grid gap-4 lg:grid-cols-3">
+        <BacklinkMini />
+
+        {/* Sitemap files */}
+        <div className="rounded-2xl border border-input bg-card p-4 shadow-sm">
+          <div className="mb-3 flex items-center justify-between">
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Sitemap Files</p>
+            <Link href="/seo/sitemap" className="flex items-center gap-1 text-[11px] text-primary hover:underline">Manage <ArrowRight className="h-3 w-3" /></Link>
+          </div>
+          <div className="space-y-1.5">
+            {sitemapFilesSeed.map((f) => (
+              <div key={f.id} className="flex items-center gap-2 text-[11px]">
+                {f.status === "ok"      && <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-500" />}
+                {f.status === "warning" && <AlertTriangle className="h-3.5 w-3.5 shrink-0 text-amber-500" />}
+                {f.status === "error"   && <XCircle className="h-3.5 w-3.5 shrink-0 text-red-500" />}
+                <span className="flex-1 truncate font-medium">{f.name}</span>
+                <span className="tabular-nums text-muted-foreground">{f.urlCount.toLocaleString()} URLs</span>
+              </div>
+            ))}
+          </div>
+          <p className="mt-3 text-[10px] text-muted-foreground">Generated: {sitemapIndex.lastGenerated} · Google: Submitted ✓</p>
+        </div>
+
+        {/* Schema schemas */}
+        <div className="rounded-2xl border border-input bg-card p-4 shadow-sm">
+          <div className="mb-3 flex items-center justify-between">
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Schema Markup</p>
+            <Link href="/seo/schema" className="flex items-center gap-1 text-[11px] text-primary hover:underline">Manage <ArrowRight className="h-3 w-3" /></Link>
+          </div>
+          <div className="space-y-1.5">
+            {schemaSeed.map((s) => (
+              <div key={s.id} className="flex items-center gap-2 text-[11px]">
+                {s.status === "active"  && <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-500" />}
+                {s.status === "warning" && <AlertTriangle className="h-3.5 w-3.5 shrink-0 text-amber-500" />}
+                {s.status === "error"   && <XCircle className="h-3.5 w-3.5 shrink-0 text-red-500" />}
+                {s.status === "draft"   && <span className="h-3.5 w-3.5 shrink-0 rounded-full border border-slate-400 inline-block" />}
+                <span className="flex-1 truncate font-medium">{s.name}</span>
+                <span className="text-[10px] capitalize text-muted-foreground">{s.scope}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
     </div>
   );
 }

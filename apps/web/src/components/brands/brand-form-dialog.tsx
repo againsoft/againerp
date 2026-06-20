@@ -1,13 +1,13 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import * as Dialog from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
+import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { WordPressClassicEditor } from "@/components/products/wordpress-classic-editor";
 import { MediaField } from "@/components/media/media-field";
 import { SlugInput } from "@/components/ui/slug-input";
@@ -96,19 +96,24 @@ export function BrandFormDialog({
   };
 
   return (
-    <Dialog.Root open={open} onOpenChange={onOpenChange}>
-      <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-50 bg-black/50" />
-        <Dialog.Content className="fixed left-1/2 top-1/2 z-50 flex max-h-[92vh] w-[min(640px,95vw)] -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-xl border border-input bg-background shadow-xl">
+    <Sheet open={open} onOpenChange={onOpenChange}>
+      <SheetContent
+        side="right"
+        className="w-full max-w-xl gap-0 overflow-hidden p-0 sm:max-w-xl [&>button.absolute]:hidden"
+        aria-describedby={undefined}
+      >
+        <div className="flex h-full min-h-0 flex-col">
           <div className="flex shrink-0 items-center justify-between border-b border-input px-5 py-4">
-            <Dialog.Title className="text-base font-semibold">
+            <p className="text-base font-semibold">
               {mode === "create" ? "Add Brand" : "Edit Brand"}
-            </Dialog.Title>
-            <Dialog.Close asChild>
-              <button type="button" className="rounded-md p-1 hover:bg-accent">
-                <X className="h-4 w-4" />
-              </button>
-            </Dialog.Close>
+            </p>
+            <button
+              type="button"
+              className="rounded-md p-1 hover:bg-accent"
+              onClick={() => onOpenChange(false)}
+            >
+              <X className="h-4 w-4" />
+            </button>
           </div>
 
           <form onSubmit={handleSubmit} className="flex min-h-0 flex-1 flex-col">
@@ -246,9 +251,9 @@ export function BrandFormDialog({
               </Button>
             </div>
           </form>
-        </Dialog.Content>
-      </Dialog.Portal>
-    </Dialog.Root>
+        </div>
+      </SheetContent>
+    </Sheet>
   );
 }
 

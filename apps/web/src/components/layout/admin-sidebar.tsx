@@ -126,11 +126,20 @@ export function AdminSidebar() {
       <div className="flex-1 overflow-y-auto p-1.5 text-xs">
         <nav className="space-y-0.5">
           {sidebarNav.map((item) => {
+            const sectionLabel = !collapsed && item.section ? (
+              <div key={`section-${item.section}`} className="mb-1 mt-3 px-1.5">
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground/60">
+                  {item.section}
+                </p>
+              </div>
+            ) : null;
+
             if (item.children) {
               const open = openGroups[item.title] ?? false;
               const groupActive = isNavItemActive(pathname, item);
               return (
                 <div key={item.title}>
+                  {sectionLabel}
                   <button
                     type="button"
                     onClick={() =>
@@ -171,20 +180,22 @@ export function AdminSidebar() {
             }
             const active = isNavActive(pathname, item.href);
             return (
-              <Link
-                key={item.title}
-                href={item.href!}
-                onClick={() => addRecent(item.title, item.href!)}
-                aria-current={active ? "page" : undefined}
-                title={collapsed ? item.title : undefined}
-                className={cn(
-                  "flex items-center gap-1.5 rounded-md px-1.5 py-1.5 text-xs font-medium hover:bg-accent",
-                  active && "border-l-2 border-primary bg-accent pl-[calc(0.375rem-2px)]",
-                )}
-              >
-                {item.icon && <item.icon className="h-3.5 w-3.5 shrink-0" aria-hidden />}
-                {!collapsed && item.title}
-              </Link>
+              <div key={item.title}>
+                {sectionLabel}
+                <Link
+                  href={item.href!}
+                  onClick={() => addRecent(item.title, item.href!)}
+                  aria-current={active ? "page" : undefined}
+                  title={collapsed ? item.title : undefined}
+                  className={cn(
+                    "flex items-center gap-1.5 rounded-md px-1.5 py-1.5 text-xs font-medium hover:bg-accent",
+                    active && "border-l-2 border-primary bg-accent pl-[calc(0.375rem-2px)]",
+                  )}
+                >
+                  {item.icon && <item.icon className="h-3.5 w-3.5 shrink-0" aria-hidden />}
+                  {!collapsed && item.title}
+                </Link>
+              </div>
             );
           })}
         </nav>
