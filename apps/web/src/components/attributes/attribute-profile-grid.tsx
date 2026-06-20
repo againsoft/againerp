@@ -1,30 +1,31 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { AgGridReact } from "ag-grid-react";
 import type { ColDef, ICellRendererParams, RowDragEndEvent } from "ag-grid-community";
 import * as Dialog from "@radix-ui/react-dialog";
 import {
-  Copy,
+  Archive,
+  ChevronDown,
+  ChevronRight,
+  Eye,
+  ExternalLink,
   Filter,
+  FolderOpen,
   GripVertical,
   Layers,
   MoreHorizontal,
+  MousePointerClick,
   Pencil,
+  SlidersHorizontal,
   Trash2,
   X,
 } from "lucide-react";
 import { toast } from "sonner";
-import {
-  attributeProfilesSeed,
-  countProfileStats,
-  type AttributeProfile,
-} from "@/lib/mock-data/attribute-profiles";
+import type { AttributeProfile } from "@/lib/mock-data/attribute-profiles";
 import { useAttributeProfileStore } from "@/lib/store/attribute-profile-store";
 import { cn } from "@/lib/utils";
 import { useIsDark } from "@/lib/use-is-dark";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
@@ -35,16 +36,99 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
+import { ActivityTriggerButton } from "@/components/activity/activity-trigger-button";
 import { AttributeProfileFormDialog } from "@/components/attributes/attribute-profile-form-dialog";
 
 const PAGE_SIZE = 25;
 
-type ProfileRow = AttributeProfile & { groupCount: number; attributeCount: number };
+const COLUMN_KEYS = ["code", "categories", "products", "status", "updated"] as const;
+type ColumnKey = (typeof COLUMN_KEYS)[number];
 
-function reorderIds(items: { id: string; sortOrder: number }[], draggedId: string, overId: string) {
+const COLUMN_LABELS: Record<ColumnKey, string> = {
+  code: "Code",
+  categories: "Categories",
+  products: "Products",
+  status: "Status",
+  updated: "Updated",
+};
+
+const DEFAULT_VISIBLE: Record<ColumnKey, boolean> = {
+  code: true,
+  categories: true,
+  products: true,
+  status: true,
+  updated: true,
+};
+
+const LIVE_EDIT_TOGGLES = ["status"] as const;
+type LiveEditKey = (typeof LIVE_EDIT_TOGGLES)[number];
+
+const LIVE_EDIT_LABELS: Record<LiveEditKey, string> = {
+  status: "Status",
+};
+
+const LIVE_EDIT_HINTS: Record<LiveEditKey, string> = {
+  status: "Click On / Off in grid · Off = inactive",
+};
+
+const DEFAULT_LIVE_EDIT: Record<LiveEditKey, boolean> = {
+  status: true,
+};
+
+const FORM_ONLY_FIELDS = [
+  "Description",
+  "Category mapping",
+  "Groups & Attributes",
+] as const;
+
+const FILTER_KEYS = ["search", "status"] as const;
+type FilterKey = (typeof FILTER_KEYS)[number];
+
+const FILTER_LABELS: Record<FilterKey, string> = {
+  search: "Search",
+  status: "Status",
+};
+
+const FILTER_HINTS: Record<FilterKey, string> = {
+  search: "Name or code",
+  status: "Active / Inactive filter",
+};
+
+const DEFAULT_VISIBLE_FILTERS: Record<FilterKey, boolean> = {
+  search: true,
+  status: false,
+};
+
+type FilterState = {
+  search: string;
+  status: string;
+};
+
+const DEFAULT_FILTERS: FilterState = {
+  search: "",
+  status: "all",
+};
+
+function applyFilters(rows: AttributeProfile[], f: FilterState) {
+  const q = f.search.toLowerCase().trim();
+  return rows.filter((p) => {
+    if (q && !p.name.toLowerCase().includes(q) && !p.code.toLowerCase().includes(q)) {
+      return false;
+    }
+    if (f.status === "on" && !p.active) return false;
+    if (f.status === "off" && p.active) return false;
+    return true;
+  });
+}
+
+function reorderProfileIds(
+  profiles: AttributeProfile[],
+  draggedId: string,
+  overId: string,
+): string[] | null {
   if (draggedId === overId) return null;
-  const sorted = [...items].sort((a, b) => a.sortOrder - b.sortOrder);
-  const ids = sorted.map((i) => i.id);
+  const sorted = [...profiles].sort((a, b) => a.sortOrder - b.sortOrder);
+  const ids = sorted.map((p) => p.id);
   const from = ids.indexOf(draggedId);
   const to = ids.indexOf(overId);
   if (from < 0 || to < 0) return null;
@@ -56,49 +140,49 @@ function reorderIds(items: { id: string; sortOrder: number }[], draggedId: strin
 
 type Props = {
   className?: string;
-  addTrigger?: number;
+  onView?: (profile: AttributeProfile) => void;
+  onEdit?: (profile: AttributeProfile) => void;
 };
 
-export function AttributeProfileGrid({ className, addTrigger = 0 }: Props) {
-  const router = useRouter();
+export function AttributeProfileGrid({ className, onView, onEdit: onEditProp }: Props) {
   const isDark = useIsDark();
+  const gridRef = useRef<AgGridReact<AttributeProfile>>(null);
+
   const profiles = useAttributeProfileStore((s) => s.profiles);
-  const groups = useAttributeProfileStore((s) => s.groups);
-  const attributes = useAttributeProfileStore((s) => s.attributes);
+  const storeGroups = useAttributeProfileStore((s) => s.groups);
+  const storeAttributes = useAttributeProfileStore((s) => s.attributes);
   const upsertProfile = useAttributeProfileStore((s) => s.upsertProfile);
   const patchProfile = useAttributeProfileStore((s) => s.patchProfile);
   const deleteProfiles = useAttributeProfileStore((s) => s.deleteProfiles);
-  const duplicateProfile = useAttributeProfileStore((s) => s.duplicateProfile);
   const reorderProfiles = useAttributeProfileStore((s) => s.reorderProfiles);
-  const setProfiles = useAttributeProfileStore((s) => s.setProfiles);
 
-  const [search, setSearch] = useState("");
-  const [status, setStatus] = useState("all");
-  const [filterSheetOpen, setFilterSheetOpen] = useState(false);
-  const [visibleFilters, setVisibleFilters] = useState({ search: true, status: false });
+  const [filters, setFilters] = useState<FilterState>(DEFAULT_FILTERS);
   const [formOpen, setFormOpen] = useState(false);
   const [formMode, setFormMode] = useState<"create" | "edit">("create");
   const [editProfile, setEditProfile] = useState<AttributeProfile | null>(null);
-  const [selected, setSelected] = useState<ProfileRow[]>([]);
-  const [deleteOpen, setDeleteOpen] = useState(false);
-  const [deleteTargets, setDeleteTargets] = useState<ProfileRow[]>([]);
   const [page, setPage] = useState(0);
+  const [selected, setSelected] = useState<AttributeProfile[]>([]);
+  const [columnSheetOpen, setColumnSheetOpen] = useState(false);
+  const [visibleCols, setVisibleCols] = useState(DEFAULT_VISIBLE);
+  const [liveEditSheetOpen, setLiveEditSheetOpen] = useState(false);
+  const [liveEdit, setLiveEdit] = useState(DEFAULT_LIVE_EDIT);
+  const [filterSheetOpen, setFilterSheetOpen] = useState(false);
+  const [visibleFilters, setVisibleFilters] = useState(DEFAULT_VISIBLE_FILTERS);
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const [deleteTargets, setDeleteTargets] = useState<AttributeProfile[]>([]);
+  const [expandedProfiles, setExpandedProfiles] = useState<Set<string>>(new Set());
+  const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set());
 
-  const rows = useMemo<ProfileRow[]>(() => {
-    return [...profiles]
-      .sort((a, b) => a.sortOrder - b.sortOrder)
-      .map((p) => {
-        const stats = countProfileStats(p.id, groups, attributes);
-        return { ...p, ...stats };
-      })
-      .filter((p) => {
-        const q = search.toLowerCase().trim();
-        if (q && !p.name.toLowerCase().includes(q) && !p.code.toLowerCase().includes(q)) return false;
-        if (status === "on" && !p.active) return false;
-        if (status === "off" && p.active) return false;
-        return true;
-      });
-  }, [profiles, groups, attributes, search, status]);
+  const toggleProfile = (id: string) =>
+    setExpandedProfiles((prev) => { const n = new Set(prev); n.has(id) ? n.delete(id) : n.add(id); return n; });
+  const toggleGroup = (id: string) =>
+    setExpandedGroups((prev) => { const n = new Set(prev); n.has(id) ? n.delete(id) : n.add(id); return n; });
+
+  const ordered = useMemo(
+    () => [...profiles].sort((a, b) => a.sortOrder - b.sortOrder),
+    [profiles],
+  );
+  const filtered = useMemo(() => applyFilters(ordered, filters), [ordered, filters]);
 
   const openCreate = useCallback(() => {
     setFormMode("create");
@@ -106,296 +190,711 @@ export function AttributeProfileGrid({ className, addTrigger = 0 }: Props) {
     setFormOpen(true);
   }, []);
 
-  useEffect(() => {
-    if (addTrigger > 0) openCreate();
-  }, [addTrigger, openCreate]);
-
-  const StatusCell = useCallback(({ data }: ICellRendererParams<ProfileRow>) => {
-    if (!data) return null;
-    return (
-      <button
-        type="button"
-        className={cn(
-          "rounded px-1.5 py-0.5 text-[10px] font-medium",
-          data.active
-            ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400"
-            : "bg-muted text-muted-foreground",
-        )}
-        onClick={(e) => {
-          e.stopPropagation();
-          patchProfile(data.id, { active: !data.active });
-        }}
-      >
-        {data.active ? "On" : "Off"}
-      </button>
-    );
-  }, [patchProfile]);
-
-  const RowActions = useCallback(
-    ({ data }: ICellRendererParams<ProfileRow>) => {
-      if (!data) return null;
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="sm" className="h-7 w-7 p-0">
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={() => router.push(`/catalog/specifications/profiles/${data.id}`)}>
-              <Layers className="mr-2 h-3.5 w-3.5" /> Open builder
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => {
-                setFormMode("edit");
-                setEditProfile(data);
-                setFormOpen(true);
-              }}
-            >
-              <Pencil className="mr-2 h-3.5 w-3.5" /> Edit profile
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => {
-                const newId = duplicateProfile(data.id);
-                if (newId) {
-                  toast.success("Profile duplicated");
-                  router.push(`/catalog/specifications/profiles/${newId}`);
-                }
-              }}
-            >
-              <Copy className="mr-2 h-3.5 w-3.5" /> Duplicate
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              className="text-destructive"
-              onClick={() => {
-                setDeleteTargets([data]);
-                setDeleteOpen(true);
-              }}
-            >
-              <Trash2 className="mr-2 h-3.5 w-3.5" /> Delete
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
+  const openEdit = useCallback(
+    (profile: AttributeProfile) => {
+      if (onEditProp) {
+        onEditProp(profile);
+      } else {
+        setFormMode("edit");
+        setEditProfile(profile);
+        setFormOpen(true);
+      }
     },
-    [router, duplicateProfile],
+    [onEditProp],
   );
 
-  const columnDefs = useMemo<ColDef<ProfileRow>[]>(
-    () => [
-      { headerCheckboxSelection: true, checkboxSelection: true, width: 44, pinned: "left", resizable: false, suppressMovable: true },
-      {
-        rowDrag: true,
-        width: 36,
-        pinned: "left",
-        resizable: false,
-        suppressMovable: true,
-        headerComponent: () => <GripVertical className="mx-auto h-3.5 w-3.5 text-muted-foreground" />,
-      },
-      {
-        colId: "icon",
-        width: 52,
-        resizable: false,
-        suppressMovable: true,
-        sortable: false,
-        cellRenderer: (p: ICellRendererParams<ProfileRow>) =>
-          p.data?.iconUrl ? (
-            <img src={p.data.iconUrl} alt="" className="h-7 w-7 rounded object-cover" />
-          ) : (
-            <span className="inline-block h-7 w-7 rounded bg-muted" />
-          ),
-      },
-      {
-        field: "name",
-        headerName: "Profile",
-        width: 200,
-        cellRenderer: (p: ICellRendererParams<ProfileRow>) =>
-          p.data ? (
-            <button
-              type="button"
-              className="truncate text-left text-primary"
-              onClick={() => router.push(`/catalog/specifications/profiles/${p.data!.id}`)}
-            >
-              {p.data.name}
-            </button>
-          ) : null,
-      },
-      { field: "code", headerName: "Code", width: 140 },
-      { field: "groupCount", headerName: "Groups", width: 88 },
-      { field: "attributeCount", headerName: "Fields", width: 88 },
-      { field: "productCount", headerName: "Products", width: 88 },
-      {
-        colId: "categories",
-        headerName: "Categories",
-        width: 160,
-        valueGetter: (p) => p.data?.categoryLabels.join(", ") ?? "",
-      },
-      { colId: "status", field: "active", headerName: "Status", width: 80, cellRenderer: StatusCell },
-      { field: "updatedAt", headerName: "Updated", width: 100 },
-      { width: 48, pinned: "right", cellRenderer: RowActions, sortable: false, resizable: false },
-    ],
-    [RowActions, StatusCell, router],
+  const turnOff = useCallback(
+    (profile: AttributeProfile) => {
+      patchProfile(profile.id, { active: false });
+      toast.success(`Turned off ${profile.name}`);
+    },
+    [patchProfile],
   );
+
+  const toggleActive = useCallback(
+    (profile: AttributeProfile) => {
+      patchProfile(profile.id, { active: !profile.active });
+    },
+    [patchProfile],
+  );
+
+  const openDeleteConfirm = useCallback((targets: AttributeProfile[]) => {
+    setDeleteTargets(targets);
+    setDeleteOpen(true);
+  }, []);
+
+  const confirmDelete = useCallback(() => {
+    deleteProfiles(deleteTargets.map((t) => t.id));
+    toast.success(
+      `Deleted ${deleteTargets.length} profile${deleteTargets.length > 1 ? "s" : ""}`,
+    );
+    setDeleteOpen(false);
+    setDeleteTargets([]);
+    setSelected([]);
+  }, [deleteTargets, deleteProfiles]);
+
+  const handleSave = (data: Partial<AttributeProfile>) => {
+    if (formMode === "create") {
+      upsertProfile(data);
+    } else if (editProfile) {
+      upsertProfile({ id: editProfile.id, ...data });
+    }
+  };
 
   const onRowDragEnd = useCallback(
-    (e: RowDragEndEvent<ProfileRow>) => {
+    (e: RowDragEndEvent<AttributeProfile>) => {
       const dragged = e.node.data;
       const over = e.overNode?.data;
       if (!dragged || !over) return;
-      const ids = reorderIds(profiles, dragged.id, over.id);
-      if (ids) reorderProfiles(ids);
+
+      const orderedIds = reorderProfileIds(profiles, dragged.id, over.id);
+      if (!orderedIds) {
+        e.api.setGridOption("rowData", filtered);
+        return;
+      }
+
+      reorderProfiles(orderedIds);
+      toast.success("Order updated");
     },
-    [profiles, reorderProfiles],
+    [profiles, filtered, reorderProfiles],
+  );
+
+  const StatusCell = useCallback(
+    ({ data }: ICellRendererParams<AttributeProfile>) => {
+      if (!data) return null;
+      const on = data.active;
+      if (!liveEdit.status) {
+        return (
+          <span className={cn("text-[10px]", on ? "text-emerald-600" : "text-muted-foreground")}>
+            {on ? "On" : "Off"}
+          </span>
+        );
+      }
+      return (
+        <button
+          type="button"
+          className={cn(
+            "rounded px-1.5 py-0.5 text-[10px] font-medium transition-colors",
+            on
+              ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400"
+              : "bg-muted text-muted-foreground hover:bg-muted/80",
+          )}
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleActive(data);
+          }}
+        >
+          {on ? "On" : "Off"}
+        </button>
+      );
+    },
+    [liveEdit.status, toggleActive],
+  );
+
+  const RowActions = useCallback(
+    ({ data }: ICellRendererParams<AttributeProfile>) => {
+      if (!data) return null;
+      return (
+        <div className="flex items-center gap-0">
+          <ActivityTriggerButton
+            entity={{
+              type: "attribute-profile",
+              id: data.id,
+              label: data.name,
+              subtitle: `/${data.code}`,
+            }}
+          />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="sm" className="h-7 w-7 p-0">
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {onView && (
+                <DropdownMenuItem onClick={() => onView(data)}>
+                  <Eye className="mr-2 h-3.5 w-3.5" /> View
+                </DropdownMenuItem>
+              )}
+              <DropdownMenuItem onClick={() => openEdit(data)}>
+                <Pencil className="mr-2 h-3.5 w-3.5" /> Edit
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <a href={`/catalog/attributes/${data.id}`}>
+                  <ExternalLink className="mr-2 h-3.5 w-3.5" /> Edit Groups &amp; Attributes
+                </a>
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => turnOff(data)} className="text-destructive">
+                <Archive className="mr-2 h-3.5 w-3.5" /> Turn off
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+      );
+    },
+    [openEdit, turnOff, onView],
+  );
+
+  const columnDefs = useMemo<ColDef<AttributeProfile>[]>(
+    () => [
+      {
+        headerCheckboxSelection: true,
+        checkboxSelection: true,
+        width: 32,
+        maxWidth: 32,
+        pinned: "left",
+        resizable: false,
+        suppressMovable: true,
+        suppressHeaderMenuButton: true,
+      },
+      {
+        rowDrag: true,
+        width: 32,
+        maxWidth: 32,
+        pinned: "left",
+        resizable: false,
+        suppressMovable: true,
+        suppressHeaderMenuButton: true,
+        headerComponent: () => (
+          <GripVertical className="mx-auto h-3.5 w-3.5 text-muted-foreground" />
+        ),
+      },
+      {
+        field: "name",
+        headerName: "Name",
+        width: 240,
+        minWidth: 140,
+        editable: false,
+        tooltipField: "name",
+        cellRenderer: (p: ICellRendererParams<AttributeProfile>) => {
+          if (!p.data) return null;
+          return (
+            <button
+              type="button"
+              className="block w-full truncate text-left font-semibold text-foreground hover:underline focus-visible:outline-none"
+              onClick={(e) => {
+                e.stopPropagation();
+                openEdit(p.data!);
+              }}
+            >
+              {p.data.name}
+            </button>
+          );
+        },
+      },
+      {
+        field: "code",
+        headerName: "Code",
+        width: 140,
+        hide: !visibleCols.code,
+      },
+      {
+        colId: "categories",
+        headerName: "Categories",
+        width: 180,
+        hide: !visibleCols.categories,
+        valueGetter: (p) => p.data?.categoryLabels.join(", ") || "—",
+      },
+      {
+        field: "productCount",
+        headerName: "Products",
+        width: 88,
+        hide: !visibleCols.products,
+      },
+      {
+        colId: "status",
+        field: "active",
+        headerName: "Status",
+        width: 88,
+        hide: !visibleCols.status,
+        cellRenderer: StatusCell,
+      },
+      {
+        field: "updatedAt",
+        headerName: "Updated",
+        width: 100,
+        hide: !visibleCols.updated,
+      },
+      {
+        colId: "actions",
+        headerName: "Action",
+        width: 72,
+        maxWidth: 72,
+        pinned: "right",
+        resizable: false,
+        suppressMovable: true,
+        cellRenderer: RowActions,
+        sortable: false,
+        suppressHeaderMenuButton: true,
+      },
+    ],
+    [RowActions, visibleCols, liveEdit, StatusCell, onView, openEdit],
   );
 
   const pageStart = page * PAGE_SIZE + 1;
-  const pageEnd = Math.min((page + 1) * PAGE_SIZE, rows.length);
+  const pageEnd = Math.min((page + 1) * PAGE_SIZE, filtered.length);
+
+  const toggleVisibleFilter = (key: FilterKey, enabled: boolean) => {
+    setVisibleFilters((v) => ({ ...v, [key]: enabled }));
+    if (!enabled) {
+      setFilters((f) => ({
+        ...f,
+        ...(key === "search" ? { search: "" } : {}),
+        ...(key === "status" ? { status: "all" } : {}),
+      }));
+    }
+  };
 
   return (
     <div className={cn("flex min-h-0 flex-col gap-3", className)}>
+      {/* Toolbar */}
       <div className="flex shrink-0 flex-wrap items-center gap-2">
         {visibleFilters.search && (
           <Input
-            placeholder="Search profile, code…"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search name, code…"
+            value={filters.search}
+            onChange={(e) => setFilters((f) => ({ ...f, search: e.target.value }))}
             className="max-w-[220px]"
           />
         )}
         {visibleFilters.status && (
-          <Select value={status} onChange={(e) => setStatus(e.target.value)} className="w-[120px]">
+          <Select
+            value={filters.status}
+            onChange={(e) => setFilters((f) => ({ ...f, status: e.target.value }))}
+            className="w-[120px]"
+          >
             <option value="all">All status</option>
             <option value="on">Active</option>
             <option value="off">Inactive</option>
           </Select>
         )}
-        <Button variant="outline" size="sm" onClick={() => { setProfiles(attributeProfilesSeed); toast.success("Reset profiles"); }}>
-          Reset order
+        <Button
+          variant="outline"
+          size="sm"
+          className="hidden sm:inline-flex"
+          onClick={() => setFilterSheetOpen(true)}
+        >
+          <Filter className="mr-1.5 h-3.5 w-3.5" />
+          Filters
         </Button>
-        <Button variant="outline" size="sm" className="hidden sm:inline-flex" onClick={() => setFilterSheetOpen(true)}>
-          <Filter className="mr-1.5 h-3.5 w-3.5" /> Filters
+        <Button
+          variant="outline"
+          size="sm"
+          className="hidden sm:inline-flex"
+          onClick={() => setLiveEditSheetOpen(true)}
+        >
+          <MousePointerClick className="mr-1.5 h-3.5 w-3.5" />
+          Live edit
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          className="hidden sm:inline-flex"
+          onClick={() => setColumnSheetOpen(true)}
+        >
+          <SlidersHorizontal className="mr-1.5 h-3.5 w-3.5" />
+          Columns
         </Button>
       </div>
 
+      {/* Bulk actions bar */}
       {selected.length > 0 && (
         <div className="flex flex-wrap items-center gap-2 rounded-md border border-primary/30 bg-primary/5 px-3 py-2">
           <span className="text-xs font-medium">{selected.length} selected</span>
-          <Button size="sm" onClick={() => { selected.forEach((p) => patchProfile(p.id, { active: true })); setSelected([]); toast.success("Activated"); }}>
-            Turn on
+          <Button
+            size="sm"
+            onClick={() => {
+              selected.forEach((p) => patchProfile(p.id, { active: true }));
+              toast.success(
+                `Activated ${selected.length} profile${selected.length > 1 ? "s" : ""}`,
+              );
+              setSelected([]);
+            }}
+          >
+            Turn on (Active)
           </Button>
-          <Button variant="secondary" size="sm" onClick={() => { selected.forEach((p) => patchProfile(p.id, { active: false })); setSelected([]); }}>
-            Turn off
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => {
+              selected.forEach((p) => patchProfile(p.id, { active: false }));
+              toast.success(
+                `Deactivated ${selected.length} profile${selected.length > 1 ? "s" : ""}`,
+              );
+              setSelected([]);
+            }}
+          >
+            Turn off (Inactive)
           </Button>
-          <Button variant="destructive" size="sm" onClick={() => { setDeleteTargets(selected); setDeleteOpen(true); }}>
+          <Button
+            variant="destructive"
+            size="sm"
+            onClick={() => openDeleteConfirm(selected)}
+          >
+            <Trash2 className="mr-1.5 h-3.5 w-3.5" />
             Delete
           </Button>
-          <Button variant="ghost" size="sm" className="ml-auto h-7 w-7 p-0" onClick={() => setSelected([])}>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="ml-auto h-7 w-7 p-0"
+            onClick={() => setSelected([])}
+          >
             <X className="h-4 w-4" />
           </Button>
         </div>
       )}
 
-      <div className="hidden min-h-0 flex-1 flex-col md:flex">
-        {rows.length === 0 ? (
-          <div className="flex flex-1 items-center justify-center rounded-lg border border-dashed border-input bg-card p-8">
-            <p className="text-sm text-muted-foreground">No attribute profiles found</p>
+      {/* Tree list */}
+      <div className="min-h-0 flex-1 overflow-y-auto rounded-md border border-input bg-card">
+        {filtered.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-16">
+            <p className="text-sm font-medium">No profiles match your filters</p>
+            <Button size="sm" className="mt-4" onClick={() => setFilters(DEFAULT_FILTERS)}>
+              Clear filters
+            </Button>
           </div>
         ) : (
-          <div className={cn("ag-theme-quartz control-border h-0 min-h-0 flex-1 overflow-hidden rounded-md bg-card [&_.ag-root-wrapper]:h-full", isDark && "ag-theme-quartz-dark")}>
-            <AgGridReact
-              theme="legacy"
-              rowData={rows}
-              columnDefs={columnDefs}
-              defaultColDef={{ resizable: true, minWidth: 72 }}
-              rowDragEntireRow
-              rowSelection="multiple"
-              suppressRowClickSelection
-              onRowDragEnd={onRowDragEnd}
-              onSelectionChanged={(e) => setSelected(e.api.getSelectedRows())}
-              pagination
-              paginationPageSize={PAGE_SIZE}
-              onPaginationChanged={(e) => setPage(e.api.paginationGetCurrentPage())}
-              getRowId={(p) => p.data.id}
-              rowClassRules={{ "opacity-45": (p) => !!p.data && !p.data.active }}
-            />
+          <div className="divide-y divide-input">
+            {filtered.map((profile) => {
+              const profileExpanded = expandedProfiles.has(profile.id);
+              const profileGroups = storeGroups
+                .filter((g) => g.profileId === profile.id)
+                .sort((a, b) => a.sortOrder - b.sortOrder);
+              return (
+                <div key={profile.id} className={cn(!profile.active && "opacity-50")}>
+                  {/* Profile row */}
+                  <div className="flex items-center gap-1.5 px-3 py-2 hover:bg-muted/30">
+                    <input
+                      type="checkbox"
+                      checked={selected.some((s) => s.id === profile.id)}
+                      onChange={(e) =>
+                        setSelected((prev) =>
+                          e.target.checked ? [...prev, profile] : prev.filter((s) => s.id !== profile.id)
+                        )
+                      }
+                      className="shrink-0 rounded border-input"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => toggleProfile(profile.id)}
+                      className="shrink-0 text-muted-foreground hover:text-foreground"
+                    >
+                      {profileExpanded
+                        ? <ChevronDown className="h-3.5 w-3.5" />
+                        : <ChevronRight className="h-3.5 w-3.5" />}
+                    </button>
+                    <Layers className="h-3.5 w-3.5 shrink-0 text-primary" />
+                    <button
+                      type="button"
+                      className="min-w-0 flex-1 truncate text-left text-sm font-semibold hover:underline focus-visible:outline-none"
+                      onClick={() => openEdit(profile)}
+                    >
+                      {profile.name}
+                    </button>
+                    <span className="hidden shrink-0 font-mono text-[11px] text-muted-foreground sm:block">
+                      {profile.code}
+                    </span>
+                    <span className="hidden shrink-0 text-[11px] text-muted-foreground lg:block">
+                      {profile.categoryLabels.join(", ") || "—"}
+                    </span>
+                    <span className="hidden shrink-0 text-[11px] text-muted-foreground sm:block">
+                      {profile.productCount} products
+                    </span>
+                    <button
+                      type="button"
+                      onClick={(e) => { e.stopPropagation(); toggleActive(profile); }}
+                      className={cn(
+                        "shrink-0 rounded px-1.5 py-0.5 text-[10px] font-medium transition-colors",
+                        profile.active
+                          ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400"
+                          : "bg-muted text-muted-foreground",
+                      )}
+                    >
+                      {profile.active ? "On" : "Off"}
+                    </button>
+                    <div className="flex shrink-0 items-center gap-0">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="ghost" size="sm" className="h-7 w-7 p-0">
+                            <MoreHorizontal className="h-4 w-4" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          {onView && (
+                            <DropdownMenuItem onClick={() => onView(profile)}>
+                              <Eye className="mr-2 h-3.5 w-3.5" /> View
+                            </DropdownMenuItem>
+                          )}
+                          <DropdownMenuItem onClick={() => openEdit(profile)}>
+                            <Pencil className="mr-2 h-3.5 w-3.5" /> Edit
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => turnOff(profile)} className="text-destructive">
+                            <Archive className="mr-2 h-3.5 w-3.5" /> Turn off
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => openDeleteConfirm([profile])} className="text-destructive">
+                            <Trash2 className="mr-2 h-3.5 w-3.5" /> Delete
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </div>
+                  </div>
+
+                  {/* Groups tree — shown when profile expanded */}
+                  {profileExpanded && (
+                    <div className="ml-[30px] border-l border-input pl-3 pb-1">
+                      {profileGroups.length === 0 ? (
+                        <p className="py-1.5 text-[11px] text-muted-foreground">No groups yet</p>
+                      ) : (
+                        profileGroups.map((group) => {
+                          const groupExpanded = expandedGroups.has(group.id);
+                          const groupAttrs = storeAttributes
+                            .filter((a) => a.groupId === group.id)
+                            .sort((a, b) => a.sortOrder - b.sortOrder);
+                          return (
+                            <div key={group.id}>
+                              {/* Group row */}
+                              <button
+                                type="button"
+                                onClick={() => toggleGroup(group.id)}
+                                className="flex w-full items-center gap-1.5 rounded-md px-1.5 py-1 text-left hover:bg-muted/40"
+                              >
+                                {groupExpanded
+                                  ? <ChevronDown className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+                                  : <ChevronRight className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />}
+                                <FolderOpen className="h-3.5 w-3.5 shrink-0 text-sky-600 dark:text-sky-400" />
+                                <span className="flex-1 text-xs font-medium">{group.name}</span>
+                                <span className="text-[10px] text-muted-foreground">{groupAttrs.length}</span>
+                              </button>
+
+                              {/* Attributes — shown when group expanded */}
+                              {groupExpanded && (
+                                <div className="ml-5 border-l border-input pl-3 py-0.5">
+                                  {groupAttrs.map((attr) => (
+                                    <div key={attr.id}>
+                                      <div className="flex flex-wrap items-center gap-1.5 rounded-md px-1 py-0.5 text-[11px] hover:bg-muted/30">
+                                        <span className="font-medium">{attr.name}</span>
+                                        {attr.isFilterable && (
+                                          <span className="inline-flex items-center gap-0.5 rounded bg-sky-100 px-1 py-0.5 text-[10px] font-medium text-sky-700 dark:bg-sky-900/40 dark:text-sky-300">
+                                            <Filter className="h-2.5 w-2.5" />
+                                            Filter
+                                          </span>
+                                        )}
+                                      </div>
+                                      {attr.isFilterable && (attr.predefinedValues ?? []).length > 0 && (
+                                        <div className="ml-3 border-l border-input pl-2.5 pb-0.5">
+                                          <div className="flex flex-wrap gap-1 pt-0.5">
+                                            {(attr.predefinedValues ?? []).map((v) => (
+                                              <span key={v} className="rounded border border-input bg-muted/50 px-1 py-0.5 text-[10px] text-muted-foreground">{v}</span>
+                                            ))}
+                                          </div>
+                                        </div>
+                                      )}
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         )}
-        {rows.length > 0 && (
-          <p className="shrink-0 pt-1 text-xs text-muted-foreground">
-            Showing {pageStart}–{pageEnd} of {rows.length} · click profile name to open builder
-          </p>
-        )}
       </div>
 
-      <div className="space-y-2 md:hidden">
-        {rows.slice(0, 20).map((p) => (
-          <button
-            key={p.id}
-            type="button"
-            className="flex w-full gap-3 rounded-lg border border-input bg-card p-3 text-left"
-            onClick={() => router.push(`/catalog/specifications/profiles/${p.id}`)}
-          >
-            {p.iconUrl ? <img src={p.iconUrl} alt="" className="h-10 w-10 rounded object-cover" /> : <span className="h-10 w-10 rounded bg-muted" />}
-            <div className="min-w-0 flex-1">
-              <p className="font-medium">{p.name}</p>
-              <p className="text-xs text-muted-foreground">{p.groupCount} groups · {p.attributeCount} fields</p>
-              <Badge variant={p.active ? "success" : "muted"} className="mt-1">{p.active ? "Active" : "Inactive"}</Badge>
+      {/* Mobile fallback */}
+      <div className="md:hidden">
+        <div className="space-y-2">
+          {filtered.slice(0, 50).map((p) => (
+            <div
+              key={p.id}
+              className="flex items-center gap-3 rounded-lg border border-input bg-card px-3 py-2.5"
+            >
+              <div className="min-w-0 flex-1">
+                <button
+                  type="button"
+                  className="block w-full truncate text-left text-sm font-semibold hover:underline"
+                  onClick={() => openEdit(p)}
+                >
+                  {p.name}
+                </button>
+                <p className="truncate text-xs text-muted-foreground">{p.code}</p>
+              </div>
+              <span
+                className={cn(
+                  "shrink-0 text-[10px] font-medium",
+                  p.active ? "text-emerald-600" : "text-muted-foreground",
+                )}
+              >
+                {p.active ? "Active" : "Inactive"}
+              </span>
             </div>
-          </button>
-        ))}
+          ))}
+          {filtered.length > 50 && (
+            <p className="text-center text-xs text-muted-foreground">
+              Showing 50 of {filtered.length} — use desktop to reorder
+            </p>
+          )}
+        </div>
       </div>
 
+      {/* Internal form dialog (fallback when onEdit prop not provided) */}
       <AttributeProfileFormDialog
         open={formOpen}
         onOpenChange={setFormOpen}
         mode={formMode}
-        profile={editProfile}
-        onSave={(data) => {
-          if (formMode === "create") upsertProfile(data);
-          else if (editProfile) upsertProfile({ id: editProfile.id, ...data });
-        }}
+        profile={
+          editProfile
+            ? profiles.find((p) => p.id === editProfile.id) ?? editProfile
+            : null
+        }
+        onSave={handleSave}
       />
 
-      <Sheet open={filterSheetOpen} onOpenChange={setFilterSheetOpen}>
-        <SheetContent side="right" className="w-full max-w-sm">
-          <h2 className="text-base font-semibold">Filters</h2>
+      {/* Columns sheet */}
+      <Sheet open={columnSheetOpen} onOpenChange={setColumnSheetOpen}>
+        <SheetContent side="right" className="w-full max-w-xs">
+          <h2 className="pr-8 text-base font-semibold">Columns</h2>
+          <p className="mt-1 text-xs text-muted-foreground">
+            Choose which columns show in the list. Name, drag, and actions always stay visible.
+          </p>
           <div className="mt-4 space-y-2">
-            {(["search", "status"] as const).map((key) => (
-              <label key={key} className="flex gap-2 text-sm">
+            {COLUMN_KEYS.map((key) => (
+              <label key={key} className="flex items-center gap-2 text-sm">
                 <input
                   type="checkbox"
-                  checked={visibleFilters[key]}
-                  onChange={(e) => setVisibleFilters((v) => ({ ...v, [key]: e.target.checked }))}
+                  checked={visibleCols[key]}
+                  onChange={(e) =>
+                    setVisibleCols((v) => ({ ...v, [key]: e.target.checked }))
+                  }
+                  className="rounded border-input"
                 />
-                {key === "search" ? "Search" : "Status"}
+                {COLUMN_LABELS[key]}
               </label>
             ))}
           </div>
+          <Button
+            variant="outline"
+            size="sm"
+            className="mt-4"
+            onClick={() => setVisibleCols(DEFAULT_VISIBLE)}
+          >
+            Reset columns
+          </Button>
         </SheetContent>
       </Sheet>
 
+      {/* Filters sheet */}
+      <Sheet open={filterSheetOpen} onOpenChange={setFilterSheetOpen}>
+        <SheetContent side="right" className="w-full max-w-sm">
+          <h2 className="pr-8 text-base font-semibold">Filters</h2>
+          <p className="mt-1 text-xs text-muted-foreground">
+            Choose which filters show in the toolbar above the list.
+          </p>
+          <div className="mt-4 space-y-3">
+            {FILTER_KEYS.map((key) => (
+              <label key={key} className="flex cursor-pointer gap-2 text-sm">
+                <input
+                  type="checkbox"
+                  checked={visibleFilters[key]}
+                  onChange={(e) => toggleVisibleFilter(key, e.target.checked)}
+                  className="mt-0.5 rounded border-input"
+                />
+                <span>
+                  <span className="font-medium">{FILTER_LABELS[key]}</span>
+                  <span className="mt-0.5 block text-xs text-muted-foreground">
+                    {FILTER_HINTS[key]}
+                  </span>
+                </span>
+              </label>
+            ))}
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            className="mt-4"
+            onClick={() => {
+              setVisibleFilters(DEFAULT_VISIBLE_FILTERS);
+              setFilters(DEFAULT_FILTERS);
+            }}
+          >
+            Reset filters
+          </Button>
+        </SheetContent>
+      </Sheet>
+
+      {/* Live edit sheet */}
+      <Sheet open={liveEditSheetOpen} onOpenChange={setLiveEditSheetOpen}>
+        <SheetContent side="right" className="w-full max-w-sm">
+          <h2 className="pr-8 text-base font-semibold">Live edit</h2>
+          <p className="mt-1 text-xs text-muted-foreground">
+            Choose which fields you can edit directly in the list without opening the form.
+          </p>
+          <div className="mt-4 space-y-3">
+            {LIVE_EDIT_TOGGLES.map((key) => (
+              <label key={key} className="flex cursor-pointer gap-2 text-sm">
+                <input
+                  type="checkbox"
+                  checked={liveEdit[key]}
+                  onChange={(e) =>
+                    setLiveEdit((v) => ({ ...v, [key]: e.target.checked }))
+                  }
+                  className="mt-0.5 rounded border-input"
+                />
+                <span>
+                  <span className="font-medium">{LIVE_EDIT_LABELS[key]}</span>
+                  <span className="mt-0.5 block text-xs text-muted-foreground">
+                    {LIVE_EDIT_HINTS[key]}
+                  </span>
+                </span>
+              </label>
+            ))}
+            <div className="rounded-md border border-input bg-muted/30 px-3 py-2">
+              <p className="text-xs font-medium">Order</p>
+              <p className="mt-0.5 text-xs text-muted-foreground">Drag row handle to reorder</p>
+              <p className="mt-1 text-[10px] text-muted-foreground">Always enabled</p>
+            </div>
+          </div>
+          <div className="mt-5 border-t border-input pt-4">
+            <p className="text-xs font-medium text-muted-foreground">Edit form only</p>
+            <ul className="mt-2 space-y-1 text-xs text-muted-foreground">
+              {FORM_ONLY_FIELDS.map((f) => (
+                <li key={f}>· {f}</li>
+              ))}
+            </ul>
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            className="mt-4"
+            onClick={() => setLiveEdit(DEFAULT_LIVE_EDIT)}
+          >
+            Reset live edit
+          </Button>
+        </SheetContent>
+      </Sheet>
+
+      {/* Delete confirm dialog */}
       <Dialog.Root open={deleteOpen} onOpenChange={setDeleteOpen}>
         <Dialog.Portal>
           <Dialog.Overlay className="fixed inset-0 z-50 bg-black/50" />
-          <Dialog.Content className="fixed left-1/2 top-1/2 z-50 w-[min(400px,90vw)] -translate-x-1/2 -translate-y-1/2 rounded-lg border border-input bg-background p-6 shadow-xl">
-            <Dialog.Title className="font-semibold">Delete profiles?</Dialog.Title>
+          <Dialog.Content className="fixed left-1/2 top-1/2 z-50 w-[min(420px,90vw)] -translate-x-1/2 -translate-y-1/2 rounded-lg border border-input bg-background p-6 shadow-xl">
+            <Dialog.Title className="text-base font-semibold">Delete profiles?</Dialog.Title>
             <Dialog.Description className="mt-2 text-sm text-muted-foreground">
               {deleteTargets.length === 1
-                ? `"${deleteTargets[0]?.name}" and all groups/attributes will be deleted.`
-                : `${deleteTargets.length} profiles will be deleted.`}
+                ? `"${deleteTargets[0]?.name}" and all its groups/attributes will be permanently deleted.`
+                : `${deleteTargets.length} profiles will be permanently deleted.`}
             </Dialog.Description>
             <div className="mt-6 flex justify-end gap-2">
-              <Button variant="outline" size="sm" onClick={() => setDeleteOpen(false)}>Cancel</Button>
-              <Button
-                size="sm"
-                variant="destructive"
-                onClick={() => {
-                  deleteProfiles(deleteTargets.map((t) => t.id));
-                  setDeleteOpen(false);
-                  setSelected([]);
-                  toast.success("Deleted");
-                }}
-              >
+              <Button variant="outline" size="sm" onClick={() => setDeleteOpen(false)}>
+                Cancel
+              </Button>
+              <Button size="sm" variant="destructive" onClick={confirmDelete}>
                 Delete
               </Button>
             </div>

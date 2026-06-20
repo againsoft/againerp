@@ -111,6 +111,7 @@ Read after [BRAIN.md](./BRAIN.md) when you need to **identify a module** (Level 
 | `accounting` | GL, journals, chart of accounts | `/accounting/*` | `/api/v1/accounting/` | `accounting_*` | [README.md](./03-business-modules/accounting/README.md) | Finance Team | Draft |
 | `manufacturing` | BOM, work orders, production | `/manufacturing/*` | `/api/v1/manufacturing/` | `manufacturing_*` | [README.md](./03-business-modules/manufacturing/README.md) | Manufacturing Team | Draft |
 | `pos` | Point of sale, sessions, receipts | `/pos/*` | `/api/v1/pos/` | `pos_*` | [README.md](./03-business-modules/pos/README.md) | Retail Team | Draft |
+| `service` | Service orders, work orders, assets, AMC, field service | `/service/*` | `/api/v1/service/` | `service_*` | [README.md](./03-business-modules/service/README.md) | Service Team | Planning Phase |
 
 ---
 

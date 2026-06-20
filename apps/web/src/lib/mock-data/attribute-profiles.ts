@@ -28,6 +28,7 @@ export type AttributeSpec = {
   active: boolean;
   unit?: string;
   helpText?: string;
+  predefinedValues?: string[];
 };
 
 export type AttributeGroup = {
@@ -49,6 +50,7 @@ export type AttributeProfile = {
   active: boolean;
   productCount: number;
   iconUrl?: string;
+  imageUrl?: string;
   categoryLabels: string[];
   updatedAt: string;
 };
@@ -147,24 +149,24 @@ const groups: AttributeGroup[] = [
 ];
 
 const attributes: AttributeSpec[] = [
-  { id: "attr_proc_brand", groupId: "grp_proc", name: "Processor Brand", code: "processor_brand", fieldType: "dropdown", sortOrder: 0, isRequired: true, isFilterable: true, isComparable: true, isSearchable: true, isVisible: true, active: true },
+  { id: "attr_proc_brand", groupId: "grp_proc", name: "Processor Brand", code: "processor_brand", fieldType: "dropdown", sortOrder: 0, isRequired: true, isFilterable: true, isComparable: true, isSearchable: true, isVisible: true, active: true, predefinedValues: ["Intel", "AMD", "Apple", "Qualcomm", "MediaTek"] },
   { id: "attr_proc_model", groupId: "grp_proc", name: "Processor Model", code: "processor_model", fieldType: "text", sortOrder: 1, isRequired: true, isFilterable: false, isComparable: true, isSearchable: true, isVisible: true, active: true },
-  { id: "attr_proc_gen", groupId: "grp_proc", name: "Generation", code: "generation", fieldType: "text", sortOrder: 2, isRequired: false, isFilterable: true, isComparable: true, isSearchable: false, isVisible: true, active: true },
-  { id: "attr_proc_freq", groupId: "grp_proc", name: "Processor Frequency", code: "processor_frequency", fieldType: "number", sortOrder: 3, isRequired: false, isFilterable: true, isComparable: true, isSearchable: false, isVisible: true, active: true, unit: "GHz" },
-  { id: "attr_proc_core", groupId: "grp_proc", name: "Processor Core", code: "processor_core", fieldType: "number", sortOrder: 4, isRequired: false, isFilterable: true, isComparable: true, isSearchable: false, isVisible: true, active: true },
+  { id: "attr_proc_gen", groupId: "grp_proc", name: "Generation", code: "generation", fieldType: "dropdown", sortOrder: 2, isRequired: false, isFilterable: true, isComparable: true, isSearchable: false, isVisible: true, active: true, predefinedValues: ["10th Gen", "11th Gen", "12th Gen", "13th Gen", "14th Gen"] },
+  { id: "attr_proc_freq", groupId: "grp_proc", name: "Processor Frequency", code: "processor_frequency", fieldType: "dropdown", sortOrder: 3, isRequired: false, isFilterable: true, isComparable: true, isSearchable: false, isVisible: true, active: true, unit: "GHz", predefinedValues: ["Up to 2.0 GHz", "2.0–3.0 GHz", "3.0–4.0 GHz", "4.0+ GHz"] },
+  { id: "attr_proc_core", groupId: "grp_proc", name: "Processor Core", code: "processor_core", fieldType: "dropdown", sortOrder: 4, isRequired: false, isFilterable: true, isComparable: true, isSearchable: false, isVisible: true, active: true, predefinedValues: ["2", "4", "6", "8", "10", "12", "16"] },
   { id: "attr_proc_thread", groupId: "grp_proc", name: "Processor Thread", code: "processor_thread", fieldType: "number", sortOrder: 5, isRequired: false, isFilterable: false, isComparable: true, isSearchable: false, isVisible: true, active: true },
   { id: "attr_cpu_cache", groupId: "grp_proc", name: "CPU Cache", code: "cpu_cache", fieldType: "text", sortOrder: 6, isRequired: false, isFilterable: false, isComparable: true, isSearchable: false, isVisible: true, active: true, unit: "MB" },
   { id: "attr_chipset", groupId: "grp_proc", name: "Chipset", code: "chipset", fieldType: "text", sortOrder: 7, isRequired: false, isFilterable: false, isComparable: true, isSearchable: false, isVisible: true, active: true },
-  { id: "attr_disp_size", groupId: "grp_disp", name: "Display Size", code: "display_size", fieldType: "number", sortOrder: 0, isRequired: true, isFilterable: true, isComparable: true, isSearchable: false, isVisible: true, active: true, unit: "inch" },
-  { id: "attr_disp_type", groupId: "grp_disp", name: "Display Type", code: "display_type", fieldType: "dropdown", sortOrder: 1, isRequired: false, isFilterable: true, isComparable: true, isSearchable: false, isVisible: true, active: true },
-  { id: "attr_resolution", groupId: "grp_disp", name: "Resolution", code: "resolution", fieldType: "text", sortOrder: 2, isRequired: false, isFilterable: true, isComparable: true, isSearchable: false, isVisible: true, active: true },
-  { id: "attr_refresh", groupId: "grp_disp", name: "Refresh Rate", code: "refresh_rate", fieldType: "number", sortOrder: 3, isRequired: false, isFilterable: true, isComparable: true, isSearchable: false, isVisible: true, active: true, unit: "Hz" },
-  { id: "attr_ram", groupId: "grp_mem", name: "RAM", code: "ram", fieldType: "dropdown", sortOrder: 0, isRequired: true, isFilterable: true, isComparable: true, isSearchable: true, isVisible: true, active: true, unit: "GB" },
-  { id: "attr_ram_type", groupId: "grp_mem", name: "RAM Type", code: "ram_type", fieldType: "dropdown", sortOrder: 1, isRequired: false, isFilterable: true, isComparable: true, isSearchable: false, isVisible: true, active: true },
-  { id: "attr_storage", groupId: "grp_stor", name: "Storage Capacity", code: "storage_capacity", fieldType: "dropdown", sortOrder: 0, isRequired: true, isFilterable: true, isComparable: true, isSearchable: true, isVisible: true, active: true, unit: "GB" },
-  { id: "attr_storage_type", groupId: "grp_stor", name: "Storage Type", code: "storage_type", fieldType: "dropdown", sortOrder: 1, isRequired: false, isFilterable: true, isComparable: true, isSearchable: false, isVisible: true, active: true },
-  { id: "attr_m_chip", groupId: "grp_m_proc", name: "Chipset", code: "chipset", fieldType: "text", sortOrder: 0, isRequired: true, isFilterable: true, isComparable: true, isSearchable: true, isVisible: true, active: true },
-  { id: "attr_m_screen", groupId: "grp_m_disp", name: "Screen Size", code: "screen_size", fieldType: "number", sortOrder: 0, isRequired: true, isFilterable: true, isComparable: true, isSearchable: false, isVisible: true, active: true, unit: "inch" },
+  { id: "attr_disp_size", groupId: "grp_disp", name: "Display Size", code: "display_size", fieldType: "dropdown", sortOrder: 0, isRequired: true, isFilterable: true, isComparable: true, isSearchable: false, isVisible: true, active: true, unit: "inch", predefinedValues: ["13\"", "13.3\"", "14\"", "15.6\"", "16\"", "17.3\""] },
+  { id: "attr_disp_type", groupId: "grp_disp", name: "Display Type", code: "display_type", fieldType: "dropdown", sortOrder: 1, isRequired: false, isFilterable: true, isComparable: true, isSearchable: false, isVisible: true, active: true, predefinedValues: ["IPS", "OLED", "AMOLED", "TN", "VA", "Mini-LED"] },
+  { id: "attr_resolution", groupId: "grp_disp", name: "Resolution", code: "resolution", fieldType: "dropdown", sortOrder: 2, isRequired: false, isFilterable: true, isComparable: true, isSearchable: false, isVisible: true, active: true, predefinedValues: ["1366x768 (HD)", "1920x1080 (FHD)", "2560x1440 (QHD)", "2560x1600", "3840x2160 (4K)"] },
+  { id: "attr_refresh", groupId: "grp_disp", name: "Refresh Rate", code: "refresh_rate", fieldType: "dropdown", sortOrder: 3, isRequired: false, isFilterable: true, isComparable: true, isSearchable: false, isVisible: true, active: true, unit: "Hz", predefinedValues: ["60 Hz", "90 Hz", "120 Hz", "144 Hz", "165 Hz", "240 Hz"] },
+  { id: "attr_ram", groupId: "grp_mem", name: "RAM", code: "ram", fieldType: "dropdown", sortOrder: 0, isRequired: true, isFilterable: true, isComparable: true, isSearchable: true, isVisible: true, active: true, unit: "GB", predefinedValues: ["4 GB", "8 GB", "16 GB", "32 GB", "64 GB"] },
+  { id: "attr_ram_type", groupId: "grp_mem", name: "RAM Type", code: "ram_type", fieldType: "dropdown", sortOrder: 1, isRequired: false, isFilterable: true, isComparable: true, isSearchable: false, isVisible: true, active: true, predefinedValues: ["DDR4", "DDR5", "LPDDR4X", "LPDDR5", "LPDDR5X"] },
+  { id: "attr_storage", groupId: "grp_stor", name: "Storage Capacity", code: "storage_capacity", fieldType: "dropdown", sortOrder: 0, isRequired: true, isFilterable: true, isComparable: true, isSearchable: true, isVisible: true, active: true, unit: "GB", predefinedValues: ["128 GB", "256 GB", "512 GB", "1 TB", "2 TB"] },
+  { id: "attr_storage_type", groupId: "grp_stor", name: "Storage Type", code: "storage_type", fieldType: "dropdown", sortOrder: 1, isRequired: false, isFilterable: true, isComparable: true, isSearchable: false, isVisible: true, active: true, predefinedValues: ["SSD", "HDD", "NVMe SSD", "PCIe SSD", "eMMC"] },
+  { id: "attr_m_chip", groupId: "grp_m_proc", name: "Chipset", code: "chipset", fieldType: "dropdown", sortOrder: 0, isRequired: true, isFilterable: true, isComparable: true, isSearchable: true, isVisible: true, active: true, predefinedValues: ["Snapdragon 8 Gen 3", "Snapdragon 8 Gen 2", "Dimensity 9300", "Apple A17 Pro", "Exynos 2400", "Google Tensor G3"] },
+  { id: "attr_m_screen", groupId: "grp_m_disp", name: "Screen Size", code: "screen_size", fieldType: "dropdown", sortOrder: 0, isRequired: true, isFilterable: true, isComparable: true, isSearchable: false, isVisible: true, active: true, unit: "inch", predefinedValues: ["5.5\"", "6.1\"", "6.4\"", "6.7\"", "6.9\""] },
   { id: "attr_m_main_cam", groupId: "grp_m_cam", name: "Main Camera", code: "main_camera", fieldType: "text", sortOrder: 0, isRequired: false, isFilterable: false, isComparable: true, isSearchable: false, isVisible: true, active: true, unit: "MP" },
 ];
 
@@ -201,6 +203,8 @@ export type BulkAttributeRow = {
   key: string;
   id?: string;
   name: string;
+  filterable: boolean;
+  predefinedValues: string[];
 };
 
 export type BulkAttributeGroupRow = {
@@ -232,6 +236,8 @@ export function profileToBulkForm(
         key: attr.id,
         id: attr.id,
         name: attr.name,
+        filterable: attr.isFilterable,
+        predefinedValues: attr.predefinedValues ?? [],
       })),
     })),
   };
@@ -242,5 +248,5 @@ export function createEmptyBulkGroup(): BulkAttributeGroupRow {
 }
 
 export function createEmptyBulkAttribute(): BulkAttributeRow {
-  return { key: `attr_new_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`, name: "" };
+  return { key: `attr_new_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`, name: "", filterable: false, predefinedValues: [] };
 }

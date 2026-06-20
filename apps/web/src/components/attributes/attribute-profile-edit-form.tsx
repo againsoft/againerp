@@ -91,7 +91,7 @@ export function AttributeProfileEditForm({ profileId }: Props) {
         name: g.name.trim(),
         attributes: g.attributes
           .filter((a) => a.name.trim())
-          .map((a) => ({ id: a.id, name: a.name.trim() })),
+          .map((a) => ({ id: a.id, name: a.name.trim(), filterable: a.filterable, predefinedValues: a.predefinedValues })),
       }));
 
     saveProfileBulk({

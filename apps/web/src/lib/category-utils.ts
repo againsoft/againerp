@@ -17,6 +17,12 @@ export function getParentLabel(category: Category, items: Category[]): string {
   return parent?.name ?? "—";
 }
 
+/** Full ancestor breadcrumb: "Electronics › Laptops › Gaming Laptop" */
+export function getCategoryBreadcrumb(category: Category, items: Category[]): string {
+  const ancestors = getCategoryAncestorNames(category, items);
+  return ancestors.length ? ancestors.join(" › ") : "—";
+}
+
 export function getCategoryAncestorNames(category: Category, items: Category[]): string[] {
   const ancestors: string[] = [];
   let parentId = category.parentId;

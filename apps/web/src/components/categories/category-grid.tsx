@@ -10,6 +10,7 @@ import type {
 import * as Dialog from "@radix-ui/react-dialog";
 import {
   Archive,
+  Eye,
   Filter,
   GripVertical,
   MoreHorizontal,
@@ -20,10 +21,11 @@ import {
   MousePointerClick,
   X,
 } from "lucide-react";
+import { ActivityTriggerButton } from "@/components/activity/activity-trigger-button";
 import { toast } from "sonner";
 import type { Category } from "@/lib/mock-data/categories";
 import { categoriesFlat as seedCategories, getDisplayOrder } from "@/lib/mock-data/categories";
-import { getCategoryDepth, getParentLabel, reorderSiblingIds } from "@/lib/category-utils";
+import { getCategoryAncestorNames, getCategoryBreadcrumb, getCategoryDepth, getParentLabel, reorderSiblingIds } from "@/lib/category-utils";
 import { resolveMediaUrl } from "@/lib/media/resolve-media";
 import { useCategoryStore } from "@/lib/store/category-store";
 import { useMediaStore } from "@/lib/store/media-store";
@@ -81,11 +83,10 @@ const DEFAULT_VISIBLE: Record<ColumnKey, boolean> = {
   updated: true,
 };
 
-const LIVE_EDIT_KEYS = ["name", "caption", "slug", "menu", "status", "order"] as const;
+const LIVE_EDIT_KEYS = ["caption", "slug", "menu", "status", "order"] as const;
 type LiveEditKey = (typeof LIVE_EDIT_KEYS)[number];
 
 const LIVE_EDIT_LABELS: Record<LiveEditKey, string> = {
-  name: "Name",
   caption: "Caption",
   slug: "Slug",
   menu: "Menu",
@@ -94,7 +95,6 @@ const LIVE_EDIT_LABELS: Record<LiveEditKey, string> = {
 };
 
 const LIVE_EDIT_HINTS: Record<LiveEditKey, string> = {
-  name: "Double-click cell to edit in grid",
   caption: "Double-click cell to edit in grid",
   slug: "Double-click cell to edit in grid",
   menu: "Click Yes / No in grid · live update",
@@ -103,11 +103,10 @@ const LIVE_EDIT_HINTS: Record<LiveEditKey, string> = {
 };
 
 /** Toggleable live-edit fields (order is always on — listed for reference) */
-const LIVE_EDIT_TOGGLES = ["name", "caption", "slug", "menu", "status"] as const;
+const LIVE_EDIT_TOGGLES = ["caption", "slug", "menu", "status"] as const;
 type LiveEditToggleKey = (typeof LIVE_EDIT_TOGGLES)[number];
 
 const DEFAULT_LIVE_EDIT: Record<LiveEditToggleKey, boolean> = {
-  name: true,
   caption: true,
   slug: true,
   menu: true,
@@ -175,10 +174,13 @@ function applyFilters(rows: Category[], f: FilterState) {
 
 type Props = {
   className?: string;
+  /** @deprecated use URL-param driven openCreate from page instead */
   addTrigger?: number;
+  onView?: (category: Category) => void;
+  onEdit?: (category: Category) => void;
 };
 
-export function CategoryGrid({ className, addTrigger = 0 }: Props) {
+export function CategoryGrid({ className, addTrigger = 0, onView, onEdit }: Props) {
   const isDark = useIsDark();
   const gridRef = useRef<AgGridReact<Category>>(null);
   const categories = useCategoryStore((s) => s.categories);
@@ -212,7 +214,7 @@ export function CategoryGrid({ className, addTrigger = 0 }: Props) {
     () =>
       categories.map((c) => ({
         id: c.id,
-        label: c.slug.split("/").join(" › "),
+        label: [...getCategoryAncestorNames(c, categories), c.name].join(" › "),
       })),
     [categories],
   );
@@ -224,12 +226,19 @@ export function CategoryGrid({ className, addTrigger = 0 }: Props) {
     setFormOpen(true);
   }, []);
 
-  const openEdit = useCallback((cat: Category) => {
-    setFormMode("edit");
-    setEditCategory(cat);
-    setDefaultParentId(null);
-    setFormOpen(true);
-  }, []);
+  const openEdit = useCallback(
+    (cat: Category) => {
+      if (onEdit) {
+        onEdit(cat);
+        return;
+      }
+      setFormMode("edit");
+      setEditCategory(cat);
+      setDefaultParentId(null);
+      setFormOpen(true);
+    },
+    [onEdit],
+  );
 
   useEffect(() => {
     if (addTrigger > 0) openCreate(null);
@@ -390,30 +399,46 @@ export function CategoryGrid({ className, addTrigger = 0 }: Props) {
   );
 
   const RowActions = useCallback(
-    ({ data }: ICellRendererParams<Category>) => {
+    (p: ICellRendererParams<Category>) => {
+      const data = p.data;
       if (!data) return null;
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="sm" className="h-7 w-7 p-0">
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={() => openEdit(data)}>
-              <Pencil className="mr-2 h-3.5 w-3.5" /> Edit
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => openCreate(data.id)}>
-              <Plus className="mr-2 h-3.5 w-3.5" /> Add subcategory
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => turnOff(data)} className="text-destructive">
-              <Archive className="mr-2 h-3.5 w-3.5" /> Turn off
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className="flex items-center justify-center gap-0">
+          <ActivityTriggerButton
+            entity={{
+              type: "category",
+              id: data.id,
+              label: data.name,
+              subtitle: `/${data.slug}`,
+            }}
+          />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="sm" className="h-7 w-7 p-0">
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {onView && (
+                <DropdownMenuItem onClick={() => onView(data)}>
+                  <Eye className="mr-2 h-3.5 w-3.5" /> View
+                </DropdownMenuItem>
+              )}
+              <DropdownMenuItem onClick={() => openEdit(data)}>
+                <Pencil className="mr-2 h-3.5 w-3.5" /> Edit
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => openCreate(data.id)}>
+                <Plus className="mr-2 h-3.5 w-3.5" /> Add subcategory
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => turnOff(data)} className="text-destructive">
+                <Archive className="mr-2 h-3.5 w-3.5" /> Turn off
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       );
     },
-    [openEdit, openCreate, turnOff],
+    [onView, openEdit, openCreate, turnOff],
   );
 
   const columnDefs = useMemo<ColDef<Category>[]>(
@@ -421,20 +446,23 @@ export function CategoryGrid({ className, addTrigger = 0 }: Props) {
       {
         headerCheckboxSelection: true,
         checkboxSelection: true,
-        width: 44,
+        width: 32,
+        maxWidth: 32,
         pinned: "left",
         resizable: false,
         suppressMovable: true,
         suppressHeaderMenuButton: true,
+        sortable: false,
       },
       {
         rowDrag: true,
-        width: 36,
-        maxWidth: 36,
+        width: 32,
+        maxWidth: 32,
         pinned: "left",
         resizable: false,
         suppressMovable: true,
         suppressHeaderMenuButton: true,
+        sortable: false,
         headerComponent: () => (
           <GripVertical className="mx-auto h-3.5 w-3.5 text-muted-foreground" />
         ),
@@ -443,7 +471,8 @@ export function CategoryGrid({ className, addTrigger = 0 }: Props) {
         colId: "icon",
         field: "iconUrl",
         headerName: "",
-        width: 52,
+        width: 36,
+        maxWidth: 36,
         hide: !visibleCols.icon,
         resizable: false,
         suppressMovable: true,
@@ -451,11 +480,9 @@ export function CategoryGrid({ className, addTrigger = 0 }: Props) {
         suppressHeaderMenuButton: true,
         cellRenderer: (p: ICellRendererParams<Category>) => {
           const url = resolveMediaUrl(p.data?.iconMediaId, p.data?.iconUrl);
-          return url ? (
-            <img src={url} alt="" className="h-7 w-7 rounded object-cover" />
-          ) : (
-            <span className="inline-block h-7 w-7 rounded bg-muted" />
-          );
+          return url
+            ? <img src={url} alt="" className="h-7 w-7 rounded object-cover" />
+            : <span className="inline-block h-7 w-7 rounded bg-muted" />;
         },
       },
       {
@@ -463,12 +490,26 @@ export function CategoryGrid({ className, addTrigger = 0 }: Props) {
         headerName: "Name",
         width: 260,
         minWidth: 140,
-        editable: liveEdit.name,
+        editable: false,
         cellStyle: (p) => {
           if (!p.data) return undefined;
           return { paddingLeft: `${getCategoryDepth(p.data, categories) * 16}px` };
         },
         tooltipField: "name",
+        cellRenderer: (p: ICellRendererParams<Category>) =>
+          p.data ? (
+            <button
+              type="button"
+              className="block w-full truncate text-left font-semibold text-foreground hover:underline focus-visible:outline-none"
+              title={p.data.name}
+              onClick={(e) => {
+                e.stopPropagation();
+                if (onEdit) onEdit(p.data!);
+              }}
+            >
+              {p.data.name}
+            </button>
+          ) : null,
       },
       {
         field: "caption",
@@ -485,7 +526,7 @@ export function CategoryGrid({ className, addTrigger = 0 }: Props) {
         width: 120,
         hide: !visibleCols.parent,
         valueGetter: (p) =>
-          p.data ? getParentLabel(p.data, categories) : "",
+          p.data ? getCategoryBreadcrumb(p.data, categories) : "",
       },
       {
         field: "slug",
@@ -529,17 +570,19 @@ export function CategoryGrid({ className, addTrigger = 0 }: Props) {
         hide: !visibleCols.updated,
       },
       {
-        headerName: "",
-        width: 48,
+        colId: "actions",
+        headerName: "Action",
+        width: 72,
+        maxWidth: 72,
         pinned: "right",
         resizable: false,
         suppressMovable: true,
-        cellRenderer: RowActions,
         sortable: false,
         suppressHeaderMenuButton: true,
+        cellRenderer: RowActions,
       },
     ],
-    [categories, RowActions, visibleCols, liveEdit, MenuCell, StatusCell, mediaItems],
+    [categories, RowActions, visibleCols, liveEdit, MenuCell, StatusCell, mediaItems, onView],
   );
 
   const pageStart = page * PAGE_SIZE + 1;
@@ -703,9 +746,10 @@ export function CategoryGrid({ className, addTrigger = 0 }: Props) {
               rowData={filtered}
               columnDefs={columnDefs}
               defaultColDef={{
-                sortable: false,
+                sortable: true,
                 resizable: true,
                 filter: false,
+                suppressHeaderMenuButton: true,
                 suppressMovable: false,
                 minWidth: 72,
               }}
@@ -732,8 +776,7 @@ export function CategoryGrid({ className, addTrigger = 0 }: Props) {
         {filtered.length > 0 && (
           <p className="shrink-0 pt-1 text-xs text-muted-foreground">
             Showing {pageStart}–{pageEnd} of {filtered.length}
-            {" · "}drag row to reorder (same parent) · Menu Yes + Status On = website menu te dekhabe
-            {" · "}drag column edges to resize
+            {" · "}drag row handle to reorder · drag column edges to resize
           </p>
         )}
       </div>

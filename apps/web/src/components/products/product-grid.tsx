@@ -155,7 +155,6 @@ const DEFAULT_VISIBLE_FILTERS: Record<FilterVisibilityKey, boolean> = {
 };
 
 const LIVE_EDIT_TOGGLES = [
-  "name",
   "category",
   "brand",
   "slug",
@@ -170,7 +169,6 @@ const LIVE_EDIT_TOGGLES = [
 type LiveEditKey = (typeof LIVE_EDIT_TOGGLES)[number];
 
 const LIVE_EDIT_LABELS: Record<LiveEditKey, string> = {
-  name: "Product title",
   category: "Category",
   brand: "Brand",
   slug: "Slug",
@@ -184,7 +182,6 @@ const LIVE_EDIT_LABELS: Record<LiveEditKey, string> = {
 };
 
 const LIVE_EDIT_HINTS: Record<LiveEditKey, string> = {
-  name: "Double-click the Name column to edit in grid",
   category: "Double-click Category · pick from list",
   brand: "Double-click Brand · pick from list",
   slug: "Double-click Slug column to edit in grid",
@@ -198,7 +195,6 @@ const LIVE_EDIT_HINTS: Record<LiveEditKey, string> = {
 };
 
 const DEFAULT_LIVE_EDIT: Record<LiveEditKey, boolean> = {
-  name: false,
   category: false,
   brand: false,
   slug: false,
@@ -653,17 +649,7 @@ export function ProductGrid({ onEdit, onView, className }: Props) {
         cellClass: "product-grid-icon-col",
         cellRenderer: (p: ICellRendererParams<Product>) =>
           p.data ? (
-            <button
-              type="button"
-              className="cursor-pointer rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-              onClick={(e) => {
-                e.stopPropagation();
-                onView(p.data!);
-              }}
-              aria-label={`View ${p.data.name}`}
-            >
-              <img src={p.data.thumbnail} alt="" className="h-7 w-7 rounded object-cover" />
-            </button>
+            <img src={p.data.thumbnail} alt="" className="h-7 w-7 rounded object-cover" />
           ) : null,
       },
       {
@@ -674,17 +660,21 @@ export function ProductGrid({ onEdit, onView, className }: Props) {
         maxWidth: 720,
         resizable: true,
         suppressMovable: false,
-        editable: liveEdit.name,
+        editable: false,
         tooltipField: "name",
         cellRenderer: (p: ICellRendererParams<Product>) =>
           p.data ? (
-            liveEdit.name ? (
-              <span className="block w-full truncate font-semibold text-foreground">{p.data.name}</span>
-            ) : (
-              <span title={p.data.name} className="block w-full truncate font-semibold text-foreground">
-                {p.data.name}
-              </span>
-            )
+            <button
+              type="button"
+              className="block w-full truncate text-left font-semibold text-foreground hover:underline focus-visible:outline-none"
+              title={p.data.name}
+              onClick={(e) => {
+                e.stopPropagation();
+                onView(p.data!);
+              }}
+            >
+              {p.data.name}
+            </button>
           ) : null,
       },
       {

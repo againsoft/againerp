@@ -1,7 +1,7 @@
 "use client";
 
 import { Warehouse } from "lucide-react";
-import { InventoryControlCenter } from "@/components/inventory/inventory-control-center";
+import { InventoryDashboard } from "@/components/inventory/inventory-dashboard";
 
 export default function InventoryPage() {
   return (
@@ -13,13 +13,12 @@ export default function InventoryPage() {
           <h1 className="page-title">Inventory</h1>
         </div>
         <p className="mt-1 max-w-3xl text-xs text-muted-foreground">
-          Stock levels, warehouses, transfers, adjustments, and reservations — single ledger for
-          every channel.
+          Stock levels, warehouses, transfers, adjustments, purchase orders, batch tracking — single ledger for every channel.
         </p>
       </div>
 
       <div className="mt-4 min-h-0 flex-1">
-        <InventoryControlCenter />
+        <InventoryDashboard />
       </div>
     </div>
   );

@@ -2,7 +2,7 @@
 
 import { useCallback, useMemo, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { AgGridReact } from "ag-grid-react";
 import type { ColDef, ICellRendererParams } from "ag-grid-community";
 import {
@@ -38,6 +38,7 @@ import {
 import { OrdersNav } from "@/components/orders/orders-nav";
 import { OrderMobileCards } from "@/components/orders/order-mobile-cards";
 import { ActivityTriggerButton } from "@/components/activity/activity-trigger-button";
+import { OrderDetailWorkspace } from "@/components/orders/order-detail-workspace";
 
 // ─── Columns ──────────────────────────────────────────────────────────────────
 
@@ -149,7 +150,22 @@ type Props = {
 
 export function OrderGrid({ className, initialStatus = "all" }: Props) {
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const viewOrderId = searchParams.get("view");
   const isDark = useIsDark();
+
+  function openOrder(id: string) {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("view", id);
+    router.push(`${pathname}?${params.toString()}`);
+  }
+
+  function closeOrder() {
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete("view");
+    router.push(`${pathname}?${params.toString()}`);
+  }
   const orders = useOrderStore((s) => s.orders);
   const updateStatus = useOrderStore((s) => s.updateStatus);
 
@@ -270,7 +286,7 @@ export function OrderGrid({ className, initialStatus = "all" }: Props) {
             <button
               type="button"
               className="font-medium text-primary hover:underline"
-              onClick={() => router.push(`/orders/${p.data!.id}`)}
+              onClick={() => openOrder(p.data!.id)}
             >
               {p.data.orderNumber}
             </button>
@@ -421,8 +437,8 @@ export function OrderGrid({ className, initialStatus = "all" }: Props) {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => router.push(`/orders/${p.data!.id}`)}>
-                <Eye className="mr-2 h-3.5 w-3.5" /> Open workspace
+              <DropdownMenuItem onClick={() => openOrder(p.data!.id)}>
+                <Eye className="mr-2 h-3.5 w-3.5" /> View order
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -578,7 +594,7 @@ export function OrderGrid({ className, initialStatus = "all" }: Props) {
           rowSelection="multiple"
           suppressRowClickSelection
           onSelectionChanged={(e) => setSelected(e.api.getSelectedRows())}
-          onRowDoubleClicked={(e) => e.data && router.push(`/orders/${e.data.id}`)}
+          onRowClicked={(e) => e.data && openOrder(e.data.id)}
           defaultColDef={{ resizable: true, sortable: true }}
           headerHeight={36}
           rowHeight={42}
@@ -587,7 +603,7 @@ export function OrderGrid({ className, initialStatus = "all" }: Props) {
       </div>
       {rows.length > 0 && (
         <p className="shrink-0 text-xs text-muted-foreground">
-          Showing {rows.length} of {orders.length} orders · double-click row to open workspace
+          Showing {rows.length} of {orders.length} orders
         </p>
       )}
 
@@ -669,6 +685,13 @@ export function OrderGrid({ className, initialStatus = "all" }: Props) {
           >
             Reset columns
           </Button>
+        </SheetContent>
+      </Sheet>
+
+      {/* ─── Order Detail Sheet ──────────────────────────────────────────── */}
+      <Sheet open={!!viewOrderId} onOpenChange={(open) => !open && closeOrder()}>
+        <SheetContent side="right" className="w-full max-w-3xl gap-0 overflow-y-auto p-0 sm:max-w-3xl [&>button.absolute]:hidden">
+          {viewOrderId && <OrderDetailWorkspace orderId={viewOrderId} isDrawer onClose={closeOrder} />}
         </SheetContent>
       </Sheet>
     </div>

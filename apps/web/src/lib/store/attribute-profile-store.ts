@@ -45,10 +45,11 @@ type State = {
   saveProfileBulk: (payload: {
     profileId?: string;
     profileName: string;
+    imageUrl?: string;
     groups: {
       id?: string;
       name: string;
-      attributes: { id?: string; name: string }[];
+      attributes: { id?: string; name: string; filterable?: boolean; predefinedValues?: string[] }[];
     }[];
   }) => string;
 };
@@ -281,7 +282,7 @@ export const useAttributeProfileStore = create<State>()(
           set({
             profiles: state.profiles.map((p) =>
               p.id === profileId
-                ? { ...p, name: profileName, code: slugifyAttributeCode(profileName), updatedAt: new Date().toISOString().slice(0, 10) }
+                ? { ...p, name: profileName, code: slugifyAttributeCode(profileName), imageUrl: payload.imageUrl ?? p.imageUrl, updatedAt: new Date().toISOString().slice(0, 10) }
                 : p,
             ),
           });
@@ -294,6 +295,7 @@ export const useAttributeProfileStore = create<State>()(
             id: profileId,
             name: profileName,
             code: slugifyAttributeCode(profileName),
+            imageUrl: payload.imageUrl,
             sortOrder: nextOrder,
             active: true,
             productCount: 0,
@@ -326,14 +328,15 @@ export const useAttributeProfileStore = create<State>()(
               groupId,
               name: attr.name.trim(),
               code: `${groupCode}_${baseCode}`,
-              fieldType: "text",
+              fieldType: attr.filterable ? "dropdown" : "text",
               sortOrder: attrIndex,
               isRequired: false,
-              isFilterable: false,
+              isFilterable: attr.filterable ?? false,
               isComparable: true,
               isSearchable: false,
               isVisible: true,
               active: true,
+              predefinedValues: attr.predefinedValues ?? [],
             });
           });
         });

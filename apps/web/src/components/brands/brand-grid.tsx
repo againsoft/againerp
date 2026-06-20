@@ -6,6 +6,7 @@ import type { ColDef, ICellRendererParams, RowDragEndEvent } from "ag-grid-commu
 import * as Dialog from "@radix-ui/react-dialog";
 import {
   Archive,
+  Eye,
   Filter,
   GripVertical,
   MoreHorizontal,
@@ -36,6 +37,7 @@ import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { SlugCellEditor } from "@/components/data-grid/slug-cell-editor";
 import { slugCellClassRules } from "@/components/data-grid/slug-cell-rules";
 import { slugHasError, validateSlug } from "@/lib/url-slug/validate-slug";
+import { ActivityTriggerButton } from "@/components/activity/activity-trigger-button";
 import { BrandFormDialog } from "@/components/brands/brand-form-dialog";
 import { BrandMobileCards } from "@/components/brands/brand-mobile-cards";
 
@@ -62,23 +64,20 @@ const DEFAULT_VISIBLE: Record<ColumnKey, boolean> = {
   updated: true,
 };
 
-const LIVE_EDIT_TOGGLES = ["name", "slug", "status"] as const;
+const LIVE_EDIT_TOGGLES = ["slug", "status"] as const;
 type LiveEditKey = (typeof LIVE_EDIT_TOGGLES)[number];
 
 const LIVE_EDIT_LABELS: Record<LiveEditKey, string> = {
-  name: "Name",
   slug: "Slug",
   status: "Status",
 };
 
 const LIVE_EDIT_HINTS: Record<LiveEditKey, string> = {
-  name: "Double-click cell to edit in grid",
   slug: "Double-click cell to edit in grid",
   status: "Click On / Off in grid · Off = inactive",
 };
 
 const DEFAULT_LIVE_EDIT: Record<LiveEditKey, boolean> = {
-  name: true,
   slug: true,
   status: true,
 };
@@ -145,10 +144,13 @@ function reorderBrandIds(brands: Brand[], draggedId: string, overId: string): st
 
 type Props = {
   className?: string;
+  /** @deprecated Use onEdit + onView from the page instead */
   addTrigger?: number;
+  onView?: (brand: Brand) => void;
+  onEdit?: (brand: Brand) => void;
 };
 
-export function BrandGrid({ className, addTrigger = 0 }: Props) {
+export function BrandGrid({ className, addTrigger = 0, onView, onEdit: onEditProp }: Props) {
   const isDark = useIsDark();
   const gridRef = useRef<AgGridReact<Brand>>(null);
   const brands = useBrandStore((s) => s.brands);
@@ -185,10 +187,14 @@ export function BrandGrid({ className, addTrigger = 0 }: Props) {
   }, []);
 
   const openEdit = useCallback((brand: Brand) => {
-    setFormMode("edit");
-    setEditBrand(brand);
-    setFormOpen(true);
-  }, []);
+    if (onEditProp) {
+      onEditProp(brand);
+    } else {
+      setFormMode("edit");
+      setEditBrand(brand);
+      setFormOpen(true);
+    }
+  }, [onEditProp]);
 
   useEffect(() => {
     if (addTrigger > 0) openCreate();
@@ -317,24 +323,34 @@ export function BrandGrid({ className, addTrigger = 0 }: Props) {
     ({ data }: ICellRendererParams<Brand>) => {
       if (!data) return null;
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="sm" className="h-7 w-7 p-0">
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={() => openEdit(data)}>
-              <Pencil className="mr-2 h-3.5 w-3.5" /> Edit
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => turnOff(data)} className="text-destructive">
-              <Archive className="mr-2 h-3.5 w-3.5" /> Turn off
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className="flex items-center gap-0">
+          <ActivityTriggerButton
+            entity={{ type: "brand", id: data.id, label: data.name, subtitle: `/${data.slug}` }}
+          />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="sm" className="h-7 w-7 p-0">
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {onView && (
+                <DropdownMenuItem onClick={() => onView(data)}>
+                  <Eye className="mr-2 h-3.5 w-3.5" /> View
+                </DropdownMenuItem>
+              )}
+              <DropdownMenuItem onClick={() => openEdit(data)}>
+                <Pencil className="mr-2 h-3.5 w-3.5" /> Edit
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => turnOff(data)} className="text-destructive">
+                <Archive className="mr-2 h-3.5 w-3.5" /> Turn off
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       );
     },
-    [openEdit, turnOff],
+    [openEdit, turnOff, onView],
   );
 
   const columnDefs = useMemo<ColDef<Brand>[]>(
@@ -342,7 +358,8 @@ export function BrandGrid({ className, addTrigger = 0 }: Props) {
       {
         headerCheckboxSelection: true,
         checkboxSelection: true,
-        width: 44,
+        width: 32,
+        maxWidth: 32,
         pinned: "left",
         resizable: false,
         suppressMovable: true,
@@ -384,8 +401,20 @@ export function BrandGrid({ className, addTrigger = 0 }: Props) {
         headerName: "Name",
         width: 220,
         minWidth: 140,
-        editable: liveEdit.name,
+        editable: false,
         tooltipField: "name",
+        cellRenderer: (p: ICellRendererParams<Brand>) => {
+          if (!p.data) return null;
+          return (
+            <button
+              type="button"
+              className="truncate text-left hover:underline focus-visible:outline-none"
+              onClick={(e) => { e.stopPropagation(); openEdit(p.data!); }}
+            >
+              {p.data.name}
+            </button>
+          );
+        },
       },
       {
         field: "slug",
@@ -435,8 +464,10 @@ export function BrandGrid({ className, addTrigger = 0 }: Props) {
         hide: !visibleCols.updated,
       },
       {
-        headerName: "",
-        width: 48,
+        colId: "actions",
+        headerName: "Action",
+        width: 72,
+        maxWidth: 72,
         pinned: "right",
         resizable: false,
         suppressMovable: true,
@@ -445,7 +476,7 @@ export function BrandGrid({ className, addTrigger = 0 }: Props) {
         suppressHeaderMenuButton: true,
       },
     ],
-    [RowActions, visibleCols, liveEdit, StatusCell, mediaItems],
+    [RowActions, visibleCols, liveEdit, StatusCell, mediaItems, onView, openEdit],
   );
 
   const pageStart = page * PAGE_SIZE + 1;
@@ -583,7 +614,7 @@ export function BrandGrid({ className, addTrigger = 0 }: Props) {
               rowData={filtered}
               columnDefs={columnDefs}
               defaultColDef={{
-                sortable: false,
+                sortable: true,
                 resizable: true,
                 filter: false,
                 suppressMovable: false,

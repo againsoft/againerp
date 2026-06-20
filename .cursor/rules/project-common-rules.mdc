@@ -19,9 +19,16 @@ alwaysApply: true
 - New module → full docs package under `docs/03-business-modules/{module}/` before code.
 
 ## UI (prototype & product)
-- **CRUD = List page + right Sheet drawer** — `?create=1` · `?view={id}` · `?edit={id}`.
+- **DataTable (MANDATORY):** Every entity list page MUST use the Product List AG Grid pattern — `product-grid.tsx` · [datatable-and-drawer-standard.md](docs/04-uiux/standards/datatable-and-drawer-standard.md). Custom `<table>` or `<div>`-based lists are **forbidden** for entity lists.
+- **CRUD = List page + right Sheet drawer** — `?create=1` · `?view={id}` · `?edit={id}` (view/create/edit **all in drawer**)
 - **Never** `/new` or `/[id]/edit` routes for standard entity CRUD. Reference: `/catalog/products`.
-- **Mobile-first mandatory:** full-width drawer on small screens, table scroll/card fallback, 44px tap targets.
+- **Mobile-first mandatory:** full-width drawer on small screens, AG Grid → card fallback on mobile, 44px tap targets.
+
+## Dark mode (mandatory — always consider)
+- Use `useIsDark()` hook → toggle `ag-theme-quartz-dark` on AG Grid containers.
+- All colors MUST use Tailwind/shadcn CSS variables (`bg-card`, `bg-background`, `text-foreground`, `border`, `muted`, etc.) — **never hardcode** `bg-white`, `text-gray-900`, or any fixed light color.
+- Icons, badges, charts, sheets, and all UI must look correct in **both** light and dark mode before shipping.
+- Recharts: use `fill="currentColor"` or CSS-variable stroke/fill; never hardcode hex colors.
 
 ## Documentation-first
 - New plan/feature → update `Architecture.md`, build guide, `MODULE_DEPENDENCY_MAP.md`, `CHANGELOG.md` **before** code.

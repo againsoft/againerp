@@ -21,6 +21,20 @@ Format follows [GOVERNANCE.md](GOVERNANCE.md#changelog-system).
 ---
 ## [Unreleased]
 
+### Added — 2026-06-21 — Service Module Documentation Package (Planning Phase)
+
+| Field | Value |
+|-------|-------|
+| **Version** | `1.0.0-service-planning` |
+| **Module** | Service |
+| **Change Type** | Added |
+| **Reason** | SSOT master plan + STEP 01–06 planning docs before any Service module code |
+| **Impact** | New package under `docs/03-business-modules/service/` — Master Plan, Architecture, Database, API, Workflow, Permissions, UI, AI, ModuleManifest. Registered in MODULE_REGISTRY and MODULE_DEPENDENCY_MAP. |
+
+**Docs:** `docs/03-business-modules/service/README.md` · `SERVICE_MODULE_MASTER_PLAN.md` · `SERVICE_MODULE_ARCHITECTURE.md` · `SERVICE_DATABASE_ARCHITECTURE.md` · `SERVICE_API_ARCHITECTURE.md` · `SERVICE_WORKFLOW_ARCHITECTURE.md` · `SERVICE_PERMISSIONS.md` · `SERVICE_UI_ARCHITECTURE.md` · `SERVICE_AI_ARCHITECTURE.md` · `ModuleManifest.md`
+
+---
+
 ### Added — 2026-06-19 — Website Module Documentation Package
 
 | Field | Value |
