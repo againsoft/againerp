@@ -162,7 +162,7 @@ function ModuleCard({ href, icon, iconBg, title, metric, metricLabel, status, st
 }
 
 function ModuleGrid() {
-  const metaMissing  = metaRecordsSeed.filter((m) => m.metaStatus === "missing").length;
+  const metaMissing  = metaRecordsSeed.filter((m) => m.score < 50).length;
   const redirActive  = redirectRulesSeed.filter((r) => r.status === "active").length;
   const schemaErrors = schemaSeed.filter((s) => s.status === "error").length;
   const smErrors     = sitemapFilesSeed.filter((f) => f.status === "error").length;

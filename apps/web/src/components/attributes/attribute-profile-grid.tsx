@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AgGridReact } from "ag-grid-react";
 import type { ColDef, ICellRendererParams, RowDragEndEvent } from "ag-grid-community";
 import * as Dialog from "@radix-ui/react-dialog";
@@ -140,11 +140,17 @@ function reorderProfileIds(
 
 type Props = {
   className?: string;
+  addTrigger?: number;
   onView?: (profile: AttributeProfile) => void;
   onEdit?: (profile: AttributeProfile) => void;
 };
 
-export function AttributeProfileGrid({ className, onView, onEdit: onEditProp }: Props) {
+export function AttributeProfileGrid({
+  className,
+  addTrigger = 0,
+  onView,
+  onEdit: onEditProp,
+}: Props) {
   const isDark = useIsDark();
   const gridRef = useRef<AgGridReact<AttributeProfile>>(null);
 
@@ -189,6 +195,10 @@ export function AttributeProfileGrid({ className, onView, onEdit: onEditProp }: 
     setEditProfile(null);
     setFormOpen(true);
   }, []);
+
+  useEffect(() => {
+    if (addTrigger > 0) openCreate();
+  }, [addTrigger, openCreate]);
 
   const openEdit = useCallback(
     (profile: AttributeProfile) => {
@@ -298,7 +308,7 @@ export function AttributeProfileGrid({ className, onView, onEdit: onEditProp }: 
         <div className="flex items-center gap-0">
           <ActivityTriggerButton
             entity={{
-              type: "attribute-profile",
+              type: "attribute_profile",
               id: data.id,
               label: data.name,
               subtitle: `/${data.code}`,

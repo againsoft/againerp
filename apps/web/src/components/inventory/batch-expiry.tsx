@@ -216,7 +216,7 @@ export function BatchExpiry() {
           p.value !== undefined ? <ExpiryChip days={p.value as number} /> : null,
         sort: "asc",
       },
-    ],
+    ] as ColDef<BatchRecord>[],
     [],
   );
 

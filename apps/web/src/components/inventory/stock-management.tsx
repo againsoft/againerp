@@ -197,7 +197,6 @@ export function StockManagement() {
         pinned: "left",
         minWidth: 220,
         cellRenderer: ProductCell,
-        rowHeight: 48,
       },
       { headerName: "Warehouse", field: "warehouse", minWidth: 130 },
       {
@@ -248,7 +247,7 @@ export function StockManagement() {
         valueFormatter: (p) => formatBdt(p.value),
       },
       { headerName: "Updated", field: "updatedAt", minWidth: 100 },
-    ],
+    ] as ColDef<StockItem>[],
     [],
   );
 

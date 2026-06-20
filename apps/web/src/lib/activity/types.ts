@@ -7,6 +7,7 @@ export type ActivityEntityType =
   | "review"
   | "category"
   | "brand"
+  | "attribute_profile"
   | "inventory"
   | "supplier"
   | "business_partner"
