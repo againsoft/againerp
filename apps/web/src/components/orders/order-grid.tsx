@@ -589,6 +589,7 @@ export function OrderGrid({ className, initialStatus = "all" }: Props) {
         )}
       >
         <AgGridReact
+          theme="legacy"
           rowData={rows}
           columnDefs={columnDefs}
           rowSelection="multiple"

@@ -314,6 +314,7 @@ export function StockManagement() {
         )}
       >
         <AgGridReact<StockItem>
+          theme="legacy"
           ref={gridRef}
           rowData={rowData}
           columnDefs={colDefs}

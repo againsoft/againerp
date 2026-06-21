@@ -267,7 +267,7 @@ export function ReviewGrid({ className }: Props) {
 
       {/* AG Grid */}
       <div className={cn("ag-theme-quartz hidden min-h-[420px] flex-1 lg:block", isDark && "ag-theme-quartz-dark")}>
-        <AgGridReact rowData={rows} columnDefs={columnDefs} rowSelection="multiple" suppressRowClickSelection
+        <AgGridReact theme="legacy" rowData={rows} columnDefs={columnDefs} rowSelection="multiple" suppressRowClickSelection
           onSelectionChanged={(e) => setSelected(e.api.getSelectedRows())}
           onRowDoubleClicked={(e) => e.data && router.push(`/catalog/reviews/${e.data.id}`)}
           defaultColDef={{ resizable: true, sortable: true }} headerHeight={36} rowHeight={44} animateRows />

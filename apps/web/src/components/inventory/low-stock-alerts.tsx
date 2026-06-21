@@ -270,6 +270,7 @@ export function LowStockAlerts() {
         )}
       >
         <AgGridReact<StockAlertRule>
+          theme="legacy"
           rowData={rowData}
           columnDefs={colDefs}
           theme="legacy"

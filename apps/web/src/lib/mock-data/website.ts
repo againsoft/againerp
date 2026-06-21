@@ -14,10 +14,12 @@ export type WebsitePage = {
   slug: string;
   status: WebsitePageStatus;
   template: string;
+  layoutId: string;
   author: string;
   lastUpdated: string;
   views: number;
   seoScore: number;
+  type: "website" | "ecommerce";
 };
 
 export type BlogPost = {
@@ -121,14 +123,19 @@ export const websiteDashboardKpis = {
 // ─── Seed Data ────────────────────────────────────────────────────────────────
 
 export const websitePagesSeed: WebsitePage[] = [
-  { id: "pg-001", title: "Home", slug: "/", status: "published", template: "Homepage", author: "Admin", lastUpdated: "2026-06-20", views: 12400, seoScore: 92 },
-  { id: "pg-002", title: "About Us", slug: "about-us", status: "published", template: "Default", author: "Rahim", lastUpdated: "2026-06-18", views: 3210, seoScore: 88 },
-  { id: "pg-003", title: "Contact", slug: "contact", status: "published", template: "Default", author: "Admin", lastUpdated: "2026-06-15", views: 1840, seoScore: 75 },
-  { id: "pg-004", title: "Services", slug: "services", status: "published", template: "Default", author: "Karim", lastUpdated: "2026-06-14", views: 2560, seoScore: 81 },
-  { id: "pg-005", title: "Pricing", slug: "pricing", status: "draft", template: "Landing", author: "Admin", lastUpdated: "2026-06-19", views: 0, seoScore: 42 },
-  { id: "pg-006", title: "Privacy Policy", slug: "privacy-policy", status: "published", template: "Default", author: "Admin", lastUpdated: "2026-05-10", views: 430, seoScore: 65 },
-  { id: "pg-007", title: "Summer Campaign", slug: "summer-2026", status: "review", template: "Landing", author: "Sadia", lastUpdated: "2026-06-21", views: 0, seoScore: 55 },
-  { id: "pg-008", title: "Old Team Page", slug: "team-old", status: "archived", template: "Default", author: "Admin", lastUpdated: "2026-03-01", views: 890, seoScore: 70 },
+  { id: "pg-001", title: "Home", slug: "/", status: "published", template: "Homepage", layoutId: "layout-1", author: "Admin", lastUpdated: "2026-06-20", views: 12400, seoScore: 92, type: "website" },
+  { id: "pg-002", title: "About Us", slug: "about-us", status: "published", template: "Default", layoutId: "layout-1", author: "Rahim", lastUpdated: "2026-06-18", views: 3210, seoScore: 88, type: "website" },
+  { id: "pg-003", title: "Contact", slug: "contact", status: "published", template: "Default", layoutId: "layout-1", author: "Admin", lastUpdated: "2026-06-15", views: 1840, seoScore: 75, type: "website" },
+  { id: "pg-004", title: "Services", slug: "services", status: "published", template: "Default", layoutId: "layout-1", author: "Karim", lastUpdated: "2026-06-14", views: 2560, seoScore: 81, type: "website" },
+  { id: "pg-005", title: "Pricing", slug: "pricing", status: "draft", template: "Landing", layoutId: "layout-2", author: "Admin", lastUpdated: "2026-06-19", views: 0, seoScore: 42, type: "website" },
+  { id: "pg-006", title: "Privacy Policy", slug: "privacy-policy", status: "published", template: "Default", layoutId: "layout-1", author: "Admin", lastUpdated: "2026-05-10", views: 430, seoScore: 65, type: "website" },
+  { id: "pg-007", title: "Summer Campaign", slug: "summer-2026", status: "review", template: "Landing", layoutId: "layout-2", author: "Sadia", lastUpdated: "2026-06-21", views: 0, seoScore: 55, type: "website" },
+  { id: "pg-008", title: "Old Team Page", slug: "team-old", status: "archived", template: "Default", layoutId: "layout-1", author: "Admin", lastUpdated: "2026-03-01", views: 890, seoScore: 70, type: "website" },
+  { id: "pg-009", title: "Shop Home", slug: "shop", status: "published", template: "Shop", layoutId: "layout-4", author: "Admin", lastUpdated: "2026-06-20", views: 8900, seoScore: 85, type: "ecommerce" },
+  { id: "pg-010", title: "Product Page", slug: "products/[slug]", status: "published", template: "Product Detail", layoutId: "layout-4", author: "Admin", lastUpdated: "2026-06-18", views: 23400, seoScore: 90, type: "ecommerce" },
+  { id: "pg-011", title: "Category Page", slug: "category/[slug]", status: "published", template: "Category Grid", layoutId: "layout-4", author: "Admin", lastUpdated: "2026-06-15", views: 11200, seoScore: 82, type: "ecommerce" },
+  { id: "pg-012", title: "Cart", slug: "cart", status: "published", template: "Cart", layoutId: "layout-2", author: "Admin", lastUpdated: "2026-06-10", views: 6700, seoScore: 60, type: "ecommerce" },
+  { id: "pg-013", title: "Checkout", slug: "checkout", status: "published", template: "Checkout", layoutId: "layout-2", author: "Admin", lastUpdated: "2026-06-10", views: 4100, seoScore: 58, type: "ecommerce" },
 ];
 
 export const blogPostsSeed: BlogPost[] = [

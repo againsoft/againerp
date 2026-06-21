@@ -873,7 +873,7 @@ export function MetaManager() {
               )}
             >
               <AgGridReact
-                theme="legacy"
+               theme="legacy"
                 domLayout="autoHeight"
                 rowData={filtered}
                 columnDefs={columnDefs}

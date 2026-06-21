@@ -265,6 +265,7 @@ export function PurchaseOrders() {
         )}
       >
         <AgGridReact<PurchaseOrder>
+          theme="legacy"
           rowData={rowData}
           columnDefs={colDefs}
           theme="legacy"

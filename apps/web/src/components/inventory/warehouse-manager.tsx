@@ -232,6 +232,7 @@ export function WarehouseManager() {
           )}
         >
           <AgGridReact<WarehouseZone>
+            theme="legacy"
             rowData={warehouseZonesSeed}
             columnDefs={zoneColDefs}
             theme="legacy"

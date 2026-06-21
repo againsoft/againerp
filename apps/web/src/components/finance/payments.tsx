@@ -461,6 +461,7 @@ export function Payments() {
                 style={{ height: 200 }}
               >
                 <AgGridReact
+                  theme="legacy"
                   ref={batchGridRef}
                   theme="legacy"
                   rowData={payableBills}
@@ -512,6 +513,7 @@ export function Payments() {
           )}
         >
           <AgGridReact
+            theme="legacy"
             ref={gridRef}
             theme="legacy"
             rowData={payments}

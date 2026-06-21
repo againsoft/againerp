@@ -210,14 +210,6 @@ export function WorkspaceSidebar({ className, onNavigate }: Props) {
       <div className="flex-1 overflow-y-auto p-2 text-xs">
         <nav className="space-y-1">
           <NavLink
-            item={workspaceHomeItem}
-            pathname={pathname}
-            collapsed={collapsed}
-            onNavigate={handleNavigate}
-            openItems={openItems}
-            setOpenItems={setOpenItems}
-          />
-          <NavLink
             item={workspaceDashboardItem}
             pathname={pathname}
             collapsed={collapsed}

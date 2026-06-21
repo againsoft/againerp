@@ -227,7 +227,7 @@ export function RfqGrid({ className, initialStatus = "all" }: Props) {
         )}
       >
         <AgGridReact
-          theme="legacy"
+         theme="legacy"
           rowData={rows}
           columnDefs={columnDefs}
           defaultColDef={{ sortable: true, resizable: true, minWidth: 72 }}

@@ -741,6 +741,7 @@ export function CategoryGrid({ className, addTrigger = 0, onView, onEdit }: Prop
             )}
           >
             <AgGridReact
+              theme="legacy"
               ref={gridRef}
               theme="legacy"
               rowData={filtered}

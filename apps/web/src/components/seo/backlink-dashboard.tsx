@@ -310,7 +310,7 @@ function ReferringDomainsGrid({ isDark }: { isDark: boolean }) {
       </div>
       <div className={cn("ag-theme-quartz control-border w-full rounded-md bg-card", isDark && "ag-theme-quartz-dark")}>
         <AgGridReact
-          theme="legacy"
+         theme="legacy"
           domLayout="autoHeight"
           rowData={filtered}
           columnDefs={colDefs}
@@ -422,7 +422,7 @@ function BacklinksGrid({ isDark }: { isDark: boolean }) {
       </div>
       <div className={cn("ag-theme-quartz control-border w-full rounded-md bg-card", isDark && "ag-theme-quartz-dark")}>
         <AgGridReact
-          theme="legacy"
+         theme="legacy"
           domLayout="autoHeight"
           rowData={filtered}
           columnDefs={colDefs}

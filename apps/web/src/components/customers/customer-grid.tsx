@@ -588,6 +588,7 @@ export function CustomerGrid({ className }: Props) {
         )}
       >
         <AgGridReact
+          theme="legacy"
           rowData={rows}
           columnDefs={columnDefs}
           rowSelection="multiple"

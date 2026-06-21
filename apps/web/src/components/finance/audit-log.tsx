@@ -146,6 +146,7 @@ export function AuditLog() {
           )}
         >
           <AgGridReact
+            theme="legacy"
             ref={gridRef}
             theme="legacy"
             rowData={rowData}

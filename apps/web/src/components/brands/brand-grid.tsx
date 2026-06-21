@@ -609,6 +609,7 @@ export function BrandGrid({ className, addTrigger = 0, onView, onEdit: onEditPro
             )}
           >
             <AgGridReact
+              theme="legacy"
               ref={gridRef}
               theme="legacy"
               rowData={filtered}

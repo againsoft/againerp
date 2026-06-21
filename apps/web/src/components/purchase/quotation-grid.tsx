@@ -177,7 +177,7 @@ export function QuotationGrid({ className }: Props) {
         )}
       >
         <AgGridReact
-          theme="legacy"
+         theme="legacy"
           rowData={rows}
           columnDefs={columnDefs}
           defaultColDef={{ sortable: true, resizable: true, minWidth: 72 }}

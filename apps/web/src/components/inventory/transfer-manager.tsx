@@ -210,6 +210,7 @@ export function TransferManager() {
         )}
       >
         <AgGridReact<StockTransfer>
+          theme="legacy"
           rowData={rowData}
           columnDefs={colDefs}
           theme="legacy"

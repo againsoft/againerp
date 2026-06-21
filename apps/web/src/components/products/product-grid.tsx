@@ -1058,7 +1058,7 @@ export function ProductGrid({ onEdit, onView, className }: Props) {
             )}
           >
             <AgGridReact
-              theme="legacy"
+             theme="legacy"
               rowData={filtered}
               columnDefs={columnDefs}
               defaultColDef={{

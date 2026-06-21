@@ -228,6 +228,7 @@ export function AdjustmentManager() {
         )}
       >
         <AgGridReact<StockAdjustment>
+          theme="legacy"
           rowData={rowData}
           columnDefs={colDefs}
           theme="legacy"

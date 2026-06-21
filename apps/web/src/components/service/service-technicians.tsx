@@ -347,6 +347,7 @@ export function ServiceTechnicians() {
           )}
         >
           <AgGridReact
+            theme="legacy"
             ref={gridRef}
             theme="legacy"
             rowData={rowData}

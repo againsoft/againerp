@@ -279,6 +279,7 @@ export function BatchExpiry() {
         )}
       >
         <AgGridReact<BatchRecord>
+          theme="legacy"
           rowData={rowData}
           columnDefs={colDefs}
           theme="legacy"

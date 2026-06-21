@@ -126,7 +126,7 @@ export function OrderSubGridShell<T>({
       </div>
 
       <div className={cn("ag-theme-quartz hidden min-h-[420px] flex-1 lg:block", isDark && "ag-theme-quartz-dark")}>
-        <AgGridReact rowData={rows} columnDefs={finalColumnDefs} defaultColDef={{ resizable: true, sortable: true }} headerHeight={36} rowHeight={44} animateRows />
+        <AgGridReact theme="legacy" rowData={rows} columnDefs={finalColumnDefs} defaultColDef={{ resizable: true, sortable: true }} headerHeight={36} rowHeight={44} animateRows />
       </div>
       <p className="shrink-0 text-xs text-muted-foreground">Showing {rows.length} of {rowData.length} records</p>
 

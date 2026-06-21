@@ -373,6 +373,7 @@ export function JournalEntries() {
           )}
         >
           <AgGridReact
+            theme="legacy"
             ref={gridRef}
             theme="legacy"
             rowData={rowData}

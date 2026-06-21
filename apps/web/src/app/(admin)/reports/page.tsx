@@ -1,5 +1,5 @@
-import { PlaceholderPage } from "@/components/placeholder-page";
+import { ReportsHub } from "@/components/reports/reports-hub";
 
-export default function Page() {
-  return <PlaceholderPage title="Reports" description="Sales, product, customer reports — Phase 1 stub." />;
+export default function ReportsPage() {
+  return <ReportsHub />;
 }

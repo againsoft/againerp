@@ -25,7 +25,6 @@ import { accountPaths, categoryPath, storefrontPaths } from "@/lib/url-slug/stor
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { href: storefrontPaths.home, label: "Home" },
   { href: categoryPath("electronics"), label: "Electronics" },
   { href: categoryPath("apparel"), label: "Fashion" },
   { href: storefrontPaths.deals, label: "Deals" },

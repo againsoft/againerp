@@ -600,6 +600,7 @@ export function CollectionGrid({ className, addTrigger = 0 }: Props) {
           className={cn("ag-theme-quartz h-full min-h-[320px] rounded-lg border border-input", isDark && "ag-theme-quartz-dark")}
         >
           <AgGridReact<ProductCollection>
+            theme="legacy"
             ref={gridRef}
             rowData={filtered}
             columnDefs={columnDefs}

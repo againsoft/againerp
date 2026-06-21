@@ -582,6 +582,7 @@ export function BundleGrid({ className, addTrigger = 0 }: Props) {
           )}
         >
           <AgGridReact<ProductBundle>
+            theme="legacy"
             ref={gridRef}
             rowData={filtered}
             columnDefs={columnDefs}

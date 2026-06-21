@@ -345,6 +345,7 @@ export function Receipts() {
           )}
         >
           <AgGridReact
+            theme="legacy"
             ref={gridRef}
             theme="legacy"
             rowData={receiptsSeed}
